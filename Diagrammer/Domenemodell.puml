@@ -5,6 +5,7 @@ class Arrangement {
 
 class Utstilling {
     Navn
+    Score
 }
 
 class Stemme {
@@ -18,7 +19,7 @@ class Besøkende{
 class Jury{
 }
 
-Jury -- Stemme : > vurderer
+Jury "1" -- "many" Utstilling : > vurderer
 
 Besøkende "many" -- "1" Stemme : > stemmer
 
