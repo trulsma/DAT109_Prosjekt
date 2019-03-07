@@ -11,6 +11,11 @@ class Stemme {
     Vekt
 }
 
+class Besøkende{
+    ID
+}
+
+Besøkende -- Stemme : > stemmer
 
 Arrangement *- Utstilling : Består av >
 
