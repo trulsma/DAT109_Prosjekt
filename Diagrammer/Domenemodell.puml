@@ -15,6 +15,11 @@ class Besøkende{
     ID
 }
 
+class Jury{
+}
+
+Jury -- Stemme : > vurderer
+
 Besøkende "many" -- "1" Stemme : > stemmer
 
 Arrangement "1" *-- "many" Utstilling : Består av >
