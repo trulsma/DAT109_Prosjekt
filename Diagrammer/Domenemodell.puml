@@ -1,0 +1,19 @@
+@startuml
+
+class Arrangement {
+}
+
+class Utstilling {
+    Navn
+}
+
+class Stemme {
+    Vekt
+}
+
+
+Arrangement *- Utstilling : Består av >
+
+Stemme -- Utstilling : < Har
+
+@enduml

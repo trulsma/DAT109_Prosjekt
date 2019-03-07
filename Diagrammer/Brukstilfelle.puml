@@ -1,0 +1,13 @@
+@startuml
+(Applikasjon) as (Applikasjon)
+(QR Kode) as (QR Kode)
+
+Bruker -> (QR Kode) : Skanner QR kode for ustillingen
+
+Bruker -> (Applikasjon) : Stemmer på en utstilling
+
+Dommer -> (Applikasjon) : Ser resultater
+
+Dommer -> (Applikasjon) : Opprette arrangement
+
+@enduml|
