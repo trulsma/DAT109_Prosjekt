@@ -1,7 +1,25 @@
 @startuml
-class Bedrifter{
-    bedriftId : int
-    bedriftnavn : varchar
+class Prosjekt{
+    prosjektid : int
+    prosjektnavn : varchar
+    prosjektbeskrivelse: varchar
+    sammerbeidsbedrift : integer
+    qrcodeurl : varchar
 }
 
+class Bedrift{
+    bedriftid : int
+    bedriftnavn : varchar
+    bedriftbeskrivelse : varchar
+}
+
+class Stemme{
+    stemmeid : int
+    prosjektid : int
+    epost : varchar
+    stemmeverdi : int
+}
+
+Bedrift "1" *-- "*" Prosjekt : > "Har en bedrift"
+Stemme "*" -- "1" Prosjekt
 @enduml
