@@ -15,10 +15,10 @@ class Besøkende{
     ID
 }
 
-Besøkende -- Stemme : > stemmer
+Besøkende "many" -- "1" Stemme : > stemmer
 
-Arrangement *- Utstilling : Består av >
+Arrangement "1" *-- "many" Utstilling : Består av >
 
-Stemme -- Utstilling : < Har
+Stemme "many" -- "1" Utstilling : < Har
 
 @enduml
