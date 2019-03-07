@@ -1,0 +1,7 @@
+@startuml
+class Bedrifter{
+    bedriftId : int
+    bedriftnavn : varchar
+}
+
+@enduml
