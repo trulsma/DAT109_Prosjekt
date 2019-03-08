@@ -14,7 +14,6 @@ public class Controller {
     @GetMapping("/test")
     public String show(Model model) {
         model.addAttribute("test", service.test());
-
         return "index";
     }
 }

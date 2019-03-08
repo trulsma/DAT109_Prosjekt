@@ -15,8 +15,7 @@ public class BedriftService implements IBedriftService {
     @Override
     public String test() {
         Bedrift bedrift = repo.findById(1).orElse(null);
-        System.out.println(bedrift.getBedriftbeskrivelse());
 
-        return bedrift.toString();
+        return bedrift == null ? "Ingen bedrift" : bedrift.toString();
     }
 }
