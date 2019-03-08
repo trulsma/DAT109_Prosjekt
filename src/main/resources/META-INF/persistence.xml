@@ -5,10 +5,11 @@
     http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
 
-    <persistence-unit name="PU" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="NewPersistenceUnit" transaction-type="RESOURCE_LOCAL">
 
-        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <class>JPA.BedriftEntity</class>
+        <class>JPA.Entity.BedriftEntity</class>
+        <class>JPA.Entity.ProsjektEntity</class>
+        <class>JPA.Entity.StemmeEntity</class>
 
         <properties>
             <!--  Generelle JPA properties -->

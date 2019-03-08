@@ -1,20 +1,25 @@
-package JPA;
+package JPA.EAO;
+
+import JPA.Entity.BedriftEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
 
 public class BedriftEAO {
 
     private EntityManagerFactory emf;
 
     public BedriftEAO() {
-        emf = Persistence.createEntityManagerFactory("PU");
+        emf = Persistence.createEntityManagerFactory("NewPersistenceUnit");
     }
 
     public BedriftEntity getBedriftById(int id) {
         EntityManager em = emf.createEntityManager();
-        return em.find(BedriftEntity.class, id);
+        BedriftEntity entity = em.find(BedriftEntity.class, id);
+        em.close();
+        return entity;
     }
 
     public static void main(String[] args) {
