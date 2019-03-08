@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "stemme", schema = "prosjekt1", catalog = "h571718")
 public class StemmeEntity {
     private int stemmeid;
+    //private String prosjektid;
     private String epost;
     private Integer stemmeverdi;
 
@@ -28,6 +29,7 @@ public class StemmeEntity {
     public void setEpost(String epost) {
         this.epost = epost;
     }
+
 
     @Basic
     @Column(name = "stemmeverdi")
@@ -59,5 +61,14 @@ public class StemmeEntity {
         result = 31 * result + (epost != null ? epost.hashCode() : 0);
         result = 31 * result + (stemmeverdi != null ? stemmeverdi.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "StemmeEntity{" +
+                "stemmeid=" + stemmeid +
+                ", epost='" + epost + '\'' +
+                ", stemmeverdi=" + stemmeverdi +
+                '}';
     }
 }
