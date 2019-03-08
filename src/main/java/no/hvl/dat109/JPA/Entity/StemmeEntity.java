@@ -1,4 +1,4 @@
-package JPA.Entity;
+package no.hvl.dat109.JPA.Entity;
 
 import javax.persistence.*;
 

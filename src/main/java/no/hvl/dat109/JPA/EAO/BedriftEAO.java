@@ -1,6 +1,6 @@
-package JPA.EAO;
+package no.hvl.dat109.JPA.EAO;
 
-import JPA.Entity.BedriftEntity;
+import no.hvl.dat109.JPA.Entity.BedriftEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
