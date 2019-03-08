@@ -20,6 +20,6 @@ class Stemme{
     stemmeverdi : int
 }
 
-Bedrift "1" *-- "*" Prosjekt : > "Har en bedrift"
+Bedrift "1" *-- "*" Prosjekt
 Stemme "*" -- "1" Prosjekt
 @enduml
