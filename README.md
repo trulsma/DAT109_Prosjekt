@@ -7,6 +7,7 @@
 3. Velg `````Project````` i venstre kolonne
 4. Velg din `````Project SDK`````, sett ````Project Langauge Level --> 8````
 5. Lag en mappe i prosjektet med navn ````out```` og sett ```Project Compiler Output``` til den mappen du nett lagde.
-6. Høyreklikk på `````src````` og ````Mark Directory as -> Sources Root````
-7. ???
-8. Prosjekt ferdig ☑
+6. Gå inn i `````src/main````` og høyreklikk på ````java: Mark Directory as -> Sources Root````
+7. Høyreklikk på prosjektmappen din og trykk ````Add Framework Support -> Maven```` da skal alle errorene forsvinne og du kan begynne å programmere
+8. ???
+9. Prosjekt ferdig ☑
