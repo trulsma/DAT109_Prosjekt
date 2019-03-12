@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.websocket.server.PathParam;
 
 @Controller
 public class ProsjektController {
@@ -16,8 +19,8 @@ public class ProsjektController {
     @Autowired
     private IProsjektService prosjektService;
 
-    @GetMapping("/prosjekt")
-    String getProsjektById(@RequestParam int id, Model model) {
+    @GetMapping("/prosjekt/{id}")
+    String getProsjektById(@PathParam("id") int id, Model model) {
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
 
@@ -40,6 +43,6 @@ public class ProsjektController {
 
         prosjektService.addProsjekt(prosjekt);
 
-        return "redirect:/prosjekt?id=" + id;
+        return "redirect:/prosjekt/" + id;
     }
 }
