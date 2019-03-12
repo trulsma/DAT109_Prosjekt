@@ -1,10 +1,14 @@
-package no.hvl.dat109.bean;
+package no.hvl.dat109.spring.beans;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "bedrift", schema = "prosjekt1")
-public class Bedrift {
+public class BedriftBean implements Serializable {
+
+    //Todo can benefit from new toString, otherwise done
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int bedriftid;
@@ -12,6 +16,13 @@ public class Bedrift {
     private String bedriftnavn;
     private String bedriftbeskrivelse;
 
+    public BedriftBean() {
+    }
+
+    public BedriftBean(String bedriftnavn, String bedriftbeskrivelse) {
+        this.bedriftnavn = bedriftnavn;
+        this.bedriftbeskrivelse = bedriftbeskrivelse;
+    }
 
     public int getBedriftid() {
         return bedriftid;
