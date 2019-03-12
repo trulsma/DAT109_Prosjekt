@@ -5,14 +5,11 @@
     <title>Registrer bedrift</title>
 </head>
 <body>
-    <form action="RegistrerBedrift" method="post">
-        <fieldset><legend><b>Register bedrift:</b></legend>
-            <p>Navn på bedrift: <input type="text" name="bedriftnavn" value=""></p>
-            <p>Beskrivelse av bedrift:</p>
-            <textarea rows="4" cols="50" name="beskrivelse" value=""></textarea>
-            <input type="submit" value="Registrer">
-        </fieldset>
-
+    <h1>Register bedrift:</h1>
+    <form method="post" action="/bedrift/add">
+        <p>Navn på bedrift: <input type="text" value="" name="bedriftnavn" placeholder="Navn på bedrift"></p>
+        <p>Beskrivelse av bedrift: <input type="text" value="" name="bedriftbeskrivelse" placeholder="Kort beskrivelse av bedrift"></p>
+        <p><input type="submit" value="Submit"/><input type="reset" value="Reset"/></p>
 
     </form>
 
