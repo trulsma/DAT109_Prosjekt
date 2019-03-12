@@ -1,10 +1,14 @@
-package JPA.Entity;
+package no.hvl.dat109.spring.beans;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "stemme", schema = "prosjekt1", catalog = "h571718")
-public class StemmeEntity {
+@Table(name = "stemme", schema = "prosjekt1")
+public class StemmeBean implements Serializable {
+
+    //Todo can benefit from new toString, otherwise done
+
     private int stemmeid;
     //private String prosjektid;
     private String epost;
@@ -42,30 +46,8 @@ public class StemmeEntity {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        StemmeEntity that = (StemmeEntity) o;
-
-        if (stemmeid != that.stemmeid) return false;
-        if (epost != null ? !epost.equals(that.epost) : that.epost != null) return false;
-        if (stemmeverdi != null ? !stemmeverdi.equals(that.stemmeverdi) : that.stemmeverdi != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = stemmeid;
-        result = 31 * result + (epost != null ? epost.hashCode() : 0);
-        result = 31 * result + (stemmeverdi != null ? stemmeverdi.hashCode() : 0);
-        return result;
-    }
-
-    @Override
     public String toString() {
-        return "StemmeEntity{" +
+        return "StemmeBean{" +
                 "stemmeid=" + stemmeid +
                 ", epost='" + epost + '\'' +
                 ", stemmeverdi=" + stemmeverdi +

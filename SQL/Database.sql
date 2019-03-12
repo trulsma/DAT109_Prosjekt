@@ -28,3 +28,7 @@ CREATE TABLE Stemme (
   CONSTRAINT prosjektidFK FOREIGN KEY (prosjektid) REFERENCES Prosjekt (prosjektid),
   CONSTRAINT stemmePK PRIMARY KEY (stemmeid)
 );
+
+INSERT INTO Bedrift (bedriftnavn, bedriftbeskrivelse)
+VALUES ('HVL', 'Høgskolen på Vestlandet'),
+       ('Equinor', 'Oljebransjen');
