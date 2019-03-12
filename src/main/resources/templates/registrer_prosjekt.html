@@ -6,9 +6,10 @@
 </head>
 <body>
     <h1> Registrer nytt prosjekt </h1>
-    <form action="#" >
-        Prosjektnavn: <input type="text" name="Prosjektnavn" placeholder="Ditt prosjektnavn">
-        Prosjektbeskrivelse: <input type="text" name="Prosjektbeskrivele" placeholder="Skriv en kort beskrivelse om ditt prosjekt">
+    <form action="#" th:action="@{/prosjekt/add}" th:object="@{prosjekt}">
+        Prosjektnavn: <input type="text" th:field="*{navn}" name="Prosjektnavn" placeholder="Ditt prosjektnavn">
+        Prosjektbeskrivelse: <input type="text" th:field="*{beskrivelse}" name="Prosjektbeskrivelse" placeholder="Skriv en kort beskrivelse om ditt prosjekt">
+        <input type="submit" value="Submit"/><input type="reset" value="Reset"/>
     </form>
 </body>
 </html>

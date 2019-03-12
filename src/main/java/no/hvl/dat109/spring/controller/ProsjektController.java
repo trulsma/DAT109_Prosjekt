@@ -33,11 +33,12 @@ public class ProsjektController {
     }
 
     @GetMapping("/prosjekt/add")
-    String addProsjekt(@RequestParam int id, @RequestParam String navn) {
+    String addProsjekt(@RequestParam int id, @RequestParam String navn, @RequestParam String beskrivelse) {
         ProsjektBean prosjekt = new ProsjektBean();
 
         prosjekt.setProsjektid(id);
         prosjekt.setProsjektnavn(navn);
+        prosjekt.setProsjektbeskrivelse(beskrivelse);
 
         prosjektService.addProsjekt(prosjekt);
 
