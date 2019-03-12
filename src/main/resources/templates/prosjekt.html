@@ -1,16 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-        <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <title>Prosjekt</title>
 </head>
 <body>
-<h1> EXPO vurdering </h1>
-<p th:inline="text">[[${prosjekt.prosjektnavn}]]</p>
-
-<p> Registrer deg </p>
-
-
+    <h1> EXPO vurdering </h1>
+    <p th:inline="text">[[${prosjekt.prosjektnavn}]]</p>
+    <button type="button">Legg inn nytt prosjekt</button>
 </body>
 </html>

@@ -6,6 +6,7 @@ import no.hvl.dat109.spring.service.Interfaces.IStemmeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,7 +23,9 @@ public class StemmeService implements IStemmeService {
     }
 
     @Override
-    public List<StemmeBean> getStemmerIEnBedrift(int bedriftId) {
+    public Integer getTotalStemmeverdi(String prosjektNavn) {
         return null;
     }
+
+
 }
