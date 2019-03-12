@@ -20,7 +20,7 @@ public class ProsjektController {
     private IProsjektService prosjektService;
 
     @GetMapping("/prosjekt/{id}")
-    String getProsjektById(@PathParam("id") int id, Model model) {
+    String getProsjektById(@PathVariable("id") int id, Model model) {
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
 
