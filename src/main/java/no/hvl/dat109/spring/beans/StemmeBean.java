@@ -14,6 +14,14 @@ public class StemmeBean implements Serializable {
     private String epost;
     private Integer stemmeverdi;
 
+    public StemmeBean(){
+
+    }
+
+    public StemmeBean(String epost, Integer stemmeverdi){
+        this.epost = epost;
+        this.stemmeverdi = stemmeverdi;
+    }
     @Id
     @Column(name = "stemmeid")
     public int getStemmeid() {
