@@ -27,8 +27,8 @@ public class BedriftService implements IBedriftService {
     }
 
     @Override
-    public void addBedrift(String bedriftnavn, String bedriftbeskrivelse) {
-        bedriftRepository.save(new BedriftBean(bedriftnavn, bedriftbeskrivelse));
+    public void addBedrift(BedriftBean bedrift) {
+        bedriftRepository.save(bedrift);
     }
 
     @Override

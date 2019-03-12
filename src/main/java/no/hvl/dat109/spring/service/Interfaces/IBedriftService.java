@@ -9,7 +9,7 @@ public interface IBedriftService {
 
     BedriftBean getBedriftById(int id);
 
-    void addBedrift(String bedriftnavn, String bedriftbeskrivelse);
+    void addBedrift(BedriftBean bedrift);
 
     boolean exists(String name);
 

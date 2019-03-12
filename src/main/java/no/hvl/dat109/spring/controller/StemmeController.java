@@ -7,6 +7,8 @@ import no.hvl.dat109.spring.service.Interfaces.IStemmeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class StemmeController {
@@ -17,5 +19,19 @@ public class StemmeController {
     private IStemmeService stemmeService;
 
 
+    @GetMapping("/stem")
+    public String visTakkForStemme() {
+        return "takk_for_stemme";
+    }
+
+    @PostMapping("/stem")
+    public String stem(@RequestParam int prosjektid, @RequestParam String epost, @RequestParam int verdi) {
+
+        // TODO: finne riktig prosjekt for prosjekt iden
+
+        stemmeService.addStemme(new StemmeBean(epost, verdi));
+
+        return "redirect:/stem";
+    }
 
 }
