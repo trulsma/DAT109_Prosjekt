@@ -26,5 +26,10 @@ public class StemmeService implements IStemmeService {
         return null;
     }
 
+    @Override
+    public StemmeBean getStemmeById(int id) {
+        return stemmeRepository.findById(id).orElse(null);
+    }
+
 
 }

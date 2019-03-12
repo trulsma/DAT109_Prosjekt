@@ -10,18 +10,24 @@ public class StemmeBean implements Serializable {
     //Todo can benefit from new toString, otherwise done
 
     private int stemmeid;
-    //private String prosjektid;
     private String epost;
     private Integer stemmeverdi;
 
-    public StemmeBean(){
+    /*
+    @OneToMany
+    @JoinColumn(name = "prosjektid")
+    private ProsjektBean prosjekt;
+    */
+
+    public StemmeBean() {
 
     }
 
-    public StemmeBean(String epost, Integer stemmeverdi){
+    public StemmeBean(String epost, int stemmeverdi) {
         this.epost = epost;
         this.stemmeverdi = stemmeverdi;
     }
+
     @Id
     @Column(name = "stemmeid")
     public int getStemmeid() {
