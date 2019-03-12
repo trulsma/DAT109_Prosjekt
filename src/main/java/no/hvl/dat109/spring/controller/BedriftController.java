@@ -32,18 +32,18 @@ public class BedriftController {
 
         //If for some reason database is empty again, you can easily add new one for debugging
 
-        if (repository.exists(navn)) return "redirect:/bedrifter";
+        if (repository.exists(navn)) return "redirect:/bedrifter.html";
         repository.addBedrift(new navn, beskrivelse);
         model.addAttribute("test", repository.getAll());
 
         //example of redirect
-        return "redirect:/bedrifter";
+        return "redirect:/bedrifter.html";
     }*/
     @GetMapping("/bedrifter")
     String getAlleBedrifter(Model model) {
-        model.addAttribute("bedrifter", repository.getAll());
+        model.addAttribute("bedrifter", repository.getAlleBedrifter());
 
-        return "bedrifter";
+        return "bedrifter.html";
     }
 
     @GetMapping("/bedrift/add")
