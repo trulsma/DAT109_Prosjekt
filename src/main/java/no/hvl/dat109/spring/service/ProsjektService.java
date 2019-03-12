@@ -23,4 +23,18 @@ public class ProsjektService implements IProsjektService {
         prosjektRepository.save(prosjekt);
     }
 
+    @Override
+    public boolean exists(String name) {
+        for (ProsjektBean prosjektBean : prosjektRepository.findAll()) {
+            if (prosjektBean.getProsjektnavn().equals(name)) return true;
+        }
+        return false;
+    }
+
+    public ProsjektBean getProsjektByName(String name) {
+        for (ProsjektBean prosjektBean : prosjektRepository.findAll()) {
+            if (prosjektBean.getProsjektnavn().equals(name)) return prosjektBean;
+        }
+        return null;
+    }
 }
