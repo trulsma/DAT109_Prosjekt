@@ -12,4 +12,6 @@ public interface IProsjektService {
 
     ProsjektBean getProsjektByName(String name);
 
+    Iterable<ProsjektBean> getAlleProsjekter();
+
 }

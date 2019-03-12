@@ -37,4 +37,9 @@ public class ProsjektService implements IProsjektService {
         }
         return null;
     }
+
+    @Override
+    public Iterable<ProsjektBean> getAlleProsjekter() {
+        return prosjektRepository.findAll();
+    }
 }
