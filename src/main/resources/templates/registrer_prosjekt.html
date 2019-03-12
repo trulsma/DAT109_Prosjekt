@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Registrer prosjekt</title>
 </head>
 <body>
-    <h1> Registrer nytt prosjekt </h1>
-    <form action="#" th:action="@{/prosjekt/add}" th:object="@{prosjekt}">
-        Prosjektnavn: <input type="text" th:field="*{navn}" name="Prosjektnavn" placeholder="Ditt prosjektnavn">
-        Prosjektbeskrivelse: <input type="text" th:field="*{beskrivelse}" name="Prosjektbeskrivelse" placeholder="Skriv en kort beskrivelse om ditt prosjekt">
-        <input type="submit" value="Submit"/><input type="reset" value="Reset"/>
-    </form>
+<h1> Registrer nytt prosjekt </h1>
+<form method="post" action="#" th:action="/prosjekt/add" th:object="">
+    <p>Legg inn Id mens den ikkje er automatisk</p>
+    <p>Id: <input type="text" th:field="" name="ProsjektId"/></p>
+    <p>Prosjektnavn: <input type="text" th:field="" name="Prosjektnavn" placeholder="Ditt prosjektnavn"></p>
+    <p>Prosjektbeskrivelse: <input type="text" th:field="" name="Prosjektbeskrivelse"
+                                   placeholder="Skriv en kort beskrivelse om ditt prosjekt"></p>
+    <p><input type="submit" value="Submit"/><input type="reset" value="Reset"/></p>
+</form>
 </body>
 </html>
