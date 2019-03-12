@@ -11,7 +11,7 @@ public interface IStemmeService {
 
     Integer getTotalStemmeverdi(String prosjektNavn);
 
-
+    StemmeBean getStemmeById(int id);
 
 
 
