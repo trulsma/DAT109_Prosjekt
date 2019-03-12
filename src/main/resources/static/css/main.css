@@ -1,0 +1,14 @@
+body, html{
+    height: 100%;
+    background-color: d3d3d3;
+    font-family: 'oxygen';
+}
+
+h1{
+    text-align: center;
+    color: navy;
+}
+
+p{
+    text-align: center;
+}
