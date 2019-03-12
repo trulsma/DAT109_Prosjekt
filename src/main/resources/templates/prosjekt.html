@@ -7,14 +7,20 @@
 </head>
 <body>
 <form action="registrere" method="post">
-<h1 class="title"> EXPO vurdering </h1>
-<h1 class="title"> Oppgave navn: </h1>
-<p th:inline="text">[[${prosjekt.prosjektnavn}]]</p>
-<h1 class="title"> Beskrivelse: </h1>
-<p th:inline="text">[[${prosjekt.prosjektbeskrivelse}]]</p>
-<p> Registrer deg </p>
-    <p> Epost <input type="text" name="epost" value="<c:out value='${epost}'/>"/></p>
-<button type="button">Registrer stemme</button>
+    <h1 class="title"> EXPO vurdering </h1>
+    <h1 class="title"> Oppgave navn: </h1>
+    <p th:inline="text">[[${prosjekt.prosjektnavn}]]</p>
+    <h1 class="title"> Beskrivelse: </h1>
+    <p th:inline="text">[[${prosjekt.prosjektbeskrivelse}]]</p>
+    <p> Registrer deg </p>
+    <p> Epost <input type="text" name="epost" value="" placeholder="Skriv inn epost"/></p>
+    <p>Avgi stemme</p>
+    <p><input type="radio" name="verdi" value="1"/> 1 </p>
+    <p><input type="radio" name="verdi" value="2"/> 2 </p>
+    <p><input type="radio" name="verdi" value="3" checked/> 3 </p>
+    <p><input type="radio" name="verdi" value="4"/> 4 </p>
+    <p><input type="radio" name="verdi" value="5"/> 5 </p>
+    <p><input type="submit" value="Registrer stemme"/></p>
 </form>
 </body>
 </html>
