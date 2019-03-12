@@ -8,4 +8,6 @@ public interface IProsjektService {
 
     void addProsjekt(ProsjektBean prosjekt);
 
+    boolean exists(String name);
+
 }
