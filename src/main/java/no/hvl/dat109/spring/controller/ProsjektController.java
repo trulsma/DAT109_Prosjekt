@@ -18,6 +18,13 @@ public class ProsjektController {
     @Autowired
     private IProsjektService prosjektService;
 
+    @GetMapping("/prosjekter")
+    String getAlleProsjekter(Model model) {
+        model.addAttribute("prosjekter", prosjektService.getAlleProsjekter());
+
+        return "prosjekter.html";
+    }
+
     @GetMapping("/prosjekt/{id}")
     String getProsjektById(@PathVariable("id") int id, Model model) {
 
