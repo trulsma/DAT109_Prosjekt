@@ -19,7 +19,7 @@ ___
 ___
 
 ### Enable HotSwap(automatisk oppdatering av endringer)
-1. Enable automatic build ```Settings/Preferences (CTRL+ALT+S) -> Build, Execution, Deployment -> Compiler``` 
+1. Enable automatic build ```Settings/Preferences (CTRL+ALT+S/CMD+,) -> Build, Execution, Deployment -> Compiler``` 
 enable ```Build Project Automatically```
 
 2. ```ctrl+shift+A``` og søk etter registry. I registry skal du huke av på: ```compiler.automake.allow.when.running``` 
