@@ -24,4 +24,7 @@ enable ```Build Project Automatically```
 
 2. ```ctrl+shift+A``` og søk etter registry. I registry skal du huke av på: ```compiler.automake.allow.when.running``` 
 
+___
+### Does Travis approve of the code?
+
 [![Build Status](https://travis-ci.org/571530/DAT109_Prosjekt.svg?branch=master)](https://travis-ci.org/571530/DAT109_Prosjekt) 
