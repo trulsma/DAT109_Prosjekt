@@ -7,8 +7,7 @@ import java.util.List;
 public interface IStemmeService {
     //TODO lag stemme interface
 
-     void addStemme(String epost, Integer stemmeverdi);
-
+    void addStemme(StemmeBean stemmeBean);
 
     Integer getTotalStemmeverdi(String prosjektNavn);
 
