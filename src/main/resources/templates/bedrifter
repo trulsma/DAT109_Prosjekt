@@ -16,8 +16,10 @@
             <th>Navn</th>
             <th>Beskrivelse</th>
         </tr>
-        <tr>
-            <td></td>
+        <tr th:each="bedrift: ${bedrifter}">
+            <td th:text="${bedrift.bedriftid}"></td>
+            <td th:text="${bedrift.bedriftnavn}"></td>
+            <td th:text="${bedrift.bedriftbeskrivelse}"></td>
         </tr>
     </table>
 </body>

@@ -19,12 +19,6 @@ public class BedriftController {
     @Autowired
     private IBedriftService repository;
 
-    @GetMapping("/bedrifter")
-    public String getAllBedrifter(Model model) {
-        model.addAttribute("test", repository.getAll());
-        return "index";
-    }
-
     @GetMapping("/bedrift/{id}")
     public String getBedriftById(@PathVariable("id") int id, Model model) {
         BedriftBean bean = repository.getBedriftById(id);
@@ -49,7 +43,7 @@ public class BedriftController {
     String getAlleBedrifter(Model model) {
         model.addAttribute("bedrifter", repository.getAll());
 
-        return "bedrifter.html";
+        return "bedrifter";
     }
 
     @GetMapping("/bedrift/add")

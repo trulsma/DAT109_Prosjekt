@@ -14,12 +14,6 @@ public class BedriftService implements IBedriftService {
     @Autowired
     private BedriftRepository bedriftRepository;
 
-    @Override
-    public String getAll() {
-        StringBuilder builder = new StringBuilder();
-        bedriftRepository.findAll().iterator().forEachRemaining(repository -> builder.append(repository).append("\n"));
-        return builder.toString().equals("") ? "Ingen bedrift" : builder.toString();
-    }
 
     @Override
     public Iterable<BedriftBean> getAlleBedrifter() {
