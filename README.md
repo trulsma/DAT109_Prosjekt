@@ -16,4 +16,12 @@ ___
 1. Last ned Plugin ```PlantUML integration``` i IntelliJ
 2. Gå til [Graphviz](https://www.graphviz.org/download/) og last ned versjonen til ditt operativsystem. Du skal nå kunne se diagrammene i mappen ```Diagrammer```
 
+___
+
+### Enable HotSwap(automatisk oppdatering av endringer)
+1. Enable automatic build ```Settings -> Build, Execution, Deployment -> Compiler``` 
+enable ```Build Project Automatically```
+
+2. ```ctrl+shift+A``` og søk etter registry. I registry skal du huke av på: ```compiler.automake.allow.when.running``` 
+
 [![Build Status](https://travis-ci.org/571530/DAT109_Prosjekt.svg?branch=master)](https://travis-ci.org/571530/DAT109_Prosjekt) 
