@@ -9,7 +9,8 @@ public interface IStemmeService {
 
      void addStemme(String epost, Integer stemmeverdi);
 
-    List<StemmeBean> getStemmerIEnBedrift(int bedriftId);
+
+    Integer getTotalStemmeverdi(String prosjektNavn);
 
 
 
