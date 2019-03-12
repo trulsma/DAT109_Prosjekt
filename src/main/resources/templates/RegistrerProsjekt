@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrer prosjekt</title>
+</head>
+<body>
+    <h1> Registrer nytt prosjekt </h1>
+    <form action="#" >
+        Prosjektnavn: <input type="text" name="Prosjektnavn" placeholder="Ditt prosjektnavn">
+        Prosjektbeskrivelse: <input type="text" name="Prosjektbeskrivele" placeholder="Skriv en kort beskrivelse om ditt prosjekt">
+    </form>
+</body>
+</html>
