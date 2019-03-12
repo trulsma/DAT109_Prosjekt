@@ -16,10 +16,9 @@ public class StemmeService implements IStemmeService {
     @Autowired
     private StemmeRepository stemmeRepository;
 
-
     @Override
-    public void addStemme(String epost, Integer stemmeverdi) {
-        stemmeRepository.save(new StemmeBean(epost, stemmeverdi));
+    public void addStemme(StemmeBean stemme) {
+        stemmeRepository.save(stemme);
     }
 
     @Override
