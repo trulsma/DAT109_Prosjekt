@@ -2,13 +2,12 @@ package no.hvl.dat109.spring.controller;
 
 import no.hvl.dat109.prosjekt.Processing;
 import no.hvl.dat109.spring.beans.BedriftBean;
-import no.hvl.dat109.spring.service.BedriftService;
 import no.hvl.dat109.spring.service.Interfaces.IBedriftService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -46,16 +45,22 @@ public class BedriftController {
         //example of redirect
         return "redirect:/bedrifter";
     }*/
+    @GetMapping("/bedrifter")
+    String getAlleBedrifter(Model model) {
+        model.addAttribute("bedrifter", repository.getAll());
+
+        return "bedrifter.html";
+    }
 
     @GetMapping("/bedrift/add")
-    String addBedrift(){
+    String addBedrift() {
         return "registrer_bedrift";
     }
 
     @PostMapping("/bedrift/add")
     String addBedriftPostRequest(
-                                 @RequestParam String bedriftnavn,
-                                 @RequestParam String bedriftbeskrivelse){
+            @RequestParam String bedriftnavn,
+            @RequestParam String bedriftbeskrivelse) {
 
         BedriftBean bedrift = new BedriftBean(bedriftnavn, bedriftbeskrivelse);
         repository.addBedrift(bedrift);

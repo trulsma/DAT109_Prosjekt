@@ -7,6 +7,8 @@ public interface IBedriftService {
     //TODO
     String getAll();
 
+    Iterable<BedriftBean> getAlleBedrifter();
+
     BedriftBean getBedriftById(int id);
 
     void addBedrift(BedriftBean bedrift);
