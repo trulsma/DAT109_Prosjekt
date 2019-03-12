@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ProsjektController {
@@ -34,7 +36,19 @@ public class ProsjektController {
     @GetMapping("/prosjekt/add")
     String addProsjekt() {
 
+        return "registrer_prosjekt";
+    }
 
-        return "Registrer prosjekt";
+    @PostMapping("/prosjekt/add")
+    String addProsjektPostRequest(@RequestParam int id,
+                                  @RequestParam String prosjektnavn,
+                                  @RequestParam String prosjektbeskrivelse) {
+        System.out.println(id);
+
+        ProsjektBean prosjekt = new ProsjektBean(id, prosjektnavn, prosjektbeskrivelse, "");
+
+        prosjektService.addProsjekt(prosjekt);
+
+        return "redirect:/prosjekt/" + prosjekt.getProsjektid();
     }
 }

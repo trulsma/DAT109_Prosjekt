@@ -14,6 +14,16 @@ public class ProsjektBean implements Serializable {
     private String prosjektbeskrivelse;
     private String qrcodeurl;
 
+    public ProsjektBean() {
+    }
+
+    public ProsjektBean(int prosjektid, String prosjektnavn, String prosjektbeskrivelse, String qrcodeurl) {
+        this.prosjektid = prosjektid;
+        this.prosjektnavn = prosjektnavn;
+        this.prosjektbeskrivelse = prosjektbeskrivelse;
+        this.qrcodeurl = qrcodeurl;
+    }
+
     @Id
     @Column(name = "prosjektid")
     public int getProsjektid() {
