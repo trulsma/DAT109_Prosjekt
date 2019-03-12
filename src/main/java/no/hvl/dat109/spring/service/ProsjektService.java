@@ -30,4 +30,11 @@ public class ProsjektService implements IProsjektService {
         }
         return false;
     }
+
+    public ProsjektBean getProsjektByName(String name) {
+        for (ProsjektBean prosjektBean : prosjektRepository.findAll()) {
+            if (prosjektBean.getProsjektnavn().equals(name)) return prosjektBean;
+        }
+        return null;
+    }
 }

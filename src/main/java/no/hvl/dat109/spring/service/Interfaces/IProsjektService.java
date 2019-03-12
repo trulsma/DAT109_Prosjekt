@@ -10,4 +10,6 @@ public interface IProsjektService {
 
     boolean exists(String name);
 
+    ProsjektBean getProsjektByName(String name);
+
 }
