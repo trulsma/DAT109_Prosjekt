@@ -1,6 +1,5 @@
 body, html{
     height: 100%;
-    background-color: #d3d3d3;
     font-family: 'oxygen';
 }
 
@@ -12,4 +11,5 @@ h1.title {
 
 p{
     text-align: center;
+    font-size: 40px;
 }
