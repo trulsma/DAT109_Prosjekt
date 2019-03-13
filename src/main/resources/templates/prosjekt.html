@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<form action="registrere" method="post">
+<form action="/stem" method="post">
     <h1 class="title"> EXPO vurdering </h1>
     <h1 class="title"> Oppgave navn: </h1>
     <p th:inline="text">[[${prosjekt.prosjektnavn}]]</p>
@@ -22,6 +22,7 @@
     <p><input type="radio" name="verdi" value="3" checked/> 3 </p>
     <p><input type="radio" name="verdi" value="4"/> 4 </p>
     <p><input type="radio" name="verdi" value="5"/> 5 </p>
+    <input type="hidden" name="prosjektid" th:value="${prosjekt.prosjektid}">
     <p><input type="submit" value="Registrer stemme"/></p>
 </form>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

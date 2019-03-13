@@ -9,6 +9,8 @@ public class ProsjektBean implements Serializable {
 
     //Todo can benefit from new toString, otherwise done
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int prosjektid;
     private String prosjektnavn;
     private String prosjektbeskrivelse;
@@ -24,7 +26,13 @@ public class ProsjektBean implements Serializable {
         this.qrcodeurl = qrcodeurl;
     }
 
-    @Id
+    public ProsjektBean(String prosjektnavn, String prosjektbeskrivelse, String qrcodeurl) {
+        this.prosjektnavn = prosjektnavn;
+        this.prosjektbeskrivelse = prosjektbeskrivelse;
+        this.qrcodeurl = qrcodeurl;
+    }
+
+
     @Column(name = "prosjektid")
     public int getProsjektid() {
         return prosjektid;

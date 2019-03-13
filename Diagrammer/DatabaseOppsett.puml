@@ -18,6 +18,7 @@ class Stemme{
     prosjektid : int
     epost : varchar
     stemmeverdi : int
+    stemmetidspunkt : timestamp
 }
 
 Bedrift "1" *-- "*" Prosjekt

@@ -29,7 +29,7 @@ public class StemmeController {
 
         // TODO: finne riktig prosjekt for prosjekt iden
 
-        stemmeService.addStemme(new StemmeBean(epost, verdi));
+        stemmeService.addStemme(new StemmeBean(prosjektid, epost, verdi));
 
         return "redirect:/stem";
     }

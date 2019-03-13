@@ -42,17 +42,16 @@ public class ProsjektController {
 
     @GetMapping("/prosjekt/add")
     String addProsjekt() {
-
         return "registrer_prosjekt";
     }
 
     @PostMapping("/prosjekt/add")
-    String addProsjektPostRequest(@RequestParam int id,
+    String addProsjektPostRequest(
                                   @RequestParam String prosjektnavn,
                                   @RequestParam String prosjektbeskrivelse) {
-        System.out.println(id);
+      //  System.out.println(id);
 
-        ProsjektBean prosjekt = new ProsjektBean(id, prosjektnavn, prosjektbeskrivelse, "");
+        ProsjektBean prosjekt = new ProsjektBean(prosjektnavn, prosjektbeskrivelse, "");
 
         prosjektService.addProsjekt(prosjekt);
 
