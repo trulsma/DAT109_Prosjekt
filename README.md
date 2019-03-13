@@ -1,5 +1,5 @@
 # Gruppe 3 DAT109 Prosjekt
-##### Enah Lanto | Espen Mæland | Heine Fjeldberg | Herborg Sjo | Ingrid Klepsvik | Raida Talukdar | Sondre Gjesdal | Truls Martinsen
+##### Enah Lanto | Espen Mæland | Heine Fjeldberg | Herborg Irgens Sjo | Ingrid Klepsvik | Raida Talukdar | Sondre Gjesdal | Truls Martinsen
 ___
 ### Setup
 1. Clone prosjektet inn i Intellij --> ````File->New->Project From Version Control->Git````
