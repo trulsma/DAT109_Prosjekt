@@ -1,6 +1,8 @@
 package no.hvl.dat109.spring.controller;
 
+import no.hvl.dat109.spring.beans.BedriftBean;
 import no.hvl.dat109.spring.beans.ProsjektBean;
+import no.hvl.dat109.spring.service.Interfaces.IBedriftService;
 import no.hvl.dat109.spring.service.Interfaces.IProsjektService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,9 @@ public class ProsjektController {
     @Autowired
     private IProsjektService prosjektService;
 
+    @Autowired
+    private IBedriftService bedriftService;
+
     @GetMapping("/prosjekter")
     String getAlleProsjekter(Model model) {
         model.addAttribute("prosjekter", prosjektService.getAlleProsjekter());
@@ -33,7 +38,9 @@ public class ProsjektController {
         if (prosjekt == null) {
             return "error";
         }
+        BedriftBean samarbeidspartner = bedriftService.getBedriftById(prosjekt.getSamarbeidsbedrift());
 
+        model.addAttribute("samarbeidspartner", samarbeidspartner);
         model.addAttribute("prosjekt", prosjekt);
 
         return "prosjekt";
@@ -41,17 +48,20 @@ public class ProsjektController {
     }
 
     @GetMapping("/prosjekt/add")
-    String addProsjekt() {
+    String addProsjekt(Model model) {
+        model.addAttribute("bedrifter", bedriftService.getAlleBedrifter());
         return "registrer_prosjekt";
     }
 
     @PostMapping("/prosjekt/add")
     String addProsjektPostRequest(
-                                  @RequestParam String prosjektnavn,
-                                  @RequestParam String prosjektbeskrivelse) {
-      //  System.out.println(id);
+            @RequestParam String prosjektnavn,
+            @RequestParam String prosjektbeskrivelse,
+            @RequestParam int samarbeidspartner) {
+        //  System.out.println(id);
 
-        ProsjektBean prosjekt = new ProsjektBean(prosjektnavn, prosjektbeskrivelse, "");
+
+        ProsjektBean prosjekt = new ProsjektBean(prosjektnavn, prosjektbeskrivelse, samarbeidspartner, "");
 
         prosjektService.addProsjekt(prosjekt);
 

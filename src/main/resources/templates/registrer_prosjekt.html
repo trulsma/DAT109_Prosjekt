@@ -7,10 +7,20 @@
 </head>
 <body>
 <h1> Registrer nytt prosjekt </h1>
-<form method="post" action="/prosjekt/add">
+<form method="post" action="/prosjekt/add" id="thisisform">
     <p>Prosjektnavn: <input type="text" value="" name="prosjektnavn" placeholder="Ditt prosjektnavn"></p>
     <p>Prosjektbeskrivelse: <input type="text" value="" name="prosjektbeskrivelse"
                                    placeholder="Skriv en kort beskrivelse om ditt prosjekt"></p>
+<p>
+    Velg din sammarbeidspartner:
+    <select form="thisisform" name="samarbeidspartner">
+        <option th:each="bedrift: ${bedrifter}"
+                th:value="${bedrift.bedriftid}"
+                th:name="${bedrift.bedriftnavn}"
+                th:text="${bedrift.bedriftnavn}">
+        </option>
+    </select>
+</p>
     <p><input type="submit" value="Submit"/><input type="reset" value="Reset"/></p>
 </form>
 </body>

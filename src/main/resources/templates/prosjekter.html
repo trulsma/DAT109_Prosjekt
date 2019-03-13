@@ -19,6 +19,7 @@
         <td th:text="${prosjekt.prosjektid}"></td>
         <td th:text="${prosjekt.prosjektnavn}"></td>
         <td th:text="${prosjekt.prosjektbeskrivelse}"></td>
+        <td><a th:href="@{'prosjekt/' + ${prosjekt.prosjektid}}">>></a></td>
     </tr>
 </table>
 </body>

@@ -14,6 +14,7 @@ public class ProsjektBean implements Serializable {
     private int prosjektid;
     private String prosjektnavn;
     private String prosjektbeskrivelse;
+    private int sammarbeidsbedrift;
     private String qrcodeurl;
 
     public ProsjektBean() {
@@ -26,9 +27,10 @@ public class ProsjektBean implements Serializable {
         this.qrcodeurl = qrcodeurl;
     }
 
-    public ProsjektBean(String prosjektnavn, String prosjektbeskrivelse, String qrcodeurl) {
+    public ProsjektBean(String prosjektnavn, String prosjektbeskrivelse, int samarbeidsbedrift, String qrcodeurl) {
         this.prosjektnavn = prosjektnavn;
         this.prosjektbeskrivelse = prosjektbeskrivelse;
+        this.sammarbeidsbedrift = samarbeidsbedrift;
         this.qrcodeurl = qrcodeurl;
     }
 
@@ -60,6 +62,14 @@ public class ProsjektBean implements Serializable {
 
     public void setProsjektbeskrivelse(String prosjektbeskrivelse) {
         this.prosjektbeskrivelse = prosjektbeskrivelse;
+    }
+
+    public int getSamarbeidsbedrift() {
+        return sammarbeidsbedrift;
+    }
+
+    public void setSamarbeidsbedrift(int samarbeidsbedrift) {
+        this.sammarbeidsbedrift = samarbeidsbedrift;
     }
 
     @Basic

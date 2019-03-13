@@ -20,6 +20,7 @@
             <td th:text="${bedrift.bedriftid}"></td>
             <td th:text="${bedrift.bedriftnavn}"></td>
             <td th:text="${bedrift.bedriftbeskrivelse}"></td>
+            <td><a th:href="@{'bedrift/' + ${bedrift.bedriftid}}"> >> </a></td>
         </tr>
     </table>
 </body>

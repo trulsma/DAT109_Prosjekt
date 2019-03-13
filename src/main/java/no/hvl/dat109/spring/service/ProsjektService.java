@@ -1,6 +1,8 @@
 package no.hvl.dat109.spring.service;
 
+import no.hvl.dat109.spring.beans.BedriftBean;
 import no.hvl.dat109.spring.beans.ProsjektBean;
+import no.hvl.dat109.spring.repository.BedriftRepository;
 import no.hvl.dat109.spring.repository.ProsjektRepository;
 import no.hvl.dat109.spring.service.Interfaces.IProsjektService;
 import org.springframework.beans.factory.annotation.Autowired;

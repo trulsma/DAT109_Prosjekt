@@ -21,10 +21,9 @@ public class BedriftController {
 
     @GetMapping("/bedrift/{id}")
     public String getBedriftById(@PathVariable("id") int id, Model model) {
-        BedriftBean bean = repository.getBedriftById(id);
-        Processing processing = new Processing(bean);
-        model.addAttribute("test", bean.toString());
-        return "index";
+        BedriftBean bedrift = repository.getBedriftById(id);
+        model.addAttribute("bedrift", bedrift);
+        return "bedrift";
     }
 
     /*@GetMapping("/bedrift/add/{navn}/{beskrivelse}")
