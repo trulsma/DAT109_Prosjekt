@@ -12,7 +12,7 @@ ___
 
 ___
 
-### Sette opp PlanUML + Graphviz
+### Sette opp PlantUML + Graphviz
 1. Last ned Plugin ```PlantUML integration``` i IntelliJ
 2. Gå til [Graphviz](https://www.graphviz.org/download/) og last ned versjonen til ditt operativsystem. Du skal nå kunne se diagrammene i mappen ```Diagrammer```
 
