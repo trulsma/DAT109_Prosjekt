@@ -110,7 +110,9 @@ public class ProsjektController {
 
     private void setQrLink(ProsjektBean prosjekt) {
         Processing processing = new Processing();
-        prosjekt.setQrcodeurl(processing.createQRCode(prosjekt));
+        prosjekt.setShortenedurl(processing.generateShortlink(prosjekt));
+        prosjekt.setQrimagepath("images/" + prosjekt.getProsjektid()
+                + "_" + prosjekt.getProsjektnavn().replaceAll(" ", "_") + ".png");
         prosjektService.updateProsjekt(prosjekt);
     }
 }

@@ -35,8 +35,8 @@
     <input type="hidden" name="prosjektid" th:value="${prosjekt.prosjektid}">
     <input type="hidden" name="epost" th:Value="${session.epost}">
     <p><input type="submit" value="Registrer stemme"/></p>
-    <p><img th:src="@{~/{fil}(fil=${qrfil})}" alt="test"></p>
-    <p class="smallText" th:text="${prosjekt.qrcodeurl}"></p>
+    <p><img th:src="@{~/{fil}(fil=${prosjekt.qrimagepath})}" alt=""></p>
+    <p class="smallText" th:text="${prosjekt.shortenedurl}"></p>
 </form>
 </body>
 </html>

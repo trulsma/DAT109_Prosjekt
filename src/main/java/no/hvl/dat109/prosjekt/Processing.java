@@ -59,36 +59,30 @@ public class Processing {
     private static final String HOST = "http://www.localhost:8080/";
     private static final int QRCODE_SIZE = 400;
 
-    public String createQRCode(ProsjektBean prosjekt) {
-        String shortenedLink = "chrome://dino/";
-        try {
-            // TODO: bytte ut urlen med riktig url for prosjektet
-            String dir = "src/main/resources/static/images/";
-            File outputfile = new File(dir + prosjekt.getProsjektid() + "_" + prosjekt.getProsjektnavn().replaceAll(" ", "_") + ".png");
-            shortenedLink = createQRCodeLink(prosjekt.getProsjektid());
-            BufferedImage image = generateQRCodeImage(shortenedLink);
-            ImageIO.write(image, "png", outputfile);
-
-
-        } catch (IOException | WriterException e) {
-            e.printStackTrace();
-        }
+    public String generateShortlink(ProsjektBean prosjekt) {
+        String shortenedLink = createQRCodeLink(prosjekt.getProsjektid());
+        createImage(prosjekt, shortenedLink);
         return shortenedLink;
     }
 
-    public static void generateQRCodeImage(String text, String filePath) throws WriterException, IOException {
-        QRCodeWriter qrCodeWriter = new QRCodeWriter();
-        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, QRCODE_SIZE, QRCODE_SIZE);
-
-        Path path = FileSystems.getDefault().getPath(filePath);
-        MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
-    }
-
-    public static BufferedImage generateQRCodeImage(String text) throws WriterException, IOException {
+    private static BufferedImage generateQRCodeImage(String text) throws WriterException, IOException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, QRCODE_SIZE, QRCODE_SIZE);
         return MatrixToImageWriter.toBufferedImage(bitMatrix);
     }
+
+    private void createImage(ProsjektBean prosjekt, String shortenedLink) {
+        String dir = "src/main/resources/static/images/";
+        File outputfile = new File(dir + prosjekt.getProsjektid() + "_" + prosjekt.getProsjektnavn().replaceAll(" ", "_") + ".png");
+        BufferedImage image = null;
+        try {
+            image = generateQRCodeImage(shortenedLink);
+            ImageIO.write(image, "png", outputfile);
+        } catch (WriterException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static String createQRCodeLink(int prosjektid) {
         Url url = as("elprosjekto", "R_eea8a14a9ffe422e8ca79f8b26aabe8a")
