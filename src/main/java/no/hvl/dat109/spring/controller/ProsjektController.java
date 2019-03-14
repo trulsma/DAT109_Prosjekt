@@ -38,9 +38,9 @@ public class ProsjektController {
         if (prosjekt == null) {
             return "error";
         }
-        BedriftBean samarbeidspartner = bedriftService.getBedriftById(prosjekt.getSamarbeidsbedrift());
+        System.out.println(prosjekt.getSammarbeidsbedrift() + " THIS IS BEDRIFT BOYYY");
 
-        model.addAttribute("samarbeidspartner", samarbeidspartner);
+        model.addAttribute("samarbeidspartner", prosjekt.getSammarbeidsbedrift());
         model.addAttribute("prosjekt", prosjekt);
 
         return "prosjekt";
@@ -60,8 +60,10 @@ public class ProsjektController {
             @RequestParam int samarbeidspartner) {
         //  System.out.println(id);
 
+        //Finn en bedrift fra id-en til comboboxen
+        BedriftBean bedrift = bedriftService.getBedriftById(samarbeidspartner);
 
-        ProsjektBean prosjekt = new ProsjektBean(prosjektnavn, prosjektbeskrivelse, samarbeidspartner, "");
+        ProsjektBean prosjekt = new ProsjektBean(prosjektnavn, prosjektbeskrivelse, bedrift, "");
 
         prosjektService.addProsjekt(prosjekt);
 

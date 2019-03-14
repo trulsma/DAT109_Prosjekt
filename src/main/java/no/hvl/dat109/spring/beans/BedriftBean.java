@@ -2,6 +2,7 @@ package no.hvl.dat109.spring.beans;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "bedrift", schema = "prosjekt1")
@@ -15,6 +16,9 @@ public class BedriftBean implements Serializable {
 
     private String bedriftnavn;
     private String bedriftbeskrivelse;
+
+    @OneToMany(mappedBy = "sammarbeidsbedrift")
+    private List<ProsjektBean> prosjekter;
 
     public BedriftBean() {
     }
@@ -46,6 +50,14 @@ public class BedriftBean implements Serializable {
 
     public void setBedriftbeskrivelse(String bedriftbeskrivelse) {
         this.bedriftbeskrivelse = bedriftbeskrivelse;
+    }
+
+    public List<ProsjektBean> getProsjekter() {
+        return prosjekter;
+    }
+
+    public void setProsjekter(List<ProsjektBean> prosjekter) {
+        this.prosjekter = prosjekter;
     }
 
     @Override

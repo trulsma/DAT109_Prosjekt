@@ -2,6 +2,7 @@ package no.hvl.dat109.spring.controller;
 
 import no.hvl.dat109.prosjekt.Processing;
 import no.hvl.dat109.spring.beans.BedriftBean;
+import no.hvl.dat109.spring.beans.ProsjektBean;
 import no.hvl.dat109.spring.service.Interfaces.IBedriftService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class BedriftController {
@@ -22,7 +25,11 @@ public class BedriftController {
     @GetMapping("/bedrift/{id}")
     public String getBedriftById(@PathVariable("id") int id, Model model) {
         BedriftBean bedrift = repository.getBedriftById(id);
+        List<ProsjektBean> prosjektBeanList = bedrift.getProsjekter();
+
+        prosjektBeanList.forEach(System.out::println);
         model.addAttribute("bedrift", bedrift);
+        //model.addAttribute("prosjekter", bedrift);
         return "bedrift";
     }
 

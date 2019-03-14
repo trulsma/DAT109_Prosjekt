@@ -14,8 +14,11 @@ public class ProsjektBean implements Serializable {
     private int prosjektid;
     private String prosjektnavn;
     private String prosjektbeskrivelse;
-    private int sammarbeidsbedrift;
     private String qrcodeurl;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sammarbeidsbedrift")
+    private BedriftBean sammarbeidsbedrift;
 
     public ProsjektBean() {
     }
@@ -27,10 +30,10 @@ public class ProsjektBean implements Serializable {
         this.qrcodeurl = qrcodeurl;
     }
 
-    public ProsjektBean(String prosjektnavn, String prosjektbeskrivelse, int samarbeidsbedrift, String qrcodeurl) {
+    public ProsjektBean(String prosjektnavn, String prosjektbeskrivelse, BedriftBean sammarbeidsbedrift, String qrcodeurl) {
         this.prosjektnavn = prosjektnavn;
         this.prosjektbeskrivelse = prosjektbeskrivelse;
-        this.sammarbeidsbedrift = samarbeidsbedrift;
+        this.sammarbeidsbedrift = sammarbeidsbedrift;
         this.qrcodeurl = qrcodeurl;
     }
 
@@ -64,12 +67,12 @@ public class ProsjektBean implements Serializable {
         this.prosjektbeskrivelse = prosjektbeskrivelse;
     }
 
-    public int getSamarbeidsbedrift() {
+    public BedriftBean getSammarbeidsbedrift() {
         return sammarbeidsbedrift;
     }
 
-    public void setSamarbeidsbedrift(int samarbeidsbedrift) {
-        this.sammarbeidsbedrift = samarbeidsbedrift;
+    public void setSammarbeidsbedrift(BedriftBean sammarbeidsbedrift) {
+        this.sammarbeidsbedrift = sammarbeidsbedrift;
     }
 
     @Basic
