@@ -21,10 +21,11 @@ CREATE TABLE Prosjekt (
 );
 
 CREATE TABLE Stemme (
-  stemmeid    SERIAL,
-  prosjektid  INTEGER,
-  epost       VARCHAR(255),
-  stemmeverdi INTEGER,
+  stemmeid        SERIAL,
+  prosjektid      INTEGER,
+  epost           VARCHAR(255),
+  stemmeverdi     INTEGER,
+  stemmetidspunkt TIMESTAMP,
   CONSTRAINT prosjektidFK FOREIGN KEY (prosjektid) REFERENCES Prosjekt (prosjektid),
   CONSTRAINT stemmePK PRIMARY KEY (stemmeid)
 );
