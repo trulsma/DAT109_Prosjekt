@@ -1,6 +1,5 @@
 package no.hvl.dat109.spring.controller;
 
-import no.hvl.dat109.prosjekt.Processing;
 import no.hvl.dat109.spring.beans.BedriftBean;
 import no.hvl.dat109.spring.beans.ProsjektBean;
 import no.hvl.dat109.spring.service.Interfaces.IBedriftService;
@@ -14,6 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+
+import static no.hvl.dat109.prosjekt.Processing.generateShortlink;
+import static no.hvl.dat109.prosjekt.Processing.getImagePath;
 
 @Controller
 public class ProsjektController {
@@ -42,14 +44,13 @@ public class ProsjektController {
             return "error";
         }
 
-        model.addAttribute("qrfil", "images/" + prosjekt.getProsjektid()
-                + "_" + prosjekt.getProsjektnavn().replaceAll(" ", "_") + ".png");
+        model.addAttribute("qrfil", getImagePath(prosjekt));
 
         return "qrkode";
     }
 
     @GetMapping("/prosjekt/{id}/qr/create")
-    String createProsjektQR(@PathVariable("id") int id, Model model) {
+    String createProsjektQR(@PathVariable("id") int id) {
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
 
@@ -78,8 +79,6 @@ public class ProsjektController {
 
         // RIP in peace System.out.println(prosjekt.getSammarbeidsbedrift() + " THIS IS BEDRIFT BOYYY");
 
-        model.addAttribute("qrfil", "images/" + prosjekt.getProsjektid()
-                + "_" + prosjekt.getProsjektnavn().replaceAll(" ", "_") + ".png");
         model.addAttribute("samarbeidspartner", prosjekt.getSammarbeidsbedrift());
         model.addAttribute("prosjekt", prosjekt);
 
@@ -109,10 +108,8 @@ public class ProsjektController {
     }
 
     private void setQrLink(ProsjektBean prosjekt) {
-        Processing processing = new Processing();
-        prosjekt.setShortenedurl(processing.generateShortlink(prosjekt));
-        prosjekt.setQrimagepath("images/" + prosjekt.getProsjektid()
-                + "_" + prosjekt.getProsjektnavn().replaceAll(" ", "_") + ".png");
+        prosjekt.setShortenedurl(generateShortlink(prosjekt));
+        prosjekt.setQrimagepath(getImagePath(prosjekt));
         prosjektService.updateProsjekt(prosjekt);
     }
 }
