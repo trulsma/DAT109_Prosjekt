@@ -68,7 +68,7 @@ public class ProsjektController {
     String getProsjektById(@PathVariable("id") int id, Model model, HttpSession session) {
 
         if (session.getAttribute("epost") == null) {
-            return "redirect:/registrer_deg";
+            return "redirect:/registrer_deg?redirect_url="+"/prosjekt/" + id;
         }
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
@@ -86,14 +86,15 @@ public class ProsjektController {
     }
 
     @PostMapping("/registrer_deg")
-    String registerBruker(@RequestParam String epost, HttpSession session) {
+    String registerBruker(@RequestParam String redirect_url, @RequestParam String epost, HttpSession session) {
         session.setAttribute("epost", epost);
 
-        return "index";
+        return "redirect:" + redirect_url;
     }
 
     @GetMapping("/registrer_deg")
-    String getRegistrerBruker() {
+    String getRegistrerBruker(@RequestParam String redirect_url, Model model) {
+        model.addAttribute("redirect_url", redirect_url);
         return "registrer_deg";
     }
 
