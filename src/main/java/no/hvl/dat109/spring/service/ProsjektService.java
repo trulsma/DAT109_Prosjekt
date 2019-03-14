@@ -41,6 +41,11 @@ public class ProsjektService implements IProsjektService {
     }
 
     @Override
+    public void updateProsjekt(ProsjektBean prosjekt) {
+        prosjektRepository.save(prosjekt);
+    }
+
+    @Override
     public Iterable<ProsjektBean> getAlleProsjekter() {
         return prosjektRepository.findAll();
     }

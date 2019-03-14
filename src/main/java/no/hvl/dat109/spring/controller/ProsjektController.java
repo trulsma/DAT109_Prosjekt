@@ -57,8 +57,7 @@ public class ProsjektController {
             return "error";
         }
 
-        Processing processing = new Processing();
-        processing.createQRCode(prosjekt);
+        setQrLink(prosjekt);
 
         // OBS! serveren kan redirecte før qrkoden bildet er lagret og vil ikke være oppdattert uten er refresh
         return "redirect:/prosjekt/" + id + "/qr";
@@ -68,7 +67,7 @@ public class ProsjektController {
     String getProsjektById(@PathVariable("id") int id, Model model, HttpSession session) {
 
         if (session.getAttribute("epost") == null) {
-            return "redirect:/registrer_deg?redirect_url="+"/prosjekt/" + id;
+            return "redirect:/registrer_deg?redirect_url=" + "/prosjekt/" + id;
         }
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
@@ -100,15 +99,16 @@ public class ProsjektController {
 
         //Finn en bedrift fra id-en til comboboxen
         BedriftBean bedrift = bedriftService.getBedriftById(samarbeidspartner);
-
-        ProsjektBean prosjekt = new ProsjektBean(prosjektnavn, prosjektbeskrivelse, bedrift, "");
-
+        ProsjektBean prosjekt = new ProsjektBean(prosjektnavn, prosjektbeskrivelse, bedrift);
         prosjektService.addProsjekt(prosjekt);
-
-        Processing processing = new Processing();
-
-        processing.createQRCode(prosjekt);
+        setQrLink(prosjekt);
 
         return "redirect:/prosjekt/" + prosjekt.getProsjektid();
+    }
+
+    private void setQrLink(ProsjektBean prosjekt) {
+        Processing processing = new Processing();
+        prosjekt.setQrcodeurl(processing.createQRCode(prosjekt));
+        prosjektService.updateProsjekt(prosjekt);
     }
 }

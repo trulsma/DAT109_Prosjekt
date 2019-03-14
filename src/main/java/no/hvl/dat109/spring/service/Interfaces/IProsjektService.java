@@ -14,4 +14,6 @@ public interface IProsjektService {
 
     Iterable<ProsjektBean> getAlleProsjekter();
 
+    void updateProsjekt(ProsjektBean prosjekt);
+
 }

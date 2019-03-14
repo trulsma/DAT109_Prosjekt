@@ -1,15 +1,21 @@
 package no.hvl.dat109.prosjekt;
 
-import no.hvl.dat109.spring.beans.BedriftBean;
+import com.google.zxing.*;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.rosaloves.bitlyj.Url;
 import no.hvl.dat109.spring.beans.ProsjektBean;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+
+import static com.rosaloves.bitlyj.Bitly.as;
+import static com.rosaloves.bitlyj.Bitly.shorten;
 
 public class Processing {
 
@@ -50,19 +56,48 @@ public class Processing {
 
     }
 
-    public String createQRCode(ProsjektBean prosjekt) {
+    private static final String HOST = "http://www.localhost:8080/";
 
-        BufferedImage image = null;
+    public String createQRCode(ProsjektBean prosjekt) {
+        String shortenedLink = "chrome://dino/";
         try {
             // TODO: bytte ut urlen med riktig url for prosjektet
-            image = ImageIO.read(new URL("https://i.imgur.com/sMyNvNk.png"));
             String dir = "src/main/resources/static/images/";
             File outputfile = new File(dir + prosjekt.getProsjektid() + "_" + prosjekt.getProsjektnavn().replaceAll(" ", "_") + ".png");
+            shortenedLink = createQRCodeLink(prosjekt.getProsjektid());
+            BufferedImage image = generateQRCodeImage(shortenedLink);
             ImageIO.write(image, "png", outputfile);
 
-        } catch (IOException e) {
+
+        } catch (IOException | WriterException e) {
             e.printStackTrace();
         }
-        return "";
+        return shortenedLink;
+    }
+
+    public static void generateQRCodeImage(String text, String filePath) throws WriterException, IOException {
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, 600, 600);
+
+        Path path = FileSystems.getDefault().getPath(filePath);
+        MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
+    }
+
+    public static BufferedImage generateQRCodeImage(String text) throws WriterException, IOException {
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, 600, 600);
+        return MatrixToImageWriter.toBufferedImage(bitMatrix);
+    }
+
+    public static String createQRCodeLink(int prosjektid) {
+        Url url = as("elprosjekto", "R_eea8a14a9ffe422e8ca79f8b26aabe8a")
+                .call(shorten(HOST + "prosjekt/" + prosjektid));
+        return url.getShortUrl();
+    }
+
+    public static void main(String[] args) {
+        Url url = as("elprosjekto", "R_eea8a14a9ffe422e8ca79f8b26aabe8a")
+                .call(shorten("http://www.localhost:8080/prosjekt/1"));
+        System.out.println(url.getShortUrl());
     }
 }

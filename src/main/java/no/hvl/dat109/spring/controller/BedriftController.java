@@ -29,7 +29,6 @@ public class BedriftController {
 
         model.addAttribute("bedrift", bedrift);
         model.addAttribute("partof", prosjektBeanList.size());
-        //model.addAttribute("prosjekter", bedrift);
         return "bedrift";
     }
 
