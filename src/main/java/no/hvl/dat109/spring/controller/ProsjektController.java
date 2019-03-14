@@ -85,20 +85,6 @@ public class ProsjektController {
         return "prosjekt";
     }
 
-    @PostMapping("/registrer_deg")
-    String registerBruker(@RequestParam String redirect_url, @RequestParam String epost, HttpSession session) {
-        session.setAttribute("epost", epost);
-
-        return "redirect:" + redirect_url;
-    }
-
-    @GetMapping("/registrer_deg")
-    String getRegistrerBruker(@RequestParam String redirect_url, Model model) {
-        model.addAttribute("redirect_url", redirect_url);
-        return "registrer_deg";
-    }
-
-
     @GetMapping("/prosjekt/add")
     String addProsjekt(Model model) {
         model.addAttribute("bedrifter", bedriftService.getAlleBedrifter());
