@@ -18,6 +18,8 @@ public class StemmeController {
     @Autowired
     private IStemmeService stemmeService;
 
+    @Autowired
+    private IProsjektService prosjektService;
 
     @GetMapping("/stem")
     public String visTakkForStemme() {
@@ -29,7 +31,13 @@ public class StemmeController {
 
         // TODO: finne riktig prosjekt for prosjekt iden
 
-        stemmeService.addStemme(new StemmeBean(prosjektid, epost, verdi));
+        ProsjektBean prosjekt = prosjektService.getProsjektById(prosjektid);
+
+        if (prosjekt == null) {
+            return "error";
+        }
+
+        stemmeService.addStemme(new StemmeBean(prosjekt, epost, verdi));
 
         return "redirect:/stem";
     }

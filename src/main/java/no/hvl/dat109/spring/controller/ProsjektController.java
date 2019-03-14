@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class ProsjektController {
 
@@ -63,20 +65,24 @@ public class ProsjektController {
     }
 
     @GetMapping("/prosjekt/{id}")
-    String getProsjektById(@PathVariable("id") int id, Model model) {
+    String getProsjektById(@PathVariable("id") int id, Model model, HttpSession session) {
+
+        if (session.getAttribute("epost") == null) {
+            return "redirect:/registrer_deg?redirect_url="+"/prosjekt/" + id;
+        }
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
 
         if (prosjekt == null) {
             return "error";
         }
+
         System.out.println(prosjekt.getSammarbeidsbedrift() + " THIS IS BEDRIFT BOYYY");
 
         model.addAttribute("samarbeidspartner", prosjekt.getSammarbeidsbedrift());
         model.addAttribute("prosjekt", prosjekt);
 
         return "prosjekt";
-
     }
 
     @GetMapping("/prosjekt/add")
