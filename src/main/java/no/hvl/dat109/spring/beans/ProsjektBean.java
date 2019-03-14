@@ -15,7 +15,8 @@ public class ProsjektBean implements Serializable {
     private int prosjektid;
     private String prosjektnavn;
     private String prosjektbeskrivelse;
-    private String qrcodeurl;
+    private String shortenedurl;
+    private String qrimagepath;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sammarbeidsbedrift")
@@ -26,13 +27,6 @@ public class ProsjektBean implements Serializable {
 
 
     public ProsjektBean() {
-    }
-
-    public ProsjektBean(int prosjektid, String prosjektnavn, String prosjektbeskrivelse, String qrcodeurl) {
-        this.prosjektid = prosjektid;
-        this.prosjektnavn = prosjektnavn;
-        this.prosjektbeskrivelse = prosjektbeskrivelse;
-        this.qrcodeurl = qrcodeurl;
     }
 
     public ProsjektBean(String prosjektnavn, String prosjektbeskrivelse, BedriftBean sammarbeidsbedrift) {
@@ -79,14 +73,20 @@ public class ProsjektBean implements Serializable {
         this.sammarbeidsbedrift = sammarbeidsbedrift;
     }
 
-    @Basic
-    @Column(name = "qrcodeurl")
-    public String getQrcodeurl() {
-        return qrcodeurl;
+    public String getShortenedurl() {
+        return shortenedurl;
     }
 
-    public void setQrcodeurl(String qrcodeurl) {
-        this.qrcodeurl = qrcodeurl;
+    public void setShortenedurl(String shortenedurl) {
+        this.shortenedurl = shortenedurl;
+    }
+
+    public String getQrimagepath() {
+        return qrimagepath;
+    }
+
+    public void setQrimagepath(String qrimagepath) {
+        this.qrimagepath = qrimagepath;
     }
 
     public List<StemmeBean> getStemmer() {
@@ -115,7 +115,10 @@ public class ProsjektBean implements Serializable {
                 "prosjektid=" + prosjektid +
                 ", prosjektnavn='" + prosjektnavn + '\'' +
                 ", prosjektbeskrivelse='" + prosjektbeskrivelse + '\'' +
-                ", qrcodeurl='" + qrcodeurl + '\'' +
+                ", shortenedurl='" + shortenedurl + '\'' +
+                ", qrimagepath='" + qrimagepath + '\'' +
+                ", sammarbeidsbedrift=" + sammarbeidsbedrift +
+                ", stemmer=" + stemmer +
                 '}';
     }
 }

@@ -11,88 +11,77 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
 
 import static com.rosaloves.bitlyj.Bitly.as;
 import static com.rosaloves.bitlyj.Bitly.shorten;
 
 public class Processing {
 
-    /*
-    //https://goo.gl/kUQ6fX
-    public Processing(BedriftBean bean) {
-        this.bean = bean;
-
-        JFrame frame = new JFrame(bean.getBedriftnavn());
-
-        BufferedImage image = null;
-        try {
-            image = ImageIO.read(new URL("https://i.imgur.com/sMyNvNk.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        JLabel imageLabel = new JLabel(new ImageIcon(image));
-        JLabel information = new JLabel(
-                "<html><body>" +
-                        "<h1>" + bean.getBedriftnavn() + "</h1>" +
-                        "<h3>" + bean.getBedriftbeskrivelse() + "</h3>" +
-                        "<p>Scan QRkoden!</p></body></html>"
-        );
-
-        information.setHorizontalAlignment(SwingConstants.CENTER);
-
-        frame.setLayout(new GridLayout(2, 1));
-        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        frame.add(information);
-        frame.add(imageLabel);
-
-        frame.setVisible(true);
-        frame.pack();
-    }
-    */
     public Processing() {
-
     }
 
     private static final String HOST = "http://www.localhost:8080/";
     private static final int QRCODE_SIZE = 400;
 
-    public String createQRCode(ProsjektBean prosjekt) {
-        String shortenedLink = "chrome://dino/";
-        try {
-            // TODO: bytte ut urlen med riktig url for prosjektet
-            String dir = "src/main/resources/static/images/";
-            File outputfile = new File(dir + prosjekt.getProsjektid() + "_" + prosjekt.getProsjektnavn().replaceAll(" ", "_") + ".png");
-            shortenedLink = createQRCodeLink(prosjekt.getProsjektid());
-            BufferedImage image = generateQRCodeImage(shortenedLink);
-            ImageIO.write(image, "png", outputfile);
-
-
-        } catch (IOException | WriterException e) {
-            e.printStackTrace();
-        }
+    /**
+     * Generer en bit.ly link og lag QR kode bilde
+     * @param prosjekt prosjektet du vil lage link til
+     * @return bit.ly link
+     */
+    public static String generateShortlink(ProsjektBean prosjekt) {
+        String shortenedLink = createQRCodeLink(prosjekt.getProsjektid());
+        createImageInResources(prosjekt, shortenedLink);
         return shortenedLink;
     }
 
-    public static void generateQRCodeImage(String text, String filePath) throws WriterException, IOException {
+    /**
+     * Metode for å generere QRCode bilder
+     * @param projectlink linken koden skal til
+     * @return bilde av QR koden
+     * @throws WriterException om det er problemer med å skrive til bilde
+     */
+    private static BufferedImage generateQRCodeImage(String projectlink) throws WriterException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
-        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, QRCODE_SIZE, QRCODE_SIZE);
-
-        Path path = FileSystems.getDefault().getPath(filePath);
-        MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
-    }
-
-    public static BufferedImage generateQRCodeImage(String text) throws WriterException, IOException {
-        QRCodeWriter qrCodeWriter = new QRCodeWriter();
-        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, QRCODE_SIZE, QRCODE_SIZE);
+        BitMatrix bitMatrix = qrCodeWriter.encode(projectlink, BarcodeFormat.QR_CODE, QRCODE_SIZE, QRCODE_SIZE);
         return MatrixToImageWriter.toBufferedImage(bitMatrix);
     }
 
+    /**
+     * Metode for å lagre qr koden i resources mappen
+     * @param prosjekt prosjekt
+     * @param shortenedLink bit.ly linken
+     */
+    private static void createImageInResources(ProsjektBean prosjekt, String shortenedLink) {
+        //Pathen til resource mappen
+        String dir = "src/main/resources/static/";
+        File outputfile = new File(dir + getImagePath(prosjekt));
+        BufferedImage image = null;
+        try {
+            image = generateQRCodeImage(shortenedLink);
+            ImageIO.write(image, "png", outputfile);
+        } catch (WriterException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Generer en bit.ly link
+     * @param prosjektid prosjektid for linken
+     * @return bit.ly link
+     */
     public static String createQRCodeLink(int prosjektid) {
         Url url = as("elprosjekto", "R_eea8a14a9ffe422e8ca79f8b26aabe8a")
                 .call(shorten(HOST + "prosjekt/" + prosjektid));
         return url.getShortUrl();
+    }
+
+    /**
+     * Metode for å finne bildene igjen
+     * @param prosjekt prosjektet du vil finne bilder til
+     * @return en path til qr bildet
+     */
+    public static String getImagePath(ProsjektBean prosjekt) {
+        return "images/" + prosjekt.getProsjektid()
+                + "_" + prosjekt.getProsjektnavn().replaceAll(" ", "_") + ".png";
     }
 }

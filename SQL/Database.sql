@@ -14,7 +14,8 @@ CREATE TABLE Prosjekt (
   prosjektnavn        VARCHAR(100) UNIQUE,
   prosjektbeskrivelse VARCHAR(1000),
   sammarbeidsbedrift  INTEGER,
-  qrcodeurl           VARCHAR(255),
+  shortenedurl        VARCHAR(255),
+  qrimagepath         VARCHAR(255),
   CONSTRAINT bedriftFK FOREIGN KEY (sammarbeidsbedrift) REFERENCES Bedrift (bedriftid),
   CONSTRAINT prosjektPK PRIMARY KEY (prosjektid)
 
