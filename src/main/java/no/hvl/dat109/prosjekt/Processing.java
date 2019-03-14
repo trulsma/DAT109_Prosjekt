@@ -1,21 +1,19 @@
 package no.hvl.dat109.prosjekt;
 
 import no.hvl.dat109.spring.beans.BedriftBean;
+import no.hvl.dat109.spring.beans.ProsjektBean;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
 public class Processing {
 
-    private BedriftBean bean;
-
-    //Todo this is just an example class of how we can manipulate data outside spring
-    //Todo run application and go to link: localhost:8080/bedrift/1 for a demostration
-
+    /*
     //https://goo.gl/kUQ6fX
     public Processing(BedriftBean bean) {
         this.bean = bean;
@@ -46,5 +44,25 @@ public class Processing {
 
         frame.setVisible(true);
         frame.pack();
+    }
+    */
+    public Processing() {
+
+    }
+
+    public String createQRCode(ProsjektBean prosjekt) {
+
+        BufferedImage image = null;
+        try {
+            // TODO: bytte ut urlen med riktig url for prosjektet
+            image = ImageIO.read(new URL("https://i.imgur.com/sMyNvNk.png"));
+            String dir = "src/main/resources/static/images/";
+            File outputfile = new File(dir + prosjekt.getProsjektid() + "_" + prosjekt.getProsjektnavn().replaceAll(" ", "_") + ".png");
+            ImageIO.write(image, "png", outputfile);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

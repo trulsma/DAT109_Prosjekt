@@ -1,0 +1,32 @@
+@startuml
+
+Bruker -left-> [Web]
+
+[Controller] ..> [Beans]
+
+[Controller] -right-> [Service]
+
+[Controller] -up-> [Web]
+[Web] -down-> [Controller]
+
+[Controller] -left-> [Processing]
+
+[Processing] ..> [Beans]
+
+[Repository] ..> [Beans]
+
+[Repository] --> Database
+
+[Service] ..> [Beans]
+
+[Service] -right-> [Repository]
+
+database "Database"{
+}
+
+
+note right of [Beans]
+    Data fra databasen overføres som beans
+end note
+
+@enduml
