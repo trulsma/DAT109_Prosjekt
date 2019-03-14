@@ -27,6 +27,7 @@
         <th>beskrivelse</th>
         <th>antall stemmer</th>
         <th>antall stemmer med verdi</th>
+        <th>stemmeverdi gjennomsnitt</th>
     </tr>
     <tr th:each="prosjekt: ${prosjekter}">
         <td th:text="${prosjekt.prosjektid}"></td>
@@ -34,6 +35,7 @@
         <td th:text="${prosjekt.prosjektbeskrivelse}"></td>
         <td th:text="${#lists.size(prosjekt.stemmer)}"></td>
         <td th:text="${prosjekt.stemmerMedVerdi}"></td>
+        <td th:text="${prosjekt.stemmeGjennomsnitt}"></td>
         <td><a th:href="@{'prosjekt/' + ${prosjekt.prosjektid}}">>></a></td>
     </tr>
 </table>

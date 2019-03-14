@@ -105,6 +105,10 @@ public class ProsjektBean implements Serializable {
         return sum;
     }
 
+    public Double getStemmeGjennomsnitt() {
+        return new Double(getStemmerMedVerdi()) / stemmer.size();
+    }
+
     @Override
     public String toString() {
         return "ProsjektBean{" +
