@@ -30,11 +30,10 @@ public class ProsjektBean implements Serializable {
         this.qrcodeurl = qrcodeurl;
     }
 
-    public ProsjektBean(String prosjektnavn, String prosjektbeskrivelse, BedriftBean sammarbeidsbedrift, String qrcodeurl) {
+    public ProsjektBean(String prosjektnavn, String prosjektbeskrivelse, BedriftBean sammarbeidsbedrift) {
         this.prosjektnavn = prosjektnavn;
         this.prosjektbeskrivelse = prosjektbeskrivelse;
         this.sammarbeidsbedrift = sammarbeidsbedrift;
-        this.qrcodeurl = qrcodeurl;
     }
 
 
