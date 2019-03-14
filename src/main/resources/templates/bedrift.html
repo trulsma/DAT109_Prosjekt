@@ -7,6 +7,7 @@
 <body>
 <h1 th:text="${bedrift.bedriftnavn}"></h1>
 <h2 th:text="${bedrift.bedriftbeskrivelse}"></h2>
+<h3 th:text="@{'Del av '+${partof} + ' prosjekter'}"></h3>
 <a href="/">Tilbake til start</a>
 </body>
 </html>
