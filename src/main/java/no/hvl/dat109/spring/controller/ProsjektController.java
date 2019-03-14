@@ -76,8 +76,10 @@ public class ProsjektController {
             return "error";
         }
 
-        System.out.println(prosjekt.getSammarbeidsbedrift() + " THIS IS BEDRIFT BOYYY");
+        // RIP in peace System.out.println(prosjekt.getSammarbeidsbedrift() + " THIS IS BEDRIFT BOYYY");
 
+        model.addAttribute("qrfil", "images/" + prosjekt.getProsjektid()
+                + "_" + prosjekt.getProsjektnavn().replaceAll(" ", "_") + ".png");
         model.addAttribute("samarbeidspartner", prosjekt.getSammarbeidsbedrift());
         model.addAttribute("prosjekt", prosjekt);
 

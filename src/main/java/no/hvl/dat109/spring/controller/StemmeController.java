@@ -37,9 +37,20 @@ public class StemmeController {
             return "error";
         }
 
-        stemmeService.addStemme(new StemmeBean(prosjekt, epost, verdi));
+        stemmeService.addStemme(new StemmeBean(prosjekt, epost, validateVerdi(verdi)));
 
         return "redirect:/stem";
+    }
+
+    /**
+     * Validerer at verdien ikke er større enn 5 eller mindre enn 0
+     * @param verdi verdi fra post
+     * @return verdi mellom 0 og 5
+     */
+    private int validateVerdi(int verdi) {
+        if (verdi < 0) verdi = 0;
+        else if (verdi > 5) verdi = 5;
+        return verdi;
     }
 
 }

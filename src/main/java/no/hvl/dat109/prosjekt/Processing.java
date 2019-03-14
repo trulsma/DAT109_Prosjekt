@@ -57,6 +57,7 @@ public class Processing {
     }
 
     private static final String HOST = "http://www.localhost:8080/";
+    private static final int QRCODE_SIZE = 400;
 
     public String createQRCode(ProsjektBean prosjekt) {
         String shortenedLink = "chrome://dino/";
@@ -77,7 +78,7 @@ public class Processing {
 
     public static void generateQRCodeImage(String text, String filePath) throws WriterException, IOException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
-        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, 600, 600);
+        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, QRCODE_SIZE, QRCODE_SIZE);
 
         Path path = FileSystems.getDefault().getPath(filePath);
         MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
@@ -85,7 +86,7 @@ public class Processing {
 
     public static BufferedImage generateQRCodeImage(String text) throws WriterException, IOException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
-        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, 600, 600);
+        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, QRCODE_SIZE, QRCODE_SIZE);
         return MatrixToImageWriter.toBufferedImage(bitMatrix);
     }
 
@@ -93,11 +94,5 @@ public class Processing {
         Url url = as("elprosjekto", "R_eea8a14a9ffe422e8ca79f8b26aabe8a")
                 .call(shorten(HOST + "prosjekt/" + prosjektid));
         return url.getShortUrl();
-    }
-
-    public static void main(String[] args) {
-        Url url = as("elprosjekto", "R_eea8a14a9ffe422e8ca79f8b26aabe8a")
-                .call(shorten("http://www.localhost:8080/prosjekt/1"));
-        System.out.println(url.getShortUrl());
     }
 }

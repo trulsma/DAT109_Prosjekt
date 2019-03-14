@@ -1,15 +1,26 @@
-body, html{
-    height: 100%;
+body {
     font-family: 'oxygen';
+    margin: 0 auto;
 }
 
 h1.title {
-    font-size: 50px;
+    font-size: 40px;
     text-align: center;
-    color: navy;
+    color: #358015;
 }
 
-p{
+.underTitle {
+    font-size: 32px;
     text-align: center;
-    font-size: 40px;
+    color: #2b6012;
+}
+
+.space {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+p {
+    text-align: center;
+    font-size: 28px;
 }

@@ -19,24 +19,24 @@
 </head>
 <body>
 <form action="/stem" method="post">
-    <h1 class="title"> EXPO vurdering </h1>
-    <h1 class="title"> Oppgave navn: </h1>
-    <p th:inline="text">[[${prosjekt.prosjektnavn}]]</p>
-    <h1 class="title"> Beskrivelse: </h1>
-    <p th:inline="text">[[${prosjekt.prosjektbeskrivelse}]]</p>
-    <h1 class="title"> Samarbeidspartner </h1>
-    <p th:inline="text">[[${samarbeidspartner.bedriftnavn}]]</p>
+    <h1 class="title" th:inline="text">Navn: [[${prosjekt.prosjektnavn}]]</h1>
+    <h1 class="underTitle" th:inline="text">Beskrivelse: [[${prosjekt.prosjektbeskrivelse}]]</h1>
+    <h1 class="underTitle" th:inline="text">Partner: [[${samarbeidspartner.bedriftnavn}]]</h1>
 
     <p>Avgi stemme</p>
-    <p><input type="radio" name="verdi" value="1"/> 1 </p>
-    <p><input type="radio" name="verdi" value="2"/> 2 </p>
-    <p><input type="radio" name="verdi" value="3" checked/> 3 </p>
-    <p><input type="radio" name="verdi" value="4"/> 4 </p>
-    <p><input type="radio" name="verdi" value="5"/> 5 </p>
+    <p>
+        <input type="radio" name="verdi" value="0"/> 0<span class="space"></span>
+        <input type="radio" name="verdi" value="1"/> 1<span class="space"></span>
+        <input type="radio" name="verdi" value="2"/> 2<span class="space"></span>
+        <input type="radio" name="verdi" value="3" checked/> 3<span class="space"></span>
+        <input type="radio" name="verdi" value="4"/> 4<span class="space"></span>
+        <input type="radio" name="verdi" value="5"/> 5
+    </p>
     <input type="hidden" name="prosjektid" th:value="${prosjekt.prosjektid}">
     <input type="hidden" name="epost" th:Value="${session.epost}">
     <p><input type="submit" value="Registrer stemme"/></p>
-    <p style="font-size:12px;text-align:right;"><a th:href="@{${prosjekt.prosjektid} + '/qr'}"/>QR koden</p>
+    <p><img th:src="@{~/{fil}(fil=${qrfil})}" alt="test"></p>
+    <p class="smallText" th:text="${prosjekt.qrcodeurl}"></p>
 </form>
 </body>
 </html>
