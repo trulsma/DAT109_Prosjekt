@@ -26,8 +26,7 @@
     <p th:inline="text">[[${prosjekt.prosjektbeskrivelse}]]</p>
     <h1 class="title"> Samarbeidspartner </h1>
     <p th:inline="text">[[${samarbeidspartner.bedriftnavn}]]</p>
-    <p> Registrer deg </p>
-    <p> Epost <input type="text" name="epost" value="" placeholder="Skriv inn epost"/></p>
+
     <p>Avgi stemme</p>
     <p><input type="radio" name="verdi" value="1"/> 1 </p>
     <p><input type="radio" name="verdi" value="2"/> 2 </p>
@@ -36,8 +35,7 @@
     <p><input type="radio" name="verdi" value="5"/> 5 </p>
     <input type="hidden" name="prosjektid" th:value="${prosjekt.prosjektid}">
     <p><input type="submit" value="Registrer stemme"/></p>
-    <p><a th:href="@{${prosjekt.prosjektid} + '/qr'}"/>QR koden</p>
-
+    <p style="font-size:12px;text-align:right;"><a th:href="@{${prosjekt.prosjektid} + '/qr'}"/>QR koden</p>
 </form>
 </body>
 </html>
