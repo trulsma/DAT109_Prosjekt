@@ -7,6 +7,11 @@ Bruker -left-> [Web]
 [Controller] -right-> [Service]
 
 [Controller] -up-> [Web]
+[Web] -down-> [Controller]
+
+[Controller] -left-> [Processing]
+
+[Processing] ..> [Beans]
 
 [Repository] ..> [Beans]
 
