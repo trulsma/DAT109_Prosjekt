@@ -1,5 +1,7 @@
 package no.hvl.dat109.spring.beans;
 
+import no.hvl.dat109.prosjekt.Processing;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -14,24 +16,22 @@ public class StemmeBean implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int stemmeid;
 
-    private int prosjektid;
     private String epost;
     private Integer stemmeverdi;
-
+    //private Integer prosjektid;
     private Date stemmetidspunkt;
 
-    /*
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "prosjektid")
     private ProsjektBean prosjekt;
-    */
+
 
     public StemmeBean() {
 
     }
 
-    public StemmeBean(int prosjektid, String epost, int stemmeverdi) {
-        this.prosjektid = prosjektid;
+    public StemmeBean(ProsjektBean prosjekt, String epost, int stemmeverdi) {
+        this.prosjekt = prosjekt;
         this.epost = epost;
         this.stemmeverdi = stemmeverdi;
         stemmetidspunkt = new Date();
@@ -56,6 +56,7 @@ public class StemmeBean implements Serializable {
         this.epost = epost;
     }
 
+    /*
     public int getProsjektid() {
         return prosjektid;
     }
@@ -63,6 +64,7 @@ public class StemmeBean implements Serializable {
     public void setProsjektid(int prosjektid) {
         this.prosjektid = prosjektid;
     }
+    */
 
     public Date getStemmetidspunkt() {
         return stemmetidspunkt;
