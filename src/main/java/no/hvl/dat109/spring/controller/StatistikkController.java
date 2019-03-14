@@ -8,7 +8,7 @@ public class StatistikkController {
 
 
     @GetMapping("/statistikk")
-    String getStatistics(){
-        return "statistikk";
+    public String getStatistics(){
+        return "statistikk.html";
     }
 }
