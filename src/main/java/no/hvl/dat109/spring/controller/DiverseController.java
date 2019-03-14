@@ -24,6 +24,10 @@ public class DiverseController {
         return "registrer_deg";
     }
 
+    @GetMapping("/index")
+    String getIndex() {
+        return "index";
+    }
 }
 
 
