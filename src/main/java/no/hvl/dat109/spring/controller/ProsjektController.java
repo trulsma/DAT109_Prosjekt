@@ -76,8 +76,6 @@ public class ProsjektController {
             return "error";
         }
 
-        System.out.println(prosjekt.getSammarbeidsbedrift() + " THIS IS BEDRIFT BOYYY");
-
         model.addAttribute("samarbeidspartner", prosjekt.getSammarbeidsbedrift());
         model.addAttribute("prosjekt", prosjekt);
 
