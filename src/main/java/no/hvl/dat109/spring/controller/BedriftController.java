@@ -27,8 +27,8 @@ public class BedriftController {
         BedriftBean bedrift = repository.getBedriftById(id);
         List<ProsjektBean> prosjektBeanList = bedrift.getProsjekter();
 
-        prosjektBeanList.forEach(System.out::println);
         model.addAttribute("bedrift", bedrift);
+        model.addAttribute("partof", prosjektBeanList.size());
         //model.addAttribute("prosjekter", bedrift);
         return "bedrift";
     }
