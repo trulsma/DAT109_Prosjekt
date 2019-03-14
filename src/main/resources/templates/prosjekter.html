@@ -25,11 +25,15 @@
         <th>Id</th>
         <th>navn</th>
         <th>beskrivelse</th>
+        <th>antall stemmer</th>
+        <th>antall stemmer med verdi</th>
     </tr>
     <tr th:each="prosjekt: ${prosjekter}">
         <td th:text="${prosjekt.prosjektid}"></td>
         <td th:text="${prosjekt.prosjektnavn}"></td>
         <td th:text="${prosjekt.prosjektbeskrivelse}"></td>
+        <td th:text="${#lists.size(prosjekt.stemmer)}"></td>
+        <td th:text="${prosjekt.stemmerMedVerdi}"></td>
         <td><a th:href="@{'prosjekt/' + ${prosjekt.prosjektid}}">>></a></td>
     </tr>
 </table>

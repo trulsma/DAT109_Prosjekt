@@ -1,7 +1,5 @@
 package no.hvl.dat109.spring.beans;
 
-import no.hvl.dat109.prosjekt.Processing;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -55,16 +53,6 @@ public class StemmeBean implements Serializable {
     public void setEpost(String epost) {
         this.epost = epost;
     }
-
-    /*
-    public int getProsjektid() {
-        return prosjektid;
-    }
-
-    public void setProsjektid(int prosjektid) {
-        this.prosjektid = prosjektid;
-    }
-    */
 
     public Date getStemmetidspunkt() {
         return stemmetidspunkt;

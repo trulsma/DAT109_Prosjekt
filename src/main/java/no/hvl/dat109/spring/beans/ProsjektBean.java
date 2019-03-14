@@ -2,6 +2,7 @@ package no.hvl.dat109.spring.beans;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "prosjekt", schema = "prosjekt1")
@@ -20,6 +21,10 @@ public class ProsjektBean implements Serializable {
     @JoinColumn(name = "sammarbeidsbedrift")
     private BedriftBean sammarbeidsbedrift;
 
+    @OneToMany(mappedBy = "prosjekt")
+    private List<StemmeBean> stemmer;
+
+
     public ProsjektBean() {
     }
 
@@ -30,11 +35,10 @@ public class ProsjektBean implements Serializable {
         this.qrcodeurl = qrcodeurl;
     }
 
-    public ProsjektBean(String prosjektnavn, String prosjektbeskrivelse, BedriftBean sammarbeidsbedrift, String qrcodeurl) {
+    public ProsjektBean(String prosjektnavn, String prosjektbeskrivelse, BedriftBean sammarbeidsbedrift) {
         this.prosjektnavn = prosjektnavn;
         this.prosjektbeskrivelse = prosjektbeskrivelse;
         this.sammarbeidsbedrift = sammarbeidsbedrift;
-        this.qrcodeurl = qrcodeurl;
     }
 
 
@@ -83,6 +87,22 @@ public class ProsjektBean implements Serializable {
 
     public void setQrcodeurl(String qrcodeurl) {
         this.qrcodeurl = qrcodeurl;
+    }
+
+    public List<StemmeBean> getStemmer() {
+        return stemmer;
+    }
+
+    public void setStemmer(List<StemmeBean> stemmer) {
+        this.stemmer = stemmer;
+    }
+
+    public Integer getStemmerMedVerdi() {
+        Integer sum = 0;
+        for (StemmeBean stemme : stemmer) {
+            sum += stemme.getStemmeverdi();
+        }
+        return sum;
     }
 
     @Override
