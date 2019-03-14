@@ -34,6 +34,7 @@
     <p><input type="radio" name="verdi" value="4"/> 4 </p>
     <p><input type="radio" name="verdi" value="5"/> 5 </p>
     <input type="hidden" name="prosjektid" th:value="${prosjekt.prosjektid}">
+    <input type="hidden" name="epost" th:Value="${session.epost}">
     <p><input type="submit" value="Registrer stemme"/></p>
     <p style="font-size:12px;text-align:right;"><a th:href="@{${prosjekt.prosjektid} + '/qr'}"/>QR koden</p>
 </form>
