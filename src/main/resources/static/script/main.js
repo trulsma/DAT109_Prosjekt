@@ -6,11 +6,9 @@ var myLines = new Chart(ctx, {
         labels: ['verdi_1', 'verdi_2', 'verdi_3'],
         datasets: [{
             label: 'fin test',
-            data: [15, 10, 30],
+            data: [15, 10, 5],
             backgroundColor: [
-                'rgba(255, 0, 255, 0.3)',
-                'rgba(128,0,0, 0.3)',
-                'rgba(0,0,128, 0.3)'
+                'rgba(0, 255, 0, 1)',
             ],
             borderColor: [
                 'rgba(255, 99, 132, 1)',
@@ -26,10 +24,7 @@ var myLines = new Chart(ctx, {
                 ticks: {
                     beginAtZero: true
                 }
-
             }]
-
         }
     }
-
 });
