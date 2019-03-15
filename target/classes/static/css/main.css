@@ -1,0 +1,26 @@
+body {
+    font-family: 'oxygen';
+    margin: 0 auto;
+}
+
+h1.title {
+    font-size: 40px;
+    text-align: center;
+    color: navy;
+}
+
+.underTitle {
+    font-size: 32px;
+    text-align: center;
+    color: navy;
+}
+
+.space {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+p {
+    text-align: center;
+    font-size: 28px;
+}

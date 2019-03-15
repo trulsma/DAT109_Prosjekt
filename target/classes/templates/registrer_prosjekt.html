@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Statistikk</title>
+    <title>Registrer prosjekt</title>
     <link rel="stylesheet" type="text/css" href="../../css/main.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -15,16 +15,24 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
 </head>
 <body>
-<h1>skal noe oppdatere seg?</h1>
-<p>Her kommer det statistikk</p>
-
-
-<canvas id="myBar" width="200" height="200" aria-label="Hello ARIA world" role="img"/>
-<script type="text/javascript" src="../../script/main.js"></script>
-
-
+<h1> Registrer nytt prosjekt </h1>
+<form method="post" action="/prosjekt/add" id="thisisform">
+    <p>Prosjektnavn: <input type="text" value="" name="prosjektnavn" placeholder="Ditt prosjektnavn"></p>
+    <p>Prosjektbeskrivelse: <input type="text" value="" name="prosjektbeskrivelse"
+                                   placeholder="Skriv en kort beskrivelse om ditt prosjekt"></p>
+<p>
+    Velg din sammarbeidspartner:
+    <select form="thisisform" name="samarbeidspartner">
+        <option th:each="bedrift: ${bedrifter}"
+                th:value="${bedrift.bedriftid}"
+                th:name="${bedrift.bedriftnavn}"
+                th:text="${bedrift.bedriftnavn}">
+        </option>
+    </select>
+</p>
+    <p><input type="submit" value="Submit"/><input type="reset" value="Reset"/></p>
+</form>
 </body>
 </html>
