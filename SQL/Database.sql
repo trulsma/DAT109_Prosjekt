@@ -31,6 +31,23 @@ CREATE TABLE Stemme (
   CONSTRAINT stemmePK PRIMARY KEY (stemmeid)
 );
 
+CREATE TABLE Arrangement (
+  arrangementid          SERIAL,
+  arrangementnavn        VARCHAR(255),
+  arrangementbeskrivelse VARCHAR(255),
+  arragementetutgaar     TIMESTAMP,
+  CONSTRAINT arrangementPK PRIMARY KEY (arrangementid)
+);
+
+CREATE TABLE ArrangementDeltagelse (
+  deltagelseid SERIAL,
+  arrangement  INTEGER,
+  prosjekt     INTEGER,
+  CONSTRAINT deltagelsePK PRIMARY KEY (deltagelseid),
+  CONSTRAINT prosjektFK FOREIGN KEY (prosjekt) REFERENCES Prosjekt (prosjektid),
+  CONSTRAINT arrangementFK FOREIGN KEY (arrangement) REFERENCES Arrangement (arrangementid)
+);
+
 INSERT INTO Bedrift (bedriftnavn, bedriftbeskrivelse)
 VALUES ('HVL', 'Høgskolen på Vestlandet'),
        ('Equinor', 'Oljebransjen');
