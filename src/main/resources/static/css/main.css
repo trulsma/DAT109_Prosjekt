@@ -9,6 +9,10 @@ h1.title {
     color: navy;
 }
 
+.darkbackground{
+    background-color: #2e2e2e;
+}
+
 .underTitle {
     font-size: 32px;
     text-align: center;

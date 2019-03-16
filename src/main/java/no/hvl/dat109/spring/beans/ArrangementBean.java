@@ -2,6 +2,7 @@ package no.hvl.dat109.spring.beans;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ public class ArrangementBean {
     private int arrangementid;
     private String arrangementnavn;
     private String arrangementbeskrivelse;
-    private Timestamp arragementetutgaar;
+    private Date arragementetutgaar;
 
     @Column(name = "arrangementid")
     public int getArrangementid() {
@@ -46,11 +47,11 @@ public class ArrangementBean {
 
     @Basic
     @Column(name = "arragementetutgaar")
-    public Timestamp getArragementetutgaar() {
+    public Date getArragementetutgaar() {
         return arragementetutgaar;
     }
 
-    public void setArragementetutgaar(Timestamp arragementetutgaar) {
+    public void setArragementetutgaar(Date arragementetutgaar) {
         this.arragementetutgaar = arragementetutgaar;
     }
 

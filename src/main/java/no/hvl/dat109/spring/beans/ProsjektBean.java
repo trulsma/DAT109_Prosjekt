@@ -18,12 +18,24 @@ public class ProsjektBean implements Serializable {
     private String shortenedurl;
     private String qrimagepath;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "prosjektkategori")
+    private KategoriBean prosjektkategori;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "stemmemetode")
+    private StemmeMetodeBean stemmemetode;
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sammarbeidsbedrift")
     private BedriftBean sammarbeidsbedrift;
 
     @OneToMany(mappedBy = "prosjekt")
     private List<StemmeBean> stemmer;
+
+
 
 
     public ProsjektBean() {
