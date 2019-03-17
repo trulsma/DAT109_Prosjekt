@@ -33,6 +33,7 @@ CREATE TABLE Prosjekt (
   stemmemetode        INTEGER,
   shortenedurl        VARCHAR(255),
   qrimagepath         VARCHAR(255),
+  pictureurl          VARCHAR(255),
   CONSTRAINT bedriftFK FOREIGN KEY (sammarbeidsbedrift) REFERENCES Bedrift (bedriftid),
   CONSTRAINT kategoriFK FOREIGN KEY (prosjektkategori) REFERENCES Kategori (kategoriid),
   CONSTRAINT metodeFK FOREIGN KEY (stemmemetode) REFERENCES StemmeMetode (metodeid),
@@ -68,3 +69,20 @@ CREATE TABLE ArrangementDeltagelse (
 
 INSERT INTO Bedrift (bedriftnavn, bedriftbeskrivelse)
 VALUES ('HVL', 'Høgskolen på Vestlandet');
+INSERT INTO StemmeMetode (metodenavn, metodeparameter)
+VALUES ('Like', 1);
+INSERT INTO Kategori (kategorinavn)
+VALUES ('Data og Realfag');
+INSERT INTO Arrangement (arrangementnavn, arrangementbeskrivelse, arragementetutgaar)
+VALUES ('Første Arrangement', 'Dette er en beskrivelse', '2019-03-17 12:07:21.827000');
+INSERT INTO Prosjekt (prosjektnavn,
+                      prosjektbeskrivelse,
+                      prosjektkategori,
+                      sammarbeidsbedrift,
+                      stemmemetode,
+                      shortenedurl,
+                      qrimagepath,
+                      pictureurl)
+VALUES ('Prosjekt navn', 'Beskrivelse', 1, 1, 1, 'short url', 'qr path', 'picture url');
+INSERT INTO ArrangementDeltagelse (arrangement, prosjekt)
+VALUES (1, 1);
