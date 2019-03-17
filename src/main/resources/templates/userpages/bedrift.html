@@ -5,6 +5,7 @@
     <title>Du er registrert!</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../../css/main.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
@@ -16,6 +17,8 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+<h1>Her kan brukere gå innpå bedriften og se informasjon, samt hvor mange prosjekter de er del av + antall
+    arrangementer de er del av?</h1>
 <h1 th:text="${bedrift.bedriftnavn}"></h1>
 <h2 th:text="${bedrift.bedriftbeskrivelse}"></h2>
 <h3 th:text="@{'Del av '+${partof} + ' prosjekter'}"></h3>

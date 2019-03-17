@@ -29,19 +29,19 @@ public class BedriftController {
 
         model.addAttribute("bedrift", bedrift);
         model.addAttribute("partof", prosjektBeanList.size());
-        return "bedrift";
+        return "userpages/bedrift";
     }
 
     @GetMapping("/bedrifter")
     String getAlleBedrifter(Model model) {
         model.addAttribute("bedrifter", repository.getAlleBedrifter());
 
-        return "bedrifter.html";
+        return "adminpages/bedrifter.html";
     }
 
     @GetMapping("/bedrift/add")
     String addBedrift() {
-        return "registrer_bedrift";
+        return "adminpages/registrering/registrer_bedrift";
     }
 
     @PostMapping("/bedrift/add")
