@@ -9,6 +9,6 @@ public class StatistikkController {
 
     @GetMapping("/statistikk")
     public String getStatistics(){
-        return "statistikk.html";
+        return "adminpages/statistikk/statistikk.html";
     }
 }

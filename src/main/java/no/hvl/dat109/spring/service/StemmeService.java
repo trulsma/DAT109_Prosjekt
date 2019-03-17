@@ -31,5 +31,15 @@ public class StemmeService implements IStemmeService {
         return stemmeRepository.findById(id).orElse(null);
     }
 
+    @Override
+    public void endreStemme(StemmeBean stemme, int nyVerdi) {
+        //Todo implement this
+    }
+
+    @Override
+    public void removeStemme(StemmeBean bean) {
+        //Todo implement this
+    }
+
 
 }

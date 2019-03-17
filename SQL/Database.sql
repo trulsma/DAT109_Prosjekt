@@ -9,16 +9,34 @@ CREATE TABLE Bedrift (
   CONSTRAINT bedriftPK PRIMARY KEY (bedriftid)
 );
 
+CREATE TABLE StemmeMetode (
+  metodeid        SERIAL,
+  metodenavn      VARCHAR(25),
+  metodeparameter INTEGER,
+  CONSTRAINT metodePK PRIMARY KEY (metodeid),
+  CONSTRAINT metodenavnUnique UNIQUE (metodenavn)
+);
+
+CREATE TABLE Kategori (
+  kategoriid   SERIAL,
+  kategorinavn VARCHAR(255),
+  CONSTRAINT kategoriPK PRIMARY KEY (kategoriid),
+  CONSTRAINT uniqueKategorinavn UNIQUE (kategorinavn)
+);
+
 CREATE TABLE Prosjekt (
   prosjektid          SERIAL,
   prosjektnavn        VARCHAR(100) UNIQUE,
   prosjektbeskrivelse VARCHAR(1000),
+  prosjektkategori    INTEGER,
   sammarbeidsbedrift  INTEGER,
+  stemmemetode        INTEGER,
   shortenedurl        VARCHAR(255),
   qrimagepath         VARCHAR(255),
   CONSTRAINT bedriftFK FOREIGN KEY (sammarbeidsbedrift) REFERENCES Bedrift (bedriftid),
+  CONSTRAINT kategoriFK FOREIGN KEY (prosjektkategori) REFERENCES Kategori (kategoriid),
+  CONSTRAINT metodeFK FOREIGN KEY (stemmemetode) REFERENCES StemmeMetode (metodeid),
   CONSTRAINT prosjektPK PRIMARY KEY (prosjektid)
-
 );
 
 CREATE TABLE Stemme (
@@ -49,5 +67,4 @@ CREATE TABLE ArrangementDeltagelse (
 );
 
 INSERT INTO Bedrift (bedriftnavn, bedriftbeskrivelse)
-VALUES ('HVL', 'Høgskolen på Vestlandet'),
-       ('Equinor', 'Oljebransjen');
+VALUES ('HVL', 'Høgskolen på Vestlandet');

@@ -19,6 +19,7 @@ public class ArrangementdeltagelseBean {
     @JoinColumn(name = "prosjekt")
     private ProsjektBean prosjekt;
 
+
     public ArrangementBean getArrangement() {
         return arrangement;
     }
