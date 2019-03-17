@@ -1,8 +1,13 @@
 var ctx = document.getElementById('myBar');
 
-var random1 = "#" + Math.floor(Math.random() * 16777215).toString(16);
-var random2 = "#" + Math.floor(Math.random() * 16777215).toString(16);
-var random3 = "#" + Math.floor(Math.random() * 16777215).toString(16);
+function randomRGBA() {
+    var o = Math.round, r = Math.random, m = 255;
+    return 'rgba(' + o(r() * m) + ',' + o(r() * m) + ',' + o(r() * m) + ',';
+}
+
+var random1 = randomRGBA();
+var random2 = randomRGBA();
+var random3 = randomRGBA();
 
 var myBar = new Chart(ctx, {
     type: 'bar',
@@ -12,33 +17,50 @@ var myBar = new Chart(ctx, {
             label: 'fin test',
             data: [5, 1, 2.5],
             borderColor: [
-                'random1',
-                'random2',
-                'random3'
+                random1 + '1)',
+                random2 + '1)',
+                random3 + '1)'
             ],
             backgroundColor: [
-                'random1',
-                'random2',
-                'random3'
+                random1 + '0.1)',
+                random2 + '0.1)',
+                random3 + '0.1)'
             ],
             borderWidth: 1
         }]
     },
-    options: { scales: { yAxes: [{ ticks: { beginAtZero: true }}]}}});
+    options: {scales: {yAxes: [{ticks: {beginAtZero: true}}]}}
+});
 
 
 new Chart(document.getElementById("chartjs-1"), {
-    "type": "bar",
-    "data": {
-        "labels": ["January", "February", "March", "April", "May", "June", "July"],
-        "datasets": [{
-            "label": "My First Dataset",
-            "data": [65, 59, 80, 81, 56, 55, 40],
-            "fill": false,
-            "backgroundColor": ["rgba(255, 99, 132, 0.2)", "rgba(255, 159, 64, 0.2)", "rgba(255, 205, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(201, 203, 207, 0.2)"],
-            "borderColor": ["rgb(255, 99, 132)", "rgb(255, 159, 64)", "rgb(255, 205, 86)", "rgb(75, 192, 192)", "rgb(54, 162, 235)", "rgb(153, 102, 255)", "rgb(201, 203, 207)"],
-            "borderWidth": 1
+    type: 'bar',
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+            label: 'My First Dataset',
+            data: [65, 59, 80, 81, 56, 55, 40],
+            fill: false,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)',
+                'rgb(201, 203, 207)'
+            ],
+            borderWidth: 1
         }]
     },
-    "options": {"scales": {"yAxes": [{"ticks": {"beginAtZero": true}}]}}
+    options: {scales: {yAxes: [{ticks: {beginAtZero: true}}]}}
 });
