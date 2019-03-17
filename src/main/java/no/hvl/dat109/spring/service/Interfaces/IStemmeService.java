@@ -13,6 +13,8 @@ public interface IStemmeService {
 
     StemmeBean getStemmeById(int id);
 
+    void endreStemme(StemmeBean stemme, int nyVerdi);
 
+    void removeStemme(StemmeBean bean);
 
 }

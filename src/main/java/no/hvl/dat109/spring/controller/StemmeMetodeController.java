@@ -11,10 +11,10 @@ public class StemmeMetodeController {
     @Autowired
     private StemmeMetodeService stemmeMetodeService;
 
-    @GetMapping("/stemmemetode")
-    public String stemmeTest() {
+    @GetMapping("/printStemmemetode")
+    public String stemmemetodeTest() {
 
-        System.out.println(stemmeMetodeService.test());
+        System.out.println(stemmeMetodeService.getAlleStemmemetoderAsString());
 
         return "index";
     }
