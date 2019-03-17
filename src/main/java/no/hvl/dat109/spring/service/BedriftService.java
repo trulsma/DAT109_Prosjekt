@@ -31,6 +31,16 @@ public class BedriftService implements IBedriftService {
     }
 
     @Override
+    public void removeBedrift(BedriftBean bedrift) {
+
+    }
+
+    @Override
+    public void updateBedriftNavn(BedriftBean bedrift, String nyttNavn) {
+
+    }
+
+    @Override
     public boolean exists(String name) {
         for (BedriftBean bedriftBean : bedriftRepository.findAll()) {
             if (bedriftBean.getBedriftnavn().equals(name)) return true;

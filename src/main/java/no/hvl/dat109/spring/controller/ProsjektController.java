@@ -32,7 +32,7 @@ public class ProsjektController {
     String getAlleProsjekter(Model model) {
         model.addAttribute("prosjekter", prosjektService.getAlleProsjekter());
 
-        return "prosjekter.html";
+        return "adminpages/prosjekter.html";
     }
 
     @GetMapping("/prosjekt/{id}/qr")
@@ -46,7 +46,7 @@ public class ProsjektController {
 
         model.addAttribute("qrfil", getImagePath(prosjekt));
 
-        return "qrkode";
+        return "standpages/qrkode";
     }
 
     @GetMapping("/prosjekt/{id}/qr/create")
@@ -61,7 +61,7 @@ public class ProsjektController {
         setQrLink(prosjekt);
 
         // OBS! serveren kan redirecte før qrkoden bildet er lagret og vil ikke være oppdattert uten er refresh
-        return "redirect:/prosjekt/" + id + "/qr";
+        return "redirect:/standpages/prosjekt/" + id + "/qr";
     }
 
     @GetMapping("/prosjekt/{id}")
@@ -82,13 +82,13 @@ public class ProsjektController {
         model.addAttribute("samarbeidspartner", prosjekt.getSammarbeidsbedrift());
         model.addAttribute("prosjekt", prosjekt);
 
-        return "prosjekt";
+        return "standpages/prosjekt";
     }
 
     @GetMapping("/prosjekt/add")
     String addProsjekt(Model model) {
         model.addAttribute("bedrifter", bedriftService.getAlleBedrifter());
-        return "registrer_prosjekt";
+        return "adminpages/registrering/registrer_prosjekt";
     }
 
     @PostMapping("/prosjekt/add")
