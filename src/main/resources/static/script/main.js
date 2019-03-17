@@ -33,6 +33,9 @@ var myBar = new Chart(ctx, {
 });
 
 
+
+//brukt til inspirasjon
+//TODO fjern før prosjektet er ferdig
 new Chart(document.getElementById("chartjs-1"), {
     type: 'bar',
     data: {
