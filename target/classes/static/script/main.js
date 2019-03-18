@@ -1,10 +1,13 @@
+/*<![CDATA[*/
 var ctx = document.getElementById('myBar');
 
 function randomRGBA() {
     var o = Math.round, r = Math.random, m = 255;
+
     return 'rgba(' + o(r() * m) + ',' + o(r() * m) + ',' + o(r() * m) + ',';
 }
 
+console.log(/*[[${prosjekt.prosjektnavn}]]*/);
 var random1 = randomRGBA();
 var random2 = randomRGBA();
 var random3 = randomRGBA();
@@ -67,3 +70,5 @@ new Chart(document.getElementById("chartjs-1"), {
     },
     options: {scales: {yAxes: [{ticks: {beginAtZero: true}}]}}
 });
+
+/*]]>*/
