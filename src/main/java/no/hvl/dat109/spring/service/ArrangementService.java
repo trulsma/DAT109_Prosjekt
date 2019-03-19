@@ -27,6 +27,7 @@ public class ArrangementService implements IArrangementService {
     @Override
     public void addArrangement(String arrangementnavn, String arrangementbeskrivelse, Date arrangementutgaar) {
         ArrangementBean nyBean = new ArrangementBean(arrangementnavn, arrangementbeskrivelse, arrangementutgaar);
+        arrangementRepository.save(nyBean);
     }
 
     @Override
