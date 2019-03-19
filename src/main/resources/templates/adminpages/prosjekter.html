@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Prosjektoversikt</title>
-    <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../css/bedrifter.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -20,24 +20,39 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<table border="1">
-    <tr>
-        <th>Id</th>
-        <th>navn</th>
-        <th>beskrivelse</th>
-        <th>antall stemmer</th>
-        <th>antall stemmer med verdi</th>
-        <th>stemmeverdi gjennomsnitt</th>
-    </tr>
-    <tr th:each="prosjekt: ${prosjekter}">
-        <td th:text="${prosjekt.prosjektid}"></td>
-        <td th:text="${prosjekt.prosjektnavn}"></td>
-        <td th:text="${prosjekt.prosjektbeskrivelse}"></td>
-        <td th:text="${#lists.size(prosjekt.stemmer)}"></td>
-        <td th:text="${prosjekt.stemmerMedVerdi}"></td>
-        <td th:text="${prosjekt.stemmeGjennomsnitt}"></td>
-        <td><a th:href="@{'prosjekt/' + ${prosjekt.prosjektid}}">>></a></td>
-    </tr>
-</table>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive" data-pattern="priority-columns">
+                <table summary=" "
+                       class="table table-bordered table-hover">
+                    <caption class="text-center"> En oversikt over alle bedriftene</caption>
+                    <thead>
+
+                    <tr>
+                        <th>Id</th>
+                        <th>navn</th>
+                        <th>beskrivelse</th>
+                        <th>antall stemmer</th>
+                        <th>antall stemmer med verdi</th>
+                        <th>stemmeverdi gjennomsnitt</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="prosjekt: ${prosjekter}">
+                        <td th:text="${prosjekt.prosjektid}"></td>
+                        <td th:text="${prosjekt.prosjektnavn}"></td>
+                        <td th:text="${prosjekt.prosjektbeskrivelse}"></td>
+                        <td th:text="${#lists.size(prosjekt.stemmer)}"></td>
+                        <td th:text="${prosjekt.stemmerMedVerdi}"></td>
+                        <td th:text="${prosjekt.stemmeGjennomsnitt}"></td>
+                        <td><a th:href="@{'prosjekt/' + ${prosjekt.prosjektid}}">>></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
