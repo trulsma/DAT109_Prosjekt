@@ -50,17 +50,6 @@ public class ProsjektController {
         return "standpages/qrkode";
     }
 
-    @GetMapping("/prosjekt/{id}/stemmer")
-    ResponseEntity<?> getProsjektQR(@PathVariable("id") int id) {
-        ProsjektBean prosjekt = prosjektService.getProsjektById(id);
-
-        if (prosjekt == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok().body(prosjekt.getStemmer());
-    }
-
     @GetMapping("/prosjekt/{id}/qr/create")
     String createProsjektQR(@PathVariable("id") int id) {
 
