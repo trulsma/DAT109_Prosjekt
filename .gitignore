@@ -26,5 +26,6 @@ hs_err_pid*
 .iml
 /target
 
+#ignore the folder 'target'
 target/
 
