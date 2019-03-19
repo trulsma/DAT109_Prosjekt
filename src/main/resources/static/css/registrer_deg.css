@@ -18,7 +18,7 @@ input[type=text]:focus {
 }
 
 input[type=submit] {
-    width: 45%;
+    width: 49%;
 
     padding: 14px 20px;
     margin: 6px 2px;
@@ -28,7 +28,7 @@ input[type=submit] {
 
 }
 input[type=reset] {
-    width: 45%;
+    width: 49%;
 
     padding: 14px 20px;
     margin: 6px 2px;
