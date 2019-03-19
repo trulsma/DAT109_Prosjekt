@@ -22,6 +22,12 @@ public class DiverseController {
     String adminLogin(@RequestParam String redirect_url, @RequestParam String passord, HttpSession session){
         session.setAttribute("passord", passord);
 
+        if (passord == "hemmelig"){
+            session.setAttribute("passord", passord);
+        }else {
+            return "redirect:admin_login?redirect_url=" + redirect_url;
+        }
+
         return "redirect:" + redirect_url;
     }
 

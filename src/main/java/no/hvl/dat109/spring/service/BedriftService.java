@@ -32,12 +32,14 @@ public class BedriftService implements IBedriftService {
 
     @Override
     public void removeBedrift(BedriftBean bedrift) {
-
+        bedriftRepository.delete(bedrift);
     }
 
     @Override
     public void updateBedriftNavn(BedriftBean bedrift, String nyttNavn) {
-
+        for(BedriftBean b : bedriftRepository.findAll()){
+            if(b.getBedriftnavn().equals(bedrift.getBedriftnavn())) b.setBedriftnavn(nyttNavn);
+        }
     }
 
     @Override

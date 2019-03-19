@@ -1,5 +1,6 @@
 package no.hvl.dat109.spring.controller;
 
+import no.hvl.dat109.spring.beans.AnonymStemmeBean;
 import no.hvl.dat109.spring.beans.ProsjektBean;
 import no.hvl.dat109.spring.beans.ProsjektMedStemmerBean;
 import no.hvl.dat109.spring.beans.StemmeBean;
@@ -35,7 +36,7 @@ public class StemmeController {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok().body(prosjekt.getStemmer());
+        return ResponseEntity.ok().body(prosjekt.getStemmer().stream().map(AnonymStemmeBean::new));
     }
 
     @GetMapping("/api/prosjekter/stemmer")
