@@ -6,11 +6,7 @@ function randomRGBA() {
 
     return 'rgba(' + o(r() * m) + ',' + o(r() * m) + ',' + o(r() * m) + ',';
 }
-
-let requestValue = [];
-
-<c:forEach items="#{prosjektBean.items}"
-
+$
 console.log("#reee");
 var random1 = randomRGBA();
 var random2 = randomRGBA();
@@ -21,7 +17,7 @@ var myBar = new Chart(ctx, {
     data: {
         labels: ['prosjekt 1', 'prosjekt 2', 'prosjekt 3'],
         datasets: [{
-            label: 'fin test',
+            label: ['prosjekt 1', 'prosjekt 2', 'prosjekt 3'],
             data: ["#{prosjekt.prosjektid}", 1, 2.5],
             borderColor: [
                 random1 + '1)',

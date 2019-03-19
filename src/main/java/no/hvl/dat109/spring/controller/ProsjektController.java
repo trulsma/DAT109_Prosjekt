@@ -5,6 +5,7 @@ import no.hvl.dat109.spring.beans.ProsjektBean;
 import no.hvl.dat109.spring.service.Interfaces.IBedriftService;
 import no.hvl.dat109.spring.service.Interfaces.IProsjektService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,6 +48,17 @@ public class ProsjektController {
         model.addAttribute("qrfil", getImagePath(prosjekt));
 
         return "standpages/qrkode";
+    }
+
+    @GetMapping("/prosjekt/{id}/stemmer")
+    ResponseEntity<?> getProsjektQR(@PathVariable("id") int id) {
+        ProsjektBean prosjekt = prosjektService.getProsjektById(id);
+
+        if (prosjekt == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok().body(prosjekt.getStemmer());
     }
 
     @GetMapping("/prosjekt/{id}/qr/create")

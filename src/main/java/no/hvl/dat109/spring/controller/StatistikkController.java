@@ -19,17 +19,7 @@ public class StatistikkController {
 
     //nødvending å gjøre tingene med Model?
     @GetMapping("/statistikk")
-    public String getStatistics(Model model) {
-        /*
-        @PathVariable("id") int id,
-        ProsjektBean prosjekt = prosjektService.getProsjektById(id);
-
-        if (prosjekt == null){
-            return "error";
-        }
-
-        model.addAttribute("prosjekt", prosjekt);
-*/
+    public String getStatistics() {
         return "adminpages/statistikk/statistikk.html";
     }
 }
