@@ -6,11 +6,11 @@ function randomRGBA() {
 
     return 'rgba(' + o(r() * m) + ',' + o(r() * m) + ',' + o(r() * m) + ',';
 }
-
+/*
 let requestValue = [];
 
 <c:forEach items="#{prosjektBean.items}"
-
+*/
 console.log("#reee");
 var random1 = randomRGBA();
 var random2 = randomRGBA();
