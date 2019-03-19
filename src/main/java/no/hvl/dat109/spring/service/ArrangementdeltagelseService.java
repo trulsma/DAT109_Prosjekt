@@ -28,18 +28,18 @@ public class ArrangementdeltagelseService implements IArrangementdeltagelseServi
 
     @Override
     public void addArrangementDeltagelse(ArrangementBean arrangement, ProsjektBean prosjek) {
-        //Todo implement this
+        ArrangementdeltagelseBean bean = new ArrangementdeltagelseBean(arrangement, prosjek);
+        arrangementdeltagelseRepository.save(bean);
     }
 
     @Override
     public void removeArrangementDeltagelse(ArrangementdeltagelseBean deltagelse) {
-        //Todo implement this
+        arrangementdeltagelseRepository.delete(deltagelse);
     }
 
     @Override
     public ArrangementdeltagelseBean getArrangementDeltagelse(int id) {
-        //Todo implement this
-        return null;
+        return arrangementdeltagelseRepository.findById(id).orElse(null);
     }
 
     @Override
