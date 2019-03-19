@@ -25,8 +25,7 @@ public class KategoriService implements IKategoriService {
 
     @Override
     public Iterable<KategoriBean> getAllKategorier() {
-        //Todo Implement this
-        return null;
+        return kategoriRepository.findAll();
     }
 
     @Override
@@ -39,35 +38,42 @@ public class KategoriService implements IKategoriService {
 
     @Override
     public void addKategori(String kategoriNavn) {
-        //Todo Implement this
+       KategoriBean nyBean = new KategoriBean(kategoriNavn);
+       kategoriRepository.save(nyBean);
     }
 
     @Override
     public KategoriBean getKategori(int id) {
-        //Todo Implement this
-        return null;
+        return kategoriRepository.findById(id).orElse(null);
     }
 
     @Override
     public KategoriBean getKategoriByName(String kategorinavn) {
-        //Todo Implement this
-        return null;
-    }
+        for(KategoriBean k : kategoriRepository.findAll()){
+            if(k.getKategorinavn().equals(kategorinavn)) return k;
+            }
+                return null;
+            }
+
+
+
 
     @Override
     public boolean exists(String kategorinavn) {
-        //Todo Implement this
+        for(KategoriBean k : kategoriRepository.findAll()){
+            if(k.getKategorinavn().equals(kategorinavn)) return true;
+        }
         return false;
     }
 
     @Override
     public boolean exists(int kategoriid) {
-        //Todo Implement this
-        return false;
+       KategoriBean k = kategoriRepository.findById(kategoriid).orElse(null);
+        return k != null;
     }
 
     @Override
     public void removeKategori(KategoriBean kategori) {
-        //Todo Implement this
+       kategoriRepository.delete(kategori);
     }
 }
