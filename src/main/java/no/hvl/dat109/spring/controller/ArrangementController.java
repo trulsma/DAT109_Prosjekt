@@ -15,7 +15,7 @@ public class ArrangementController {
     @GetMapping("/arrangement")
     public String test() {
 
-        arrangementService.test();
+        System.out.println(arrangementService.getAllArrangementAsString());
 
         return "index";
     }

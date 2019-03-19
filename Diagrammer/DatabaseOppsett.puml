@@ -3,14 +3,41 @@ class Prosjekt{
     prosjektid : int
     prosjektnavn : varchar
     prosjektbeskrivelse: varchar
+    kategori : int
     sammerbeidsbedrift : integer
-    qrcodeurl : varchar
+    stemmemetode : int
+    shortenedurl : varchar
+    qrimagepath : varchar
+}
+
+class Kategori{
+    kategoriid : int
+    kategorinavn : varchar
+}
+
+class Arrangement{
+    arrangementid : int
+    arrangementnavn : varchar
+    arrangementbeskrivelse : varchar
+    arrangementutgaar : date
+}
+
+class Arrangementdeltagelse{
+    deltagelseid : int
+    arrangement : int
+    prosjekt : int
 }
 
 class Bedrift{
     bedriftid : int
     bedriftnavn : varchar
     bedriftbeskrivelse : varchar
+}
+
+class StemmeMetode{
+    metodeid : int
+    metodenavn : varchar
+    metodeparameter : int
 }
 
 class Stemme{
@@ -21,6 +48,10 @@ class Stemme{
     stemmetidspunkt : timestamp
 }
 
-Bedrift "1" *-- "*" Prosjekt
+Arrangementdeltagelse "*" --* "1" Arrangement
+Prosjekt "1" *-- "*" Arrangementdeltagelse
 Stemme "*" -- "1" Prosjekt
+Bedrift "1" *-- "*" Prosjekt
+Kategori "1" *-- "*" Prosjekt
+Prosjekt "*" --* "1" StemmeMetode
 @enduml

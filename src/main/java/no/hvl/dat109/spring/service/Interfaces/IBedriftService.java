@@ -11,6 +11,10 @@ public interface IBedriftService {
 
     void addBedrift(BedriftBean bedrift);
 
+    void removeBedrift(BedriftBean bedrift);
+
+    void updateBedriftNavn(BedriftBean bedrift, String nyttNavn);
+
     boolean exists(String name);
 
     boolean exists(int id);
