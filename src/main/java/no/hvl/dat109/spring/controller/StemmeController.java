@@ -54,7 +54,7 @@ public class StemmeController {
                         prosjekt.getStemmer().size(),
                         prosjekt.getStemmeGjennomsnitt()))
                 .collect(Collectors.toList());
-        System.out.println(prosjekterMedStemmer);
+
         return ResponseEntity.ok().body(prosjekterMedStemmer);
     }
 
