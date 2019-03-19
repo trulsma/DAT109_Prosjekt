@@ -20,7 +20,7 @@ private IBedriftService bedriftService;
 
 
     //nødvending å gjøre tingene med Model?
-    @GetMapping("/statistikk/{id}")
+    @GetMapping("/statistikk")
     public String getStatistics(@PathVariable("id") int id, Model model){
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
 

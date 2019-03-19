@@ -7,7 +7,7 @@ function randomRGBA() {
     return 'rgba(' + o(r() * m) + ',' + o(r() * m) + ',' + o(r() * m) + ',';
 }
 
-var requestValue = [];
+let requestValue = [];
 
 <c:forEach items="#{prosjektBean.items}"
 
