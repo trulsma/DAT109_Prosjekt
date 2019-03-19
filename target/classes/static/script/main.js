@@ -32,7 +32,10 @@ var myBar = new Chart(ctx, {
             borderWidth: 1
         }]
     },
-    options: {scales: {yAxes: [{ticks: {beginAtZero: true}}]}}
+    options: {scales: {yAxes: [{ticks: {
+        beginAtZero: true,
+        max: 5
+    }}]}}
 });
 
 
