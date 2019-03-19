@@ -23,7 +23,6 @@ public class StemmeBean implements Serializable {
     @JoinColumn(name = "prosjektid")
     private ProsjektBean prosjekt;
 
-
     public StemmeBean() {
 
     }
@@ -33,6 +32,10 @@ public class StemmeBean implements Serializable {
         this.epost = epost;
         this.stemmeverdi = stemmeverdi;
         stemmetidspunkt = new Date();
+    }
+
+    public ProsjektBean getProsjekt() {
+        return prosjekt;
     }
 
     @Column(name = "stemmeid")
