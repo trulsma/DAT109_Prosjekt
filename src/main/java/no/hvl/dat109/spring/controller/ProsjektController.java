@@ -78,7 +78,9 @@ public class ProsjektController {
             return "error";
         }
 
-        // RIP in peace System.out.println(prosjekt.getSammarbeidsbedrift() + " THIS IS BEDRIFT BOYYY");
+        // Guess who's back, back again
+        // Bedrift boyy is back, tell a friend
+        System.out.println(prosjekt.getSammarbeidsbedrift() + " THIS IS BEDRIFT BOYYY🔥");
 
         model.addAttribute("samarbeidspartner", prosjekt.getSammarbeidsbedrift());
         model.addAttribute("prosjekt", prosjekt);
