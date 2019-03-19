@@ -16,6 +16,13 @@ public class ArrangementBean {
     private String arrangementbeskrivelse;
     private Date arragementetutgaar;
 
+
+    public ArrangementBean(String arrangementnavn, String arrangementbeskrivelse, Date arragementetutgaar) {
+        this.arrangementnavn = arrangementnavn;
+        this.arrangementbeskrivelse = arrangementbeskrivelse;
+        this.arragementetutgaar = arragementetutgaar;
+    }
+
     @Column(name = "arrangementid")
     public int getArrangementid() {
         return arrangementid;

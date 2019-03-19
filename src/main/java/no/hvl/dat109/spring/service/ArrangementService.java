@@ -26,34 +26,42 @@ public class ArrangementService implements IArrangementService {
 
     @Override
     public void addArrangement(String arrangementnavn, String arrangementbeskrivelse, Date arrangementutgaar) {
-        //Todo implment method
+        ArrangementBean nyBean = new ArrangementBean(arrangementnavn, arrangementbeskrivelse, arrangementutgaar);
     }
 
     @Override
     public void removeArrangement(ArrangementBean arrangemen) {
-        //Todo implment method
+        arrangementRepository.deleteById(arrangemen.getArrangementid());
     }
 
     @Override
     public void updateArrangemntNavn(ArrangementBean arrangement, String nyttNavn) {
+       ArrangementBean a = arrangementRepository.findById(arrangement.getArrangementid()).orElse(null);
+
+       a.setArrangementnavn(nyttNavn);
+
+       return;
 
     }
 
     @Override
     public ArrangementBean getArrangement(int arrangementid) {
-        //Todo implment method
-        return null;
+        return arrangementRepository.findById(arrangementid).orElse(null);
     }
 
     @Override
     public ArrangementBean getArrangementByName(String arrangementNavn) {
-        //Todo implment method
-        return null;
+        ArrangementBean a = null;
+        for(ArrangementBean arrangementBean : arrangementRepository.findAll()){
+            if(arrangementBean.equals(arrangementNavn)){
+                a = arrangementBean;
+            }
+        }
+        return a;
     }
 
     @Override
     public Iterable<ArrangementBean> getAllArrangement() {
-        //Todo implment method
-        return null;
+        return arrangementRepository.findAll();
     }
 }
