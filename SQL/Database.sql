@@ -9,16 +9,35 @@ CREATE TABLE Bedrift (
   CONSTRAINT bedriftPK PRIMARY KEY (bedriftid)
 );
 
+CREATE TABLE StemmeMetode (
+  metodeid        SERIAL,
+  metodenavn      VARCHAR(25),
+  metodeparameter INTEGER,
+  CONSTRAINT metodePK PRIMARY KEY (metodeid),
+  CONSTRAINT metodenavnUnique UNIQUE (metodenavn)
+);
+
+CREATE TABLE Kategori (
+  kategoriid   SERIAL,
+  kategorinavn VARCHAR(255),
+  CONSTRAINT kategoriPK PRIMARY KEY (kategoriid),
+  CONSTRAINT uniqueKategorinavn UNIQUE (kategorinavn)
+);
+
 CREATE TABLE Prosjekt (
   prosjektid          SERIAL,
   prosjektnavn        VARCHAR(100) UNIQUE,
   prosjektbeskrivelse VARCHAR(1000),
+  prosjektkategori    INTEGER,
   sammarbeidsbedrift  INTEGER,
+  stemmemetode        INTEGER,
   shortenedurl        VARCHAR(255),
   qrimagepath         VARCHAR(255),
+  pictureurl          VARCHAR(255),
   CONSTRAINT bedriftFK FOREIGN KEY (sammarbeidsbedrift) REFERENCES Bedrift (bedriftid),
+  CONSTRAINT kategoriFK FOREIGN KEY (prosjektkategori) REFERENCES Kategori (kategoriid),
+  CONSTRAINT metodeFK FOREIGN KEY (stemmemetode) REFERENCES StemmeMetode (metodeid),
   CONSTRAINT prosjektPK PRIMARY KEY (prosjektid)
-
 );
 
 CREATE TABLE Stemme (
@@ -49,5 +68,21 @@ CREATE TABLE ArrangementDeltagelse (
 );
 
 INSERT INTO Bedrift (bedriftnavn, bedriftbeskrivelse)
-VALUES ('HVL', 'Høgskolen på Vestlandet'),
-       ('Equinor', 'Oljebransjen');
+VALUES ('HVL', 'Høgskolen på Vestlandet');
+INSERT INTO StemmeMetode (metodenavn, metodeparameter)
+VALUES ('Like', 1);
+INSERT INTO Kategori (kategorinavn)
+VALUES ('Data og Realfag');
+INSERT INTO Arrangement (arrangementnavn, arrangementbeskrivelse, arragementetutgaar)
+VALUES ('Første Arrangement', 'Dette er en beskrivelse', '2019-03-17 12:07:21.827000');
+INSERT INTO Prosjekt (prosjektnavn,
+                      prosjektbeskrivelse,
+                      prosjektkategori,
+                      sammarbeidsbedrift,
+                      stemmemetode,
+                      shortenedurl,
+                      qrimagepath,
+                      pictureurl)
+VALUES ('Prosjekt navn', 'Beskrivelse', 1, 1, 1, 'short url', 'qr path', 'picture url');
+INSERT INTO ArrangementDeltagelse (arrangement, prosjekt)
+VALUES (1, 1);

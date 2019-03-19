@@ -17,6 +17,16 @@ public class ProsjektBean implements Serializable {
     private String prosjektbeskrivelse;
     private String shortenedurl;
     private String qrimagepath;
+    private String pictureurl;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "prosjektkategori")
+    private KategoriBean prosjektkategori;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "stemmemetode")
+    private StemmeMetodeBean stemmemetode;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sammarbeidsbedrift")
@@ -35,8 +45,6 @@ public class ProsjektBean implements Serializable {
         this.sammarbeidsbedrift = sammarbeidsbedrift;
     }
 
-
-    @Column(name = "prosjektid")
     public int getProsjektid() {
         return prosjektid;
     }
@@ -45,8 +53,6 @@ public class ProsjektBean implements Serializable {
         this.prosjektid = prosjektid;
     }
 
-    @Basic
-    @Column(name = "prosjektnavn")
     public String getProsjektnavn() {
         return prosjektnavn;
     }
@@ -55,8 +61,6 @@ public class ProsjektBean implements Serializable {
         this.prosjektnavn = prosjektnavn;
     }
 
-    @Basic
-    @Column(name = "prosjektbeskrivelse")
     public String getProsjektbeskrivelse() {
         return prosjektbeskrivelse;
     }
@@ -95,6 +99,30 @@ public class ProsjektBean implements Serializable {
 
     public void setStemmer(List<StemmeBean> stemmer) {
         this.stemmer = stemmer;
+    }
+
+    public String getPictureurl() {
+        return pictureurl;
+    }
+
+    public void setPictureurl(String pictureurl) {
+        this.pictureurl = pictureurl;
+    }
+
+    public KategoriBean getProsjektkategori() {
+        return prosjektkategori;
+    }
+
+    public void setProsjektkategori(KategoriBean prosjektkategori) {
+        this.prosjektkategori = prosjektkategori;
+    }
+
+    public StemmeMetodeBean getStemmemetode() {
+        return stemmemetode;
+    }
+
+    public void setStemmemetode(StemmeMetodeBean stemmemetode) {
+        this.stemmemetode = stemmemetode;
     }
 
     public Integer getStemmerMedVerdi() {

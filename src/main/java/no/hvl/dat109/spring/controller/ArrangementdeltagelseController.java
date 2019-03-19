@@ -14,7 +14,7 @@ public class ArrangementdeltagelseController {
     @GetMapping("/deltagelse")
     public String test() {
 
-        arrangementService.test();
+        //arrangementService.test();
 
         return "index";
     }
