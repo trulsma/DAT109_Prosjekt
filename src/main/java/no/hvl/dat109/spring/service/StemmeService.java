@@ -23,6 +23,7 @@ public class StemmeService implements IStemmeService {
 
     @Override
     public Integer getTotalStemmeverdi(String prosjektNavn) {
+        //TODO
         return null;
     }
 
@@ -33,12 +34,16 @@ public class StemmeService implements IStemmeService {
 
     @Override
     public void endreStemme(StemmeBean stemme, int nyVerdi) {
-        //Todo implement this
+        for(StemmeBean s : stemmeRepository.findAll()){
+            if(s.getStemmeid() == stemme.getStemmeid()){
+                s.setStemmeverdi(nyVerdi);
+            }
+        }
     }
 
     @Override
     public void removeStemme(StemmeBean bean) {
-        //Todo implement this
+        stemmeRepository.delete(bean);
     }
 
 
