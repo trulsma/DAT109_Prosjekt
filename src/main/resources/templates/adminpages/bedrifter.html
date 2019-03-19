@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bedriftoversikt</title>
-    <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../css/bedrifter.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -20,19 +20,34 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Oversikt over alle bedrifter</h1>
-    <table border="1">
-        <tr>
-            <th>Id</th>
-            <th>Navn</th>
-            <th>Beskrivelse</th>
-        </tr>
-        <tr th:each="bedrift: ${bedrifter}">
-            <td th:text="${bedrift.bedriftid}"></td>
-            <td th:text="${bedrift.bedriftnavn}"></td>
-            <td th:text="${bedrift.bedriftbeskrivelse}"></td>
-            <td><a th:href="@{'bedrift/' + ${bedrift.bedriftid}}"> >> </a></td>
-        </tr>
-    </table>
+<h1>Oversikt over alle bedrifter</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive" data-pattern="priority-columns">
+                <table summary="This table shows how to create responsive tables using RWD-Table-Patterns' functionality"
+                       class="table table-bordered table-hover">
+                    <caption class="text-center"> En oversikt over alle bedriftene</caption>
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Navn</th>
+                        <th>Beskrivelse</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="bedrift: ${bedrifter}">
+                        <td th:text="${bedrift.bedriftid}"></td>
+                        <td th:text="${bedrift.bedriftnavn}"></td>
+                        <td th:text="${bedrift.bedriftbeskrivelse}"></td>
+                        <td><a th:href="@{'bedrift/' + ${bedrift.bedriftid}}"> >> </a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</table>
 </body>
 </html>
