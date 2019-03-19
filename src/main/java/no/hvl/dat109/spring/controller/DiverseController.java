@@ -32,10 +32,21 @@ public class DiverseController {
     }
 
     @GetMapping("/admin_login")
-    String getAdminLogin(@RequestParam String redirect_url, Model model){
+    String getAdminLogin(@RequestParam(required = false) String redirect_url, Model model){
+
+        if (redirect_url == null){
+            redirect_url = "adminpages/adminindex";
+        }
         model.addAttribute("redirect_url", redirect_url);
         return "admin_login";
     }
+
+    @GetMapping("/adminindex")
+    String getAdminIndex(@RequestParam String redirect_url, Model model){
+        model.addAttribute("redirect_url", redirect_url);
+        return "adminindex";
+    }
+
 
     @GetMapping("/registrer_deg")
     String getRegistrerBruker(@RequestParam String redirect_url, Model model) {
