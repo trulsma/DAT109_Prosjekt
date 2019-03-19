@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Registrer deg</title>
+    <link rel="stylesheet" type="text/css" href="../../css/registrer_deg.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -17,11 +18,12 @@
 </head>
 <body>
 <form method="post" action="/registrer_deg" id="regform">
-    <p> Registrer deg </p>
+    <h1>Registrer deg </h1>
+    <div>
     <p> Epost <input type="text" name="epost" value="" placeholder="Skriv inn epost"/></p>
     <input type="hidden" name="redirect_url" th:value="${redirect_url}">
     <p><input type="submit" value="Submit"/><input type="reset" value="Reset"/></p>
-
+    </div>
 </form>
 </body>
 </html>
