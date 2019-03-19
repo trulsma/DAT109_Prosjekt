@@ -29,9 +29,9 @@ function visGraf(resultat) {
     var myBar = new Chart(ctx, {
         type: 'bar',
         data: {
-            label: ['prosjekter'],
+            labels: label,
             datasets: [{
-                label: label,
+                label: 'Prosjekter',
                 data: data,
                 borderColor: [
                     random1 + '1)',
@@ -51,7 +51,7 @@ function visGraf(resultat) {
                 yAxes: [{
                     ticks: {
                         beginAtZero: true,
-                        //max: 5
+                        max: 5
                     }
                 }]
             }
