@@ -18,6 +18,19 @@ public class DiverseController {
         return "redirect:" + redirect_url;
     }
 
+    @PostMapping("/admin_login")
+    String adminLogin(@RequestParam String redirect_url, @RequestParam String passord, HttpSession session){
+        session.setAttribute("passord", passord);
+
+        return "redirect:" + redirect_url;
+    }
+
+    @GetMapping("/admin_login")
+    String getAdminLogin(@RequestParam String redirect_url, Model model){
+        model.addAttribute("redirect_url", redirect_url);
+        return "admin_login";
+    }
+
     @GetMapping("/registrer_deg")
     String getRegistrerBruker(@RequestParam String redirect_url, Model model) {
         model.addAttribute("redirect_url", redirect_url);
