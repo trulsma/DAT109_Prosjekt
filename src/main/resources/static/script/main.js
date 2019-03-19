@@ -29,7 +29,7 @@ function visGraf(resultat) {
     var myBar = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['prosjekter'],
+            label: ['prosjekter'],
             datasets: [{
                 label: label,
                 data: data,
