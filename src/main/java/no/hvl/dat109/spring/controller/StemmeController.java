@@ -30,14 +30,17 @@ public class StemmeController {
 
 
     @GetMapping("/api/prosjekt/{id}/stemmer")
-    ResponseEntity<?> getStemmerForProsjekt(@PathVariable("id") int id) {
+    ResponseEntity<?> getStemmerForProsjekt(@PathVariable("id") int id,
+                                            @RequestParam(required = false) Integer steps) {
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
 
         if (prosjekt == null) {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok().body(prosjekt.getStemmer().stream().map(AnonymStemmeBean::new));
+        List<AnonymStemmeBean> stemmer = prosjekt.getStemmer().stream().map(AnonymStemmeBean::new).collect(Collectors.toList());
+
+        return ResponseEntity.ok().body(stemmer);
     }
 
     @GetMapping("/api/prosjekter/stemmer")

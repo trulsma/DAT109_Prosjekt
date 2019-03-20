@@ -57,6 +57,7 @@ public class DiverseController {
     String getIndex() {
         return "index";
     }
+
 }
 
 
