@@ -10,7 +10,7 @@ public class StudieBean {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int studieid;
 
-    private String studienavn, beskrivelse;
+    private String studienavn, studiebeskrivelse;
 
     @ManyToOne
     @JoinColumn(name = "studiekategori")
@@ -21,7 +21,7 @@ public class StudieBean {
 
     public StudieBean(String studienavn, String beskrivelse) {
         this.studienavn = studienavn;
-        this.beskrivelse = beskrivelse;
+        this.studiebeskrivelse = beskrivelse;
     }
 
     public int getStudieid() {
@@ -40,12 +40,12 @@ public class StudieBean {
         this.studienavn = studienavn;
     }
 
-    public String getBeskrivelse() {
-        return beskrivelse;
+    public String getStudiebeskrivelse() {
+        return studiebeskrivelse;
     }
 
-    public void setBeskrivelse(String beskrivelse) {
-        this.beskrivelse = beskrivelse;
+    public void setStudiebeskrivelse(String beskrivelse) {
+        this.studiebeskrivelse = beskrivelse;
     }
 
     public KategoriBean getStudiekategori() {
@@ -61,7 +61,7 @@ public class StudieBean {
         return "StudieBean{" +
                 "studieid=" + studieid +
                 ", studienavn='" + studienavn + '\'' +
-                ", beskrivelse='" + beskrivelse + '\'' +
+                ", beskrivelse='" + studiebeskrivelse + '\'' +
                 ", studiekategori=" + studiekategori +
                 '}';
     }

@@ -1,9 +1,9 @@
-package no.hvl.dat109.spring.repository;
+package no.hvl.dat109.spring.service.Interfaces;
 
 import no.hvl.dat109.spring.beans.UserGroupBean;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface UserGroupRepository extends CrudRepository<UserGroupBean, Integer> {
+public interface IUserGroupService {
+    String test();
 }
