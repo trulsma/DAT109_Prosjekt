@@ -24,24 +24,24 @@
                                    placeholder="Skriv en kort beskrivelse om ditt prosjekt"></p>
 
     <p>
-        <select form="thisisform" name="kategori">
+        <select form="thisisform" name="samarbeidspartner">
             <option th:each="kategori: ${kategorier}"
-            th:value="${katogori.kategoriid}"
-            th:name="${kategori.kategorinavn}"
-            th:text="${kategori.kategorinavn}">
+                    th:value="${kategori.kategoriid}"
+                    th:name="${kategori.kategorinavn}"
+                    th:text="${kategori.kategorinavn}">
             </option>
         </select>
     </p>
-<p>
-    Velg din sammarbeidspartner:
-    <select form="thisisform" name="samarbeidspartner">
-        <option th:each="bedrift: ${bedrifter}"
-                th:value="${bedrift.bedriftid}"
-                th:name="${bedrift.bedriftnavn}"
-                th:text="${bedrift.bedriftnavn}">
-        </option>
-    </select>
-</p>
+    <p>
+        Velg din sammarbeidspartner:
+        <select form="thisisform" name="samarbeidspartner">
+            <option th:each="bedrift: ${bedrifter}"
+                    th:value="${bedrift.bedriftid}"
+                    th:name="${bedrift.bedriftnavn}"
+                    th:text="${bedrift.bedriftnavn}">
+            </option>
+        </select>
+    </p>
     <p><input type="reset" value="Reset"/><input type="submit" value="Submit"/></p>
 </form>
 </body>
