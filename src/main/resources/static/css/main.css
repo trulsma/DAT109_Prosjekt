@@ -1,7 +1,44 @@
+body {
+    margin: 0;
+}
+
+ul.topnav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+ul.topnav li {float: left;}
+
+ul.topnav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+ul.topnav li a:hover:not(.active) {
+    background-color: navy;
+}
+
+ul.topnav li a.active {
+    background-color: black;}
+
+ul.topnav li.right {float: right;}
+
+@media screen and (max-width: 600px) {
+    ul.topnav li.right,
+    ul.topnav li {float: none;}
+}
+
 h1 {
     font-size: 40px;
     text-align: center;
     color: navy;
+    padding-top: 10px;
 }
 
 h3 {
@@ -9,11 +46,13 @@ h3 {
     color: navy;
 }
 
+/*
 body {
     font-family: 'oxygen';
     margin: 0 auto;
     padding: 25px;
 }
+*/
 
 .underTitle {
     font-size: 32px;
