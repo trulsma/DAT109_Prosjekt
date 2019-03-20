@@ -1,3 +1,8 @@
+h1 {
+    font-size: 20px;
+    text-align: center;
+    font-style: normal;
+}
 .table-bordered {
     border: 1px solid #ddd !important;
 }
