@@ -16,6 +16,12 @@ public class ArrangementBean {
     private String arrangementbeskrivelse;
     private Date arragementetutgaar;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "arrangementstemmemetode")
+    private StemmeMetodeBean stemmemetode;
+
+    public ArrangementBean() {
+    }
 
     public ArrangementBean(String arrangementnavn, String arrangementbeskrivelse, Date arragementetutgaar) {
         this.arrangementnavn = arrangementnavn;
