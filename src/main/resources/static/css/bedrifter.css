@@ -22,3 +22,22 @@ table caption {
     padding-top: 140px;
     font-size: 14px;
 }
+
+div{
+    text-align: center;
+}
+ a {
+    display: block;
+    background-color: #e7e7e7;
+    color: black;
+    border: 2px solid #e7e7e7;
+    font-style: italic;
+    padding: 5px;
+    width: 80%;
+    text-align: center;
+}
+
+a:hover {
+    background-color: white;
+    text-decoration: none;
+}
