@@ -94,6 +94,7 @@ public class StemmeController {
 
     /**
      * Validerer at verdien ikke er større enn 5 eller mindre enn 0
+     *
      * @param verdi verdi fra post
      * @return verdi mellom 0 og 5
      */
