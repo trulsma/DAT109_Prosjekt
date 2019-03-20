@@ -48,6 +48,14 @@ public class ArrangementBean {
         this.arrangementnavn = arrangementnavn;
     }
 
+    public StemmeMetodeBean getStemmemetode() {
+        return stemmemetode;
+    }
+
+    public void setStemmemetode(StemmeMetodeBean stemmemetode) {
+        this.stemmemetode = stemmemetode;
+    }
+
     @Basic
     @Column(name = "arrangementbeskrivelse")
     public String getArrangementbeskrivelse() {
