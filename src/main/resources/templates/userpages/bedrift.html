@@ -22,16 +22,21 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="table-responsive" data-pattern="priority-columns">
-                <table summary=" "
+                <table  summary=" "
                        class="table table-bordered table-hover">
-                    <caption class="text-center"> Dette er hvor mange prosjekt og hvor mange arrangement bedriften er med i.</caption>
-                    <thead>
+                    <caption class="text-center">Dette er hvor mange prosjekt og hvor mange arrangement bedriften er med i.</caption>
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Navn:</th>
+                        <th scope="col">Beskrivelse:</th>
+                        <th scope="col">Antall prosjekt:</th>
+                    </tr>
+                    </thead>
                     <tr>
                         <td th:text="${bedrift.bedriftnavn}"></td>
                         <td th:text="${bedrift.bedriftbeskrivelse}"></td>
                         <td th:text="@{'Del av '+${partof} + ' prosjekter'}"></td>
                     </tr>
-                    </thead>
                 </table>
             </div>
         </div>
