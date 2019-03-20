@@ -77,8 +77,6 @@ public class StemmeController {
     @PostMapping("/stem")
     public String stem(@RequestParam int prosjektid, @RequestParam String epost, @RequestParam int verdi) {
 
-        // TODO: finne riktig prosjekt for prosjekt iden
-
         ProsjektBean prosjekt = prosjektService.getProsjektById(prosjektid);
 
         if (prosjekt == null) {
