@@ -62,7 +62,7 @@ public class StemmeController {
 
     @GetMapping("/stem")
     public String visTakkForStemme() {
-        return "takk_for_stemme";
+        return "userpages/takk_for_stemme";
     }
 
     @PostMapping("/stem")

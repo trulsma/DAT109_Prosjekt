@@ -3,6 +3,7 @@ package no.hvl.dat109.spring.controller;
 import no.hvl.dat109.spring.beans.BedriftBean;
 import no.hvl.dat109.spring.beans.ProsjektBean;
 import no.hvl.dat109.spring.service.Interfaces.IBedriftService;
+import no.hvl.dat109.spring.service.Interfaces.IKategoriService;
 import no.hvl.dat109.spring.service.Interfaces.IProsjektService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,9 @@ public class ProsjektController {
 
     @Autowired
     private IBedriftService bedriftService;
+
+    @Autowired
+    private IKategoriService kategoriService;
 
     @GetMapping("/prosjekter")
     String getAlleProsjekter(Model model) {
@@ -91,6 +95,7 @@ public class ProsjektController {
     @GetMapping("/prosjekt/add")
     String addProsjekt(Model model) {
         model.addAttribute("bedrifter", bedriftService.getAlleBedrifter());
+        model.addAttribute("kategorier", kategoriService.getAllKategorier());
         return "adminpages/registrering/registrer_prosjekt";
     }
 
