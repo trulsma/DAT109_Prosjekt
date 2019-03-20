@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +48,7 @@ public class StemmeController {
 
         prosjekter.forEach(prosjektListe::add);
 
+
         List<ProsjektMedStemmerBean> prosjekterMedStemmer = prosjektListe.stream().map(prosjekt ->
                 new ProsjektMedStemmerBean(prosjekt.getProsjektid(),
                         prosjekt.getProsjektnavn(),
@@ -77,8 +79,6 @@ public class StemmeController {
     @PostMapping("/stem")
     public String stem(@RequestParam int prosjektid, @RequestParam String epost, @RequestParam int verdi) {
 
-        // TODO: finne riktig prosjekt for prosjekt iden
-
         ProsjektBean prosjekt = prosjektService.getProsjektById(prosjektid);
 
         if (prosjekt == null) {
@@ -92,6 +92,7 @@ public class StemmeController {
 
     /**
      * Validerer at verdien ikke er større enn 5 eller mindre enn 0
+     *
      * @param verdi verdi fra post
      * @return verdi mellom 0 og 5
      */
