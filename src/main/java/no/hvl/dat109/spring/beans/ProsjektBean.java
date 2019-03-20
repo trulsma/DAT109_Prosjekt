@@ -27,9 +27,6 @@ public class ProsjektBean implements Serializable {
     @JoinColumn(name = "sammarbeidsbedrift")
     private BedriftBean sammarbeidsbedrift;
 
-    @OneToMany(mappedBy = "prosjekt")
-    private List<StemmeBean> stemmer;
-
 
     public ProsjektBean() {
     }
@@ -87,15 +84,6 @@ public class ProsjektBean implements Serializable {
     public void setQrimagepath(String qrimagepath) {
         this.qrimagepath = qrimagepath;
     }
-
-    public List<StemmeBean> getStemmer() {
-        return stemmer;
-    }
-
-    public void setStemmer(List<StemmeBean> stemmer) {
-        this.stemmer = stemmer;
-    }
-
     public String getPictureurl() {
         return pictureurl;
     }
@@ -111,7 +99,7 @@ public class ProsjektBean implements Serializable {
     public void setProsjektkategori(KategoriBean prosjektkategori) {
         this.prosjektkategori = prosjektkategori;
     }
-
+/*
     public Integer getStemmerMedVerdi() {
         Integer sum = 0;
         for (StemmeBean stemme : stemmer) {
@@ -123,6 +111,7 @@ public class ProsjektBean implements Serializable {
     public Double getStemmeGjennomsnitt() {
         return new Double(getStemmerMedVerdi()) / stemmer.size();
     }
+    */
 
     @Override
     public String toString() {
@@ -133,7 +122,6 @@ public class ProsjektBean implements Serializable {
                 ", shortenedurl='" + shortenedurl + '\'' +
                 ", qrimagepath='" + qrimagepath + '\'' +
                 ", sammarbeidsbedrift=" + sammarbeidsbedrift +
-                ", stemmer=" + stemmer +
                 '}';
     }
 }
