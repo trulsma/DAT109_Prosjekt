@@ -24,11 +24,6 @@ public class ProsjektBean implements Serializable {
     private KategoriBean prosjektkategori;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "stemmemetode")
-    private StemmeMetodeBean stemmemetode;
-
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sammarbeidsbedrift")
     private BedriftBean sammarbeidsbedrift;
 
@@ -115,14 +110,6 @@ public class ProsjektBean implements Serializable {
 
     public void setProsjektkategori(KategoriBean prosjektkategori) {
         this.prosjektkategori = prosjektkategori;
-    }
-
-    public StemmeMetodeBean getStemmemetode() {
-        return stemmemetode;
-    }
-
-    public void setStemmemetode(StemmeMetodeBean stemmemetode) {
-        this.stemmemetode = stemmemetode;
     }
 
     public Integer getStemmerMedVerdi() {
