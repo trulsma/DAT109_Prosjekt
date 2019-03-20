@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Du er registrert!</title>
+    <title>Bedriftsoversikt</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../../../css/bedrifter.css">
@@ -17,16 +17,14 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<h1> Her kan brukere gå innpå bedriften og se informasjon, samt hvor mange prosjekter de er del av + antall
-    arrangementer de er del av </h1>
+<h1> Oversikt over hvor mange prosjekt bedriften har</h1>
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
             <div class="table-responsive" data-pattern="priority-columns">
                 <table summary=" "
                        class="table table-bordered table-hover">
-                    <caption class="text-center"> Her er en oversikt over bedriften og informasjon om hvor mange prosjekter de er del av + antall
-                        arrangementer de er del av</caption>
+                    <caption class="text-center"> Dette er hvor mange prosjekt og hvor mange arrangement bedriften er med i.</caption>
                     <thead>
                     <tr>
                         <td th:text="${bedrift.bedriftnavn}"></td>
