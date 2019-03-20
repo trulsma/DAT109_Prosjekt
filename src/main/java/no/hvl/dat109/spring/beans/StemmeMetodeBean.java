@@ -16,7 +16,7 @@ public class StemmeMetodeBean {
     private int metodeparameter;
 
     @OneToMany(mappedBy = "stemmemetode")
-    private List<ProsjektBean> prosjekter;
+    private List<ArrangementBean> prosjekter;
 
     public StemmeMetodeBean() {
     }
