@@ -35,15 +35,14 @@ public class DiverseController {
     String getAdminLogin(@RequestParam(required = false) String redirect_url, Model model){
 
         if (redirect_url == null){
-            redirect_url = "adminpages/adminindex.html";
+            redirect_url = "/adminindex";
         }
         model.addAttribute("redirect_url", redirect_url);
         return "adminpages/admin_login.html";
     }
 
     @GetMapping("/adminindex")
-    String getAdminIndex(@RequestParam String redirect_url, Model model){
-        model.addAttribute("redirect_url", redirect_url);
+    String getAdminIndex(){
         return "adminpages/adminindex.html";
     }
 
