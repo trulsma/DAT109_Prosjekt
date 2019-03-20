@@ -20,6 +20,9 @@ public class ArrangementdeltagelseBean {
     private ProsjektBean prosjekt;
 
 
+
+    public ArrangementdeltagelseBean(){}
+
     public ArrangementdeltagelseBean(ArrangementBean arrangement, ProsjektBean prosjekt) {
         this.arrangement = arrangement;
         this.prosjekt = prosjekt;

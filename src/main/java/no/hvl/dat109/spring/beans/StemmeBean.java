@@ -20,21 +20,21 @@ public class StemmeBean implements Serializable {
     private Date stemmetidspunkt;
 
     @ManyToOne
-    @JoinColumn(name = "prosjektid")
-    private ProsjektBean prosjekt;
+    @JoinColumn(name = "arrangementdeltagelseid")
+    private ArrangementdeltagelseBean prosjekt;
 
     public StemmeBean() {
 
     }
 
-    public StemmeBean(ProsjektBean prosjekt, String epost, int stemmeverdi) {
+    public StemmeBean(ArrangementdeltagelseBean prosjekt, String epost, int stemmeverdi) {
         this.prosjekt = prosjekt;
         this.epost = epost;
         this.stemmeverdi = stemmeverdi;
         stemmetidspunkt = new Date();
     }
 
-    public ProsjektBean getProsjekt() {
+    public ArrangementdeltagelseBean getProsjekt() {
         return prosjekt;
     }
 
