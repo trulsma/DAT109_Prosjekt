@@ -41,7 +41,7 @@ public class StemmeController {
     }
 
     @GetMapping("/api/prosjekter/stemmer")
-    ResponseEntity<?> getStemmerForAlleProsjekt() {
+    ResponseEntity<?> getStemmerForAlleProsjekt(@RequestParam(required = false) String order, @RequestParam(required = false) Integer limit) {
         Iterable<ProsjektBean> prosjekter = prosjektService.getAlleProsjekter();
 
         List<ProsjektBean> prosjektListe = new ArrayList<>();
@@ -56,6 +56,17 @@ public class StemmeController {
                         prosjekt.getStemmer().size(),
                         prosjekt.getStemmeGjennomsnitt()))
                 .collect(Collectors.toList());
+
+        if ("antall".equals(order)) {
+            prosjekterMedStemmer = prosjekterMedStemmer.stream().sorted((a, b) -> b.getAntallStemmer() - a.getAntallStemmer()).collect(Collectors.toList());
+        }
+        else if ("gjennomsnitt".equals(order)) {
+            prosjekterMedStemmer = prosjekterMedStemmer.stream().sorted((a, b) -> Double.compare(b.getGjennomsnittVerdi(),a.getGjennomsnittVerdi())).collect(Collectors.toList());
+        }
+
+        if (limit != null && limit > 0) {
+            prosjekterMedStemmer = prosjekterMedStemmer.stream().limit(limit).collect(Collectors.toList());
+        }
 
         return ResponseEntity.ok().body(prosjekterMedStemmer);
     }
