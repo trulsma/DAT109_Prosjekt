@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +47,7 @@ public class StemmeController {
         List<ProsjektBean> prosjektListe = new ArrayList<>();
 
         prosjekter.forEach(prosjektListe::add);
+
 
         List<ProsjektMedStemmerBean> prosjekterMedStemmer = prosjektListe.stream().map(prosjekt ->
                 new ProsjektMedStemmerBean(prosjekt.getProsjektid(),
