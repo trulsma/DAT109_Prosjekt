@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+            xmlns:th="http://www.thymeleaf.org"
+            xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+            xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <title>Mine stemmer</title>
@@ -7,5 +10,23 @@
 <body>
 <h1>Viss en bruker har registrert seg med email kan det vær gøy å ha muligheten til å se hvilke bedrifter h*n har stemt på</h1>
 <p>Om vi har tid kan vi sette opp statistikk her også?</p>
+
+<table summary=" "
+       class="table table-bordered table-hover">
+    <caption class="text-center"> En oversikt over alle bedriftene</caption>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Navn</th>
+        <th>Beskrivelse</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="stemme: ${stemmer}">
+        <td th:text="${stemme.id}"></td>
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>

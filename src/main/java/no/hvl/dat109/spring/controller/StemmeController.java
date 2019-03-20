@@ -9,11 +9,13 @@ import no.hvl.dat109.spring.service.Interfaces.IStemmeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,9 +40,9 @@ public class StemmeController {
             return ResponseEntity.notFound().build();
         }
 
-        List<AnonymStemmeBean> stemmer = prosjekt.getStemmer().stream().map(AnonymStemmeBean::new).collect(Collectors.toList());
-
-        return ResponseEntity.ok().body(stemmer);
+        //List<AnonymStemmeBean> stemmer = prosjekt.getStemmer().stream().map(AnonymStemmeBean::new).collect(Collectors.toList());
+        // TODO: fikse til å bruke arragment
+        return ResponseEntity.ok().body("");
     }
 
     @GetMapping("/api/prosjekter/stemmer")
@@ -51,7 +53,7 @@ public class StemmeController {
 
         prosjekter.forEach(prosjektListe::add);
 
-
+        /*
         List<ProsjektMedStemmerBean> prosjekterMedStemmer = prosjektListe.stream().map(prosjekt ->
                 new ProsjektMedStemmerBean(prosjekt.getProsjektid(),
                         prosjekt.getProsjektnavn(),
@@ -72,6 +74,29 @@ public class StemmeController {
         }
 
         return ResponseEntity.ok().body(prosjekterMedStemmer);
+        */
+        return ResponseEntity.badRequest().body("meg ikke fungere bra nå");
+    }
+
+    @GetMapping("/mine_stemmer")
+    public String visMineStemmer(HttpSession session, Model model) {
+        String epost = (String) session.getAttribute("epost");
+
+        if (epost == null) {
+            return "redirect:/registrer_deg?redirect_url=mine_stemmer";
+        }
+
+        Iterable<StemmeBean> stemmer = stemmeService.getAlleStemmer();
+
+        List<StemmeBean> stemmerListe = new ArrayList<>();
+
+        stemmer.forEach(stemmerListe::add);
+
+        stemmerListe = stemmerListe.stream().filter(a -> a.getEpost().equals(epost)).collect(Collectors.toList());
+
+        model.addAttribute("stemmer", stemmerListe);
+
+        return "userpages/mine_stemmer";
     }
 
     @GetMapping("/stem")
@@ -88,7 +113,9 @@ public class StemmeController {
             return "error";
         }
 
-        stemmeService.addStemme(new StemmeBean(prosjekt, epost, validateVerdi(verdi)));
+
+        // TODO: bruke arragemetntdeltagelse
+        //stemmeService.addStemme(new StemmeBean(prosjekt, epost, validateVerdi(verdi)));
 
         return "redirect:/stem";
     }

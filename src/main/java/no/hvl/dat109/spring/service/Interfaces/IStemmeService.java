@@ -17,4 +17,6 @@ public interface IStemmeService {
 
     void removeStemme(StemmeBean bean);
 
+    Iterable<StemmeBean> getAlleStemmer();
+
 }

@@ -46,5 +46,8 @@ public class StemmeService implements IStemmeService {
         stemmeRepository.delete(bean);
     }
 
-
+    @Override
+    public Iterable<StemmeBean> getAlleStemmer() {
+        return stemmeRepository.findAll();
+    }
 }
