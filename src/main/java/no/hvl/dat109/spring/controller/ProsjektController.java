@@ -1,6 +1,7 @@
 package no.hvl.dat109.spring.controller;
 
 import no.hvl.dat109.spring.beans.BedriftBean;
+import no.hvl.dat109.spring.beans.KategoriBean;
 import no.hvl.dat109.spring.beans.ProsjektBean;
 import no.hvl.dat109.spring.service.Interfaces.IBedriftService;
 import no.hvl.dat109.spring.service.Interfaces.IKategoriService;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+
+import java.util.Iterator;
 
 import static no.hvl.dat109.prosjekt.Processing.generateShortlink;
 import static no.hvl.dat109.prosjekt.Processing.getImagePath;
@@ -94,8 +97,8 @@ public class ProsjektController {
 
     @GetMapping("/prosjekt/add")
     String addProsjekt(Model model) {
-        model.addAttribute("bedrifter", bedriftService.getAlleBedrifter());
         model.addAttribute("kategorier", kategoriService.getAllKategorier());
+        model.addAttribute("bedrifter", bedriftService.getAlleBedrifter());
         return "adminpages/registrering/registrer_prosjekt";
     }
 
