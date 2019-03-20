@@ -22,13 +22,16 @@
     <p>Prosjektnavn: <input type="text" value="" name="prosjektnavn" placeholder="Ditt prosjektnavn"></p>
     <p>Prosjektbeskrivelse: <input type="text" value="" name="prosjektbeskrivelse"
                                    placeholder="Skriv en kort beskrivelse om ditt prosjekt"></p>
-    <!--
+
     <p>
         <select form="thisisform" name="kategori">
-            <option th:each=""
+            <option th:each="kategori: ${kategorier}"
+            th:value="${katogori.kategoriid}"
+            th:name="${kategori.kategorinavn}"
+            th:text="${kategori.kategorinavn}">
+            </option>
         </select>
     </p>
-    -->
 <p>
     Velg din sammarbeidspartner:
     <select form="thisisform" name="samarbeidspartner">
