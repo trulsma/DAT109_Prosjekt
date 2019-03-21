@@ -1,17 +1,24 @@
 /*<![CDATA[*/
 var bar = document.getElementById('myBar');
 var ctx = document.getElementById('myLine')
+
 function randomRGBA() {
     var o = Math.round, r = Math.random, m = 255;
 
     return 'rgba(' + o(r() * m) + ',' + o(r() * m) + ',' + o(r() * m) + ',';
 }
 
+/*
 $.ajax({
     url: "/api/prosjekter/stemmer",
     data: {},
     success: visGraf
 })
+*/
+let random1 = randomRGBA();
+let random2 = randomRGBA();
+let random3 = randomRGBA();
+
 
 function visGraf(resultat) {
     let prosjekt = [];
@@ -19,9 +26,6 @@ function visGraf(resultat) {
     console.log("#reee");
 
 
-    var random1 = randomRGBA();
-    var random2 = randomRGBA();
-    var random3 = randomRGBA();
 //console.log(resultat[0])
 
     let label = resultat.map(a => a.prosjektnavn);
@@ -63,7 +67,7 @@ function visGraf(resultat) {
 var myLine = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: label,
+        labels: ['prosjekt1', 'prosjekt2', 'prosjekt3'],
         datasets: [{
             label: ['prosjekt1', 'prosjekt2', 'prosjekt3'],
             data: [1, 2, 3],
