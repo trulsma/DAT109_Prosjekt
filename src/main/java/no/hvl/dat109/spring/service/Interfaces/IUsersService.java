@@ -12,4 +12,6 @@ public interface IUsersService {
     UsersBean getUserByName(String username);
 
     void removeUser(UsersBean user);
+
+    UsersBean getUserById(int id);
 }

@@ -82,10 +82,16 @@ public class ProsjektController {
             return "redirect:/registrer_deg?redirect_url=" + "/prosjekt/" + id;
         }
 
+
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
+        UsersBean user = (UsersBean) session.getAttribute("user");
 
         if (prosjekt == null) {
             return "error";
+        }
+
+        if (prosjekt.erEigerAvProsjekt(user)) {
+            return "redirect:/dashboard";
         }
 
         // Guess who's back, back again
@@ -110,27 +116,49 @@ public class ProsjektController {
             @RequestParam String prosjektnavn,
             @RequestParam String prosjektbeskrivelse,
             @RequestParam int samarbeidspartner,
-            @RequestParam int institutt) {
+            @RequestParam int institutt,
+            @RequestParam String email,
+            HttpSession session) {
         //  System.out.println(id);
 
         //Finn en bedrift fra id-en til comboboxen
         BedriftBean bedrift = bedriftService.getBedriftById(samarbeidspartner);
+
+        //Finn studie fra box
         StudieBean studie = studieService.getStudieById(institutt);
-        UsersBean user = userService.createNewUser(prosjektnavn.replaceAll(" ", "_"));
+
+        //Lag en user med emailen vi fikk
+        UsersBean user = userService.createNewUser(email);
+
+        //Lag prosjektet med alt vi har fått så langt
         ProsjektBean prosjekt = new ProsjektBean(prosjektnavn, prosjektbeskrivelse, bedrift, studie, user);
         prosjektService.addProsjekt(prosjekt);
+
+        //Etter prosjektet er laget kan kan vi danne qr bilde link
         setQrLink(prosjekt);
+
+        session.setAttribute("email", email);
+        session.setAttribute("user", user);
+
+        //TODO SEND PASSORD TIL USER PÅ EMAIL
 
         return "redirect:/prosjekt/" + prosjekt.getProsjektid();
     }
 
     @GetMapping("/prosjekt/{id}/remove")
-    String removeProject(@PathVariable("id") int id) {
-        System.out.println("Inside remove");
+    String removeProject(@PathVariable("id") int id, HttpSession session) {
+        //Finn prosjektet
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
+        //Slett alle prosjektfiler
         FileHandler.removeProject(prosjekt);
+
+        //Fjern prosjektet og fjern useren fra databasen
         prosjektService.removeProject(prosjekt);
         userService.removeUser(prosjekt.getProsjektEiger());
+
+        //Fjern session attributter
+        session.removeAttribute("user");
+        session.removeAttribute("email");
         return "redirect:/index";
     }
 

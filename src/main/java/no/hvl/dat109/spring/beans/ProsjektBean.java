@@ -34,21 +34,6 @@ public class ProsjektBean implements Serializable {
     @JoinColumn(name = "prosjektuser")
     private UsersBean prosjektEiger;
 
-    public StudieBean getStudieKategori() {
-        return studieKategori;
-    }
-
-    public void setStudieKategori(StudieBean studieKategori) {
-        this.studieKategori = studieKategori;
-    }
-
-    public List<ArrangementdeltagelseBean> getArragementdeltagelser() {
-        return arragementdeltagelser;
-    }
-
-    public void setArragementdeltagelser(List<ArrangementdeltagelseBean> arragementdeltagelser) {
-        this.arragementdeltagelser = arragementdeltagelser;
-    }
 
     public ProsjektBean() {
     }
@@ -91,14 +76,6 @@ public class ProsjektBean implements Serializable {
         this.prosjektbeskrivelse = prosjektbeskrivelse;
     }
 
-    public BedriftBean getSammarbeidsbedrift() {
-        return sammarbeidsbedrift;
-    }
-
-    public void setSammarbeidsbedrift(BedriftBean sammarbeidsbedrift) {
-        this.sammarbeidsbedrift = sammarbeidsbedrift;
-    }
-
     public String getShortenedurl() {
         return shortenedurl;
     }
@@ -123,12 +100,28 @@ public class ProsjektBean implements Serializable {
         this.pictureurl = pictureurl;
     }
 
-    public StudieBean getProsjektkategori() {
+    public StudieBean getStudieKategori() {
         return studieKategori;
     }
 
-    public void setProsjektkategori(StudieBean studieKategori) {
+    public void setStudieKategori(StudieBean studieKategori) {
         this.studieKategori = studieKategori;
+    }
+
+    public BedriftBean getSammarbeidsbedrift() {
+        return sammarbeidsbedrift;
+    }
+
+    public void setSammarbeidsbedrift(BedriftBean sammarbeidsbedrift) {
+        this.sammarbeidsbedrift = sammarbeidsbedrift;
+    }
+
+    public List<ArrangementdeltagelseBean> getArragementdeltagelser() {
+        return arragementdeltagelser;
+    }
+
+    public void setArragementdeltagelser(List<ArrangementdeltagelseBean> arragementdeltagelser) {
+        this.arragementdeltagelser = arragementdeltagelser;
     }
 
     public UsersBean getProsjektEiger() {
@@ -139,6 +132,10 @@ public class ProsjektBean implements Serializable {
         this.prosjektEiger = prosjektEiger;
     }
 
+    public boolean erEigerAvProsjekt(UsersBean user) {
+        if (user == null) return false;
+        return this.prosjektEiger.getUserid() == user.getUserid();
+    }
     /*
     public Integer getStemmerMedVerdi() {
         Integer sum = 0;

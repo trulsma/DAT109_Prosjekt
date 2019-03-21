@@ -47,4 +47,9 @@ public class UsersService implements IUsersService {
     public void removeUser(UsersBean user) {
         usersRepository.delete(user);
     }
+
+    @Override
+    public UsersBean getUserById(int id) {
+        return usersRepository.findById(id).orElse(null);
+    }
 }
