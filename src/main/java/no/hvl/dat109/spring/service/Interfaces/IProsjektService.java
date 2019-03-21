@@ -16,8 +16,4 @@ public interface IProsjektService {
 
     void updateProsjekt(ProsjektBean prosjekt);
 
-    void removeProject(ProsjektBean prosjekt);
-
-    void removeAllProjects();
-
 }
