@@ -134,6 +134,7 @@ div.desc {
 
 .fg-hvl{
     color: #64d0df;
+    border-bottom: 1px solid #004357;
 }
 
 .fg-hvl:hover{
@@ -141,10 +142,6 @@ div.desc {
     border-bottom: 1px solid #f9de45;
 }
 
-
-/*
-.nav-item{
-    width: 100px;
-    height: 35px;
+.bgimg {
+    background-image: url("../images/expo.jpg");
 }
-*/
