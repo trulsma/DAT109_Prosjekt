@@ -1,9 +1,10 @@
+<!--
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Registrer bedrift</title>
-    <link rel="stylesheet" type="text/css" href="../../css/registrer_deg.css">
+    <link rel="stylesheet" type="text/css" href="../../css/registrering.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -25,5 +26,34 @@
 
     </form>
 
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>Registrer bedrift</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/registrering.css" rel="stylesheet">
+</head>
+<body class="text-center">
+<form class="form-signin" method="post" action="/bedrift/add">
+    <img class="mb-4" src="/images/hvl.svg" alt="" width="300" height="200">
+    <h1 class="h3 mb-3 font-weight-normal text-white">Registrer bedrift</h1>
+    <label for="inputNavn" class="sr-only">Navn</label>
+    <input type="text" id="inputNavn" class="form-control" name="bedriftnavn" placeholder="Navn på bedrift" required="" autofocus="">
+    <br>
+    <label for="inputBeskrivelse" class="sr-only">Beskrivelse</label>
+    <input type="text" id="inputBeskrivelse" class="form-control" name="bedriftbeskrivelse" placeholder="Kort beskrivelse av bedrift" required="" autofocus="">
+    <br>
+    <button class="btn btn-lg btn-outline-light btn-block" type="submit">Registrer bedrift</button>
+</form>
 </body>
 </html>
