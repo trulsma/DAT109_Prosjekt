@@ -18,6 +18,8 @@ public interface IArrangementdeltagelseService {
 
     ArrangementdeltagelseBean getArrangementDeltagelse(int id);
 
+    void removeProsjektFromDeltagelse(ProsjektBean prosjekt);
+
     /**
      * Metode for å finne alle prosjekt i et arrangement
      *

@@ -33,6 +33,20 @@ public class ArrangementdeltagelseService implements IArrangementdeltagelseServi
     }
 
     @Override
+    public void removeProsjektFromDeltagelse(ProsjektBean prosjekt) {
+        Iterator<ArrangementdeltagelseBean> iterator = arrangementdeltagelseRepository.findAll().iterator();
+
+        ArrangementdeltagelseBean arrangementdeltagelse;
+        while (iterator.hasNext()) {
+            arrangementdeltagelse = iterator.next();
+            if (arrangementdeltagelse.getProsjekt().getProsjektid() == prosjekt.getProsjektid()) {
+                this.removeArrangementDeltagelse(arrangementdeltagelse);
+                return;
+            }
+        }
+    }
+
+    @Override
     public void removeArrangementDeltagelse(ArrangementdeltagelseBean deltagelse) {
         arrangementdeltagelseRepository.delete(deltagelse);
     }
