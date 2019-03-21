@@ -19,6 +19,7 @@ class Arrangement{
     arrangementid : int
     arrangementnavn : varchar
     arrangementbeskrivelse : varchar
+    arrangementstemmemetode : int
     arrangementutgaar : date
 }
 
@@ -42,10 +43,30 @@ class StemmeMetode{
 
 class Stemme{
     stemmeid : int
-    prosjektid : int
+    arrangementdeltagelse : int
     epost : varchar
     stemmeverdi : int
     stemmetidspunkt : timestamp
+}
+
+class Studie{
+    studieid : int
+    studienavn : varchar
+    studiebeskrivelse : varchar
+    studiekategori : int
+}
+
+class UserGroup{
+    groupid : int
+    groupname : varchar
+    grouplevel : int
+}
+
+class Users{
+    userid : int
+    username : varchar
+    password : varchar
+    usergroup : int
 }
 
 Arrangementdeltagelse "*" --* "1" Arrangement
@@ -53,5 +74,7 @@ Prosjekt "1" *-- "*" Arrangementdeltagelse
 Stemme "*" -- "1" Prosjekt
 Bedrift "1" *-- "*" Prosjekt
 Kategori "1" *-- "*" Prosjekt
-Prosjekt "*" --* "1" StemmeMetode
+Arrangement "*" --* "1" StemmeMetode
+Users "*" --* "1" UserGroup
+Kategori "1" --* "*" Studie
 @enduml
