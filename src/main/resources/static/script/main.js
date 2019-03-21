@@ -70,8 +70,8 @@ function visGraf(resultat) {
         data: {
             labels: label,
             datasets: [{
-                label: 'Prosjekter',
-                data: data,
+                label: ['prosjekt1', 'prosjekt2', 'prosjekt3'],
+                data: [1, 2, 3],
                 borderColor: [
                     random1 + '1)',
                     random2 + '1)',
