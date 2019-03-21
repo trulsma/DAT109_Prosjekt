@@ -8,9 +8,6 @@
     <title>Mine stemmer</title>
 </head>
 <body>
-<h1>Viss en bruker har registrert seg med email kan det vær gøy å ha muligheten til å se hvilke bedrifter h*n har stemt på</h1>
-<p>Om vi har tid kan vi sette opp statistikk her også?</p>
-
 <table summary=" "
        class="table table-bordered table-hover">
     <caption class="text-center"> En oversikt over alle bedriftene</caption>
@@ -23,7 +20,7 @@
     </thead>
     <tbody>
     <tr th:each="stemme: ${stemmer}">
-        <td th:text="${stemme.id}"></td>
+        <td th:text="${stemme.stemmeid}"></td>
     </tr>
     </tbody>
 </table>
