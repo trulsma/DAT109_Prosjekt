@@ -24,41 +24,46 @@ public class StemmeMetodeService implements IStemmeMetode {
 
     @Override
     public void addStemmemetode(String metodenavn, int metodeparameter) {
-        //Todo implement method
-
         //Tanken her er at metodenavn kan være "Flervalg eller Stemme/Ikke stemme" og metodeparameter er eventuelt
         //hvor mange radio buttons som skal bli lagt til.
         //Ex: addStemmemetode("Flervalg", 10) -> 10 radio buttons.,
         //Ex: addStemmemetode("Stemme/Ikke stemme", 1) -> QR code med direkte stemming i seg.
+
+        StemmeMetodeBean bean = new StemmeMetodeBean(metodenavn, metodeparameter);
+        stemmeMetodeRepository.save(bean);
     }
 
     @Override
     public void removeStemmemetode(StemmeMetodeBean stemmemetode) {
-        //Todo implement method
+        stemmeMetodeRepository.delete(stemmemetode);
     }
 
     @Override
     public void editStemmemetodeNavn(StemmeMetodeBean stemmemetode, String nyttNavn) {
-        //Todo implement method
+        for(StemmeMetodeBean bean : stemmeMetodeRepository.findAll()){
+            if(bean.getMetodeid() == stemmemetode.getMetodeid()){
+                bean.setMetodenavn(nyttNavn);
+            }
+        }
     }
 
     @Override
     public Iterable<StemmeMetodeBean> getAllStemmemetoder() {
-        //Todo implement method
-        return null;
+        return stemmeMetodeRepository.findAll();
 
     }
 
     @Override
     public StemmeMetodeBean getStemmeMetode(int metodeid) {
-        //Todo implement method
-        return null;
+        return stemmeMetodeRepository.findById(metodeid).orElse(null);
 
     }
 
     @Override
     public StemmeMetodeBean getStemmeMetoderByName(String name) {
-        //Todo implement method
+        for(StemmeMetodeBean bean : stemmeMetodeRepository.findAll()){
+            if(bean.getMetodenavn().equals(name)) return  bean;
+        }
         return null;
 
     }
