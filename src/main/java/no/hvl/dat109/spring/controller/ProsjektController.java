@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import java.util.Iterator;
 
+import static no.hvl.dat109.prosjekt.FileHandler.removeProjectQrCode;
 import static no.hvl.dat109.prosjekt.Processing.generateShortlink;
 import static no.hvl.dat109.prosjekt.Processing.getProjectImagePath;
 
@@ -72,6 +73,8 @@ public class ProsjektController {
             return "error";
         }
 
+        //Denne koden kjører av en eller annen merkelig grunn når jeg faktisk bare skriver linken inn i nettleser #spooky
+        removeProjectQrCode(prosjekt);
         setQrLink(prosjekt);
 
         // OBS! serveren kan redirecte før qrkoden bildet er lagret og vil ikke være oppdattert uten er refresh
@@ -98,7 +101,7 @@ public class ProsjektController {
 
         // Guess who's back, back again
         // Bedrift boyy is back, tell a friend
-        System.out.println(prosjekt.getSammarbeidsbedrift() + " THIS IS BEDRIFT BOYYY🔥");
+        //System.out.println(prosjekt.getSammarbeidsbedrift() + " THIS IS BEDRIFT BOYYY🔥");
 
         model.addAttribute("samarbeidspartner", prosjekt.getSammarbeidsbedrift());
         model.addAttribute("prosjekt", prosjekt);
@@ -110,7 +113,6 @@ public class ProsjektController {
     String addProsjekt(Model model) {
         model.addAttribute("kategorier", kategoriService.getAllKategorier());
         model.addAttribute("bedrifter", bedriftService.getAlleBedrifter());
-        model.addAttribute("arrangementer", arrangementService.getAllArrangement());
         return "adminpages/registrering/registrer_prosjekt";
     }
 

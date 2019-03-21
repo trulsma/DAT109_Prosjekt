@@ -13,6 +13,9 @@ public class KategoriBean {
 
     private String kategorinavn;
 
+    @OneToMany(mappedBy = "studiekategori")
+    private List<StudieBean> studier;
+
     public KategoriBean() {
     }
 
@@ -36,6 +39,13 @@ public class KategoriBean {
         this.kategorinavn = kategorinavn;
     }
 
+    public List<StudieBean> getStudier() {
+        return studier;
+    }
+
+    public void setStudier(List<StudieBean> studier) {
+        this.studier = studier;
+    }
 
     @Override
     public String toString() {

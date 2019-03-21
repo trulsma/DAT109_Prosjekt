@@ -21,7 +21,7 @@ public class Processing {
     public Processing() {
     }
 
-    private static final String HOST = "http://www.localhost:8080/";
+    private static final String HOST = "http://192.168.0.25:8080/";
     private static final String IMAGEPATH = "src/main/resources/static/projects/";
     private static final String PROJECTPATH = "projects/";
     private static final int QRCODE_SIZE = 400;
@@ -61,17 +61,26 @@ public class Processing {
         //Pathen til resource mappen
         String dir = IMAGEPATH + prosjekt.getProsjektnavn() + "/images/";
         File directory = new File(dir);
-        if (directory.mkdirs()) {
+
+        //If directory exists then we can create, or try to make directory
+        boolean canCreateFile = directory.exists() || directory.mkdirs();
+
+        //If operation over succeeded then we can create the image
+        if (canCreateFile) {
+            //Create file where output should be
             File outputfile = new File(dir + getImagePath(prosjekt));
             BufferedImage image = null;
             try {
+                //Generate the QRCodeImage and write it to output
                 image = generateQRCodeImage(shortenedLink);
                 ImageIO.write(image, "png", outputfile);
+                //Check if it actually created the image
+                System.out.println("Did it create the image? " + outputfile.exists());
             } catch (WriterException | IOException e) {
                 e.printStackTrace();
             }
         } else {
-            System.err.println("Kunne ikke lage mapper");
+            System.err.println("Couldnt either create directory or it doesnt exist");
         }
     }
 
@@ -93,7 +102,7 @@ public class Processing {
      * @param prosjekt prosjektet du vil finne bilder til
      * @return en path til qr bildet
      */
-    private static String getImagePath(ProsjektBean prosjekt) {
+    public static String getImagePath(ProsjektBean prosjekt) {
         return prosjekt.getProsjektid()
                 + "_" + prosjekt.getProsjektnavn().replaceAll(" ", "_") + ".png";
     }
