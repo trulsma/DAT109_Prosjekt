@@ -15,6 +15,9 @@ public class ProsjektService implements IProsjektService {
     @Autowired
     private ProsjektRepository prosjektRepository;
 
+    @Autowired
+    private ArrangementdeltagelseService deltagelseService;
+
     @Override
     public ProsjektBean getProsjektById(int id) {
         return prosjektRepository.findById(id).orElse(null);
@@ -43,6 +46,17 @@ public class ProsjektService implements IProsjektService {
     @Override
     public void updateProsjekt(ProsjektBean prosjekt) {
         prosjektRepository.save(prosjekt);
+    }
+
+    @Override
+    public void removeAllProjects() {
+        prosjektRepository.deleteAll();
+    }
+
+    @Override
+    public void removeProject(ProsjektBean prosjekt) {
+        deltagelseService.removeProsjektFromDeltagelse(prosjekt);
+        prosjektRepository.delete(prosjekt);
     }
 
     @Override

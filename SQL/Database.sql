@@ -54,13 +54,13 @@ CREATE TABLE Prosjekt (
   prosjektid          SERIAL,
   prosjektnavn        VARCHAR(100) UNIQUE,
   prosjektbeskrivelse VARCHAR(1000),
-  prosjektkategori    INTEGER,
+  studie              INTEGER,
   sammarbeidsbedrift  INTEGER,
   shortenedurl        VARCHAR(255),
   qrimagepath         VARCHAR(255),
   pictureurl          VARCHAR(255),
   CONSTRAINT bedriftFK FOREIGN KEY (sammarbeidsbedrift) REFERENCES Bedrift (bedriftid),
-  CONSTRAINT kategoriFK FOREIGN KEY (prosjektkategori) REFERENCES Kategori (kategoriid),
+  CONSTRAINT kategoriFK FOREIGN KEY (studie) REFERENCES Studie (studieid),
   CONSTRAINT prosjektPK PRIMARY KEY (prosjektid)
 );
 
@@ -100,11 +100,13 @@ INSERT INTO StemmeMetode (metodenavn, metodeparameter)
 VALUES ('Like', 1);
 INSERT INTO Kategori (kategorinavn)
 VALUES ('Data og Realfag');
+INSERT INTO Studie (studienavn, studiebeskrivelse, studiekategori)
+VALUES ('Informasjonsteknologi', 'Data', 1);
 INSERT INTO Arrangement (arrangementnavn, arrangementbeskrivelse, arragementetutgaar)
 VALUES ('Første Arrangement', 'Dette er en beskrivelse', '2019-03-17 12:07:21.827000');
 INSERT INTO Prosjekt (prosjektnavn,
                       prosjektbeskrivelse,
-                      prosjektkategori,
+                      studie,
                       sammarbeidsbedrift,
                       shortenedurl,
                       qrimagepath,
