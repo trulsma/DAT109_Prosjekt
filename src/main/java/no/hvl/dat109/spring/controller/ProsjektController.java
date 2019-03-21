@@ -130,6 +130,7 @@ public class ProsjektController {
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
         FileHandler.removeProject(prosjekt);
         prosjektService.removeProject(prosjekt);
+        userService.removeUser(prosjekt.getProsjektEiger());
         return "redirect:/index";
     }
 

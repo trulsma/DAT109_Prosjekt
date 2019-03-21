@@ -9,13 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class UserController {
 
-    @Autowired
-    private UsersService usersService;
 
     @GetMapping("/users")
     public String getAllStudie(){
 
-        usersService.test();
         return "index";
     }
 }

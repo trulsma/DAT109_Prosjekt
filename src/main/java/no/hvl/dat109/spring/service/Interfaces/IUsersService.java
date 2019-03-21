@@ -10,4 +10,6 @@ public interface IUsersService {
     UsersBean createNewUser(String username);
 
     UsersBean getUserByName(String username);
+
+    void removeUser(UsersBean user);
 }
