@@ -131,3 +131,16 @@ div.desc {
         font-size: 3.5rem;
     }
 }
+
+.bg-hvl{
+    background-color: #004357;
+}
+
+.fg-hvl{
+    color: #64d0df;
+}
+
+.fg-hvl:hover{
+    color: white;
+    border-bottom: 1px solid #f9de45;
+}
