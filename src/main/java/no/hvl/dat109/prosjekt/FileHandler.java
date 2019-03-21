@@ -16,12 +16,15 @@ public class FileHandler {
         File projectFolder = new File(FilePaths.PROJECT_PATH + prosjekt.getProsjektnavn());
 
         //If it is a directory then purge it
-        if (projectFolder.isDirectory())
+        if (projectFolder.isDirectory()) {
             purgeFolder(projectFolder);
-
+            //Delete the folder itself when all others are gone
+            boolean done = projectFolder.delete();
+            System.out.printf("Prosjekt mappe: %s ble slettet: %s\n", prosjekt.getProsjektnavn(), done);
+        } else {
             //If it is not working then print error
-        else
             System.err.println("Error removing project. Folder is probably missing");
+        }
     }
 
     /**

@@ -72,7 +72,7 @@ public class ProsjektController {
         setQrLink(prosjekt);
 
         // OBS! serveren kan redirecte før qrkoden bildet er lagret og vil ikke være oppdattert uten er refresh
-        return "redirect:/standpages/prosjekt/" + id + "/qr";
+        return "redirect:/prosjekt/" + id + "/qr";
     }
 
     @GetMapping("/prosjekt/{id}")
