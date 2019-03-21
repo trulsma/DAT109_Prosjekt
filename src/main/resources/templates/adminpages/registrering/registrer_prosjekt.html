@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -43,6 +43,66 @@
         </select>
     </p>
     <p><input type="reset" value="Reset"/><input type="submit" value="Submit"/></p>
+</form>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>Registrer prosjekt</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="/css/registrering.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.7/dist/css/bootstrap-select.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.7/dist/js/bootstrap-select.min.js"></script>
+</head>
+<body class="text-center">
+<form class="form-signin" method="post" action="/bedrift/add">
+    <img class="mb-4" src="/images/hvl.svg" alt="" width="300" height="200">
+    <h1 class="h3 mb-3 font-weight-normal text-white">Registrer prosjekt</h1>
+    <label for="inputNavn" class="sr-only">Navn</label>
+    <input type="text" id="inputNavn" class="form-control" name="prosjektnavn" placeholder="Navn på prosjekt"
+           required="" autofocus="">
+    <br>
+    <label for="inputBeskrivelse" class="sr-only">Prosjektbeskrivelse</label>
+    <input type="text" id="inputBeskrivelse" class="form-control" name="prosjektbeskrivelse"
+           placeholder="Beskrivelse av prosjektet" required="" autofocus="">
+    <br>
+    <p class="underTitle text-white"> Velg institutt:
+        <select class="selectpicker" data-live-search="true" name="samarbeidspartner" form="thisisform">
+            <option th:each="kategori: ${kategorier}"
+                    th:value="${kategori.kategoriid}"
+                    th:name="${kategori.kategorinavn}"
+                    th:text="${kategori.kategorinavn}">
+            </option>
+        </select>
+    </p>
+    <p class="underTitle text-white">Velg din sammarbeidspartner:
+        <select  class="selectpicker" data-live-search="true" form="thisisform" name="samarbeidspartner">
+            <option th:each="bedrift: ${bedrifter}"
+                    th:value="${bedrift.bedriftid}"
+                    th:name="${bedrift.bedriftnavn}"
+                    th:text="${bedrift.bedriftnavn}">
+            </option>
+        </select>
+    </p>
+    <button class="btn btn-lg btn-outline-light btn-block" type="submit">Registrer prosjekt</button>
 </form>
 </body>
 </html>
