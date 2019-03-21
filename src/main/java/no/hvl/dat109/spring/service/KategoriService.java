@@ -29,14 +29,6 @@ public class KategoriService implements IKategoriService {
     }
 
     @Override
-    public List<ProsjektBean> getAllProsjektWithKategori(int kategoriid) {
-        KategoriBean kategoriBean = kategoriRepository.findById(kategoriid).orElse(null);
-
-        if (kategoriBean == null) return null;
-        return kategoriBean.getProsjekter();
-    }
-
-    @Override
     public void addKategori(String kategoriNavn) {
        KategoriBean nyBean = new KategoriBean(kategoriNavn);
        kategoriRepository.save(nyBean);

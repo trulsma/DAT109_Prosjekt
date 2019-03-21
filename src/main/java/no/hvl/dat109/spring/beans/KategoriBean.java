@@ -13,9 +13,6 @@ public class KategoriBean {
 
     private String kategorinavn;
 
-    @OneToMany(mappedBy = "prosjektkategori")
-    private List<ProsjektBean> prosjekter;
-
     public KategoriBean() {
     }
 
@@ -39,20 +36,12 @@ public class KategoriBean {
         this.kategorinavn = kategorinavn;
     }
 
-    public List<ProsjektBean> getProsjekter() {
-        return prosjekter;
-    }
-
-    public void setProsjekter(List<ProsjektBean> prosjekter) {
-        this.prosjekter = prosjekter;
-    }
 
     @Override
     public String toString() {
         return "KategoriBean{" +
                 "kategoriid=" + kategoriid +
                 ", kategorinavn='" + kategorinavn + '\'' +
-                ", prosjekter=" + prosjekter +
                 '}';
     }
 }
