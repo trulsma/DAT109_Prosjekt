@@ -1,6 +1,5 @@
 package no.hvl.dat109.spring.controller;
 
-import no.hvl.dat109.prosjekt.FileHandler;
 import no.hvl.dat109.spring.beans.BedriftBean;
 import no.hvl.dat109.spring.beans.KategoriBean;
 import no.hvl.dat109.spring.beans.ProsjektBean;
@@ -75,7 +74,7 @@ public class ProsjektController {
         setQrLink(prosjekt);
 
         // OBS! serveren kan redirecte før qrkoden bildet er lagret og vil ikke være oppdattert uten er refresh
-        return "redirect:/prosjekt/" + id + "/qr";
+        return "redirect:/standpages/prosjekt/" + id + "/qr";
     }
 
     @GetMapping("/prosjekt/{id}")
@@ -124,21 +123,6 @@ public class ProsjektController {
         setQrLink(prosjekt);
 
         return "redirect:/prosjekt/" + prosjekt.getProsjektid();
-    }
-
-    @GetMapping("/prosjekt/{id}/remove")
-    String removeProject(@PathVariable("id") int id) {
-        System.out.println("Inside remove");
-        ProsjektBean prosjekt = prosjektService.getProsjektById(id);
-        FileHandler.removeProject(prosjekt);
-        prosjektService.removeProject(prosjekt);
-        return "redirect:/index";
-    }
-
-    @GetMapping("/prosjekter/apocalypse")
-    String removeAllProsjektFiles() {
-        FileHandler.removeAllProjects();
-        return "index";
     }
 
     private void setQrLink(ProsjektBean prosjekt) {
