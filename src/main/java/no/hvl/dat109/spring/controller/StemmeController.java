@@ -75,7 +75,7 @@ public class StemmeController {
 
         return ResponseEntity.ok().body(prosjekterMedStemmer);
         */
-        return ResponseEntity.badRequest().body("meg ikke fungere bra nå");
+        return ResponseEntity.badRequest().body("meg vere sjuk og ikke bra nå");
     }
 
     @GetMapping("/mine_stemmer")
