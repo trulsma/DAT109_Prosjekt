@@ -20,7 +20,7 @@ public class ProsjektBean implements Serializable {
     private String pictureurl;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "prosjektkategori")
+    @JoinColumn(name = "studie")
     private StudieBean studieKategori;
 
     @ManyToOne(fetch = FetchType.LAZY)
