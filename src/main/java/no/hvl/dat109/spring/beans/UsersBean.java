@@ -1,6 +1,9 @@
 package no.hvl.dat109.spring.beans;
 
+import no.hvl.dat109.prosjekt.Utilities;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users", schema = "prosjekt1")
@@ -15,6 +18,18 @@ public class UsersBean {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usergroup")
     private UserGroupBean userGroup;
+
+    @OneToMany(mappedBy = "prosjektEiger")
+    private List<ProsjektBean> prosjekter;
+
+    public UsersBean() {
+    }
+
+    public UsersBean(String username, UserGroupBean userGroup) {
+        this.username = username;
+        this.password = Utilities.generateShortPassword(5);
+        this.userGroup = userGroup;
+    }
 
     public int getUserid() {
         return userid;
@@ -46,6 +61,14 @@ public class UsersBean {
 
     public void setUserGroup(UserGroupBean userGroup) {
         this.userGroup = userGroup;
+    }
+
+    public List<ProsjektBean> getProsjekter() {
+        return prosjekter;
+    }
+
+    public void setProsjekter(List<ProsjektBean> prosjekter) {
+        this.prosjekter = prosjekter;
     }
 
     @Override

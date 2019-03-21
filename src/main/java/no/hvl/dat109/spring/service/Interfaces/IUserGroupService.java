@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 public interface IUserGroupService {
     String test();
+
+    UserGroupBean getUsergroupById(int id);
 }

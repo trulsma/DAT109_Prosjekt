@@ -30,6 +30,10 @@ public class ProsjektBean implements Serializable {
     @OneToMany(mappedBy = "prosjekt")
     private List<ArrangementdeltagelseBean> arragementdeltagelser;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "prosjektuser")
+    private UsersBean prosjektEiger;
+
     public StudieBean getStudieKategori() {
         return studieKategori;
     }
@@ -55,11 +59,12 @@ public class ProsjektBean implements Serializable {
         this.sammarbeidsbedrift = sammarbeidsbedrift;
     }
 
-    public ProsjektBean(String prosjektnavn, String prosjektbeskrivelse, BedriftBean sammarbeidsbedrift, StudieBean studieKategori) {
+    public ProsjektBean(String prosjektnavn, String prosjektbeskrivelse, BedriftBean sammarbeidsbedrift, StudieBean studieKategori, UsersBean prosjektEiger) {
         this.prosjektnavn = prosjektnavn;
         this.prosjektbeskrivelse = prosjektbeskrivelse;
         this.sammarbeidsbedrift = sammarbeidsbedrift;
         this.studieKategori = studieKategori;
+        this.prosjektEiger = prosjektEiger;
     }
 
     public int getProsjektid() {
@@ -125,7 +130,16 @@ public class ProsjektBean implements Serializable {
     public void setProsjektkategori(StudieBean studieKategori) {
         this.studieKategori = studieKategori;
     }
-/*
+
+    public UsersBean getProsjektEiger() {
+        return prosjektEiger;
+    }
+
+    public void setProsjektEiger(UsersBean prosjektEiger) {
+        this.prosjektEiger = prosjektEiger;
+    }
+
+    /*
     public Integer getStemmerMedVerdi() {
         Integer sum = 0;
         for (StemmeBean stemme : stemmer) {

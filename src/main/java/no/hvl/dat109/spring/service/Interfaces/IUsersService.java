@@ -6,4 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 public interface IUsersService {
 
     String test();
+
+    UsersBean createNewUser(String username);
+
+    UsersBean getUserByName(String username);
 }

@@ -1,14 +1,8 @@
 package no.hvl.dat109.spring.controller;
 
 import no.hvl.dat109.prosjekt.FileHandler;
-import no.hvl.dat109.spring.beans.BedriftBean;
-import no.hvl.dat109.spring.beans.KategoriBean;
-import no.hvl.dat109.spring.beans.ProsjektBean;
-import no.hvl.dat109.spring.beans.StudieBean;
-import no.hvl.dat109.spring.service.Interfaces.IBedriftService;
-import no.hvl.dat109.spring.service.Interfaces.IKategoriService;
-import no.hvl.dat109.spring.service.Interfaces.IProsjektService;
-import no.hvl.dat109.spring.service.Interfaces.IStudieService;
+import no.hvl.dat109.spring.beans.*;
+import no.hvl.dat109.spring.service.Interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -41,6 +35,9 @@ public class ProsjektController {
 
     @Autowired
     private IStudieService studieService;
+
+    @Autowired
+    private IUsersService userService;
 
     @GetMapping("/prosjekter")
     String getAlleProsjekter(Model model) {
@@ -119,7 +116,8 @@ public class ProsjektController {
         //Finn en bedrift fra id-en til comboboxen
         BedriftBean bedrift = bedriftService.getBedriftById(samarbeidspartner);
         StudieBean studie = studieService.getStudieById(institutt);
-        ProsjektBean prosjekt = new ProsjektBean(prosjektnavn, prosjektbeskrivelse, bedrift, studie);
+        UsersBean user = userService.createNewUser(prosjektnavn.replaceAll(" ", "_"));
+        ProsjektBean prosjekt = new ProsjektBean(prosjektnavn, prosjektbeskrivelse, bedrift, studie, user);
         prosjektService.addProsjekt(prosjekt);
         setQrLink(prosjekt);
 
