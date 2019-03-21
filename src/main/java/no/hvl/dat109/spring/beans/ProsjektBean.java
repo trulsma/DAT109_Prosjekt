@@ -27,6 +27,24 @@ public class ProsjektBean implements Serializable {
     @JoinColumn(name = "sammarbeidsbedrift")
     private BedriftBean sammarbeidsbedrift;
 
+    @OneToMany(mappedBy = "prosjekt")
+    private List<ArrangementdeltagelseBean> arragementdeltagelser;
+
+    public StudieBean getStudieKategori() {
+        return studieKategori;
+    }
+
+    public void setStudieKategori(StudieBean studieKategori) {
+        this.studieKategori = studieKategori;
+    }
+
+    public List<ArrangementdeltagelseBean> getArragementdeltagelser() {
+        return arragementdeltagelser;
+    }
+
+    public void setArragementdeltagelser(List<ArrangementdeltagelseBean> arragementdeltagelser) {
+        this.arragementdeltagelser = arragementdeltagelser;
+    }
 
     public ProsjektBean() {
     }
