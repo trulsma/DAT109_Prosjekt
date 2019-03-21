@@ -1,6 +1,7 @@
 package no.hvl.dat109.spring.beans;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "studie", schema = "prosjekt1")
@@ -15,6 +16,10 @@ public class StudieBean {
     @ManyToOne
     @JoinColumn(name = "studiekategori")
     private KategoriBean studiekategori;
+
+    @OneToMany(mappedBy = "studieKategori")
+    private List<ProsjektBean> prosjekter;
+
 
     public StudieBean() {
     }
@@ -54,6 +59,14 @@ public class StudieBean {
 
     public void setStudiekategori(KategoriBean studiekategori) {
         this.studiekategori = studiekategori;
+    }
+
+    public List<ProsjektBean> getProsjekter() {
+        return prosjekter;
+    }
+
+    public void setProsjekter(List<ProsjektBean> prosjekter) {
+        this.prosjekter = prosjekter;
     }
 
     @Override

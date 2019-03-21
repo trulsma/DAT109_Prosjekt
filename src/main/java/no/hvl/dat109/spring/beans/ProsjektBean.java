@@ -20,8 +20,8 @@ public class ProsjektBean implements Serializable {
     private String pictureurl;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "prosjektkategori")
-    private KategoriBean prosjektkategori;
+    @JoinColumn(name = "studie")
+    private StudieBean studieKategori;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sammarbeidsbedrift")
@@ -35,6 +35,13 @@ public class ProsjektBean implements Serializable {
         this.prosjektnavn = prosjektnavn;
         this.prosjektbeskrivelse = prosjektbeskrivelse;
         this.sammarbeidsbedrift = sammarbeidsbedrift;
+    }
+
+    public ProsjektBean(String prosjektnavn, String prosjektbeskrivelse, BedriftBean sammarbeidsbedrift, StudieBean studieKategori) {
+        this.prosjektnavn = prosjektnavn;
+        this.prosjektbeskrivelse = prosjektbeskrivelse;
+        this.sammarbeidsbedrift = sammarbeidsbedrift;
+        this.studieKategori = studieKategori;
     }
 
     public int getProsjektid() {
@@ -84,6 +91,7 @@ public class ProsjektBean implements Serializable {
     public void setQrimagepath(String qrimagepath) {
         this.qrimagepath = qrimagepath;
     }
+
     public String getPictureurl() {
         return pictureurl;
     }
@@ -92,12 +100,12 @@ public class ProsjektBean implements Serializable {
         this.pictureurl = pictureurl;
     }
 
-    public KategoriBean getProsjektkategori() {
-        return prosjektkategori;
+    public StudieBean getProsjektkategori() {
+        return studieKategori;
     }
 
-    public void setProsjektkategori(KategoriBean prosjektkategori) {
-        this.prosjektkategori = prosjektkategori;
+    public void setProsjektkategori(StudieBean studieKategori) {
+        this.studieKategori = studieKategori;
     }
 /*
     public Integer getStemmerMedVerdi() {

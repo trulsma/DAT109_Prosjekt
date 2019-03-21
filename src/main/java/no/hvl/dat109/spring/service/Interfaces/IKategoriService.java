@@ -13,8 +13,6 @@ public interface IKategoriService {
 
     Iterable<KategoriBean> getAllKategorier();
 
-    List<ProsjektBean> getAllProsjektWithKategori(int kategoriid);
-
     void addKategori(String kategoriNavn);
 
     KategoriBean getKategori(int id);
