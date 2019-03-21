@@ -63,6 +63,11 @@ public class DiverseController {
         return "index";
     }
 
+
+    @GetMapping("/dashboard")
+    String getDashboard(){
+        return "adminpages/statistikk/dashboard";
+    }
 }
 
 
