@@ -1,6 +1,6 @@
 /*<![CDATA[*/
-var ctx = document.getElementById('myBar');
-
+var bar = document.getElementById('myBar');
+var ctx = document.getElementById('myLine')
 function randomRGBA() {
     var o = Math.round, r = Math.random, m = 255;
 
@@ -26,12 +26,12 @@ function visGraf(resultat) {
 
     let label = resultat.map(a => a.prosjektnavn);
     let data = resultat.map(a => a.gjennomsnittVerdi);
-    var myBar = new Chart(ctx, {
+    var myBar = new Chart(bar, {
         type: 'bar',
         data: {
-            labels: ['prosjekter'],
+            labels: label,
             datasets: [{
-                label: label,
+                label: 'Prosjekter',
                 data: data,
                 borderColor: [
                     random1 + '1)',
@@ -51,12 +51,52 @@ function visGraf(resultat) {
                 yAxes: [{
                     ticks: {
                         beginAtZero: true,
-                        //max: 5
+                        max: 5
                     }
                 }]
             }
         }
     });
+}
+
+
+var myLine = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: label,
+        datasets: [{
+            label: ['prosjekt1', 'prosjekt2', 'prosjekt3'],
+            data: [1, 2, 3],
+            borderColor: [
+                random1 + '1)',
+                random2 + '1)',
+                random3 + '1)'
+            ],
+            backgroundColor: [
+                random1 + '0.1)',
+                random2 + '0.1)',
+                random3 + '0.1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    max: 5
+                }
+            }]
+        }
+    }
+});
+
+function visGraf(resultat) {
+    let prosjekt = [];
+
+//console.log(resultat[0])
+
 }
 
 /*]]>*/

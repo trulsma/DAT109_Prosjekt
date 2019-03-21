@@ -53,7 +53,10 @@ public class DiverseController {
 
 
     @GetMapping("/registrer_deg")
-    String getRegistrerBruker(@RequestParam String redirect_url, Model model) {
+    String getRegistrerBruker(@RequestParam(required = false) String redirect_url, Model model) {
+        if (redirect_url == null) {
+            redirect_url = "/index";
+        }
         model.addAttribute("redirect_url", redirect_url);
         return "registrer_deg";
     }
