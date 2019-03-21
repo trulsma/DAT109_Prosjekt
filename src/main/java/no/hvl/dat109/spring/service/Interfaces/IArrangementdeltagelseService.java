@@ -12,6 +12,8 @@ public interface IArrangementdeltagelseService {
 
     String test();
 
+    ArrangementdeltagelseBean getArrangementDeltagelse(int prosjektid, int arrangementid);
+
     void addArrangementDeltagelse(ArrangementBean arrangement, ProsjektBean prosjek);
 
     void removeArrangementDeltagelse(ArrangementdeltagelseBean deltagelse);

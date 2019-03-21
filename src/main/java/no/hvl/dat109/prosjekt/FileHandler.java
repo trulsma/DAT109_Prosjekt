@@ -13,7 +13,7 @@ public class FileHandler {
      */
     public static void removeProject(ProsjektBean prosjekt) {
         //Find path to project folder
-        File projectFolder = new File(FilePaths.PROJECT_PATH + prosjekt.getProsjektnavn());
+        File projectFolder = new File(Paths.PROJECT_PATH + prosjekt.getProsjektnavn());
 
         //If it is a directory then purge it
         if (projectFolder.isDirectory()) {
@@ -55,7 +55,7 @@ public class FileHandler {
      * Delete all project folders from disk
      */
     public static void removeAllProjects() {
-        File projectFolder = new File(FilePaths.PROJECT_PATH);
+        File projectFolder = new File(Paths.PROJECT_PATH);
         if (projectFolder.isDirectory())
             purgeFolder(projectFolder);
     }

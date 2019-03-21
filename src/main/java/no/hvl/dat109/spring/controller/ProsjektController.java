@@ -28,6 +28,9 @@ public class ProsjektController {
     private IProsjektService prosjektService;
 
     @Autowired
+    private IArrangementService arrangementService;
+
+    @Autowired
     private IBedriftService bedriftService;
 
     @Autowired
@@ -82,7 +85,6 @@ public class ProsjektController {
             return "redirect:/registrer_deg?redirect_url=" + "/prosjekt/" + id;
         }
 
-
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
         UsersBean user = (UsersBean) session.getAttribute("user");
 
@@ -108,6 +110,7 @@ public class ProsjektController {
     String addProsjekt(Model model) {
         model.addAttribute("kategorier", kategoriService.getAllKategorier());
         model.addAttribute("bedrifter", bedriftService.getAlleBedrifter());
+        model.addAttribute("arrangementer", arrangementService.getAllArrangement());
         return "adminpages/registrering/registrer_prosjekt";
     }
 

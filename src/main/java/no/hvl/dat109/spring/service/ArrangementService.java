@@ -37,12 +37,11 @@ public class ArrangementService implements IArrangementService {
 
     @Override
     public void updateArrangemntNavn(ArrangementBean arrangement, String nyttNavn) {
-       ArrangementBean a = arrangementRepository.findById(arrangement.getArrangementid()).orElse(null);
+        ArrangementBean a = arrangementRepository.findById(arrangement.getArrangementid()).orElse(null);
 
-       a.setArrangementnavn(nyttNavn);
-
-       return;
-
+        if (a == null) return;
+        a.setArrangementnavn(nyttNavn);
+        arrangementRepository.save(a);
     }
 
     @Override
@@ -53,9 +52,10 @@ public class ArrangementService implements IArrangementService {
     @Override
     public ArrangementBean getArrangementByName(String arrangementNavn) {
         ArrangementBean a = null;
-        for(ArrangementBean arrangementBean : arrangementRepository.findAll()){
-            if(arrangementBean.equals(arrangementNavn)){
+        for (ArrangementBean arrangementBean : arrangementRepository.findAll()) {
+            if (arrangementBean.getArrangementnavn().equals(arrangementNavn)) {
                 a = arrangementBean;
+                break;
             }
         }
         return a;

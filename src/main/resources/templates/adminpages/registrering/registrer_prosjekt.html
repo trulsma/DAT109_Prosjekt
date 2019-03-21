@@ -84,6 +84,10 @@
     <input type="text" id="inputBeskrivelse" class="form-control" name="prosjektbeskrivelse"
            placeholder="Beskrivelse av prosjektet" required="" autofocus="">
     <br>
+    <label for="email" class="sr-only">Email</label>
+    <input type="text" id="email" class="form-control" name="email"
+           placeholder="Din email adresse" required="" autofocus="">
+
     <p class="underTitle text-white"> Velg institutt:
         <select class="selectpicker" data-live-search="true" name="institutt" form="thisisform">
             <option th:each="kategori: ${kategorier}"

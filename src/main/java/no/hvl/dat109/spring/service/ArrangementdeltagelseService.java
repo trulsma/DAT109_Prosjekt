@@ -8,6 +8,7 @@ import no.hvl.dat109.spring.service.Interfaces.IArrangementdeltagelseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -24,6 +25,11 @@ public class ArrangementdeltagelseService implements IArrangementdeltagelseServi
         arrangementdeltagelseRepository.findAll().forEach(System.out::println);
 
         return "index";
+    }
+
+    @Override
+    public ArrangementdeltagelseBean getArrangementDeltagelse(int prosjektid, int arrangementid) {
+        return null;
     }
 
     @Override
@@ -59,6 +65,20 @@ public class ArrangementdeltagelseService implements IArrangementdeltagelseServi
     @Override
     public List<ProsjektBean> getAllProsjektFromArrangement(ArrangementBean arrangement) {
         //Todo implement this
-        return null;
+        //Create list of projects and arrangement deltagelser
+        List<ProsjektBean> prosjekter = new ArrayList<>();
+        Iterator<ArrangementdeltagelseBean> deltagelser = arrangementdeltagelseRepository.findAll().iterator();
+
+        //Iterate through all deltagelser and check if they have the same id as @param
+        ArrangementdeltagelseBean deltagelseBean;
+        while (deltagelser.hasNext()) {
+            deltagelseBean = deltagelser.next();
+            if (deltagelseBean.getArrangement().getArrangementid() == arrangement.getArrangementid()) {
+                //If both arrangement ids are the same, then add the project
+                prosjekter.add(deltagelseBean.getProsjekt());
+            }
+        }
+        //Return list of projects
+        return prosjekter;
     }
 }

@@ -18,7 +18,7 @@ public class UserController {
     private IUsersService usersService;
 
     @GetMapping("/login/{id}")
-    public String getAllStudie(@PathVariable("id") int id, HttpSession session) {
+    public String logIn(@PathVariable("id") int id, HttpSession session) {
 
         //TODO: MIDLERTIDIG INNLOGGIN FOR SJEKKING
 
@@ -26,5 +26,12 @@ public class UserController {
         if (user == null) return "index";
         session.setAttribute("user", user);
         return "redirect:/prosjekt/" + id;
+    }
+
+    @GetMapping("/logout")
+    public String logOut(HttpSession session) {
+        if (session.getAttribute("user") != null)
+            session.removeAttribute("user");
+        return "redirect:/";
     }
 }
