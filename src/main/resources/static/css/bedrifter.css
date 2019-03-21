@@ -7,9 +7,6 @@ h1 {
     border: 1px solid #ddd !important;
 }
 
-.centerTable {
-    margin: 0px auto;
-}
 
 table caption {
     padding: .5em 0;
@@ -26,6 +23,7 @@ table caption {
     padding-top: 140px;
     font-size: 14px;
 }
+/*
  a {
     display: block;
     background-color: #e7e7e7;
@@ -37,9 +35,9 @@ table caption {
     text-align: center;
      position: center;
 }
-
 a:hover {
     background-color: white;
     text-decoration: none;
     cursor: pointer;
 }
+*/
