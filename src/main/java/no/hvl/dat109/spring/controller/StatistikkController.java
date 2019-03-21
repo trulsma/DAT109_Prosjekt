@@ -39,4 +39,16 @@ public class StatistikkController {
         return "standpages/stand_statistikk";
     }
 
+    @GetMapping("/dashboard/{id}")
+    String getDashboardForProsjekt(@PathVariable("id") int id, Model model) {
+        ProsjektBean prosjekt = prosjektService.getProsjektById(id);
+
+        if (prosjekt == null) {
+            return "error";
+        }
+
+        model.addAttribute("prosjekt", prosjekt);
+
+        return "standpages/dashboard";
+    }
 }
