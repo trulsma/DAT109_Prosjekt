@@ -3,9 +3,11 @@ package no.hvl.dat109.spring.controller;
 import no.hvl.dat109.spring.beans.BedriftBean;
 import no.hvl.dat109.spring.beans.KategoriBean;
 import no.hvl.dat109.spring.beans.ProsjektBean;
+import no.hvl.dat109.spring.beans.StudieBean;
 import no.hvl.dat109.spring.service.Interfaces.IBedriftService;
 import no.hvl.dat109.spring.service.Interfaces.IKategoriService;
 import no.hvl.dat109.spring.service.Interfaces.IProsjektService;
+import no.hvl.dat109.spring.service.Interfaces.IStudieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Iterator;
 
 import static no.hvl.dat109.prosjekt.Processing.generateShortlink;
-import static no.hvl.dat109.prosjekt.Processing.getImagePath;
+import static no.hvl.dat109.prosjekt.Processing.getProjectImagePath;
 
 @Controller
 public class ProsjektController {
@@ -35,6 +37,9 @@ public class ProsjektController {
 
     @Autowired
     private IKategoriService kategoriService;
+
+    @Autowired
+    private IStudieService studieService;
 
     @GetMapping("/prosjekter")
     String getAlleProsjekter(Model model) {
@@ -52,7 +57,7 @@ public class ProsjektController {
             return "error";
         }
 
-        model.addAttribute("qrfil", getImagePath(prosjekt));
+        model.addAttribute("qrfil", getProjectImagePath(prosjekt));
 
         return "standpages/qrkode";
     }
@@ -106,12 +111,14 @@ public class ProsjektController {
     String addProsjektPostRequest(
             @RequestParam String prosjektnavn,
             @RequestParam String prosjektbeskrivelse,
-            @RequestParam int samarbeidspartner) {
+            @RequestParam int samarbeidspartner,
+            @RequestParam int institutt) {
         //  System.out.println(id);
 
         //Finn en bedrift fra id-en til comboboxen
         BedriftBean bedrift = bedriftService.getBedriftById(samarbeidspartner);
-        ProsjektBean prosjekt = new ProsjektBean(prosjektnavn, prosjektbeskrivelse, bedrift);
+        StudieBean studie = studieService.getStudieById(institutt);
+        ProsjektBean prosjekt = new ProsjektBean(prosjektnavn, prosjektbeskrivelse, bedrift, studie);
         prosjektService.addProsjekt(prosjekt);
         setQrLink(prosjekt);
 
@@ -120,7 +127,7 @@ public class ProsjektController {
 
     private void setQrLink(ProsjektBean prosjekt) {
         prosjekt.setShortenedurl(generateShortlink(prosjekt));
-        prosjekt.setQrimagepath(getImagePath(prosjekt));
+        prosjekt.setQrimagepath(getProjectImagePath(prosjekt));
         prosjektService.updateProsjekt(prosjekt);
     }
 }
