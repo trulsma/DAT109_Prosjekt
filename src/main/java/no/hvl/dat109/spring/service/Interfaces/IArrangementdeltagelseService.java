@@ -16,6 +16,8 @@ public interface IArrangementdeltagelseService {
 
     void removeArrangementDeltagelse(ArrangementdeltagelseBean deltagelse);
 
+    void removeProsjektFromDeltagelse(ProsjektBean prosjekt);
+
     ArrangementdeltagelseBean getArrangementDeltagelse(int id);
 
     /**
