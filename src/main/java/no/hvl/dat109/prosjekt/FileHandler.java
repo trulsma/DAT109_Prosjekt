@@ -15,7 +15,7 @@ public class FileHandler {
      */
     public static void removeProject(ProsjektBean prosjekt) {
         //Find path to project folder
-        File projectFolder = new File(Paths.PROJECT_PATH + prosjekt.getProsjektnavn());
+        File projectFolder = new File(ProsjektPaths.PROJECT_PATH + prosjekt.getProsjektnavn());
 
         //If it is a directory then purge it
         if (projectFolder.isDirectory()) {
@@ -54,7 +54,7 @@ public class FileHandler {
     }
 
     public static void removeProjectQrCode(ProsjektBean prosjektBean) {
-        File file = new File(Paths.PROJECT_PATH + getImagePath(prosjektBean));
+        File file = new File(ProsjektPaths.PROJECT_PATH + getImagePath(prosjektBean));
         if (file.delete()) System.out.println("Managed to delete QR code");
         else System.out.println("Qr code does not exist!");
     }
@@ -63,7 +63,7 @@ public class FileHandler {
      * Delete all project folders from disk
      */
     public static void removeAllProjects() {
-        File projectFolder = new File(Paths.PROJECT_PATH);
+        File projectFolder = new File(ProsjektPaths.PROJECT_PATH);
         if (projectFolder.isDirectory())
             purgeFolder(projectFolder);
     }
