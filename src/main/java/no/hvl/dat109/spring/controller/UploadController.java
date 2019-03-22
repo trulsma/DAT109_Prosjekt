@@ -1,5 +1,6 @@
 package no.hvl.dat109.spring.controller;
 
+import no.hvl.dat109.prosjekt.FileHandler;
 import no.hvl.dat109.prosjekt.Processing;
 import no.hvl.dat109.prosjekt.ProsjektPaths;
 import no.hvl.dat109.spring.beans.ProsjektBean;
@@ -34,21 +35,27 @@ public class UploadController {
     }
 
     @PostMapping("prosjekt/{id}/upload") // //new annotation since 4.3
-    public String singleFileUpload(@RequestParam("file") MultipartFile file, @PathVariable("id") int id) {
+    public String singleFileUpload(@RequestParam("background") MultipartFile background,
+                                   @RequestParam("logo") MultipartFile logo,
+                                   @PathVariable("id") int id) {
 
-        try {
-            ProsjektBean prosjekt = prosjektService.getProsjektById(id);
-            // Get the file and save it somewhere
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(ProsjektPaths.PROJECT_PATH + prosjekt.getProsjektnavn() +
-                    "/images/" + file.getOriginalFilename().replaceAll(" ", "_"));
-            Files.write(path, bytes);
-            prosjektService.updatePicturePath(prosjekt, path.toString().replace("src/main/resources/static/", ""));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String backgroundPath = "", logoPath = "";
+
+        ProsjektBean prosjekt = prosjektService.getProsjektById(id);
+        if (!background.isEmpty())
+            backgroundPath = prosjektService.createBackground(background, prosjekt);
+
+        if (!logo.isEmpty())
+            logoPath = prosjektService.createLogo(logo, prosjekt);
+
+
+        if (!logoPath.equals(""))
+            prosjektService.updatePicturePath(prosjekt, logoPath);
+        if (!backgroundPath.equals(""))
+            prosjektService.updateBackgroundPath(prosjekt, backgroundPath);
 
         return "redirect:/";
     }
+
 
 }
