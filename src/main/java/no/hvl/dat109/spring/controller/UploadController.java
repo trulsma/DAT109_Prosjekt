@@ -43,7 +43,7 @@ public class UploadController {
             Path path = Paths.get(ProsjektPaths.PROJECT_PATH + prosjekt.getProsjektnavn() +
                     "/images/" + file.getOriginalFilename().replaceAll(" ", "_"));
             Files.write(path, bytes);
-
+            prosjektService.updatePicturePath(prosjekt, path.toString().replace("src/main/resources/static/", ""));
         } catch (IOException e) {
             e.printStackTrace();
         }
