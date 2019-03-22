@@ -1,5 +1,7 @@
 package no.hvl.dat109.spring.service;
 
+import no.hvl.dat109.prosjekt.FileHandler;
+import no.hvl.dat109.prosjekt.ProsjektPaths;
 import no.hvl.dat109.spring.beans.BedriftBean;
 import no.hvl.dat109.spring.beans.ProsjektBean;
 import no.hvl.dat109.spring.repository.BedriftRepository;
@@ -7,6 +9,12 @@ import no.hvl.dat109.spring.repository.ProsjektRepository;
 import no.hvl.dat109.spring.service.Interfaces.IProsjektService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Service
 public class ProsjektService implements IProsjektService {
@@ -65,6 +73,24 @@ public class ProsjektService implements IProsjektService {
         if (prosjektBean == null) return;
         prosjektBean.setPictureurl(path);
         prosjektRepository.save(prosjektBean);
+    }
+
+    @Override
+    public void updateBackgroundPath(ProsjektBean prosjekt, String path) {
+        ProsjektBean bean = prosjektRepository.findById(prosjekt.getProsjektid()).orElse(null);
+        if (bean == null) return;
+        bean.setBackgroundurl(path);
+        prosjektRepository.save(bean);
+    }
+
+    @Override
+    public String createLogo(MultipartFile logo, ProsjektBean prosjekt) {
+        return FileHandler.createLogoImage(logo, prosjekt).replace("src/main/resources/static/", "");
+    }
+
+    @Override
+    public String createBackground(MultipartFile background, ProsjektBean prosjekt) {
+        return FileHandler.createBackgroundImage(background, prosjekt).replace("src/main/resources/static/", "");
     }
 
     @Override

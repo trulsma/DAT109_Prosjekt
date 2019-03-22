@@ -18,6 +18,7 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+<img th:src="@{~/{fil}(fil=${prosjekt.backgroundurl})}" alt="">
 <form action="/stem" method="post">
     <h1 class="title" th:inline="text">Navn: [[${prosjekt.prosjektnavn}]]</h1>
     <h1 class="underTitle" th:inline="text">Beskrivelse: [[${prosjekt.prosjektbeskrivelse}]]</h1>
