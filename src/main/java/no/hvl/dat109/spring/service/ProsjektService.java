@@ -60,6 +60,14 @@ public class ProsjektService implements IProsjektService {
     }
 
     @Override
+    public void updatePicturePath(ProsjektBean prosjekt, String path) {
+        ProsjektBean prosjektBean = prosjektRepository.findById(prosjekt.getProsjektid()).orElse(null);
+        if (prosjektBean == null) return;
+        prosjektBean.setPictureurl(path);
+        prosjektRepository.save(prosjektBean);
+    }
+
+    @Override
     public Iterable<ProsjektBean> getAlleProsjekter() {
         return prosjektRepository.findAll();
     }

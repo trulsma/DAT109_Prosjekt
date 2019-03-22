@@ -20,4 +20,6 @@ public interface IProsjektService {
 
     void removeProject(ProsjektBean prosjekt);
 
+    void updatePicturePath(ProsjektBean prosjekt, String path);
+
 }
