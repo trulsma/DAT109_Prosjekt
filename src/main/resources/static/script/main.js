@@ -64,7 +64,7 @@ function visGraf(resultat) {
 }
 
 
-var myLine = new Chart(ctx, {
+let myLine = new Chart(ctx, {
     type: 'line',
     data: {
         labels: ['prosjekt1', 'prosjekt2', 'prosjekt3'],
