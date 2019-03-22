@@ -65,6 +65,7 @@ CREATE TABLE Prosjekt
   shortenedurl        VARCHAR(255),
   qrimagepath         VARCHAR(255),
   pictureurl          VARCHAR(255),
+  backgroundurl       VARCHAR(255),
   prosjektuser        INTEGER,
 
   CONSTRAINT bedriftFK FOREIGN KEY (sammarbeidsbedrift) REFERENCES Bedrift (bedriftid),
@@ -105,11 +106,11 @@ CREATE TABLE Stemme
   CONSTRAINT stemmePK PRIMARY KEY (stemmeid)
 );
 
-INSERT INTO Usergroup(groupname, grouplevel)
+INSERT INTO Usergroup (groupname, grouplevel)
 VALUES ('Admin', 1),
        ('Stand', 2),
        ('User', 3);
-INSERT INTO Users(username, password, usergroup)
+INSERT INTO Users (username, password, usergroup)
 VALUES ('admin', 'admin', 1);
 INSERT INTO Bedrift (bedriftnavn, bedriftbeskrivelse)
 VALUES ('HVL', 'Høgskolen på Vestlandet');
@@ -172,7 +173,6 @@ VALUES ('Ergoterapi', 'Ergoterapi', 1),
        ('Nautikk y-veg', 'nautikk', 13),
        ('Maritime operasjoner', 'nautikk', 13),
        ('Samfunnsvitenskap', 'samfunnsvitenskap', 14);
-
 
 
 INSERT INTO Arrangement (arrangementnavn, arrangementbeskrivelse, arragementetutgaar)

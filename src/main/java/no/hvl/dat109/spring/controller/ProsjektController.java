@@ -1,11 +1,11 @@
 package no.hvl.dat109.spring.controller;
 
-import no.hvl.dat109.prosjekt.EmailUtil;
-import no.hvl.dat109.prosjekt.FileHandler;
+import no.hvl.dat109.prosjekt.utilities.EmailUtil;
+import no.hvl.dat109.prosjekt.handlers.FileHandler;
+import no.hvl.dat109.prosjekt.utilities.Utilities;
 import no.hvl.dat109.spring.beans.*;
 import no.hvl.dat109.spring.service.Interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
-import java.util.Iterator;
-
-import static no.hvl.dat109.prosjekt.FileHandler.removeProjectQrCode;
-import static no.hvl.dat109.prosjekt.Processing.generateShortlink;
-import static no.hvl.dat109.prosjekt.Processing.getProjectImagePath;
+import static no.hvl.dat109.prosjekt.handlers.FileHandler.removeProjectQrCode;
+import static no.hvl.dat109.prosjekt.handlers.Processing.generateShortlink;
+import static no.hvl.dat109.prosjekt.handlers.Processing.getFullQRImagePath;
+import static no.hvl.dat109.prosjekt.utilities.Utilities.checkPassword;
 
 @Controller
 public class ProsjektController {
@@ -130,14 +129,15 @@ public class ProsjektController {
         StudieBean studie = studieService.getStudieById(institutt);
 
         //Lag en user med emailen vi fikk
-        UsersBean user = userService.createNewUser(email);
+        String password = Utilities.generateShortPassword(5);
+        UsersBean user = userService.createNewUser(email, password);
 
         //Lag prosjektet med alt vi har fått så langt
         ProsjektBean prosjekt = new ProsjektBean(prosjektnavn, prosjektbeskrivelse, bedrift, studie, user);
         prosjektService.addProsjekt(prosjekt);
 
         //Send email with password
-        sendEmail(email, user);
+        sendEmail(email, user, password);
 
         //Etter prosjektet er laget kan kan vi danne qr bilde link
         setQrLink(prosjekt);
@@ -179,8 +179,8 @@ public class ProsjektController {
      * @param email email of user
      * @param user  user with username and password
      */
-    private void sendEmail(String email, UsersBean user) {
-        String messagebody = String.format("Username: %s\nPassword: %s", user.getUsername(), user.getPassword());
+    private void sendEmail(String email, UsersBean user, String password) {
+        String messagebody = String.format("Username: %s\nPasswordHasher: %s", user.getUsername(), password);
         Thread thread = new Thread(() -> EmailUtil.sendEmail(email, messagebody));
         thread.start();
     }
@@ -192,7 +192,7 @@ public class ProsjektController {
      */
     private void setQrLink(ProsjektBean prosjekt) {
         prosjekt.setShortenedurl(generateShortlink(prosjekt));
-        prosjekt.setQrimagepath(getProjectImagePath(prosjekt));
+        prosjekt.setQrimagepath(getFullQRImagePath(prosjekt));
         prosjektService.updateProsjekt(prosjekt);
     }
 }

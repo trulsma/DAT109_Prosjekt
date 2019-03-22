@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Iterator;
 
+import static no.hvl.dat109.prosjekt.utilities.Utilities.hashPassword;
+
 @Service
 public class UsersService implements IUsersService {
 
@@ -24,8 +26,8 @@ public class UsersService implements IUsersService {
     }
 
     @Override
-    public UsersBean createNewUser(String username) {
-        UsersBean user = new UsersBean(username, userGroupService.getUsergroupById(2));
+    public UsersBean createNewUser(String username, String password) {
+        UsersBean user = new UsersBean(username, hashPassword(password), userGroupService.getUsergroupById(2));
         usersRepository.save(user);
         return getUserByName(username);
     }

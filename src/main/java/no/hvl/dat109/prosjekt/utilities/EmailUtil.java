@@ -1,4 +1,4 @@
-package no.hvl.dat109.prosjekt;
+package no.hvl.dat109.prosjekt.utilities;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;

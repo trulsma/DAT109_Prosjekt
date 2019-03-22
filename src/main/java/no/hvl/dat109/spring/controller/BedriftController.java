@@ -1,6 +1,5 @@
 package no.hvl.dat109.spring.controller;
 
-import no.hvl.dat109.prosjekt.Processing;
 import no.hvl.dat109.spring.beans.BedriftBean;
 import no.hvl.dat109.spring.beans.ProsjektBean;
 import no.hvl.dat109.spring.service.Interfaces.IBedriftService;

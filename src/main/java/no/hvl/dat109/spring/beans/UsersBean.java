@@ -1,6 +1,6 @@
 package no.hvl.dat109.spring.beans;
 
-import no.hvl.dat109.prosjekt.Utilities;
+import no.hvl.dat109.prosjekt.utilities.Utilities;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,9 +25,9 @@ public class UsersBean {
     public UsersBean() {
     }
 
-    public UsersBean(String username, UserGroupBean userGroup) {
+    public UsersBean(String username, String password, UserGroupBean userGroup) {
         this.username = username;
-        this.password = Utilities.generateShortPassword(5);
+        this.password = password;
         this.userGroup = userGroup;
     }
 

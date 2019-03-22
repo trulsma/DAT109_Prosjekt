@@ -1,8 +1,6 @@
 package no.hvl.dat109.spring.controller;
 
-import no.hvl.dat109.prosjekt.FileHandler;
-import no.hvl.dat109.prosjekt.Processing;
-import no.hvl.dat109.prosjekt.ProsjektPaths;
+import no.hvl.dat109.prosjekt.utilities.ProsjektPaths;
 import no.hvl.dat109.spring.beans.ProsjektBean;
 import no.hvl.dat109.spring.service.Interfaces.IProsjektService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @Controller
 public class UploadController {

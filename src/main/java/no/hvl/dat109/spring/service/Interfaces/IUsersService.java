@@ -7,7 +7,7 @@ public interface IUsersService {
 
     String test();
 
-    UsersBean createNewUser(String username);
+    UsersBean createNewUser(String username, String password);
 
     UsersBean getUserByName(String username);
 

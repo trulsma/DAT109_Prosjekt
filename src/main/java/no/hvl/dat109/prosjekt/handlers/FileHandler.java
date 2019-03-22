@@ -1,5 +1,6 @@
-package no.hvl.dat109.prosjekt;
+package no.hvl.dat109.prosjekt.handlers;
 
+import no.hvl.dat109.prosjekt.utilities.ProsjektPaths;
 import no.hvl.dat109.spring.beans.ProsjektBean;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -9,7 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static no.hvl.dat109.prosjekt.Processing.getImagePath;
+import static no.hvl.dat109.prosjekt.handlers.Processing.qrImageFileName;
 
 public class FileHandler {
 
@@ -59,7 +60,7 @@ public class FileHandler {
     }
 
     public static void removeProjectQrCode(ProsjektBean prosjektBean) {
-        File file = new File(ProsjektPaths.PROJECT_PATH + getImagePath(prosjektBean));
+        File file = new File(ProsjektPaths.PROJECT_PATH + qrImageFileName(prosjektBean));
         if (file.delete()) System.out.println("Managed to delete QR code");
         else System.out.println("Qr code does not exist!");
     }
