@@ -30,21 +30,10 @@ public class ProsjektBean implements Serializable {
     @OneToMany(mappedBy = "prosjekt")
     private List<ArrangementdeltagelseBean> arragementdeltagelser;
 
-    public StudieBean getStudieKategori() {
-        return studieKategori;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "prosjektuser")
+    private UsersBean prosjektEiger;
 
-    public void setStudieKategori(StudieBean studieKategori) {
-        this.studieKategori = studieKategori;
-    }
-
-    public List<ArrangementdeltagelseBean> getArragementdeltagelser() {
-        return arragementdeltagelser;
-    }
-
-    public void setArragementdeltagelser(List<ArrangementdeltagelseBean> arragementdeltagelser) {
-        this.arragementdeltagelser = arragementdeltagelser;
-    }
 
     public ProsjektBean() {
     }
@@ -55,11 +44,12 @@ public class ProsjektBean implements Serializable {
         this.sammarbeidsbedrift = sammarbeidsbedrift;
     }
 
-    public ProsjektBean(String prosjektnavn, String prosjektbeskrivelse, BedriftBean sammarbeidsbedrift, StudieBean studieKategori) {
+    public ProsjektBean(String prosjektnavn, String prosjektbeskrivelse, BedriftBean sammarbeidsbedrift, StudieBean studieKategori, UsersBean prosjektEiger) {
         this.prosjektnavn = prosjektnavn;
         this.prosjektbeskrivelse = prosjektbeskrivelse;
         this.sammarbeidsbedrift = sammarbeidsbedrift;
         this.studieKategori = studieKategori;
+        this.prosjektEiger = prosjektEiger;
     }
 
     public int getProsjektid() {
@@ -86,14 +76,6 @@ public class ProsjektBean implements Serializable {
         this.prosjektbeskrivelse = prosjektbeskrivelse;
     }
 
-    public BedriftBean getSammarbeidsbedrift() {
-        return sammarbeidsbedrift;
-    }
-
-    public void setSammarbeidsbedrift(BedriftBean sammarbeidsbedrift) {
-        this.sammarbeidsbedrift = sammarbeidsbedrift;
-    }
-
     public String getShortenedurl() {
         return shortenedurl;
     }
@@ -118,14 +100,43 @@ public class ProsjektBean implements Serializable {
         this.pictureurl = pictureurl;
     }
 
-    public StudieBean getProsjektkategori() {
+    public StudieBean getStudieKategori() {
         return studieKategori;
     }
 
-    public void setProsjektkategori(StudieBean studieKategori) {
+    public void setStudieKategori(StudieBean studieKategori) {
         this.studieKategori = studieKategori;
     }
-/*
+
+    public BedriftBean getSammarbeidsbedrift() {
+        return sammarbeidsbedrift;
+    }
+
+    public void setSammarbeidsbedrift(BedriftBean sammarbeidsbedrift) {
+        this.sammarbeidsbedrift = sammarbeidsbedrift;
+    }
+
+    public List<ArrangementdeltagelseBean> getArragementdeltagelser() {
+        return arragementdeltagelser;
+    }
+
+    public void setArragementdeltagelser(List<ArrangementdeltagelseBean> arragementdeltagelser) {
+        this.arragementdeltagelser = arragementdeltagelser;
+    }
+
+    public UsersBean getProsjektEiger() {
+        return prosjektEiger;
+    }
+
+    public void setProsjektEiger(UsersBean prosjektEiger) {
+        this.prosjektEiger = prosjektEiger;
+    }
+
+    public boolean erEigerAvProsjekt(UsersBean user) {
+        if (user == null) return false;
+        return this.prosjektEiger.getUserid() == user.getUserid();
+    }
+    /*
     public Integer getStemmerMedVerdi() {
         Integer sum = 0;
         for (StemmeBean stemme : stemmer) {

@@ -1,6 +1,7 @@
 package no.hvl.dat109.spring.service;
 
 
+import no.hvl.dat109.spring.beans.UserGroupBean;
 import no.hvl.dat109.spring.repository.UserGroupRepository;
 import no.hvl.dat109.spring.service.Interfaces.IUserGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +18,10 @@ public class UserGroupService implements IUserGroupService {
 
         userGroupRepository.findAll().forEach(System.out::println);
         return "";
+    }
+
+    @Override
+    public UserGroupBean getUsergroupById(int id) {
+        return userGroupRepository.findById(id).orElse(null);
     }
 }

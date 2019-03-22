@@ -4,6 +4,8 @@ import no.hvl.dat109.spring.beans.ProsjektBean;
 
 import java.io.File;
 
+import static no.hvl.dat109.prosjekt.Processing.getImagePath;
+
 public class FileHandler {
 
     /**
@@ -13,15 +15,18 @@ public class FileHandler {
      */
     public static void removeProject(ProsjektBean prosjekt) {
         //Find path to project folder
-        File projectFolder = new File(FilePaths.PROJECT_PATH + prosjekt.getProsjektnavn());
+        File projectFolder = new File(Paths.PROJECT_PATH + prosjekt.getProsjektnavn());
 
         //If it is a directory then purge it
-        if (projectFolder.isDirectory())
+        if (projectFolder.isDirectory()) {
             purgeFolder(projectFolder);
-
+            //Delete the folder itself when all others are gone
+            boolean done = projectFolder.delete();
+            System.out.printf("Prosjekt mappe: %s ble slettet: %s\n", prosjekt.getProsjektnavn(), done);
+        } else {
             //If it is not working then print error
-        else
             System.err.println("Error removing project. Folder is probably missing");
+        }
     }
 
     /**
@@ -48,11 +53,17 @@ public class FileHandler {
         }
     }
 
+    public static void removeProjectQrCode(ProsjektBean prosjektBean) {
+        File file = new File(Paths.PROJECT_PATH + getImagePath(prosjektBean));
+        if (file.delete()) System.out.println("Managed to delete QR code");
+        else System.out.println("Qr code does not exist!");
+    }
+
     /**
      * Delete all project folders from disk
      */
     public static void removeAllProjects() {
-        File projectFolder = new File(FilePaths.PROJECT_PATH);
+        File projectFolder = new File(Paths.PROJECT_PATH);
         if (projectFolder.isDirectory())
             purgeFolder(projectFolder);
     }
