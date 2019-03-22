@@ -1,5 +1,6 @@
 package no.hvl.dat109.spring.controller;
 
+import no.hvl.dat109.prosjekt.EmailUtil;
 import no.hvl.dat109.prosjekt.FileHandler;
 import no.hvl.dat109.spring.beans.*;
 import no.hvl.dat109.spring.service.Interfaces.*;
@@ -95,10 +96,6 @@ public class ProsjektController {
             return "error";
         }
 
-        if (prosjekt.erEigerAvProsjekt(user)) {
-            return "redirect:/dashboard";
-        }
-
         // Guess who's back, back again
         // Bedrift boyy is back, tell a friend
         //System.out.println(prosjekt.getSammarbeidsbedrift() + " THIS IS BEDRIFT BOYYY🔥");
@@ -139,10 +136,13 @@ public class ProsjektController {
         ProsjektBean prosjekt = new ProsjektBean(prosjektnavn, prosjektbeskrivelse, bedrift, studie, user);
         prosjektService.addProsjekt(prosjekt);
 
+        //Send email with password
+        sendEmail(email, user);
+
         //Etter prosjektet er laget kan kan vi danne qr bilde link
         setQrLink(prosjekt);
 
-        session.setAttribute("email", email);
+        session.setAttribute("epost", email);
         session.setAttribute("user", user);
 
         //TODO SEND PASSORD TIL USER PÅ EMAIL
@@ -163,7 +163,7 @@ public class ProsjektController {
 
         //Fjern session attributter
         session.removeAttribute("user");
-        session.removeAttribute("email");
+        session.removeAttribute("epost");
         return "redirect:/index";
     }
 
@@ -173,6 +173,23 @@ public class ProsjektController {
         return "index";
     }
 
+    /**
+     * Send email with login info for stand user
+     *
+     * @param email email of user
+     * @param user  user with username and password
+     */
+    private void sendEmail(String email, UsersBean user) {
+        String messagebody = String.format("Username: %s\nPassword: %s", user.getUsername(), user.getPassword());
+        Thread thread = new Thread(() -> EmailUtil.sendEmail(email, messagebody));
+        thread.start();
+    }
+
+    /**
+     * Sets the QR link to the database
+     *
+     * @param prosjekt prosjekt to set the qr link to
+     */
     private void setQrLink(ProsjektBean prosjekt) {
         prosjekt.setShortenedurl(generateShortlink(prosjekt));
         prosjekt.setQrimagepath(getProjectImagePath(prosjekt));
