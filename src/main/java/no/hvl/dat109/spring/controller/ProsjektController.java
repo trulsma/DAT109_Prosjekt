@@ -60,7 +60,7 @@ public class ProsjektController {
             return "error";
         }
 
-        model.addAttribute("qrfil", getProjectImagePath(prosjekt));
+        model.addAttribute("prosjekt", prosjekt);
 
         return "standpages/qrkode";
     }
@@ -103,7 +103,7 @@ public class ProsjektController {
         model.addAttribute("samarbeidspartner", prosjekt.getSammarbeidsbedrift());
         model.addAttribute("prosjekt", prosjekt);
 
-        return "standpages/prosjekt";
+        return "userpages/stand";
     }
 
     @GetMapping("/prosjekt/add")
