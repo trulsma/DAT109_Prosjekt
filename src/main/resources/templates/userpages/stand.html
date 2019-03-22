@@ -1,11 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Stand</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 </head>
 <body>
-<h1>Dette er plasse hvor folk skal stemme. Her du kommer om du scanner en qr kode</h1>
-<p>Lagt inn i prosjekt at en kan ha et bilde / plakat som skal vises på siden også sammen med beskrivels osv</p>
+<form action="/stem" method="post">
+    <h1 class="title" th:inline="text">Navn: [[${prosjekt.prosjektnavn}]]</h1>
+    <h1 class="underTitle" th:inline="text">Beskrivelse: [[${prosjekt.prosjektbeskrivelse}]]</h1>
+    <h1 class="underTitle" th:inline="text">Partner: [[${samarbeidspartner.bedriftnavn}]]</h1>
+
+    <p>Avgi stemme</p>
+    <p>
+        <input type="radio" name="verdi" value="0"/> 0<span class="space"></span>
+        <input type="radio" name="verdi" value="1"/> 1<span class="space"></span>
+        <input type="radio" name="verdi" value="2"/> 2<span class="space"></span>
+        <input type="radio" name="verdi" value="3" checked/> 3<span class="space"></span>
+        <input type="radio" name="verdi" value="4"/> 4<span class="space"></span>
+        <input type="radio" name="verdi" value="5"/> 5
+    </p>
+    <input type="hidden" name="prosjektid" th:value="${prosjekt.prosjektid}">
+    <input type="hidden" name="epost" th:Value="${session.epost}">
+    <p><input type="submit" value="Registrer stemme"/></p>
+</form>
 </body>
 </html>
