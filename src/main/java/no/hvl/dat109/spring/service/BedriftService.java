@@ -37,9 +37,12 @@ public class BedriftService implements IBedriftService {
 
     @Override
     public void updateBedriftNavn(BedriftBean bedrift, String nyttNavn) {
-        for(BedriftBean b : bedriftRepository.findAll()){
-            if(b.getBedriftnavn().equals(bedrift.getBedriftnavn())) b.setBedriftnavn(nyttNavn);
-        }
+        BedriftBean b = bedriftRepository.findById(bedrift.getBedriftid()).orElse(null);
+        if (b == null) return;
+        b.setBedriftnavn(nyttNavn);
+        bedriftRepository.save(b);
+
+
     }
 
     @Override
