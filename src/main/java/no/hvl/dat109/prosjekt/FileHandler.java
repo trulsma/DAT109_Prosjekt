@@ -1,8 +1,13 @@
 package no.hvl.dat109.prosjekt;
 
 import no.hvl.dat109.spring.beans.ProsjektBean;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static no.hvl.dat109.prosjekt.Processing.getImagePath;
 
@@ -66,5 +71,30 @@ public class FileHandler {
         File projectFolder = new File(ProsjektPaths.PROJECT_PATH);
         if (projectFolder.isDirectory())
             purgeFolder(projectFolder);
+    }
+
+    public static String createLogoImage(MultipartFile logo, ProsjektBean prosjekt) {
+        String output = ProsjektPaths.PROJECT_PATH + prosjekt.getProsjektnavn() + "/images/logo_" +
+                logo.getOriginalFilename().replaceAll(" ", "_");
+        createPicture(logo, output);
+        return output;
+    }
+
+    public static String createBackgroundImage(MultipartFile logo, ProsjektBean prosjekt) {
+        String output = ProsjektPaths.PROJECT_PATH + prosjekt.getProsjektnavn() + "/images/background_" +
+                logo.getOriginalFilename().replaceAll(" ", "_");
+        createPicture(logo, output);
+        return output;
+    }
+
+    private static void createPicture(MultipartFile file, String outputPath) {
+        try {
+            // Get the file and save it somewhere
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(outputPath);
+            Files.write(path, bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

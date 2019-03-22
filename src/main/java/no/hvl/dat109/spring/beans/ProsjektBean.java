@@ -18,6 +18,7 @@ public class ProsjektBean implements Serializable {
     private String shortenedurl;
     private String qrimagepath;
     private String pictureurl;
+    private String backgroundurl;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "studie")
@@ -98,6 +99,14 @@ public class ProsjektBean implements Serializable {
 
     public void setPictureurl(String pictureurl) {
         this.pictureurl = pictureurl;
+    }
+
+    public String getBackgroundurl() {
+        return backgroundurl;
+    }
+
+    public void setBackgroundurl(String backgroundurl) {
+        this.backgroundurl = backgroundurl;
     }
 
     public StudieBean getStudieKategori() {
