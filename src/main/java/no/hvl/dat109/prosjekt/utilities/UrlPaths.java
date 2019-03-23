@@ -64,6 +64,8 @@ public class UrlPaths {
             LOGIN_HTML = "login",
             USER_LOGIN = "/user/login",
             USER_LOGIN_HTML = "userLogin",
+            LOGGED_IN_HTML = "loggedinIndex",
+            INDEX = "/",
             STEM = "/stem",
             MINE_STEMMER = "/mine_stemmer",
             ADMIN_INDEX = "/adminindex",

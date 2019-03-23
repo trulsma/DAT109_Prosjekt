@@ -11,6 +11,10 @@ public interface IUsersService {
 
     UsersBean getUserByName(String username);
 
+    UsersBean validUser(String username, String password);
+
+    void createVoterUser(String username);
+
     void removeUser(UsersBean user);
 
     UsersBean getUserById(int id);

@@ -1,6 +1,7 @@
 package no.hvl.dat109.spring.controller;
 
 import no.hvl.dat109.prosjekt.utilities.UrlPaths;
+import no.hvl.dat109.spring.beans.UsersBean;
 import no.hvl.dat109.spring.service.Interfaces.IUserGroupService;
 import no.hvl.dat109.spring.service.Interfaces.IUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +31,27 @@ public class LoginController {
     @PostMapping(UrlPaths.LOGIN)
     String loginUser(@RequestParam String epost, HttpSession session) {
 
+        //Create user from the posted epost
+        UsersBean user = usersService.getUserByName(epost);
+        if (user == null) return "redirect:" + UrlPaths.LOGIN_HTML; //TODO CREATE ERROR WHEN USER NOT FOUND
 
-
-        return UrlPaths.INDEX_HTML;
+        //Add the user to session and go back to index page
+        session.setAttribute("user", user);
+        return "redirect:" + UrlPaths.INDEX_HTML;
     }
 
     @GetMapping(UrlPaths.USER_LOGIN)
     String userLogin() {
         //Login for stand users and admin
         return UrlPaths.USER_LOGIN_HTML;
+    }
+
+    @PostMapping(UrlPaths.USER_LOGIN)
+    String postUserLogin(@RequestParam String epost, @RequestParam String passord, HttpSession session, Model model) {
+
+        UsersBean user = usersService.validUser(epost, passord);
+        if (user == null) return "redirect:" + UrlPaths.USER_LOGIN; //TODO CRETE ERROR WHEN NOT FOUND
+        session.setAttribute("user", user);
+        return "redirect:" + UrlPaths.INDEX;
     }
 }

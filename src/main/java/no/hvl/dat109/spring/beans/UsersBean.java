@@ -17,14 +17,20 @@ public class UsersBean {
 
     private boolean expired;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usergroup")
     private UserGroupBean userGroup;
 
-    @OneToMany(mappedBy = "prosjektEiger")
+    @OneToMany(mappedBy = "prosjektEiger", fetch = FetchType.LAZY)
     private List<ProsjektBean> prosjekter;
 
     public UsersBean() {
+    }
+
+    public UsersBean(String username, UserGroupBean groupBean) {
+        this.username = username;
+        this.password = "NO-PASSWORD";
+        this.userGroup = groupBean;
     }
 
     public UsersBean(String username, String password, UserGroupBean userGroup) {
@@ -81,6 +87,10 @@ public class UsersBean {
         this.expired = expired;
     }
 
+    public int getUsergroupLevel() {
+        return userGroup.getGrouplevel();
+    }
+
     @Override
     public String toString() {
         return "UsersBean{" +
@@ -88,8 +98,7 @@ public class UsersBean {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", expired=" + expired +
-                ", userGroup=" + userGroup +
-                ", prosjekter=" + prosjekter +
+                ", usergroup=" + userGroup.getGrouplevel() +
                 '}';
     }
 }
