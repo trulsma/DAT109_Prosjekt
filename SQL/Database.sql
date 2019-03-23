@@ -15,8 +15,9 @@ CREATE TABLE Users
   userid    SERIAL,
   username  VARCHAR(255),
   password  VARCHAR(255),
-  usergroup INTEGER,
+  usergroup INTEGER NOT NULL DEFAULT 3,
   expired   BOOLEAN,
+  ipadress  VARCHAR(50),
   CONSTRAINT userPK PRIMARY KEY (userid),
   CONSTRAINT userGroupFK FOREIGN KEY (usergroup) REFERENCES Usergroup (groupid)
 );
@@ -111,8 +112,8 @@ INSERT INTO Usergroup (groupname, grouplevel)
 VALUES ('Admin', 1),
        ('Stand', 2),
        ('User', 3);
-INSERT INTO Users (username, password, usergroup)
-VALUES ('admin', 'admin', 1);
+INSERT INTO Users (username, password, usergroup, expired)
+VALUES ('admin', 'admin', 1, false);
 INSERT INTO Bedrift (bedriftnavn, bedriftbeskrivelse)
 VALUES ('HVL', 'Høgskolen på Vestlandet');
 INSERT INTO StemmeMetode (metodenavn, metodeparameter)
@@ -184,7 +185,9 @@ INSERT INTO Prosjekt (prosjektnavn,
                       sammarbeidsbedrift,
                       shortenedurl,
                       qrimagepath,
-                      pictureurl)
-VALUES ('Prosjekt navn', 'Beskrivelse', 1, 1, 'short url', 'qr path', 'picture url');
+                      pictureurl,
+                      backgroundurl,
+                      prosjektuser)
+VALUES ('Prosjekt navn', 'Beskrivelse', 1, 1, 'short url', 'qr path', 'picture url', 'background', 1);
 INSERT INTO ArrangementDeltagelse (arrangement, prosjekt)
 VALUES (1, 1);
