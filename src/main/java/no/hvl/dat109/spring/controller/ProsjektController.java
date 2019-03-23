@@ -2,23 +2,19 @@ package no.hvl.dat109.spring.controller;
 
 import no.hvl.dat109.prosjekt.utilities.EmailUtil;
 import no.hvl.dat109.prosjekt.handlers.FileHandler;
+import no.hvl.dat109.prosjekt.utilities.UrlPaths;
 import no.hvl.dat109.prosjekt.utilities.Utilities;
 import no.hvl.dat109.spring.beans.*;
 import no.hvl.dat109.spring.service.Interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
 import static no.hvl.dat109.prosjekt.handlers.FileHandler.removeProjectQrCode;
-import static no.hvl.dat109.prosjekt.handlers.Processing.generateShortlink;
-import static no.hvl.dat109.prosjekt.handlers.Processing.getFullQRImagePath;
-import static no.hvl.dat109.prosjekt.utilities.Utilities.checkPassword;
+import static no.hvl.dat109.prosjekt.handlers.Processing.*;
 
 @Controller
 public class ProsjektController {
@@ -50,27 +46,27 @@ public class ProsjektController {
         return "adminpages/prosjekter.html";
     }
 
-    @GetMapping("/prosjekt/{id}/qr")
+    @GetMapping(UrlPaths.SHOW_QR)
     String getProsjektQR(@PathVariable("id") int id, Model model) {
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
 
         if (prosjekt == null) {
-            return "error";
+            return UrlPaths.ERRORPAGE;
         }
 
         model.addAttribute("prosjekt", prosjekt);
 
-        return "standpages/qrkode";
+        return UrlPaths.STAND_QR_HTML;
     }
 
-    @GetMapping("/prosjekt/{id}/qr/create")
+    @GetMapping(UrlPaths.CREATE_QR_IMAGE)
     String createProsjektQR(@PathVariable("id") int id) {
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
 
         if (prosjekt == null) {
-            return "error";
+            return UrlPaths.ERRORPAGE;
         }
 
         //Denne koden kjører av en eller annen merkelig grunn når jeg faktisk bare skriver linken inn i nettleser #spooky
@@ -81,7 +77,7 @@ public class ProsjektController {
         return "redirect:/prosjekt/" + id + "/qr";
     }
 
-    @GetMapping("/prosjekt/{id}")
+    @GetMapping(UrlPaths.PROJECT_WITH_ID)
     String getProsjektById(@PathVariable("id") int id, Model model, HttpSession session) {
 
         if (session.getAttribute("epost") == null) {
@@ -92,7 +88,7 @@ public class ProsjektController {
         UsersBean user = (UsersBean) session.getAttribute("user");
 
         if (prosjekt == null) {
-            return "error";
+            return UrlPaths.ERRORPAGE;
         }
 
         // Guess who's back, back again
@@ -102,10 +98,10 @@ public class ProsjektController {
         model.addAttribute("samarbeidspartner", prosjekt.getSammarbeidsbedrift());
         model.addAttribute("prosjekt", prosjekt);
 
-        return "userpages/stand";
+        return UrlPaths.STAND_HTML;
     }
 
-    @GetMapping("/prosjekt/add")
+    @GetMapping(UrlPaths.ADD_PROSJEKT)
     String addProsjekt(Model model) {
         model.addAttribute("kategorier", kategoriService.getAllKategorier());
         model.addAttribute("bedrifter", bedriftService.getAlleBedrifter());
@@ -145,12 +141,10 @@ public class ProsjektController {
         session.setAttribute("epost", email);
         session.setAttribute("user", user);
 
-        //TODO SEND PASSORD TIL USER PÅ EMAIL
-
         return "redirect:/prosjekt/" + prosjekt.getProsjektid();
     }
 
-    @GetMapping("/prosjekt/{id}/remove")
+    @PostMapping("/prosjekt/{id}/remove")
     String removeProject(@PathVariable("id") int id, HttpSession session) {
         //Finn prosjektet
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
@@ -174,13 +168,13 @@ public class ProsjektController {
     }
 
     /**
-     * Send email with login info for stand user
+     * Send email with login info for STAND_HTML user
      *
      * @param email email of user
      * @param user  user with username and password
      */
     private void sendEmail(String email, UsersBean user, String password) {
-        String messagebody = String.format("Username: %s\nPasswordHasher: %s", user.getUsername(), password);
+        String messagebody = String.format("Username: %s\nPassword: %s", user.getUsername(), password);
         Thread thread = new Thread(() -> EmailUtil.sendEmail(email, messagebody));
         thread.start();
     }
@@ -192,7 +186,7 @@ public class ProsjektController {
      */
     private void setQrLink(ProsjektBean prosjekt) {
         prosjekt.setShortenedurl(generateShortlink(prosjekt));
-        prosjekt.setQrimagepath(getFullQRImagePath(prosjekt));
+        prosjekt.setQrimagepath(getRelativeProjectQRCode(prosjekt));
         prosjektService.updateProsjekt(prosjekt);
     }
 }

@@ -17,8 +17,6 @@ public class UploadController {
 
     @Autowired
     private IProsjektService prosjektService;
-    //Save the uploaded file to this folder
-    private static String UPLOADED_FOLDER = ProsjektPaths.MAIN_PATH;
 
     @GetMapping("/prosjekt/{id}/upload")
     public String index(@PathVariable("id") int id, Model model) {
@@ -28,8 +26,8 @@ public class UploadController {
     }
 
     @PostMapping("prosjekt/{id}/upload") // //new annotation since 4.3
-    public String singleFileUpload(@RequestParam("background") MultipartFile background,
-                                   @RequestParam("logo") MultipartFile logo,
+    public String singleFileUpload(@RequestParam(value = "background", required = false) MultipartFile background,
+                                   @RequestParam(value = "logo", required = false) MultipartFile logo,
                                    @PathVariable("id") int id) {
 
         String backgroundPath = "", logoPath = "";
@@ -47,7 +45,7 @@ public class UploadController {
         if (!backgroundPath.equals(""))
             prosjektService.updateBackgroundPath(prosjekt, backgroundPath);
 
-        return "redirect:/";
+        return "redirect:/prosjekt/" + id;
     }
 
 

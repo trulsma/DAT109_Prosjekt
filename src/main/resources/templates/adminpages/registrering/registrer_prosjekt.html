@@ -36,7 +36,7 @@
         Velg din sammarbeidspartner:
         <select form="thisisform" name="samarbeidspartner">
             <option th:each="bedrift: ${bedrifter}"
-                    th:value="${bedrift.bedriftid}"
+                    th:value="${bedrift.BEDRIFT_WITH_ID}"
                     th:name="${bedrift.bedriftnavn}"
                     th:text="${bedrift.bedriftnavn}">
             </option>

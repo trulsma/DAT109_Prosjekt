@@ -30,7 +30,7 @@ public class FileHandler {
             boolean done = projectFolder.delete();
             System.out.printf("Prosjekt mappe: %s ble slettet: %s\n", prosjekt.getProsjektnavn(), done);
         } else {
-            //If it is not working then print error
+            //If it is not working then print ERRORPAGE
             System.err.println("Error removing project. Folder is probably missing");
         }
     }

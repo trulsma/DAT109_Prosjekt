@@ -79,7 +79,7 @@ public class ArrangementBean {
     @Override
     public String toString() {
         return "ArrangementBean{" +
-                "arrangementid=" + arrangementid +
+                "ARRANGEMENT_WITH_ID=" + arrangementid +
                 ", arrangementnavn='" + arrangementnavn + '\'' +
                 ", arrangementbeskrivelse='" + arrangementbeskrivelse + '\'' +
                 ", arragementetutgaar=" + arragementetutgaar +

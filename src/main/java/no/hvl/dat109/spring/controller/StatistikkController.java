@@ -31,7 +31,7 @@ public class StatistikkController {
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
 
         if (prosjekt == null) {
-            return "error";
+            return "ERRORPAGE";
         }
 
         model.addAttribute("id", prosjekt.getProsjektid());
@@ -44,7 +44,7 @@ public class StatistikkController {
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
 
         if (prosjekt == null) {
-            return "error";
+            return "ERRORPAGE";
         }
 
         model.addAttribute("prosjekt", prosjekt);

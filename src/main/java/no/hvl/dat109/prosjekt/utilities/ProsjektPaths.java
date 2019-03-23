@@ -8,5 +8,6 @@ public class ProsjektPaths {
     public static final String IMAGES_PATH = MAIN_PATH + "images/";
     public static final String RELATIVE_IMAGE_PATH = "images/";
     public static final String RELATIVE_PROJECT_PATH = "projects/";
+    public static final String RELATIVE_PROJECT_IMAGE_PATH = RELATIVE_PROJECT_PATH + "images/";
 
 }

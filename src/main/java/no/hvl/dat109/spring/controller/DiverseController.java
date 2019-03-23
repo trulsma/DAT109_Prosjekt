@@ -31,9 +31,9 @@ public class DiverseController {
         return "redirect:" + redirect_url;
     }
 
-    @GetMapping("/kontakt")
+    @GetMapping("/KONTAKT_HTML")
     String getKontakt(){
-        return "userpages/kontakt.html";
+        return "userpages/KONTAKT_HTML.html";
     }
 
     @GetMapping("/admin_login")

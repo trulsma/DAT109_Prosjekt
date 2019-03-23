@@ -52,7 +52,7 @@ public class Processing {
      */
     private static void createQRImage(ProsjektBean prosjekt, String shortenedLink) {
         //Pathen til resource mappen
-        String dir = RELATIVE_PROJECT_PATH + prosjekt.getProsjektnavn() + "/images/";
+        String dir = PROJECT_PATH + prosjekt.getProsjektnavn() + "/images/";
         File directory = new File(dir);
 
         //If directory exists then we can create, or try to make directory
@@ -114,6 +114,17 @@ public class Processing {
     }
 
     /**
+     * Get relative qr code image path for database
+     * Ex: projects/[projectname]/images/qrfile.png
+     *
+     * @param prosjekt prosjekt you want the qr code for
+     * @return qrimage path relative to project
+     */
+    public static String getRelativeProjectQRCode(ProsjektBean prosjekt) {
+        return RELATIVE_PROJECT_PATH + prosjekt.getProsjektnavn() + "/images/" + qrImageFileName(prosjekt);
+    }
+
+    /**
      * Get relative path to images from a project
      * Ex: projects/Prosjekt navn/images/
      *
@@ -121,6 +132,6 @@ public class Processing {
      * @return relative imagepath often used in database
      */
     public static String getRelativeProjectImagePath(ProsjektBean prosjektBean) {
-        return RELATIVE_IMAGE_PATH + prosjektBean.getProsjektnavn() + "/images/";
+        return RELATIVE_PROJECT_PATH + prosjektBean.getProsjektnavn() + "/images/";
     }
 }
