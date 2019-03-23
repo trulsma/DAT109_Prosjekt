@@ -32,7 +32,6 @@ public class DiverseController {
         return "redirect:" + redirect_url;
     }
 
-
     @GetMapping(UrlPaths.INDEX)
     String loggedInIndex(HttpSession session, Model model) {
 

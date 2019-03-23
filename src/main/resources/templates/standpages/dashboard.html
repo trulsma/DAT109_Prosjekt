@@ -3,11 +3,13 @@
 <style type="text/css" id="dark-mode-custom-style"></style>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title th:text="${prosjekt.prosjektnavn}"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
 
-    <title th:text="${prosjekt.prosjektnavn}"></title>
-
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="../../css/main.css">
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -56,7 +58,7 @@
     <input class="form-control form-control-dark w-80" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Sign out</a>
+            <a class="nav-link" href="/logout">Sign out</a>
         </li>
     </ul>
 </nav>
@@ -73,13 +75,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#editName">
                             <i class="fa fa-edit"></i>
                             Endre navn
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#editBeskrivelse">
                             <i class="fa fa-edit"></i>
                             Endre beskrivelse
                         </a>
@@ -91,7 +93,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-danger" href="#">
+                        <a class="nav-link text-danger" data-toggle="modal" data-target="#removeProject">
                             <i class="fa fa-trash"></i>
                             Slett prosjekt
                         </a>
@@ -137,6 +139,93 @@
 
 
         </main>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="editName" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="display-10">Gi et nytt navn på prosjektet</h1>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form th:action="@{'/prosjekt/' + ${prosjekt.prosjektid} + '/endrenavn'}" method="post">
+                    <div class="modal-body">
+
+                        <label for="prosjektnavn" class="sr-only">Prosjektnavn</label>
+                        <input type="text" id="prosjektnavn" class="form-control" name="prosjektnavn"
+                               placeholder="Nytt navn"
+                               required="" autofocus="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="editBeskrivelse" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="display-10">Endre prosjektbeskrivelse</h1>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form th:action="@{'/prosjekt/' + ${prosjekt.prosjektid} + '/endrebeskrivelse'}" method="post">
+                    <div class="modal-body">
+
+                        <label for="beskrivelse" class="sr-only">Beskrivelse</label>
+                        <input type="text" id="beskrivelse" class="form-control" name="beskrivelse"
+                               placeholder="Ny beskrivelse"
+                               required="" autofocus="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit">Save</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="removeProject" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="display-10">Slett prosjekt</h1>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form th:action="@{'/prosjekt/' + ${prosjekt.prosjektid} + '/remove'}" method="post">
+                    <div class="modal-body">
+
+                       <p>Er du sikker på du vil slette prosjektet?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn-danger">Ja</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Nei</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
     </div>
 </div>
 

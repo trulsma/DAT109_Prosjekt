@@ -75,6 +75,18 @@ public class ProsjektService implements IProsjektService {
     }
 
     @Override
+    public void changeNameOfProject(ProsjektBean prosjekt, String newName) {
+        prosjekt.setProsjektnavn(newName);
+        prosjektRepository.save(prosjekt);
+    }
+
+    @Override
+    public void changeBeskrivelse(ProsjektBean prosjekt, String beskrivelse) {
+        prosjekt.setProsjektbeskrivelse(beskrivelse);
+        prosjektRepository.save(prosjekt);
+    }
+
+    @Override
     public void updatePicturePath(ProsjektBean prosjekt, String path) {
         ProsjektBean prosjektBean = prosjektRepository.findById(prosjekt.getProsjektid()).orElse(null);
         if (prosjektBean == null) return;

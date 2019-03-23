@@ -32,6 +32,7 @@ public class StemmeController {
     private IProsjektService prosjektService;
 
 
+    /*
     @GetMapping(UrlPaths.API_PROSJEKTER_STEMMER)
     ResponseEntity<?> getStemmerForProsjekt(@PathVariable("id") int id,
                                             @RequestParam(required = false) Integer steps) {
@@ -47,6 +48,8 @@ public class StemmeController {
     }
 
     @GetMapping(UrlPaths.API_PROSJEKTER_STEMMER)
+     */
+        /*
     ResponseEntity<?> getStemmerForAlleProsjekt(@RequestParam(required = false) String order, @RequestParam(required = false) Integer limit) {
         Iterable<ProsjektBean> prosjekter = prosjektService.getAlleProsjekter();
 
@@ -54,7 +57,6 @@ public class StemmeController {
 
         prosjekter.forEach(prosjektListe::add);
 
-        /*
         List<ProsjektMedStemmerBean> prosjekterMedStemmer = prosjektListe.stream().map(prosjekt ->
                 new ProsjektMedStemmerBean(prosjekt.getProsjektid(),
                         prosjekt.getProsjektnavn(),
@@ -75,13 +77,13 @@ public class StemmeController {
         }
 
         return ResponseEntity.ok().body(prosjekterMedStemmer);
-        */
         return ResponseEntity.badRequest().body("meg vere sjuk og ikke bra nå");
     }
+        */
 
     @GetMapping(UrlPaths.MINE_STEMMER)
     public String visMineStemmer(HttpSession session, Model model) {
-        String epost = (String) session.getAttribute("epost");
+        /*String epost = (String) session.getAttribute("epost");
 
         if (epost == null) {
             return "redirect:" + UrlPaths.REGISTRER_DEG_HTML + "?redirect_url=mine_stemmer";
@@ -96,6 +98,7 @@ public class StemmeController {
         stemmerListe = stemmerListe.stream().filter(a -> a.getEpost().equals(epost)).collect(Collectors.toList());
 
         model.addAttribute("stemmer", stemmerListe);
+        */
 
         return UrlPaths.MINE_STEMMER_HTML;
     }

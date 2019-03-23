@@ -24,6 +24,10 @@ public interface IProsjektService {
 
     ProsjektBean getProsjektFromOwner(UsersBean user);
 
+    void changeNameOfProject(ProsjektBean prosjekt, String newname);
+
+    void changeBeskrivelse(ProsjektBean prosjekt, String beskrivelse);
+
     void updatePicturePath(ProsjektBean prosjekt, String path);
 
     void updateBackgroundPath(ProsjektBean prosjekt, String path);

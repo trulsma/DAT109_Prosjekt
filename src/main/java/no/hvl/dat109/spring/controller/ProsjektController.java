@@ -77,7 +77,7 @@ public class ProsjektController {
         return "redirect:" + UrlPaths.BASE_PROSJEKT + id + "/qr";
     }
 
-    @GetMapping(UrlPaths.PROJECT_WITH_ID)
+    @GetMapping(UrlPaths.PROSJEKT_WITH_ID)
     String getProsjektById(@PathVariable("id") int id, Model model, HttpSession session) {
 
         if (session.getAttribute("epost") == null) {
@@ -144,8 +144,25 @@ public class ProsjektController {
         return "redirect:" + UrlPaths.BASE_PROSJEKT + "/" + prosjekt.getProsjektid();
     }
 
+    @PostMapping(UrlPaths.PROSJEKT_ENDRE_NAVN)
+    String editName(@PathVariable("id") int id, @RequestParam String prosjektnavn) {
+        //TODO SJEKK OM NAVN ENDRINGEN BLIR ENDRET AV EIGER / ADMIN
+        ProsjektBean prosjekt = prosjektService.getProsjektById(id);
+        prosjektService.changeNameOfProject(prosjekt, prosjektnavn);
+        return "redirect:" + UrlPaths.PROSJEKT_DASHBOARD;
+    }
+
+    @PostMapping(UrlPaths.PROSJEKT_ENDRE_BESKRIVELSE)
+    String endreBeskrivelse(@PathVariable("id") int id, @RequestParam String beskrivelse) {
+        //TODO SJEKK OM BESKRIVELSEN BLIR ENDRET AV EIGER / ADMIN
+        ProsjektBean prosjekt = prosjektService.getProsjektById(id);
+        prosjektService.changeBeskrivelse(prosjekt, beskrivelse);
+        return "redirect:" + UrlPaths.PROSJEKT_DASHBOARD;
+    }
+
     @PostMapping(UrlPaths.REMOVE_PROSJEKT)
     String removeProject(@PathVariable("id") int id, HttpSession session) {
+        //TODO SJEKK OM PROSJEKTET BLIR SLETTET AV EIGER / ADMIN
         //Finn prosjektet
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
         //Slett alle prosjektfiler
@@ -163,6 +180,7 @@ public class ProsjektController {
 
     @GetMapping(UrlPaths.REMOVE_ALL_PROSJEKT_FILES)
     String removeAllProsjektFiles() {
+        //TODO SJEKK OM ADMIN UTFØRER OPERASJONEN
         FileHandler.removeAllProjects();
         return "redirect:" + UrlPaths.INDEX;
     }

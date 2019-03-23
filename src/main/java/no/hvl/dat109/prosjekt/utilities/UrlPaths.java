@@ -23,13 +23,15 @@ public class UrlPaths {
     //Prosjekt
     public final static String
             BASE_PROSJEKT = "/prosjekt",
-            PROJECT_WITH_ID = BASE_PROSJEKT + "/{id}",
+            PROSJEKT_WITH_ID = BASE_PROSJEKT + "/{id}",
+            PROSJEKT_ENDRE_NAVN = PROSJEKT_WITH_ID + "/endrenavn",
+            PROSJEKT_ENDRE_BESKRIVELSE = PROSJEKT_WITH_ID + "/endrebeskrivelse",
             ADD_PROSJEKT = BASE_PROSJEKT + "/add",
-            PROSJEKT_STATISTIKK = PROJECT_WITH_ID + "/statistikk",
-            SHOW_QR = PROJECT_WITH_ID + "/qr",
+            PROSJEKT_STATISTIKK = PROSJEKT_WITH_ID + "/statistikk",
+            SHOW_QR = PROSJEKT_WITH_ID + "/qr",
             CREATE_QR_IMAGE = SHOW_QR + "/create",
-            REMOVE_PROSJEKT = PROJECT_WITH_ID + "/remove",
-            UPLOAD_PROSJEKT_IMAGES = PROJECT_WITH_ID + "/upload",
+            REMOVE_PROSJEKT = PROSJEKT_WITH_ID + "/remove",
+            UPLOAD_PROSJEKT_IMAGES = PROSJEKT_WITH_ID + "/upload",
             UPLOAD_HTML = "upload.html",
             ALLE_PROSJEKTER = "/prosjekter",
 
