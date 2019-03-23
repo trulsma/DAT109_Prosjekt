@@ -142,7 +142,7 @@ public class ProsjektBean implements Serializable {
     }
 
     public boolean erEigerAvProsjekt(UsersBean user) {
-        if (user == null) return false;
+        if (user == null || this.prosjektEiger == null) return false;
         return this.prosjektEiger.getUserid() == user.getUserid();
     }
     /*

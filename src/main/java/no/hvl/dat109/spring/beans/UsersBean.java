@@ -1,7 +1,5 @@
 package no.hvl.dat109.spring.beans;
 
-import no.hvl.dat109.prosjekt.utilities.Utilities;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -9,11 +7,12 @@ import java.util.List;
 @Table(name = "users", schema = "prosjekt1")
 public class UsersBean {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userid;
 
-    private String username, password;
+    private String username, password, ipadress;
 
     private boolean expired;
 
@@ -21,16 +20,14 @@ public class UsersBean {
     @JoinColumn(name = "usergroup")
     private UserGroupBean userGroup;
 
-    @OneToMany(mappedBy = "prosjektEiger", fetch = FetchType.LAZY)
-    private List<ProsjektBean> prosjekter;
-
     public UsersBean() {
     }
 
-    public UsersBean(String username, UserGroupBean groupBean) {
+    public UsersBean(String username, UserGroupBean groupBean, String ipadres) {
         this.username = username;
         this.password = "NO-PASSWORD";
         this.userGroup = groupBean;
+        this.ipadress = ipadres;
     }
 
     public UsersBean(String username, String password, UserGroupBean userGroup) {
@@ -71,14 +68,6 @@ public class UsersBean {
         this.userGroup = userGroup;
     }
 
-    public List<ProsjektBean> getProsjekter() {
-        return prosjekter;
-    }
-
-    public void setProsjekter(List<ProsjektBean> prosjekter) {
-        this.prosjekter = prosjekter;
-    }
-
     public boolean isExpired() {
         return expired;
     }
@@ -89,6 +78,14 @@ public class UsersBean {
 
     public int getUsergroupLevel() {
         return userGroup.getGrouplevel();
+    }
+
+    public String getIpadress() {
+        return ipadress;
+    }
+
+    public void setIpadress(String ipadress) {
+        this.ipadress = ipadress;
     }
 
     @Override

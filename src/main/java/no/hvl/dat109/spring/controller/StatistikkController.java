@@ -1,5 +1,6 @@
 package no.hvl.dat109.spring.controller;
 
+import no.hvl.dat109.prosjekt.utilities.UrlPaths;
 import no.hvl.dat109.spring.beans.ProsjektBean;
 import no.hvl.dat109.spring.service.Interfaces.IBedriftService;
 import no.hvl.dat109.spring.service.Interfaces.IProsjektService;
@@ -41,11 +42,15 @@ public class StatistikkController {
 
     @GetMapping("/dashboard/{id}")
     String getDashboardForProsjekt(@PathVariable("id") int id, Model model) {
-        ProsjektBean prosjekt = prosjektService.getProsjektById(id);
 
+        if (id == 0)
+            return "redirect:"+UrlPaths.INDEX;
+
+        ProsjektBean prosjekt = prosjektService.getProsjektById(id);
         if (prosjekt == null) {
-            return "ERRORPAGE";
+            return UrlPaths.ERRORPAGE;
         }
+
 
         model.addAttribute("prosjekt", prosjekt);
 

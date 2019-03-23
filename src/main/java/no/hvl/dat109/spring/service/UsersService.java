@@ -56,10 +56,10 @@ public class UsersService implements IUsersService {
     }
 
     @Override
-    public void createVoterUser(String username) {
+    public void createVoterUser(String username, String ipadress) {
         //Create a user with voter usergroup
         UserGroupBean group = userGroupService.getUsergroupById(3);
-        usersRepository.save(new UsersBean(username, group));
+        usersRepository.save(new UsersBean(username, group, ipadress));
     }
 
     @Override
@@ -70,5 +70,23 @@ public class UsersService implements IUsersService {
     @Override
     public UsersBean getUserById(int id) {
         return usersRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public UsersBean getVoterUserByName(String epost) {
+
+        Iterator<UsersBean> allUsers = usersRepository.findAll().iterator();
+
+        UsersBean user = null;
+
+        while (allUsers.hasNext()) {
+            user = allUsers.next();
+            if (user.getUsername().equals(epost) &&
+                    !user.isExpired() &&
+                    user.getPassword().equals("NO-PASSWORD")) {
+                break;
+            }
+        }
+        return user;
     }
 }

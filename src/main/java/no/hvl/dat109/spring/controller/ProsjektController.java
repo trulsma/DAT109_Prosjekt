@@ -105,10 +105,10 @@ public class ProsjektController {
     String addProsjekt(Model model) {
         model.addAttribute("kategorier", kategoriService.getAllKategorier());
         model.addAttribute("bedrifter", bedriftService.getAlleBedrifter());
-        return "adminpages/registrering/registrer_prosjekt";
+        return UrlPaths.REGISTRER_PROSJEKT_HTML;
     }
 
-    @PostMapping("/prosjekt/add")
+    @PostMapping(UrlPaths.ADD_PROSJEKT)
     String addProsjektPostRequest(
             @RequestParam String prosjektnavn,
             @RequestParam String prosjektbeskrivelse,

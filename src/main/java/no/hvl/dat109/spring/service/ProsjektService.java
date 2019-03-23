@@ -2,11 +2,14 @@ package no.hvl.dat109.spring.service;
 
 import no.hvl.dat109.prosjekt.handlers.FileHandler;
 import no.hvl.dat109.spring.beans.ProsjektBean;
+import no.hvl.dat109.spring.beans.UsersBean;
 import no.hvl.dat109.spring.repository.ProsjektRepository;
 import no.hvl.dat109.spring.service.Interfaces.IProsjektService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Iterator;
 
 @Service
 public class ProsjektService implements IProsjektService {
@@ -57,6 +60,18 @@ public class ProsjektService implements IProsjektService {
     public void removeProject(ProsjektBean prosjekt) {
         deltagelseService.removeProsjektFromDeltagelse(prosjekt);
         prosjektRepository.delete(prosjekt);
+    }
+
+    @Override
+    public ProsjektBean getProsjektFromOwner(UsersBean user) {
+        Iterator<ProsjektBean> alleProsjekter = getAlleProsjekter().iterator();
+
+        ProsjektBean prosjekt;
+        while (alleProsjekter.hasNext()) {
+            prosjekt = alleProsjekter.next();
+            if (prosjekt.erEigerAvProsjekt(user)) return prosjekt;
+        }
+        return null;
     }
 
     @Override

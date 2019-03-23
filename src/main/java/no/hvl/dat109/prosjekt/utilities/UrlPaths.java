@@ -50,13 +50,13 @@ public class UrlPaths {
             API_PROSJEKTER_STEMMER = API_PROSJEKTER + "/stemmer";
 
     //admin pages
-    public final static String baseAdminpages = "/adminpages",
-            adminBaseStatistikk = baseAdminpages + "/statistikk",
-            adminStatistikk = adminBaseStatistikk + "/statistikk.html",
-            dashboardAdmin = adminBaseStatistikk + "/dashboard",
-            adminBaseRegistrering = baseAdminpages + "/registrering",
-            REGISTRER_BEDRIFT_HTML = adminBaseRegistrering + "/registrer_bedrift",
-            REGISTRER_PROSJEKT_HTML = adminBaseRegistrering + "/registrer_prosjekt";
+    public final static String ADMINPAGES_BASE = "/adminpages",
+            ADMIN_BASE_STATISTIKK = ADMINPAGES_BASE + "/statistikk",
+            ADMIN_STATISTIKK_HTML = ADMIN_BASE_STATISTIKK + "/statistikk.html",
+            DASHBOARD_ADMIN_HTML = ADMIN_BASE_STATISTIKK + "/dashboard.html",
+            ADMIN_REGISTRERING_BASE = ADMINPAGES_BASE + "/registrering",
+            REGISTRER_BEDRIFT_HTML = ADMIN_REGISTRERING_BASE + "/registrer_bedrift",
+            REGISTRER_PROSJEKT_HTML = ADMIN_REGISTRERING_BASE + "/registrer_prosjekt";
 
     //Misc
     public final static String LOGOUT = "/LOGOUT",
@@ -71,10 +71,11 @@ public class UrlPaths {
             ADMIN_INDEX = "/adminindex",
             INDEX_HTML = "index",
             REGISTRER_DEG = "/registrer_deg",
+            REGISTRER_DEG_HTML = "registrer_deg",
             ALLE_BEDRIFTER = "/bedrifter",
-            ALLE_BEDRIFTER_HTML = baseAdminpages + "/bedrifter",
+            ALLE_BEDRIFTER_HTML = ADMINPAGES_BASE + "/bedrifter",
             baseStatistikk = "/statistikk",
-            ERRORPAGE = "/ERRORPAGE";
+            ERRORPAGE = "error";
 
 }
 

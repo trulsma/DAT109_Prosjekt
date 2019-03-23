@@ -13,9 +13,11 @@ public interface IUsersService {
 
     UsersBean validUser(String username, String password);
 
-    void createVoterUser(String username);
+    void createVoterUser(String username, String ipadress);
 
     void removeUser(UsersBean user);
 
     UsersBean getUserById(int id);
+
+    UsersBean getVoterUserByName(String epost);
 }
