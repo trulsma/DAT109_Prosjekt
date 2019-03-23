@@ -39,11 +39,11 @@ public class ProsjektController {
     @Autowired
     private IUsersService userService;
 
-    @GetMapping("/prosjekter")
+    @GetMapping(UrlPaths.ALLE_PROSJEKTER)
     String getAlleProsjekter(Model model) {
         model.addAttribute("prosjekter", prosjektService.getAlleProsjekter());
 
-        return "adminpages/prosjekter.html";
+        return UrlPaths.ALLE_PROSJEKTER_HTML;
     }
 
     @GetMapping(UrlPaths.SHOW_QR)
@@ -74,14 +74,14 @@ public class ProsjektController {
         setQrLink(prosjekt);
 
         // OBS! serveren kan redirecte før qrkoden bildet er lagret og vil ikke være oppdattert uten er refresh
-        return "redirect:/prosjekt/" + id + "/qr";
+        return "redirect:" + UrlPaths.BASE_PROSJEKT + id + "/qr";
     }
 
     @GetMapping(UrlPaths.PROJECT_WITH_ID)
     String getProsjektById(@PathVariable("id") int id, Model model, HttpSession session) {
 
         if (session.getAttribute("epost") == null) {
-            return "redirect:/registrer_deg?redirect_url=" + "/prosjekt/" + id;
+            return "redirect:" + UrlPaths.REGISTRER_DEG + "?redirect_url=" + "/prosjekt/" + id;
         }
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
@@ -141,10 +141,10 @@ public class ProsjektController {
         session.setAttribute("epost", email);
         session.setAttribute("user", user);
 
-        return "redirect:/prosjekt/" + prosjekt.getProsjektid();
+        return "redirect:" + UrlPaths.BASE_PROSJEKT + "/" + prosjekt.getProsjektid();
     }
 
-    @PostMapping("/prosjekt/{id}/remove")
+    @PostMapping(UrlPaths.REMOVE_PROSJEKT)
     String removeProject(@PathVariable("id") int id, HttpSession session) {
         //Finn prosjektet
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
@@ -158,13 +158,13 @@ public class ProsjektController {
         //Fjern session attributter
         session.removeAttribute("user");
         session.removeAttribute("epost");
-        return "redirect:/index";
+        return "redirect:" + UrlPaths.INDEX;
     }
 
-    @GetMapping("/prosjekter/apocalypse")
+    @GetMapping(UrlPaths.REMOVE_ALL_PROSJEKT_FILES)
     String removeAllProsjektFiles() {
         FileHandler.removeAllProjects();
-        return "index";
+        return "redirect:" + UrlPaths.INDEX;
     }
 
     /**

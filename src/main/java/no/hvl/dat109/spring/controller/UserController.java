@@ -1,5 +1,6 @@
 package no.hvl.dat109.spring.controller;
 
+import no.hvl.dat109.prosjekt.utilities.UrlPaths;
 import no.hvl.dat109.spring.beans.UsersBean;
 import no.hvl.dat109.spring.service.Interfaces.IUsersService;
 import no.hvl.dat109.spring.service.UserGroupService;
@@ -17,21 +18,23 @@ public class UserController {
     @Autowired
     private IUsersService usersService;
 
-    @GetMapping("/login/{id}")
+    @GetMapping(UrlPaths.LOGIN + "/{id}")
     public String logIn(@PathVariable("id") int id, HttpSession session) {
 
         //TODO: MIDLERTIDIG INNLOGGIN FOR SJEKKING
 
         UsersBean user = usersService.getUserById(id);
-        if (user == null) return "index";
+        if (user == null)
+            return "redirect:" + UrlPaths.INDEX;
+
         session.setAttribute("user", user);
-        return "redirect:/prosjekt/" + id;
+        return "redirect:" + UrlPaths.BASE_PROSJEKT + "/" + id;
     }
 
-    @GetMapping("/logout")
+    @GetMapping(UrlPaths.LOGOUT)
     public String logOut(HttpSession session) {
         if (session.getAttribute("user") != null)
             session.removeAttribute("user");
-        return "redirect:/";
+        return "redirect:" + UrlPaths.INDEX;
     }
 }

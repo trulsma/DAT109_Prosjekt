@@ -1,5 +1,6 @@
 package no.hvl.dat109.spring.controller;
 
+import no.hvl.dat109.prosjekt.utilities.UrlPaths;
 import no.hvl.dat109.spring.beans.AnonymStemmeBean;
 import no.hvl.dat109.spring.beans.ProsjektBean;
 import no.hvl.dat109.spring.beans.ProsjektMedStemmerBean;
@@ -31,7 +32,7 @@ public class StemmeController {
     private IProsjektService prosjektService;
 
 
-    @GetMapping("/api/prosjekt/{id}/stemmer")
+    @GetMapping(UrlPaths.API_PROSJEKTER_STEMMER)
     ResponseEntity<?> getStemmerForProsjekt(@PathVariable("id") int id,
                                             @RequestParam(required = false) Integer steps) {
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
@@ -45,7 +46,7 @@ public class StemmeController {
         return ResponseEntity.ok().body("");
     }
 
-    @GetMapping("/api/prosjekter/stemmer")
+    @GetMapping(UrlPaths.API_PROSJEKTER_STEMMER)
     ResponseEntity<?> getStemmerForAlleProsjekt(@RequestParam(required = false) String order, @RequestParam(required = false) Integer limit) {
         Iterable<ProsjektBean> prosjekter = prosjektService.getAlleProsjekter();
 
@@ -78,12 +79,12 @@ public class StemmeController {
         return ResponseEntity.badRequest().body("meg vere sjuk og ikke bra nå");
     }
 
-    @GetMapping("/mine_stemmer")
+    @GetMapping(UrlPaths.MINE_STEMMER)
     public String visMineStemmer(HttpSession session, Model model) {
         String epost = (String) session.getAttribute("epost");
 
         if (epost == null) {
-            return "redirect:/registrer_deg?redirect_url=mine_stemmer";
+            return "redirect:" + UrlPaths.REGISTRER_DEG_HTML + "?redirect_url=mine_stemmer";
         }
 
         Iterable<StemmeBean> stemmer = stemmeService.getAlleStemmer();
@@ -96,28 +97,28 @@ public class StemmeController {
 
         model.addAttribute("stemmer", stemmerListe);
 
-        return "userpages/mine_stemmer";
+        return UrlPaths.MINE_STEMMER_HTML;
     }
 
-    @GetMapping("/stem")
+    @GetMapping(UrlPaths.STEM)
     public String visTakkForStemme() {
-        return "userpages/takk_for_stemme";
+        return UrlPaths.TAKK_FOR_STEMME_HTML;
     }
 
-    @PostMapping("/stem")
+    @PostMapping(UrlPaths.STEM)
     public String stem(@RequestParam int prosjektid, @RequestParam String epost, @RequestParam int verdi) {
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(prosjektid);
 
         if (prosjekt == null) {
-            return "error";
+            return UrlPaths.ERRORPAGE;
         }
 
 
         // TODO: bruke arragemetntdeltagelse
         //stemmeService.addStemme(new StemmeBean(prosjekt, epost, validateVerdi(verdi)));
 
-        return "redirect:/stem";
+        return "redirect:" + UrlPaths.STEM;
     }
 
     /**

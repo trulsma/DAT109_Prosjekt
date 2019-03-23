@@ -21,39 +21,40 @@ public class StatistikkController {
 
 
     //nødvending å gjøre tingene med Model?
-    @GetMapping("/statistikk")
+    @GetMapping(UrlPaths.BASE_STATISTIKK)
     public String getStatistics() {
-        return "adminpages/statistikk/statistikk.html";
+        return UrlPaths.ADMIN_STATISTIKK_HTML;
     }
 
 
-    @GetMapping("/prosjekt/{id}/statistikk")
+    @GetMapping(UrlPaths.PROSJEKT_STATISTIKK)
     String getProsjektStatistikk(@PathVariable("id") int id, Model model) {
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
 
         if (prosjekt == null) {
-            return "ERRORPAGE";
+            return UrlPaths.ERRORPAGE;
         }
 
         model.addAttribute("id", prosjekt.getProsjektid());
 
-        return "standpages/stand_statistikk";
+        return UrlPaths.STAND_STATISTIKK_HTML;
     }
 
-    @GetMapping("/dashboard/{id}")
+    @GetMapping(UrlPaths.PROSJEKT_DASHBOARD)
     String getDashboardForProsjekt(@PathVariable("id") int id, Model model) {
 
-        if (id == 0)
-            return "redirect:"+UrlPaths.INDEX;
+        //This means the owner is not logged in to the project
+        if (id == 0) {
+            return "redirect:" + UrlPaths.INDEX;
+        }
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
         if (prosjekt == null) {
             return UrlPaths.ERRORPAGE;
         }
 
-
         model.addAttribute("prosjekt", prosjekt);
 
-        return "standpages/dashboard";
+        return UrlPaths.STAND_DASHBOARD_HTML;
     }
 }

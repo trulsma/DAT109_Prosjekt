@@ -16,26 +16,34 @@ public class UrlPaths {
             ADD_BEDRIFT = BEDRIFT_BASE + "/add";
 
     //Arrangement
-    public final static String arrangementBase = "/arrangement",
-            ARRANGEMENT_WITH_ID = arrangementBase + "/{id}",
+    public final static String ARRANGEMENT_BASE = "/arrangement",
+            ARRANGEMENT_WITH_ID = ARRANGEMENT_BASE + "/{id}",
             ARRANGEMNT_DELTAGELSE_HTML = "deltagelser";
 
     //Prosjekt
     public final static String
-            baseProsjekt = "/prosjekt",
-            PROJECT_WITH_ID = baseProsjekt + "/{id}",
-            ADD_PROSJEKT = baseProsjekt + "/add",
+            BASE_PROSJEKT = "/prosjekt",
+            PROJECT_WITH_ID = BASE_PROSJEKT + "/{id}",
+            ADD_PROSJEKT = BASE_PROSJEKT + "/add",
             PROSJEKT_STATISTIKK = PROJECT_WITH_ID + "/statistikk",
             SHOW_QR = PROJECT_WITH_ID + "/qr",
             CREATE_QR_IMAGE = SHOW_QR + "/create",
             REMOVE_PROSJEKT = PROJECT_WITH_ID + "/remove",
             UPLOAD_PROSJEKT_IMAGES = PROJECT_WITH_ID + "/upload",
-            prosjekter = "/prosjekter",
-            REMOVE_ALL_PROSJEKT_FILES = prosjekter + "/apocalypse";
+            UPLOAD_HTML = "upload.html",
+            ALLE_PROSJEKTER = "/prosjekter",
+
+
+    REMOVE_ALL_PROSJEKT_FILES = ALLE_PROSJEKTER + "/apocalypse";
 
     //Dashboard
     public final static String DASHBOARD = "/dashboard",
             PROSJEKT_DASHBOARD = DASHBOARD + "/{id}";
+
+    public final static String KATEGORI_BASE = "/kategori",
+            KATEGORI_WITH_ID = KATEGORI_BASE + "/{id}",
+            REMOVE_KATEGORI = KATEGORI_WITH_ID + "/remove",
+            ADD_KATEGORI = KATEGORI_BASE + "/add";
 
     //Stand pages
     public final static String baseStandPages = "/standpages",
@@ -56,10 +64,11 @@ public class UrlPaths {
             DASHBOARD_ADMIN_HTML = ADMIN_BASE_STATISTIKK + "/dashboard.html",
             ADMIN_REGISTRERING_BASE = ADMINPAGES_BASE + "/registrering",
             REGISTRER_BEDRIFT_HTML = ADMIN_REGISTRERING_BASE + "/registrer_bedrift",
-            REGISTRER_PROSJEKT_HTML = ADMIN_REGISTRERING_BASE + "/registrer_prosjekt";
+            REGISTRER_PROSJEKT_HTML = ADMIN_REGISTRERING_BASE + "/registrer_prosjekt",
+            ALLE_PROSJEKTER_HTML = ADMINPAGES_BASE + "/prosjekter.html";
 
     //Misc
-    public final static String LOGOUT = "/LOGOUT",
+    public final static String LOGOUT = "/logout",
             LOGIN = "/login",
             LOGIN_HTML = "login",
             USER_LOGIN = "/user/login",
@@ -74,7 +83,7 @@ public class UrlPaths {
             REGISTRER_DEG_HTML = "registrer_deg",
             ALLE_BEDRIFTER = "/bedrifter",
             ALLE_BEDRIFTER_HTML = ADMINPAGES_BASE + "/bedrifter",
-            baseStatistikk = "/statistikk",
+            BASE_STATISTIKK = "/statistikk",
             ERRORPAGE = "error";
 
 }
