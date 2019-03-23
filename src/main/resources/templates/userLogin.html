@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>Registrer deg</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/registrering.css" rel="stylesheet">
+</head>
+<body class="text-center">
+<form class="form-signin" method="post" action="/user/login">
+    <img class="mb-4" src="/images/hvl.svg" alt="" width="300" height="200">
+    <h1 class="h3 mb-3 font-weight-normal text-white">Logg inn</h1>
+    <label for="inputEmail" class="sr-only">epost</label>
+    <input type="hidden" name="redirect_url" th:value="${redirect_url}">
+    <input type="email" id="inputEmail" class="form-control" name="epost" placeholder="Epost" required="" autofocus="">
+    <input type="password" id="inputPassword" class="form-control" name="passord" placeholder="Passord" required="" autofocus="">
+    <br>
+    <button class="btn btn-lg btn-outline-light btn-block" type="submit">Logg inn</button>
+</form>
+</body>
+</html>

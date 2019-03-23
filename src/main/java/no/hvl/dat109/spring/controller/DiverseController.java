@@ -1,5 +1,6 @@
 package no.hvl.dat109.spring.controller;
 
+import no.hvl.dat109.prosjekt.utilities.UrlPaths;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,9 +32,9 @@ public class DiverseController {
         return "redirect:" + redirect_url;
     }
 
-    @GetMapping("/KONTAKT_HTML")
+    @GetMapping(UrlPaths.BASE_KONTAKT)
     String getKontakt(){
-        return "userpages/KONTAKT_HTML.html";
+        return UrlPaths.KONTAKT_HTML;
     }
 
     @GetMapping("/admin_login")
@@ -55,7 +56,7 @@ public class DiverseController {
     @GetMapping("/registrer_deg")
     String getRegistrerBruker(@RequestParam(required = false) String redirect_url, Model model) {
         if (redirect_url == null) {
-            redirect_url = "/index";
+            redirect_url = "/";
         }
         model.addAttribute("redirect_url", redirect_url);
         return "registrer_deg";

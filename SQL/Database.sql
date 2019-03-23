@@ -14,8 +14,9 @@ CREATE TABLE Users
 (
   userid    SERIAL,
   username  VARCHAR(255),
-  password  VARCHAR(50),
+  password  VARCHAR(255),
   usergroup INTEGER,
+  expired   BOOLEAN,
   CONSTRAINT userPK PRIMARY KEY (userid),
   CONSTRAINT userGroupFK FOREIGN KEY (usergroup) REFERENCES Usergroup (groupid)
 );

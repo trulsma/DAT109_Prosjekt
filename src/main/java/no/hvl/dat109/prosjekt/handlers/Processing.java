@@ -84,7 +84,6 @@ public class Processing {
      * @return bit.ly link
      */
     public static String generateShortBitlyLinkForQR(int prosjektid) {
-        System.out.println(HOST + "prosjekt/" + prosjektid + " URL");
         Url url = as("elprosjekto", "R_eea8a14a9ffe422e8ca79f8b26aabe8a")
                 .call(shorten(HOST + "prosjekt/" + prosjektid));
         return url.getShortUrl();

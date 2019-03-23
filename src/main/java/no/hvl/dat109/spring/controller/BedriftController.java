@@ -1,5 +1,6 @@
 package no.hvl.dat109.spring.controller;
 
+import no.hvl.dat109.prosjekt.utilities.UrlPaths;
 import no.hvl.dat109.spring.beans.BedriftBean;
 import no.hvl.dat109.spring.beans.ProsjektBean;
 import no.hvl.dat109.spring.service.Interfaces.IBedriftService;
@@ -21,29 +22,29 @@ public class BedriftController {
     @Autowired
     private IBedriftService repository;
 
-    @GetMapping("/bedrift/{id}")
+    @GetMapping(UrlPaths.BEDRIFT_WITH_ID)
     public String getBedriftById(@PathVariable("id") int id, Model model) {
         BedriftBean bedrift = repository.getBedriftById(id);
         List<ProsjektBean> prosjektBeanList = bedrift.getProsjekter();
 
         model.addAttribute("bedrift", bedrift);
         model.addAttribute("partof", prosjektBeanList.size());
-        return "userpages/bedrift";
+        return UrlPaths.BEDRIFT_HTML;
     }
 
-    @GetMapping("/bedrifter")
+    @GetMapping(UrlPaths.ALLE_BEDRIFTER)
     String getAlleBedrifter(Model model) {
         model.addAttribute("bedrifter", repository.getAlleBedrifter());
 
-        return "adminpages/bedrifter.html";
+        return UrlPaths.ALLE_BEDRIFTER_HTML;
     }
 
-    @GetMapping("/bedrift/add")
+    @GetMapping(UrlPaths.ADD_BEDRIFT)
     String addBedrift() {
-        return "adminpages/registrering/registrer_bedrift";
+        return UrlPaths.REGISTRER_BEDRIFT_HTML;
     }
 
-    @PostMapping("/bedrift/add")
+    @PostMapping(UrlPaths.ADD_BEDRIFT)
     String addBedriftPostRequest(
             @RequestParam String bedriftnavn,
             @RequestParam String bedriftbeskrivelse) {
@@ -51,7 +52,7 @@ public class BedriftController {
         BedriftBean bedrift = new BedriftBean(bedriftnavn, bedriftbeskrivelse);
         repository.addBedrift(bedrift);
 
-        return "redirect:/bedrift/" + bedrift.getBedriftid();
+        return "redirect:" + UrlPaths.BEDRIFT_BASE + "/" + bedrift.getBedriftid();
     }
 
 

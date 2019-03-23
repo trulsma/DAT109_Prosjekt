@@ -15,6 +15,8 @@ public class UsersBean {
 
     private String username, password;
 
+    private boolean expired;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usergroup")
     private UserGroupBean userGroup;
@@ -71,13 +73,23 @@ public class UsersBean {
         this.prosjekter = prosjekter;
     }
 
+    public boolean isExpired() {
+        return expired;
+    }
+
+    public void setExpired(boolean expired) {
+        this.expired = expired;
+    }
+
     @Override
     public String toString() {
         return "UsersBean{" +
                 "userid=" + userid +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", expired=" + expired +
                 ", userGroup=" + userGroup +
+                ", prosjekter=" + prosjekter +
                 '}';
     }
 }

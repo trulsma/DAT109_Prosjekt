@@ -1,5 +1,6 @@
 package no.hvl.dat109.spring.controller;
 
+import no.hvl.dat109.prosjekt.utilities.UrlPaths;
 import no.hvl.dat109.spring.beans.ArrangementBean;
 import no.hvl.dat109.spring.beans.ArrangementdeltagelseBean;
 import no.hvl.dat109.spring.beans.ProsjektBean;
@@ -22,12 +23,12 @@ public class ArrangementdeltagelseController {
     @Autowired
     private IArrangementService arrangementService;
 
-    @GetMapping("/arrangement/{id}")
+    @GetMapping(UrlPaths.ARRANGEMENT_WITH_ID)
     public String getArrangementDeltagelser(@PathVariable("id") int id, Model model) {
         ArrangementBean arrangement = arrangementService.getArrangement(id);
         System.out.println("Arrangement: " + arrangement);
         List<ProsjektBean> deltagelser = deltagelseService.getAllProsjektFromArrangement(arrangement);
         model.addAttribute("deltagelser", deltagelser);
-        return "deltagelser.html";
+        return UrlPaths.ARRANGEMNT_DELTAGELSE_HTML;
     }
 }

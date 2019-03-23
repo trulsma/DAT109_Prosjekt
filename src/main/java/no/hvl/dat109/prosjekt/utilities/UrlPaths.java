@@ -5,30 +5,20 @@ public class UrlPaths {
     public final static String BASE_USERPAGES_HTML = "/userpages",
             BEDRIFT_HTML = BASE_USERPAGES_HTML + "/bedrift",
             KONTAKT_HTML = BASE_USERPAGES_HTML + "/kontakt",
+            BASE_KONTAKT = "/kontakt",
             STAND_HTML = BASE_USERPAGES_HTML + "/stand",
             MINE_STEMMER_HTML = BASE_USERPAGES_HTML + "/mine_stemmer",
             TAKK_FOR_STEMME_HTML = BASE_USERPAGES_HTML + "/takk_for_stemme";
 
     //Bedrift
-    public final static String baseBedrift = "/bedrift",
-            BEDRIFT_WITH_ID = baseBedrift + "/{id}",
-            ADD_BEDRIFT = baseBedrift + "/add";
+    public final static String BEDRIFT_BASE = "/bedrift",
+            BEDRIFT_WITH_ID = BEDRIFT_BASE + "/{id}",
+            ADD_BEDRIFT = BEDRIFT_BASE + "/add";
 
     //Arrangement
     public final static String arrangementBase = "/arrangement",
-            ARRANGEMENT_WITH_ID = arrangementBase + "/{id}";
-
-    //Misc
-    public final static String LOGOUT = "/LOGOUT",
-            baselogin = "/login",
-            LOGIN_USER = baselogin + "/{id}",
-            STEM = "/stem",
-            MINE_STEMMER = "/mine_stemmer",
-            ADMIN_INDEX = "/adminindex",
-            REGISTRER_DEG = "/registrer_deg",
-            ALLE_BEDRIFTER = "/bedrifter",
-            baseStatistikk = "/statistikk",
-            ERRORPAGE = "/ERRORPAGE";
+            ARRANGEMENT_WITH_ID = arrangementBase + "/{id}",
+            ARRANGEMNT_DELTAGELSE_HTML = "deltagelser";
 
     //Prosjekt
     public final static String
@@ -67,6 +57,22 @@ public class UrlPaths {
             adminBaseRegistrering = baseAdminpages + "/registrering",
             REGISTRER_BEDRIFT_HTML = adminBaseRegistrering + "/registrer_bedrift",
             REGISTRER_PROSJEKT_HTML = adminBaseRegistrering + "/registrer_prosjekt";
+
+    //Misc
+    public final static String LOGOUT = "/LOGOUT",
+            LOGIN = "/login",
+            LOGIN_HTML = "login",
+            USER_LOGIN = "/user/login",
+            USER_LOGIN_HTML = "userLogin",
+            STEM = "/stem",
+            MINE_STEMMER = "/mine_stemmer",
+            ADMIN_INDEX = "/adminindex",
+            INDEX_HTML = "index",
+            REGISTRER_DEG = "/registrer_deg",
+            ALLE_BEDRIFTER = "/bedrifter",
+            ALLE_BEDRIFTER_HTML = baseAdminpages + "/bedrifter",
+            baseStatistikk = "/statistikk",
+            ERRORPAGE = "/ERRORPAGE";
 
 }
 

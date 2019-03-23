@@ -25,6 +25,7 @@ public class UsersService implements IUsersService {
         return "";
     }
 
+
     @Override
     public UsersBean createNewUser(String username, String password) {
         UsersBean user = new UsersBean(username, hashPassword(password), userGroupService.getUsergroupById(2));
@@ -39,7 +40,7 @@ public class UsersService implements IUsersService {
         UsersBean user;
         while (users.hasNext()) {
             user = users.next();
-            if (user.getUsername().equals(username)) return user;
+            if (user.getUsername().equals(username) && !user.isExpired()) return user;
         }
 
         return null;
