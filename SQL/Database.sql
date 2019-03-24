@@ -188,6 +188,6 @@ INSERT INTO Prosjekt (prosjektnavn,
                       pictureurl,
                       backgroundurl,
                       prosjektuser)
-VALUES ('Prosjekt navn', 'Beskrivelse', 1, 1, 'short url', 'qr path', 'picture url', 'background', 1);
+VALUES ('Prosjekt navn', 'Beskrivelse', 1, 1, 'short url', 'qr path', 'images/expo-logo-transparent.png', 'images/background.png', 1);
 INSERT INTO ArrangementDeltagelse (arrangement, prosjekt)
 VALUES (1, 1);
