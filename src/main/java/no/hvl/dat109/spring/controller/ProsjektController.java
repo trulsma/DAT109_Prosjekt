@@ -1,25 +1,20 @@
 package no.hvl.dat109.spring.controller;
 
-import no.hvl.dat109.prosjekt.EmailUtil;
-import no.hvl.dat109.prosjekt.FileHandler;
+import no.hvl.dat109.prosjekt.utilities.EmailUtil;
+import no.hvl.dat109.prosjekt.handlers.FileHandler;
+import no.hvl.dat109.prosjekt.utilities.UrlPaths;
+import no.hvl.dat109.prosjekt.utilities.Utilities;
 import no.hvl.dat109.spring.beans.*;
 import no.hvl.dat109.spring.service.Interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
-import java.util.Iterator;
-
-import static no.hvl.dat109.prosjekt.FileHandler.removeProjectQrCode;
-import static no.hvl.dat109.prosjekt.Processing.generateShortlink;
-import static no.hvl.dat109.prosjekt.Processing.getProjectImagePath;
+import static no.hvl.dat109.prosjekt.handlers.FileHandler.removeProjectQrCode;
+import static no.hvl.dat109.prosjekt.handlers.Processing.*;
 
 @Controller
 public class ProsjektController {
@@ -44,34 +39,34 @@ public class ProsjektController {
     @Autowired
     private IUsersService userService;
 
-    @GetMapping("/prosjekter")
+    @GetMapping(UrlPaths.ALLE_PROSJEKTER)
     String getAlleProsjekter(Model model) {
         model.addAttribute("prosjekter", prosjektService.getAlleProsjekter());
 
-        return "adminpages/prosjekter.html";
+        return UrlPaths.ALLE_PROSJEKTER_HTML;
     }
 
-    @GetMapping("/prosjekt/{id}/qr")
+    @GetMapping(UrlPaths.SHOW_QR)
     String getProsjektQR(@PathVariable("id") int id, Model model) {
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
 
         if (prosjekt == null) {
-            return "error";
+            return UrlPaths.ERRORPAGE;
         }
 
         model.addAttribute("prosjekt", prosjekt);
 
-        return "standpages/qrkode";
+        return UrlPaths.STAND_QR_HTML;
     }
 
-    @GetMapping("/prosjekt/{id}/qr/create")
+    @GetMapping(UrlPaths.CREATE_QR_IMAGE)
     String createProsjektQR(@PathVariable("id") int id) {
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
 
         if (prosjekt == null) {
-            return "error";
+            return UrlPaths.ERRORPAGE;
         }
 
         //Denne koden kjører av en eller annen merkelig grunn når jeg faktisk bare skriver linken inn i nettleser #spooky
@@ -79,21 +74,21 @@ public class ProsjektController {
         setQrLink(prosjekt);
 
         // OBS! serveren kan redirecte før qrkoden bildet er lagret og vil ikke være oppdattert uten er refresh
-        return "redirect:/prosjekt/" + id + "/qr";
+        return "redirect:" + UrlPaths.BASE_PROSJEKT + id + "/qr";
     }
 
-    @GetMapping("/prosjekt/{id}")
+    @GetMapping(UrlPaths.PROSJEKT_WITH_ID)
     String getProsjektById(@PathVariable("id") int id, Model model, HttpSession session) {
 
         if (session.getAttribute("epost") == null) {
-            return "redirect:/registrer_deg?redirect_url=" + "/prosjekt/" + id;
+            return "redirect:" + UrlPaths.REGISTRER_DEG + "?redirect_url=" + "/prosjekt/" + id;
         }
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
         UsersBean user = (UsersBean) session.getAttribute("user");
 
         if (prosjekt == null) {
-            return "error";
+            return UrlPaths.ERRORPAGE;
         }
 
         // Guess who's back, back again
@@ -103,17 +98,17 @@ public class ProsjektController {
         model.addAttribute("samarbeidspartner", prosjekt.getSammarbeidsbedrift());
         model.addAttribute("prosjekt", prosjekt);
 
-        return "userpages/stand";
+        return UrlPaths.STAND_HTML;
     }
 
-    @GetMapping("/prosjekt/add")
+    @GetMapping(UrlPaths.ADD_PROSJEKT)
     String addProsjekt(Model model) {
         model.addAttribute("kategorier", kategoriService.getAllKategorier());
         model.addAttribute("bedrifter", bedriftService.getAlleBedrifter());
-        return "adminpages/registrering/registrer_prosjekt";
+        return UrlPaths.REGISTRER_PROSJEKT_HTML;
     }
 
-    @PostMapping("/prosjekt/add")
+    @PostMapping(UrlPaths.ADD_PROSJEKT)
     String addProsjektPostRequest(
             @RequestParam String prosjektnavn,
             @RequestParam String prosjektbeskrivelse,
@@ -130,14 +125,15 @@ public class ProsjektController {
         StudieBean studie = studieService.getStudieById(institutt);
 
         //Lag en user med emailen vi fikk
-        UsersBean user = userService.createNewUser(email);
+        String password = Utilities.generateShortPassword(5);
+        UsersBean user = userService.createNewUser(email, password);
 
         //Lag prosjektet med alt vi har fått så langt
         ProsjektBean prosjekt = new ProsjektBean(prosjektnavn, prosjektbeskrivelse, bedrift, studie, user);
         prosjektService.addProsjekt(prosjekt);
 
         //Send email with password
-        sendEmail(email, user);
+        sendEmail(email, user, password);
 
         //Etter prosjektet er laget kan kan vi danne qr bilde link
         setQrLink(prosjekt);
@@ -145,13 +141,28 @@ public class ProsjektController {
         session.setAttribute("epost", email);
         session.setAttribute("user", user);
 
-        //TODO SEND PASSORD TIL USER PÅ EMAIL
-
-        return "redirect:/prosjekt/" + prosjekt.getProsjektid();
+        return "redirect:" + UrlPaths.BASE_PROSJEKT + "/" + prosjekt.getProsjektid();
     }
 
-    @GetMapping("/prosjekt/{id}/remove")
+    @PostMapping(UrlPaths.PROSJEKT_ENDRE_NAVN)
+    String editName(@PathVariable("id") int id, @RequestParam String prosjektnavn) {
+        //TODO SJEKK OM NAVN ENDRINGEN BLIR ENDRET AV EIGER / ADMIN
+        ProsjektBean prosjekt = prosjektService.getProsjektById(id);
+        prosjektService.changeNameOfProject(prosjekt, prosjektnavn);
+        return "redirect:" + UrlPaths.PROSJEKT_DASHBOARD;
+    }
+
+    @PostMapping(UrlPaths.PROSJEKT_ENDRE_BESKRIVELSE)
+    String endreBeskrivelse(@PathVariable("id") int id, @RequestParam String beskrivelse) {
+        //TODO SJEKK OM BESKRIVELSEN BLIR ENDRET AV EIGER / ADMIN
+        ProsjektBean prosjekt = prosjektService.getProsjektById(id);
+        prosjektService.changeBeskrivelse(prosjekt, beskrivelse);
+        return "redirect:" + UrlPaths.PROSJEKT_DASHBOARD;
+    }
+
+    @PostMapping(UrlPaths.REMOVE_PROSJEKT)
     String removeProject(@PathVariable("id") int id, HttpSession session) {
+        //TODO SJEKK OM PROSJEKTET BLIR SLETTET AV EIGER / ADMIN
         //Finn prosjektet
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
         //Slett alle prosjektfiler
@@ -164,23 +175,24 @@ public class ProsjektController {
         //Fjern session attributter
         session.removeAttribute("user");
         session.removeAttribute("epost");
-        return "redirect:/index";
+        return "redirect:" + UrlPaths.INDEX;
     }
 
-    @GetMapping("/prosjekter/apocalypse")
+    @GetMapping(UrlPaths.REMOVE_ALL_PROSJEKT_FILES)
     String removeAllProsjektFiles() {
+        //TODO SJEKK OM ADMIN UTFØRER OPERASJONEN
         FileHandler.removeAllProjects();
-        return "index";
+        return "redirect:" + UrlPaths.INDEX;
     }
 
     /**
-     * Send email with login info for stand user
+     * Send email with login info for STAND_HTML user
      *
      * @param email email of user
      * @param user  user with username and password
      */
-    private void sendEmail(String email, UsersBean user) {
-        String messagebody = String.format("Username: %s\nPassword: %s", user.getUsername(), user.getPassword());
+    private void sendEmail(String email, UsersBean user, String password) {
+        String messagebody = String.format("Username: %s\nPassword: %s", user.getUsername(), password);
         Thread thread = new Thread(() -> EmailUtil.sendEmail(email, messagebody));
         thread.start();
     }
@@ -192,7 +204,7 @@ public class ProsjektController {
      */
     private void setQrLink(ProsjektBean prosjekt) {
         prosjekt.setShortenedurl(generateShortlink(prosjekt));
-        prosjekt.setQrimagepath(getProjectImagePath(prosjekt));
+        prosjekt.setQrimagepath(getRelativeProjectQRCode(prosjekt));
         prosjektService.updateProsjekt(prosjekt);
     }
 }

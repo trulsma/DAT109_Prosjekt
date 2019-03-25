@@ -1,4 +1,4 @@
-package no.hvl.dat109.prosjekt;
+package no.hvl.dat109.prosjekt.handlers;
 
 import com.google.zxing.*;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -11,19 +11,12 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
 
 import static com.rosaloves.bitlyj.Bitly.as;
 import static com.rosaloves.bitlyj.Bitly.shorten;
+import static no.hvl.dat109.prosjekt.utilities.ProsjektPaths.*;
 
 public class Processing {
-
-    public Processing() {
-    }
-
-    private static final String HOST = "http://192.168.0.25:8080/";
-    private static final String IMAGEPATH = "src/main/resources/static/projects/";
-    private static final String PROJECTPATH = "projects/";
     private static final int QRCODE_SIZE = 400;
 
     /**
@@ -33,8 +26,8 @@ public class Processing {
      * @return bit.ly link
      */
     public static String generateShortlink(ProsjektBean prosjekt) {
-        String shortenedLink = createQRCodeLink(prosjekt.getProsjektid());
-        createImageInResources(prosjekt, shortenedLink);
+        String shortenedLink = generateShortBitlyLinkForQR(prosjekt.getProsjektid());
+        createQRImage(prosjekt, shortenedLink);
         return shortenedLink;
     }
 
@@ -57,9 +50,9 @@ public class Processing {
      * @param prosjekt      prosjekt
      * @param shortenedLink bit.ly linken
      */
-    private static void createImageInResources(ProsjektBean prosjekt, String shortenedLink) {
+    private static void createQRImage(ProsjektBean prosjekt, String shortenedLink) {
         //Pathen til resource mappen
-        String dir = IMAGEPATH + prosjekt.getProsjektnavn() + "/images/";
+        String dir = PROJECT_PATH + prosjekt.getProsjektnavn() + "/images/";
         File directory = new File(dir);
 
         //If directory exists then we can create, or try to make directory
@@ -68,7 +61,7 @@ public class Processing {
         //If operation over succeeded then we can create the image
         if (canCreateFile) {
             //Create file where output should be
-            File outputfile = new File(dir + getImagePath(prosjekt));
+            File outputfile = new File(dir + qrImageFileName(prosjekt));
             BufferedImage image = null;
             try {
                 //Generate the QRCodeImage and write it to output
@@ -90,7 +83,7 @@ public class Processing {
      * @param prosjektid prosjektid for linken
      * @return bit.ly link
      */
-    public static String createQRCodeLink(int prosjektid) {
+    public static String generateShortBitlyLinkForQR(int prosjektid) {
         Url url = as("elprosjekto", "R_eea8a14a9ffe422e8ca79f8b26aabe8a")
                 .call(shorten(HOST + "prosjekt/" + prosjektid));
         return url.getShortUrl();
@@ -98,16 +91,46 @@ public class Processing {
 
     /**
      * Metode for å finne bildene igjen
+     * Ex: 1_Prosjekt_navn.png
      *
      * @param prosjekt prosjektet du vil finne bilder til
      * @return en path til qr bildet
      */
-    public static String getImagePath(ProsjektBean prosjekt) {
+    public static String qrImageFileName(ProsjektBean prosjekt) {
         return prosjekt.getProsjektid()
                 + "_" + prosjekt.getProsjektnavn().replaceAll(" ", "_") + ".png";
     }
 
-    public static String getProjectImagePath(ProsjektBean prosjektBean) {
-        return PROJECTPATH + prosjektBean.getProsjektnavn() + "/images/" + getImagePath(prosjektBean);
+    /**
+     * Get full image path for the Project.
+     * Ex: src/main/resources/static/ + project name
+     *
+     * @param prosjektBean prosjekt å finne qr bilde til
+     * @return path til QR image
+     */
+    public static String getFullQRImagePath(ProsjektBean prosjektBean) {
+        return PROJECT_PATH + prosjektBean.getProsjektnavn() + "/images/" + qrImageFileName(prosjektBean);
+    }
+
+    /**
+     * Get relative qr code image path for database
+     * Ex: projects/[projectname]/images/qrfile.png
+     *
+     * @param prosjekt prosjekt you want the qr code for
+     * @return qrimage path relative to project
+     */
+    public static String getRelativeProjectQRCode(ProsjektBean prosjekt) {
+        return RELATIVE_PROJECT_PATH + prosjekt.getProsjektnavn() + "/images/" + qrImageFileName(prosjekt);
+    }
+
+    /**
+     * Get relative path to images from a project
+     * Ex: projects/Prosjekt navn/images/
+     *
+     * @param prosjektBean project to get imagepath to
+     * @return relative imagepath often used in database
+     */
+    public static String getRelativeProjectImagePath(ProsjektBean prosjektBean) {
+        return RELATIVE_PROJECT_PATH + prosjektBean.getProsjektnavn() + "/images/";
     }
 }

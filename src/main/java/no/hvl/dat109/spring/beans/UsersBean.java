@@ -1,7 +1,5 @@
 package no.hvl.dat109.spring.beans;
 
-import no.hvl.dat109.prosjekt.Utilities;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -9,25 +7,32 @@ import java.util.List;
 @Table(name = "users", schema = "prosjekt1")
 public class UsersBean {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userid;
 
-    private String username, password;
+    private String username, password, ipadress;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    private boolean expired;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usergroup")
     private UserGroupBean userGroup;
-
-    @OneToMany(mappedBy = "prosjektEiger")
-    private List<ProsjektBean> prosjekter;
 
     public UsersBean() {
     }
 
-    public UsersBean(String username, UserGroupBean userGroup) {
+    public UsersBean(String username, UserGroupBean groupBean, String ipadres) {
         this.username = username;
-        this.password = Utilities.generateShortPassword(5);
+        this.password = "NO-PASSWORD";
+        this.userGroup = groupBean;
+        this.ipadress = ipadres;
+    }
+
+    public UsersBean(String username, String password, UserGroupBean userGroup) {
+        this.username = username;
+        this.password = password;
         this.userGroup = userGroup;
     }
 
@@ -63,12 +68,24 @@ public class UsersBean {
         this.userGroup = userGroup;
     }
 
-    public List<ProsjektBean> getProsjekter() {
-        return prosjekter;
+    public boolean isExpired() {
+        return expired;
     }
 
-    public void setProsjekter(List<ProsjektBean> prosjekter) {
-        this.prosjekter = prosjekter;
+    public void setExpired(boolean expired) {
+        this.expired = expired;
+    }
+
+    public int getUsergroupLevel() {
+        return userGroup.getGrouplevel();
+    }
+
+    public String getIpadress() {
+        return ipadress;
+    }
+
+    public void setIpadress(String ipadress) {
+        this.ipadress = ipadress;
     }
 
     @Override
@@ -77,7 +94,8 @@ public class UsersBean {
                 "userid=" + userid +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", userGroup=" + userGroup +
+                ", expired=" + expired +
+                ", usergroup=" + userGroup.getGrouplevel() +
                 '}';
     }
 }

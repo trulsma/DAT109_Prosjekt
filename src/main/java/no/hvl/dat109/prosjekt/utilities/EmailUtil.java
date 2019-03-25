@@ -1,4 +1,4 @@
-package no.hvl.dat109.prosjekt;
+package no.hvl.dat109.prosjekt.utilities;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -20,7 +20,7 @@ public class EmailUtil {
             props.put("mail.smtp.starttls.enable", "true");
             props.put("mail.smtp.auth", "true");
 
-            Session session = Session.getDefaultInstance(props,
+            Session session = Session.getInstance(props,
                     new javax.mail.Authenticator() {
                         protected PasswordAuthentication getPasswordAuthentication() {
                             return new PasswordAuthentication(from, pass);

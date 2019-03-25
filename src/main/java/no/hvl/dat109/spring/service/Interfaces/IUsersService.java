@@ -7,11 +7,17 @@ public interface IUsersService {
 
     String test();
 
-    UsersBean createNewUser(String username);
+    UsersBean createNewUser(String username, String password);
 
     UsersBean getUserByName(String username);
+
+    UsersBean validUser(String username, String password);
+
+    void createVoterUser(String username, String ipadress);
 
     void removeUser(UsersBean user);
 
     UsersBean getUserById(int id);
+
+    UsersBean getVoterUserByName(String epost);
 }

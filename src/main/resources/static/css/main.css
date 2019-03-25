@@ -146,6 +146,12 @@ div.desc {
     background-image: url("../images/expo.jpg");
 }
 
+.stand_bg {
+    background-image: url("../images/background.jpg");
+    background-position: right -500px bottom -80px;
+    background-repeat: no-repeat;
+}
+
 .wrapper{
     transform: rotate(90deg);
     transform-origin: bottom left;

@@ -1,6 +1,7 @@
 package no.hvl.dat109.spring.service.Interfaces;
 
 import no.hvl.dat109.spring.beans.ProsjektBean;
+import no.hvl.dat109.spring.beans.UsersBean;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface IProsjektService {
@@ -20,6 +21,12 @@ public interface IProsjektService {
     void removeAllProjects();
 
     void removeProject(ProsjektBean prosjekt);
+
+    ProsjektBean getProsjektFromOwner(UsersBean user);
+
+    void changeNameOfProject(ProsjektBean prosjekt, String newname);
+
+    void changeBeskrivelse(ProsjektBean prosjekt, String beskrivelse);
 
     void updatePicturePath(ProsjektBean prosjekt, String path);
 

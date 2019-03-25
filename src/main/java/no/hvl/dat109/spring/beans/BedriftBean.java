@@ -63,7 +63,7 @@ public class BedriftBean implements Serializable {
     @Override
     public String toString() {
         return "Bedrift{" +
-                "bedriftid=" + bedriftid +
+                "BEDRIFT_WITH_ID=" + bedriftid +
                 ", bedriftnavn='" + bedriftnavn + '\'' +
                 ", bedriftbeskrivelse='" + bedriftbeskrivelse + '\'' +
                 '}';

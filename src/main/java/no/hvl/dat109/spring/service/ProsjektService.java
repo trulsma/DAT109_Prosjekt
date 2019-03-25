@@ -1,20 +1,15 @@
 package no.hvl.dat109.spring.service;
 
-import no.hvl.dat109.prosjekt.FileHandler;
-import no.hvl.dat109.prosjekt.ProsjektPaths;
-import no.hvl.dat109.spring.beans.BedriftBean;
+import no.hvl.dat109.prosjekt.handlers.FileHandler;
 import no.hvl.dat109.spring.beans.ProsjektBean;
-import no.hvl.dat109.spring.repository.BedriftRepository;
+import no.hvl.dat109.spring.beans.UsersBean;
 import no.hvl.dat109.spring.repository.ProsjektRepository;
 import no.hvl.dat109.spring.service.Interfaces.IProsjektService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Iterator;
 
 @Service
 public class ProsjektService implements IProsjektService {
@@ -65,6 +60,30 @@ public class ProsjektService implements IProsjektService {
     public void removeProject(ProsjektBean prosjekt) {
         deltagelseService.removeProsjektFromDeltagelse(prosjekt);
         prosjektRepository.delete(prosjekt);
+    }
+
+    @Override
+    public ProsjektBean getProsjektFromOwner(UsersBean user) {
+        Iterator<ProsjektBean> alleProsjekter = getAlleProsjekter().iterator();
+
+        ProsjektBean prosjekt;
+        while (alleProsjekter.hasNext()) {
+            prosjekt = alleProsjekter.next();
+            if (prosjekt.erEigerAvProsjekt(user)) return prosjekt;
+        }
+        return null;
+    }
+
+    @Override
+    public void changeNameOfProject(ProsjektBean prosjekt, String newName) {
+        prosjekt.setProsjektnavn(newName);
+        prosjektRepository.save(prosjekt);
+    }
+
+    @Override
+    public void changeBeskrivelse(ProsjektBean prosjekt, String beskrivelse) {
+        prosjekt.setProsjektbeskrivelse(beskrivelse);
+        prosjektRepository.save(prosjekt);
     }
 
     @Override

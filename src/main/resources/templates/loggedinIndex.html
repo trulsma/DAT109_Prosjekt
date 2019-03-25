@@ -45,7 +45,16 @@
                 <a class="nav-link fg-hvl" href="/bedrifter">Bedrifter</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link fg-hvl" href="/user/login">Logg inn</a>
+                <a class="nav-link fg-hvl" href="/bedrift/add">Registrer bedrift</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link fg-hvl" href="/prosjekt/add">Registrer prosjekt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link fg-hvl" th:href="@{'/dashboard/' + ${prosjektid}}">Sjekk statistikk</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link fg-hvl" href="/logout">Logg ut</a>
             </li>
         </ul>
     </div>
@@ -55,7 +64,7 @@
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light bgimg">
     <div class="col-md-5 p-lg-5 mx-auto my-5 padding-md bg-light rounded">
         <h1 class="display-4 font-weight-normal">EXPO 2019</h1>
-        <p class="lead font-weight-normal">Bachelor-utstilling på HVL - Høgskulen på Vestlandet.</p>
+        <p class="lead font-weight-normal">Bachelor-utstilling på HVL - Høgskulen på Vestlandet, Du er innlogget</p>
     </div>
     <div class="product-device shadow-sm d-none d-md-block"></div>
     <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>

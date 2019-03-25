@@ -56,7 +56,7 @@ public class StemmeMetodeBean {
                 "metodeid=" + metodeid +
                 ", metodenavn='" + metodenavn + '\'' +
                 ", metodeparameter=" + metodeparameter +
-                ", prosjekter=" + prosjekter +
+                ", ALLE_PROSJEKTER=" + prosjekter +
                 '}';
     }
 }

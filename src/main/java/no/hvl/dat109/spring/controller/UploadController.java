@@ -1,8 +1,7 @@
 package no.hvl.dat109.spring.controller;
 
-import no.hvl.dat109.prosjekt.FileHandler;
-import no.hvl.dat109.prosjekt.Processing;
-import no.hvl.dat109.prosjekt.ProsjektPaths;
+import no.hvl.dat109.prosjekt.utilities.ProsjektPaths;
+import no.hvl.dat109.prosjekt.utilities.UrlPaths;
 import no.hvl.dat109.spring.beans.ProsjektBean;
 import no.hvl.dat109.spring.service.Interfaces.IProsjektService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,29 +13,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 @Controller
 public class UploadController {
 
     @Autowired
     private IProsjektService prosjektService;
-    //Save the uploaded file to this folder
-    private static String UPLOADED_FOLDER = ProsjektPaths.MAIN_PATH;
 
-    @GetMapping("/prosjekt/{id}/upload")
+    @GetMapping(UrlPaths.UPLOAD_PROSJEKT_IMAGES)
     public String index(@PathVariable("id") int id, Model model) {
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
         model.addAttribute("id", prosjekt.getProsjektid());
-        return "upload";
+        return UrlPaths.UPLOAD_HTML;
     }
 
-    @PostMapping("prosjekt/{id}/upload") // //new annotation since 4.3
-    public String singleFileUpload(@RequestParam("background") MultipartFile background,
-                                   @RequestParam("logo") MultipartFile logo,
+    @PostMapping(UrlPaths.UPLOAD_PROSJEKT_IMAGES) // //new annotation since 4.3
+    public String singleFileUpload(@RequestParam(value = "background", required = false) MultipartFile background,
+                                   @RequestParam(value = "logo", required = false) MultipartFile logo,
                                    @PathVariable("id") int id) {
 
         String backgroundPath = "", logoPath = "";
@@ -54,7 +46,7 @@ public class UploadController {
         if (!backgroundPath.equals(""))
             prosjektService.updateBackgroundPath(prosjekt, backgroundPath);
 
-        return "redirect:/";
+        return "redirect:" + UrlPaths.BASE_PROSJEKT + "/" + id;
     }
 
 

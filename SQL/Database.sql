@@ -14,8 +14,10 @@ CREATE TABLE Users
 (
   userid    SERIAL,
   username  VARCHAR(255),
-  password  VARCHAR(50),
-  usergroup INTEGER,
+  password  VARCHAR(255),
+  usergroup INTEGER NOT NULL DEFAULT 3,
+  expired   BOOLEAN,
+  ipadress  VARCHAR(50),
   CONSTRAINT userPK PRIMARY KEY (userid),
   CONSTRAINT userGroupFK FOREIGN KEY (usergroup) REFERENCES Usergroup (groupid)
 );
@@ -65,6 +67,7 @@ CREATE TABLE Prosjekt
   shortenedurl        VARCHAR(255),
   qrimagepath         VARCHAR(255),
   pictureurl          VARCHAR(255),
+  backgroundurl       VARCHAR(255),
   prosjektuser        INTEGER,
 
   CONSTRAINT bedriftFK FOREIGN KEY (sammarbeidsbedrift) REFERENCES Bedrift (bedriftid),
@@ -105,12 +108,12 @@ CREATE TABLE Stemme
   CONSTRAINT stemmePK PRIMARY KEY (stemmeid)
 );
 
-INSERT INTO Usergroup(groupname, grouplevel)
+INSERT INTO Usergroup (groupname, grouplevel)
 VALUES ('Admin', 1),
        ('Stand', 2),
        ('User', 3);
-INSERT INTO Users(username, password, usergroup)
-VALUES ('admin', 'admin', 1);
+INSERT INTO Users (username, password, usergroup, expired)
+VALUES ('admin', 'admin', 1, false);
 INSERT INTO Bedrift (bedriftnavn, bedriftbeskrivelse)
 VALUES ('HVL', 'Høgskolen på Vestlandet');
 INSERT INTO StemmeMetode (metodenavn, metodeparameter)
@@ -174,7 +177,6 @@ VALUES ('Ergoterapi', 'Ergoterapi', 1),
        ('Samfunnsvitenskap', 'samfunnsvitenskap', 14);
 
 
-
 INSERT INTO Arrangement (arrangementnavn, arrangementbeskrivelse, arragementetutgaar)
 VALUES ('Første Arrangement', 'Dette er en beskrivelse', '2019-03-17 12:07:21.827000');
 INSERT INTO Prosjekt (prosjektnavn,
@@ -183,7 +185,9 @@ INSERT INTO Prosjekt (prosjektnavn,
                       sammarbeidsbedrift,
                       shortenedurl,
                       qrimagepath,
-                      pictureurl)
-VALUES ('Prosjekt navn', 'Beskrivelse', 1, 1, 'short url', 'qr path', 'picture url');
+                      pictureurl,
+                      backgroundurl,
+                      prosjektuser)
+VALUES ('Prosjekt navn', 'Beskrivelse', 1, 1, 'short url', 'qr path', 'images/expo-logo-transparent.png', 'images/background.png', 1);
 INSERT INTO ArrangementDeltagelse (arrangement, prosjekt)
 VALUES (1, 1);
