@@ -26,6 +26,14 @@ public class BedriftService implements IBedriftService {
     }
 
     @Override
+    public BedriftBean getBedriftByName(String name) {
+        for(BedriftBean b : bedriftRepository.findAll()){
+            if(b.getBedriftnavn().equals(name)) return b;
+        }
+        return null;
+    }
+
+    @Override
     public void addBedrift(BedriftBean bedrift) {
         bedriftRepository.save(bedrift);
     }
@@ -44,6 +52,8 @@ public class BedriftService implements IBedriftService {
 
 
     }
+
+
 
     @Override
     public boolean exists(String name) {

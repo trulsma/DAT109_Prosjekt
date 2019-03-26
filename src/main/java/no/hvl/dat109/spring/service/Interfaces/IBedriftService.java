@@ -9,6 +9,8 @@ public interface IBedriftService {
 
     BedriftBean getBedriftById(int id);
 
+    BedriftBean getBedriftByName(String name);
+
     void addBedrift(BedriftBean bedrift);
 
     void removeBedrift(BedriftBean bedrift);
