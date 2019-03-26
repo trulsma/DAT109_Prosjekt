@@ -1,7 +1,9 @@
 package no.hvl.dat109.spring.controller;
 
 import no.hvl.dat109.prosjekt.utilities.UrlPaths;
+import no.hvl.dat109.spring.beans.ArrangementBean;
 import no.hvl.dat109.spring.beans.ProsjektBean;
+import no.hvl.dat109.spring.service.Interfaces.IArrangementService;
 import no.hvl.dat109.spring.service.Interfaces.IBedriftService;
 import no.hvl.dat109.spring.service.Interfaces.IProsjektService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ public class StatistikkController {
     @Autowired
     private IBedriftService bedriftService;
 
+    @Autowired
+    private IArrangementService arrangementService;
 
     //nødvending å gjøre tingene med Model?
     @GetMapping(UrlPaths.BASE_STATISTIKK)
@@ -56,5 +60,31 @@ public class StatistikkController {
         model.addAttribute("prosjekt", prosjekt);
 
         return UrlPaths.STAND_DASHBOARD_HTML;
+    }
+
+    @GetMapping(UrlPaths.PROSJEKT_ARRANGEMENT_DASHBOARD)
+    String getDashboardForProsjektAndArrangement(@PathVariable("id") int id, @PathVariable("arrangementid") int arrangementid, Model model) {
+
+        //This means the owner is not logged in to the project
+        if (id == 0) {
+            return "redirect:" + UrlPaths.INDEX;
+        }
+
+        System.out.println("test");
+
+        ProsjektBean prosjekt = prosjektService.getProsjektById(id);
+        if (prosjekt == null) {
+            return UrlPaths.ERRORPAGE;
+        }
+
+        ArrangementBean arrangement = arrangementService.getArrangement(arrangementid);
+        if (arrangement == null) {
+            return UrlPaths.ERRORPAGE;
+        }
+
+        model.addAttribute("prosjekt", prosjekt);
+        model.addAttribute("arrangement", arrangement);
+
+        return UrlPaths.STAND_ARRANGEMENT_DASHBOARD_HTML;
     }
 }

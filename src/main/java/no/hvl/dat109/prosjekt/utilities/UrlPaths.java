@@ -42,7 +42,8 @@ public class UrlPaths {
 
     //Dashboard
     public final static String DASHBOARD = "/dashboard",
-            PROSJEKT_DASHBOARD = DASHBOARD + "/{id}";
+            PROSJEKT_DASHBOARD = DASHBOARD + "/{id}",
+            PROSJEKT_ARRANGEMENT_DASHBOARD = PROSJEKT_DASHBOARD + "/arrangement/{arrangementid}";
 
     public final static String KATEGORI_BASE = "/kategori",
             KATEGORI_WITH_ID = KATEGORI_BASE + "/{id}",
@@ -53,6 +54,7 @@ public class UrlPaths {
     public final static String baseStandPages = "/standpages",
             STAND_STATISTIKK_HTML = baseStandPages + "/stand_statistikk",
             STAND_DASHBOARD_HTML = baseStandPages + "/dashboard",
+            STAND_ARRANGEMENT_DASHBOARD_HTML = baseStandPages + "/dashboard_arrangement",
             STAND_QR_HTML = baseStandPages + "/qrkode";
     //Api
     public final static String API_BASE = "/api",
