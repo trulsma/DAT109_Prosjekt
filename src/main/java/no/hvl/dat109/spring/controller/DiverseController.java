@@ -41,6 +41,7 @@ public class DiverseController {
 
         //If you are a voter or dont have a user
         if (user == null || user.getUsergroupLevel() == 3) {
+            model.addAttribute("prosjekter", prosjektService.getAlleProsjekter());
             model.addAttribute("prosjektid", 0);
             return UrlPaths.INDEX_HTML; //If user is not logged in og just a voter
         } else {
@@ -68,17 +69,8 @@ public class DiverseController {
 
     @GetMapping("/index")
     String getIndex() {
-
         return "redirect:" + UrlPaths.INDEX;
     }
-
-    @GetMapping("/")
-    String getDefaultIndex(Model model) {
-
-        model.addAttribute("prosjekter", prosjektService.getAlleProsjekter());
-        return "redirect:" + UrlPaths.INDEX;
-    }
-
 
     @GetMapping(UrlPaths.DASHBOARD)
     String getDashboard() {
