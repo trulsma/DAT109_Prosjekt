@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <link type="text/css" id="dark-mode" rel="stylesheet" href="">
 <style type="text/css" id="dark-mode-custom-style"></style>
@@ -353,7 +354,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form class="form-signin" method="post" action="/prosjekt/add" id="m'Form">
                         <div class="form-group">
                             <label for="prosjekt-navn" class="col-form-label"></label>
                             <input type="text" class="form-control" id="prosjekt-navn" placeholder="Prosjektnavn">
@@ -369,7 +370,7 @@
                         </div>
                         <div class="form-group">
                             <p class="underTitle text-white"> Velg institutt:
-                                <select class="selectpicker" data-live-search="true" name="institutt" form="thisisform">
+                                <select class="selectpicker" data-live-search="true" name="institutt" form="m'Form">
                                     <optgroup th:each="kategori: ${kategorier}" th:label="${kategori.kategorinavn}">
                                         <option th:each="institutt: ${kategori.studier}"
                                                 th:value="${institutt.studieid}"
@@ -382,7 +383,7 @@
                         </div>
                         <div class="form-group">
                             <p class="underTitle text-white">Velg din sammarbeidspartner:
-                                <select class="selectpicker" data-live-search="true" form="thisisform"
+                                <select class="selectpicker" data-live-search="true" form="m'Form"
                                         name="samarbeidspartner">
                                     <option th:each="bedrift: ${bedrifter}"
                                             th:value="${bedrift.bedriftid}"
