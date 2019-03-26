@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
 
-    <title>Dashboard Template for Bootstrap</title>
+    <title>Admin Dashboard</title>
 
     <script src="http://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -373,10 +373,10 @@
                             <input type="text" class="form-control" id="prosjekt-email" placeholder="Prosjektmail">
                         </div>
 
-                        <p class="underTitle text-white"> Velg institutt:
-                            <select class="selectpicker" data-live-search="true" id="fuck" name="institutt"
+                        <p class="underTitle"> Velg institutt: <br>
+                            <select style="align-content: center" class="selectpicker" data-live-search="true" id="fuck" name="institutt"
                                     form="addProsjektForm">
-                                <optgroup th:each="kategori: ${kategorier}" th:label="${kategori.kategorinavn}">
+                                <optgroup style="align-content: center" th:each="kategori: ${kategorier}" th:label="${kategori.kategorinavn}">
                                     <option th:each="institutt: ${kategori.studier}"
                                             th:value="${institutt.studieid}"
                                             th:name="${institutt.studienavn}"
@@ -386,7 +386,7 @@
                             </select>
                         </p>
 
-                        <p class="underTitle text-white">Velg din sammarbeidspartner:
+                        <p class="underTitle">Velg din sammarbeidspartner:
                             <select class="selectpicker" data-live-search="true" form="addProsjektForm" name="samarbeidspartner">
                                 <option th:each="bedrift: ${bedrifter}"
                                         th:value="${bedrift.bedriftid}"
