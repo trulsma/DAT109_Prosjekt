@@ -39,6 +39,8 @@ public class DiverseController {
         UsersBean user = (UsersBean) session.getAttribute("user");
         model.addAttribute("user", user);
 
+        model.addAttribute("prosjekter", prosjektService.getAlleProsjekter());
+
         //If you are a voter or dont have a user
         if (user == null || user.getUsergroupLevel() == 3) {
             model.addAttribute("prosjektid", 0);
@@ -70,7 +72,6 @@ public class DiverseController {
     String getIndex() {
         return "redirect:" + UrlPaths.INDEX;
     }
-
 
     @GetMapping(UrlPaths.DASHBOARD)
     String getDashboard() {
