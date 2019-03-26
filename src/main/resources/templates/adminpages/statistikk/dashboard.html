@@ -352,12 +352,12 @@
         <div class="modal-dialog">
 
             <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Legg til nytt prosjekt</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
-                </div>
-                <form class="form-signin" method="post" action="/prosjekt/add" id="addProsjektForm">
+            <form class="form-signin" method="post" action="/prosjekt/add" id="addProsjektForm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Legg til nytt prosjekt</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+                    </div>
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="prosjekt-navn" class="col-form-label"></label>
@@ -399,12 +399,14 @@
                             </p>
                         </div>
                     </div>
-                </form>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <div class="modal-footer">
+                        <button class="btn btn-lg btn-outline-success btn-block" type="submit">Registrer prosjekt
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
-            </div>
 
+            </form>
         </div>
     </div>
 </div>
