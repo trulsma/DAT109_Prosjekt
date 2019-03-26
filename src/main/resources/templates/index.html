@@ -62,12 +62,18 @@
 </div>
 
 <div class="container">
-    <col-md-4>
-        <tr th:each="prosjekt: ${prosjekter}">
-            <td th:text="${prosjekt.prosjektnavn}"></td>
+<div class="row">
+        <div class="col-md-2" th:each="prosjekt: ${prosjekter}">
+            <svg class="bd-placeholder-img round-circle" width="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidyMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140">
+                <title>..</title>
+                <rect width="100%" height="100%" fill="#777"></rect>
+            </svg>
+            <h2 th:text="${prosjekt.prosjektnavn}"></h2>
+            <p th:text="${prosjekt.prosjektbeskrivelse}"></p>
 
-        </tr>
-    </col-md-4>
+        </div>
+</div>
+
 </div>
 
 
