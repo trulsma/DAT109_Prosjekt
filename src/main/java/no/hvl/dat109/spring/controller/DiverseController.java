@@ -68,6 +68,14 @@ public class DiverseController {
 
     @GetMapping("/index")
     String getIndex() {
+
+        return "redirect:" + UrlPaths.INDEX;
+    }
+
+    @GetMapping("/")
+    String getDefaultIndex(Model model) {
+
+        model.addAttribute("prosjekter", prosjektService.getAlleProsjekter());
         return "redirect:" + UrlPaths.INDEX;
     }
 
