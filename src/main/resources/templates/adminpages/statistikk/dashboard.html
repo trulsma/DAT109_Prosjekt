@@ -128,7 +128,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#addBedriftModal">
                             <i class="fas fa-plus"></i>
                             Legg til Bedrift
                         </a>
@@ -346,6 +346,41 @@
         </div>
     </div>
 
+    <!-- addBedriftModal -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <form class="form-signin" method="post" action="/prosjekt/add" id="addBedriftForm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Legg til ny bedrift</h4>
+                    </div>
+                    <div class="modal-body">
+                        <img class="mb-4" src="/images/hvl.svg" alt="" width="300" height="200">
+                        <h1 class="h3 mb-3 font-weight-normal text-white">Registrer bedrift</h1>
+                        <label for="inputNavn" class="sr-only">Navn</label>
+                        <input type="text" id="inputNavn" class="form-control" name="bedriftnavn"
+                               placeholder="Navn på bedrift" required="" autofocus="">
+                        <br>
+                        <label for="inputBeskrivelse" class="sr-only">Beskrivelse</label>
+                        <input type="text" id="inputBeskrivelse" class="form-control" name="bedriftbeskrivelse"
+                               placeholder="Kort beskrivelse av bedrift" required="" autofocus="">
+                        <br>
+
+                        <a class="btn btn-lg btn-outline-light btn-block" href="/">Tilbake til startsiden</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-lg btn-outline-success btn-block" type="submit">Registrer bedrift
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+        </div>
+    </div>
 
     <!-- addProsjektModal -->
     <div class="modal fade" id="addProsjektModal" role="dialog">
