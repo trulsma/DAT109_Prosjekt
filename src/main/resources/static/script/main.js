@@ -102,7 +102,20 @@ function visGraf(resultat) {
 
 //console.log(resultat[0])
 
-$('#addProsjektModal .selectpicker').selectpicker();
+
 }
+
+function triggerSelect() {
+    $('#fuck').selectpicker();
+    $('#picker').selectpicker();
+
+}
+
+$(document).ready(function () {
+    $('#addProsjektModal').on('show', function () {
+        triggerSelect();
+
+    });
+});
 
 /*]]>*/
