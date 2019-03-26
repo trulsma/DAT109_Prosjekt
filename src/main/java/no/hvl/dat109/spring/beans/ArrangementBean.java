@@ -20,6 +20,10 @@ public class ArrangementBean {
     @JoinColumn(name = "arrangementstemmemetode")
     private StemmeMetodeBean stemmemetode;
 
+
+    @OneToMany(mappedBy = "arrangement")
+    private List<ArrangementdeltagelseBean> deltagelser;
+
     public ArrangementBean() {
     }
 
@@ -27,6 +31,14 @@ public class ArrangementBean {
         this.arrangementnavn = arrangementnavn;
         this.arrangementbeskrivelse = arrangementbeskrivelse;
         this.arragementetutgaar = arragementetutgaar;
+    }
+
+    public List<ArrangementdeltagelseBean> getDeltagelser() {
+        return deltagelser;
+    }
+
+    public void setDeltagelser(List<ArrangementdeltagelseBean> deltagelser) {
+        this.deltagelser = deltagelser;
     }
 
     @Column(name = "arrangementid")

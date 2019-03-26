@@ -19,13 +19,22 @@ public class ArrangementdeltagelseBean {
     @JoinColumn(name = "prosjekt")
     private ProsjektBean prosjekt;
 
-
+    @OneToMany(mappedBy = "prosjekt")
+    private List<StemmeBean> stemmer;
 
     public ArrangementdeltagelseBean(){}
 
     public ArrangementdeltagelseBean(ArrangementBean arrangement, ProsjektBean prosjekt) {
         this.arrangement = arrangement;
         this.prosjekt = prosjekt;
+    }
+
+    public List<StemmeBean> getStemmer() {
+        return stemmer;
+    }
+
+    public void setStemmer(List<StemmeBean> stemmer) {
+        this.stemmer = stemmer;
     }
 
     public ArrangementBean getArrangement() {

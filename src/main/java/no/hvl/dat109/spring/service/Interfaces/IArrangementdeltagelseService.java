@@ -29,6 +29,4 @@ public interface IArrangementdeltagelseService {
      * @return liste med alle ALLE_PROSJEKTER på dette arrangementet
      */
     List<ProsjektBean> getAllProsjektFromArrangement(ArrangementBean arrangement);
-
-
 }

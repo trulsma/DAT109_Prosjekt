@@ -28,7 +28,7 @@ public class AnonymStemmeBean implements Serializable {
     public AnonymStemmeBean(StemmeBean stemmeBean) {
         stemmeid = stemmeBean.getStemmeid();
         stemmeverdi = stemmeBean.getStemmeverdi();
-        //prosjektid = stemmeBean.getProsjekt().getProsjektid();
+        prosjektid = stemmeBean.getProsjekt().getProsjekt().getProsjektid();
         stemmetidspunkt = stemmeBean.getStemmetidspunkt();
     }
 }

@@ -56,7 +56,7 @@ public class UrlPaths {
             STAND_QR_HTML = baseStandPages + "/qrkode";
     //Api
     public final static String API_BASE = "/api",
-            API_PROSJEKT = API_BASE + "/prosjekt/{id}",
+            API_PROSJEKT = API_BASE + "/prosjekt/{id}/arrangement/{arrangementid}",
             STEM_HTML = API_PROSJEKT + "/stemmer",
             API_PROSJEKTER = API_BASE + "/prosjekter",
             API_PROSJEKTER_STEMMER = API_PROSJEKTER + "/stemmer";
