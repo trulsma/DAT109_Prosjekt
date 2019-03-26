@@ -372,29 +372,32 @@
                             <label for="prosjekt-email" class="col-form-label"></label>
                             <input type="text" class="form-control" id="prosjekt-email" placeholder="Prosjektmail">
                         </div>
-
-                        <p class="underTitle"> Velg institutt: <br>
-                            <select style="align-content: center" class="selectpicker" data-live-search="true" id="fuck" name="institutt"
-                                    form="addProsjektForm">
-                                <optgroup style="align-content: center" th:each="kategori: ${kategorier}" th:label="${kategori.kategorinavn}">
-                                    <option th:each="institutt: ${kategori.studier}"
-                                            th:value="${institutt.studieid}"
-                                            th:name="${institutt.studienavn}"
-                                            th:text="${institutt.studienavn}">
+                        <div class="form-group">
+                            <p class="underTitle"> Velg institutt: <br>
+                                <select class="selectpicker" data-live-search="true" id="fuck" name="institutt"
+                                        form="addProsjektForm">
+                                    <optgroup th:each="kategori: ${kategorier}" th:label="${kategori.kategorinavn}">
+                                        <option th:each="institutt: ${kategori.studier}"
+                                                th:value="${institutt.studieid}"
+                                                th:name="${institutt.studienavn}"
+                                                th:text="${institutt.studienavn}">
+                                        </option>
+                                    </optgroup>
+                                </select>
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <p class="underTitle">Velg din sammarbeidspartner:
+                                <select class="selectpicker" data-live-search="true" form="addProsjektForm"
+                                        name="samarbeidspartner">
+                                    <option th:each="bedrift: ${bedrifter}"
+                                            th:value="${bedrift.bedriftid}"
+                                            th:name="${bedrift.bedriftnavn}"
+                                            th:text="${bedrift.bedriftnavn}">
                                     </option>
-                                </optgroup>
-                            </select>
-                        </p>
-
-                        <p class="underTitle">Velg din sammarbeidspartner:
-                            <select class="selectpicker" data-live-search="true" form="addProsjektForm" name="samarbeidspartner">
-                                <option th:each="bedrift: ${bedrifter}"
-                                        th:value="${bedrift.bedriftid}"
-                                        th:name="${bedrift.bedriftnavn}"
-                                        th:text="${bedrift.bedriftnavn}">
-                                </option>
-                            </select>
-                        </p>
+                                </select>
+                            </p>
+                        </div>
                     </div>
                 </form>
                 <div class="modal-footer">
