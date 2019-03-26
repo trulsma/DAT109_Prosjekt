@@ -86,9 +86,6 @@ public class ProsjektController {
         if (prosjekt == null) {
             return UrlPaths.ERRORPAGE;
         }
-        prosjekt.getArragementdeltagelser().stream().forEach(System.out::println);
-
-        System.out.println(prosjekt.getArragementdeltagelser());
 
         model.addAttribute("prosjekt", prosjekt);
         if (prosjekt.getArragementdeltagelser() != null) {

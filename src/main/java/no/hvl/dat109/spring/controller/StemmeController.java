@@ -51,7 +51,13 @@ public class StemmeController {
     }
 
     @GetMapping(UrlPaths.STEM)
-    public String visTakkForStemme() {
+    public String visTakkForStemme(@RequestParam(required = false) String navn, Model model) {
+        if (navn == null) {
+            navn = "";
+        }
+
+        model.addAttribute("prosjektnavn", navn);
+
         return UrlPaths.TAKK_FOR_STEMME_HTML;
     }
 
@@ -80,7 +86,7 @@ public class StemmeController {
         // TODO: bruke arragemetntdeltagelse
         stemmeService.addStemme(new StemmeBean(deltagelse, epost, validateVerdi(verdi)));
 
-        return "redirect:" + UrlPaths.STEM;
+        return "redirect:" + UrlPaths.STEM +"?navn=" + prosjekt.getProsjektnavn();
     }
 
     /**
