@@ -96,13 +96,26 @@ let myLine = new Chart(ctx, {
     }
 });
 
-$('#addProsjektModal .selectpicker').selectpicker();
 
 function visGraf(resultat) {
     let prosjekt = [];
 
 //console.log(resultat[0])
 
+
 }
+
+function triggerSelect() {
+    $('#fuck').selectpicker();
+    $('#picker').selectpicker();
+
+}
+
+$(document).ready(function () {
+    $('#addProsjektModal').on('show', function () {
+        triggerSelect();
+
+    });
+});
 
 /*]]>*/

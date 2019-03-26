@@ -90,7 +90,7 @@
            placeholder="Din email adresse" required="" autofocus="">
 
     <p class="underTitle text-white"> Velg institutt:
-        <select class="selectpicker" data-live-search="true" name="institutt" form="thisisform">
+        <select class="selectpicker" data-live-search="true" name="institutt"  form="thisisform">
             <optgroup th:each="kategori: ${kategorier}" th:label="${kategori.kategorinavn}">
                 <option th:each="institutt: ${kategori.studier}"
                         th:value="${institutt.studieid}"

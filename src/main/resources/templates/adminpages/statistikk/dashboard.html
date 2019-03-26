@@ -371,7 +371,7 @@
                         </div>
 
                         <p class="underTitle text-white"> Velg institutt:
-                            <select class="selectpicker" data-live-search="true" name="institutt"
+                            <select class="selectpicker" data-live-search="true" id="fuck" name="institutt"
                                     form="addProsjektForm">
                                 <optgroup th:each="kategori: ${kategorier}" th:label="${kategori.kategorinavn}">
                                     <option th:each="institutt: ${kategori.studier}"
@@ -385,7 +385,7 @@
 
                         <p class="underTitle text-white">Velg din sammarbeidspartner:
                             <select class="selectpicker" data-live-search="true" form="addProsjektForm"
-                                    name="samarbeidspartner">
+                                    id="picker" name="samarbeidspartner">
                                 <option th:each="bedrift: ${bedrifter}"
                                         th:value="${bedrift.bedriftid}"
                                         th:name="${bedrift.bedriftnavn}"
