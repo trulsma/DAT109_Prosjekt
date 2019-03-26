@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
+import java.util.ArrayList;
+
 import static no.hvl.dat109.prosjekt.handlers.FileHandler.removeProjectQrCode;
 import static no.hvl.dat109.prosjekt.handlers.Processing.*;
 
@@ -78,10 +80,36 @@ public class ProsjektController {
     }
 
     @GetMapping(UrlPaths.PROSJEKT_WITH_ID)
-    String getProsjektById(@PathVariable("id") int id, Model model, HttpSession session) {
+    String getProsjektById(@PathVariable("id") int id, Model model) {
+        ProsjektBean prosjekt = prosjektService.getProsjektById(id);
+
+        if (prosjekt == null) {
+            return UrlPaths.ERRORPAGE;
+        }
+        prosjekt.getArragementdeltagelser().stream().forEach(System.out::println);
+
+        System.out.println(prosjekt.getArragementdeltagelser());
+
+        model.addAttribute("prosjekt", prosjekt);
+        if (prosjekt.getArragementdeltagelser() != null) {
+            model.addAttribute("deltagelser", prosjekt.getArragementdeltagelser());
+        }
+        else {
+            model.addAttribute("deltagelser", new ArrayList<ArrangementdeltagelseBean>());
+        }
+
+        return UrlPaths.STAND_DELTAGELSE_HTML;
+    }
+
+
+    @GetMapping(UrlPaths.PROSJEKT_WITH_ID_AND_ARRANGEMENT)
+    String getProsjektByIdAndByArrangement(@PathVariable("id") int id,
+                                           @PathVariable("arrangementid") int arrangementid,
+                                           Model model,
+                                           HttpSession session) {
 
         if (session.getAttribute("epost") == null) {
-            return "redirect:" + UrlPaths.REGISTRER_DEG + "?redirect_url=" + "/prosjekt/" + id;
+            return "redirect:" + UrlPaths.REGISTRER_DEG + "?redirect_url=prosjekt/" + id + "/arrangement/" + arrangementid;
         }
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
@@ -91,12 +119,20 @@ public class ProsjektController {
             return UrlPaths.ERRORPAGE;
         }
 
-        // Guess who's back, back again
-        // Bedrift boyy is back, tell a friend
-        //System.out.println(prosjekt.getSammarbeidsbedrift() + " THIS IS BEDRIFT BOYYY🔥");
+        // Sjekke om prosjektet deltar i arragementet
+        ArrangementdeltagelseBean deltagelse = prosjekt.getArragementdeltagelser()
+                .stream()
+                .filter(a -> a.getArrangement().getArrangementid() == arrangementid)
+                .findAny()
+                .orElse(null);
+
+        if (deltagelse == null) {
+            return UrlPaths.ERRORPAGE;
+        }
 
         model.addAttribute("samarbeidspartner", prosjekt.getSammarbeidsbedrift());
         model.addAttribute("prosjekt", prosjekt);
+        model.addAttribute("arrangement", deltagelse.getArrangement());
 
         return UrlPaths.STAND_HTML;
     }

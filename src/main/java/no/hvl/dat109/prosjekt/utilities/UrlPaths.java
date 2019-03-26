@@ -7,6 +7,7 @@ public class UrlPaths {
             KONTAKT_HTML = BASE_USERPAGES_HTML + "/kontakt",
             BASE_KONTAKT = "/kontakt",
             STAND_HTML = BASE_USERPAGES_HTML + "/stand",
+            STAND_DELTAGELSE_HTML = BASE_USERPAGES_HTML + "/stand_deltagelse",
             MINE_STEMMER_HTML = BASE_USERPAGES_HTML + "/mine_stemmer",
             TAKK_FOR_STEMME_HTML = BASE_USERPAGES_HTML + "/takk_for_stemme";
 
@@ -24,6 +25,7 @@ public class UrlPaths {
     public final static String
             BASE_PROSJEKT = "/prosjekt",
             PROSJEKT_WITH_ID = BASE_PROSJEKT + "/{id}",
+            PROSJEKT_WITH_ID_AND_ARRANGEMENT = PROSJEKT_WITH_ID + "/arrangement/{arrangementid}",
             PROSJEKT_ENDRE_NAVN = PROSJEKT_WITH_ID + "/endrenavn",
             PROSJEKT_ENDRE_BESKRIVELSE = PROSJEKT_WITH_ID + "/endrebeskrivelse",
             ADD_PROSJEKT = BASE_PROSJEKT + "/add",

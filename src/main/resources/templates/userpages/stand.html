@@ -37,11 +37,12 @@
                 <input type="radio" name="verdi" value="5"/> 5
             </p>
             <input type="hidden" name="prosjektid" th:value="${prosjekt.prosjektid}">
+            <input type="hidden" name="arrangementid" th:value="${arrangement.arrangementid}">
             <input type="hidden" name="epost" th:Value="${session.epost}">
             <p><input type="submit" value="Registrer stemme"/></p>
 
             <div class="col-md-12 text-center">
-                <a href="/" class="btn btn-outline-primary btn-lg">Tilbake til startsiden</a>
+                <a href="/" class="btn btn-outline-secondary btn-lg">Tilbake til startsiden</a>
             </div>
         </form>
     </div>

@@ -1,10 +1,7 @@
 package no.hvl.dat109.spring.controller;
 
 import no.hvl.dat109.prosjekt.utilities.UrlPaths;
-import no.hvl.dat109.spring.beans.AnonymStemmeBean;
-import no.hvl.dat109.spring.beans.ProsjektBean;
-import no.hvl.dat109.spring.beans.ProsjektMedStemmerBean;
-import no.hvl.dat109.spring.beans.StemmeBean;
+import no.hvl.dat109.spring.beans.*;
 import no.hvl.dat109.spring.service.Interfaces.IProsjektService;
 import no.hvl.dat109.spring.service.Interfaces.IStemmeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,56 +27,6 @@ public class StemmeController {
 
     @Autowired
     private IProsjektService prosjektService;
-
-
-    /*
-    @GetMapping(UrlPaths.API_PROSJEKTER_STEMMER)
-    ResponseEntity<?> getStemmerForProsjekt(@PathVariable("id") int id,
-                                            @RequestParam(required = false) Integer steps) {
-        ProsjektBean prosjekt = prosjektService.getProsjektById(id);
-
-        if (prosjekt == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        //List<AnonymStemmeBean> stemmer = prosjekt.getStemmer().stream().map(AnonymStemmeBean::new).collect(Collectors.toList());
-        // TODO: fikse til å bruke arragment
-        return ResponseEntity.ok().body("");
-    }
-
-    @GetMapping(UrlPaths.API_PROSJEKTER_STEMMER)
-     */
-        /*
-    ResponseEntity<?> getStemmerForAlleProsjekt(@RequestParam(required = false) String order, @RequestParam(required = false) Integer limit) {
-        Iterable<ProsjektBean> prosjekter = prosjektService.getAlleProsjekter();
-
-        List<ProsjektBean> prosjektListe = new ArrayList<>();
-
-        prosjekter.forEach(prosjektListe::add);
-
-        List<ProsjektMedStemmerBean> prosjekterMedStemmer = prosjektListe.stream().map(prosjekt ->
-                new ProsjektMedStemmerBean(prosjekt.getProsjektid(),
-                        prosjekt.getProsjektnavn(),
-                        prosjekt.getProsjektbeskrivelse(),
-                        prosjekt.getStemmer().size(),
-                        prosjekt.getStemmeGjennomsnitt()))
-                .collect(Collectors.toList());
-
-        if ("antall".equals(order)) {
-            prosjekterMedStemmer = prosjekterMedStemmer.stream().sorted((a, b) -> b.getAntallStemmer() - a.getAntallStemmer()).collect(Collectors.toList());
-        }
-        else if ("gjennomsnitt".equals(order)) {
-            prosjekterMedStemmer = prosjekterMedStemmer.stream().sorted((a, b) -> Double.compare(b.getGjennomsnittVerdi(),a.getGjennomsnittVerdi())).collect(Collectors.toList());
-        }
-
-        if (limit != null && limit > 0) {
-            prosjekterMedStemmer = prosjekterMedStemmer.stream().limit(limit).collect(Collectors.toList());
-        }
-
-        return ResponseEntity.ok().body(prosjekterMedStemmer);
-        return ResponseEntity.badRequest().body("meg vere sjuk og ikke bra nå");
-    }
-        */
 
     @GetMapping(UrlPaths.MINE_STEMMER)
     public String visMineStemmer(HttpSession session, Model model) {
@@ -109,17 +56,29 @@ public class StemmeController {
     }
 
     @PostMapping(UrlPaths.STEM)
-    public String stem(@RequestParam int prosjektid, @RequestParam String epost, @RequestParam int verdi) {
+    public String stem(@RequestParam int prosjektid, @RequestParam int arrangementid, @RequestParam String epost, @RequestParam int verdi) {
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(prosjektid);
 
+        // Sjekke om prosjekt eksisterer
         if (prosjekt == null) {
             return UrlPaths.ERRORPAGE;
         }
 
+        // Sjekke om prosjektet deltar i arragementet
+        ArrangementdeltagelseBean deltagelse = prosjekt.getArragementdeltagelser()
+                .stream()
+                .filter(a -> a.getArrangement().getArrangementid() == arrangementid)
+                .findAny()
+                .orElse(null);
+
+        // PRosjektet deltar ikke i arrengementet
+        if (deltagelse == null) {
+            return UrlPaths.ERRORPAGE;
+        }
 
         // TODO: bruke arragemetntdeltagelse
-        //stemmeService.addStemme(new StemmeBean(prosjekt, epost, validateVerdi(verdi)));
+        stemmeService.addStemme(new StemmeBean(deltagelse, epost, validateVerdi(verdi)));
 
         return "redirect:" + UrlPaths.STEM;
     }
