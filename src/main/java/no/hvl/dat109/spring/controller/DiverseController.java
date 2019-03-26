@@ -3,10 +3,7 @@ package no.hvl.dat109.spring.controller;
 import no.hvl.dat109.prosjekt.utilities.UrlPaths;
 import no.hvl.dat109.spring.beans.ProsjektBean;
 import no.hvl.dat109.spring.beans.UsersBean;
-import no.hvl.dat109.spring.service.Interfaces.IBedriftService;
-import no.hvl.dat109.spring.service.Interfaces.IKategoriService;
-import no.hvl.dat109.spring.service.Interfaces.IProsjektService;
-import no.hvl.dat109.spring.service.Interfaces.IUsersService;
+import no.hvl.dat109.spring.service.Interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +27,7 @@ public class DiverseController {
 
     @Autowired
     private IProsjektService prosjektService;
+
 
     @PostMapping(UrlPaths.REGISTRER_DEG)
     String registerBruker(@RequestParam String redirect_url, @RequestParam String epost, HttpSession session, HttpServletRequest request) {
@@ -86,6 +84,8 @@ public class DiverseController {
         model.addAttribute("bedrifter", bedriftService.getAlleBedrifter());
         return UrlPaths.DASHBOARD_ADMIN_HTML;
     }
+
+
 }
 
 

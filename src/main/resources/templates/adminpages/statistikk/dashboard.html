@@ -128,7 +128,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#addBedriftModal">
                             <i class="fas fa-plus"></i>
                             Legg til Bedrift
                         </a>
@@ -346,18 +346,53 @@
         </div>
     </div>
 
+    <!-- addBedriftModal -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <form class="form-signin" method="post" action="/prosjekt/add" id="addBedriftForm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Legg til ny bedrift</h4>
+                    </div>
+                    <div class="modal-body">
+                        <img class="mb-4" src="/images/hvl.svg" alt="" width="300" height="200">
+                        <h1 class="h3 mb-3 font-weight-normal text-white">Registrer bedrift</h1>
+                        <label for="inputNavn" class="sr-only">Navn</label>
+                        <input type="text" id="inputNavn" class="form-control" name="bedriftnavn"
+                               placeholder="Navn på bedrift" required="" autofocus="">
+                        <br>
+                        <label for="inputBeskrivelse" class="sr-only">Beskrivelse</label>
+                        <input type="text" id="inputBeskrivelse" class="form-control" name="bedriftbeskrivelse"
+                               placeholder="Kort beskrivelse av bedrift" required="" autofocus="">
+                        <br>
+
+                        <a class="btn btn-lg btn-outline-light btn-block" href="/">Tilbake til startsiden</a>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-lg btn-outline-success btn-block" type="submit">Registrer bedrift
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+        </div>
+    </div>
 
     <!-- addProsjektModal -->
     <div class="modal fade" id="addProsjektModal" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Legg til nytt prosjekt</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
-                </div>
-                <form class="form-signin" method="post" action="/prosjekt/add" id="addProsjektForm">
+            <form class="form-signin" method="post" action="/prosjekt/add" id="addProsjektForm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Legg til nytt prosjekt</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+                    </div>
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="prosjekt-navn" class="col-form-label"></label>
@@ -372,36 +407,41 @@
                             <label for="prosjekt-email" class="col-form-label"></label>
                             <input type="text" class="form-control" id="prosjekt-email" placeholder="Prosjektmail">
                         </div>
-
-                        <p class="underTitle"> Velg institutt: <br>
-                            <select style="align-content: center" class="selectpicker" data-live-search="true" id="fuck" name="institutt"
-                                    form="addProsjektForm">
-                                <optgroup style="align-content: center" th:each="kategori: ${kategorier}" th:label="${kategori.kategorinavn}">
-                                    <option th:each="institutt: ${kategori.studier}"
-                                            th:value="${institutt.studieid}"
-                                            th:name="${institutt.studienavn}"
-                                            th:text="${institutt.studienavn}">
+                        <div class="form-group">
+                            <p class="underTitle"> Velg institutt: <br>
+                                <select class="selectpicker" data-live-search="true" id="fuck" name="institutt"
+                                        form="addProsjektForm">
+                                    <optgroup th:each="kategori: ${kategorier}" th:label="${kategori.kategorinavn}">
+                                        <option th:each="institutt: ${kategori.studier}"
+                                                th:value="${institutt.studieid}"
+                                                th:name="${institutt.studienavn}"
+                                                th:text="${institutt.studienavn}">
+                                        </option>
+                                    </optgroup>
+                                </select>
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <p class="underTitle">Velg din sammarbeidspartner:
+                                <select class="selectpicker" data-live-search="true" form="addProsjektForm"
+                                        name="samarbeidspartner">
+                                    <option th:each="bedrift: ${bedrifter}"
+                                            th:value="${bedrift.bedriftid}"
+                                            th:name="${bedrift.bedriftnavn}"
+                                            th:text="${bedrift.bedriftnavn}">
                                     </option>
-                                </optgroup>
-                            </select>
-                        </p>
-
-                        <p class="underTitle">Velg din sammarbeidspartner:
-                            <select class="selectpicker" data-live-search="true" form="addProsjektForm" name="samarbeidspartner">
-                                <option th:each="bedrift: ${bedrifter}"
-                                        th:value="${bedrift.bedriftid}"
-                                        th:name="${bedrift.bedriftnavn}"
-                                        th:text="${bedrift.bedriftnavn}">
-                                </option>
-                            </select>
-                        </p>
+                                </select>
+                            </p>
+                        </div>
                     </div>
-                </form>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <div class="modal-footer">
+                        <button class="btn btn-lg btn-outline-success btn-block" type="submit">Registrer prosjekt
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
-            </div>
 
+            </form>
         </div>
     </div>
 </div>
