@@ -3,6 +3,8 @@ package no.hvl.dat109.spring.controller;
 import no.hvl.dat109.prosjekt.utilities.UrlPaths;
 import no.hvl.dat109.spring.beans.ProsjektBean;
 import no.hvl.dat109.spring.beans.UsersBean;
+import no.hvl.dat109.spring.service.Interfaces.IBedriftService;
+import no.hvl.dat109.spring.service.Interfaces.IKategoriService;
 import no.hvl.dat109.spring.service.Interfaces.IProsjektService;
 import no.hvl.dat109.spring.service.Interfaces.IUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,11 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class DiverseController {
+    @Autowired
+    private IKategoriService kategoriService;
+
+    @Autowired
+    private IBedriftService bedriftService;
 
     @Autowired
     private IUsersService usersService;
@@ -74,7 +81,9 @@ public class DiverseController {
     }
 
     @GetMapping(UrlPaths.DASHBOARD)
-    String getDashboard() {
+    String getDashboard(Model model) {
+        model.addAttribute("kategorier", kategoriService.getAllKategorier());
+        model.addAttribute("bedrifter", bedriftService.getAlleBedrifter());
         return UrlPaths.DASHBOARD_ADMIN_HTML;
     }
 }
