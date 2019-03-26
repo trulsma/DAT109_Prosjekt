@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <link type="text/css" id="dark-mode" rel="stylesheet" href="">
 <style type="text/css" id="dark-mode-custom-style"></style>
 <head>
@@ -349,11 +349,50 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h5 class="modal-title">Legg til nytt prosjekt</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p>Some text in the modal.</p>
+                    <form>
+                        <div class="form-group">
+                            <label for="prosjekt-navn" class="col-form-label"></label>
+                            <input type="text" class="form-control" id="prosjekt-navn" placeholder="Prosjektnavn">
+                        </div>
+                        <div class="form-group">
+                            <label for="prosjekt-beskrivelse" class="col-form-label"></label>
+                            <input type="text" class="form-control" id="prosjekt-beskrivelse"
+                                   placeholder="Prosjektbeskrivelse">
+                        </div>
+                        <div class="form-group">
+                            <label for="prosjekt-email" class="col-form-label"></label>
+                            <input type="text" class="form-control" id="prosjekt-email" placeholder="Prosjektmail">
+                        </div>
+                        <div class="form-group">
+                            <p class="underTitle text-white"> Velg institutt:
+                                <select class="selectpicker" data-live-search="true" name="institutt" form="thisisform">
+                                    <optgroup th:each="kategori: ${kategorier}" th:label="${kategori.kategorinavn}">
+                                        <option th:each="institutt: ${kategori.studier}"
+                                                th:value="${institutt.studieid}"
+                                                th:name="${institutt.studienavn}"
+                                                th:text="${institutt.studienavn}">
+                                        </option>
+                                    </optgroup>
+                                </select>
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <p class="underTitle text-white">Velg din sammarbeidspartner:
+                                <select class="selectpicker" data-live-search="true" form="thisisform"
+                                        name="samarbeidspartner">
+                                    <option th:each="bedrift: ${bedrifter}"
+                                            th:value="${bedrift.bedriftid}"
+                                            th:name="${bedrift.bedriftnavn}"
+                                            th:text="${bedrift.bedriftnavn}">
+                                    </option>
+                                </select>
+                            </p>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
