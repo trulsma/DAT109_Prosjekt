@@ -72,7 +72,7 @@
             <h2 th:text="${prosjekt.prosjektnavn}"></h2>
             <p th:text="${prosjekt.prosjektbeskrivelse}"></p>
             <p>
-                <a class="btn btn-outline-info" href="@{'prosjekt/' + ${prosjekt.prosjektid}">Gå til prosjekt</a>
+                <a class="btn btn-outline-info" th:href="@{'prosjekt/' + ${prosjekt.prosjektid}}">Gå til prosjekt</a>
             </p>
 
 
