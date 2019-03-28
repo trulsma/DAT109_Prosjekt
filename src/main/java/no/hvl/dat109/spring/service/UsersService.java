@@ -7,7 +7,9 @@ import no.hvl.dat109.spring.service.Interfaces.IUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import static no.hvl.dat109.prosjekt.utilities.Utilities.checkPassword;
 import static no.hvl.dat109.prosjekt.utilities.Utilities.hashPassword;
@@ -50,9 +52,24 @@ public class UsersService implements IUsersService {
 
     @Override
     public UsersBean validUser(String username, String password) {
-        UsersBean user = getUserByName(username);
-        if (user == null || !checkPassword(password, user)) return null;
-        return user;
+        List<UsersBean> users = getUsersWithName(username);
+        for (UsersBean user : users) {
+            if (checkPassword(password, user)) return user;
+        }
+        return null;
+    }
+
+    @Override
+    public List<UsersBean> getUsersWithName(String username) {
+        Iterator<UsersBean> usersIterator = usersRepository.findAll().iterator();
+        List<UsersBean> users = new ArrayList<>();
+        UsersBean user;
+        while (usersIterator.hasNext()) {
+            user = usersIterator.next();
+            if (user.getUsername().equals(username) && !user.isExpired()) users.add(user);
+        }
+
+        return users;
     }
 
     @Override
