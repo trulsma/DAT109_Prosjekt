@@ -4,6 +4,7 @@ import no.hvl.dat109.prosjekt.utilities.UrlPaths;
 import no.hvl.dat109.spring.beans.ArrangementBean;
 import no.hvl.dat109.spring.beans.ArrangementdeltagelseBean;
 import no.hvl.dat109.spring.beans.ProsjektBean;
+import no.hvl.dat109.spring.beans.UsersBean;
 import no.hvl.dat109.spring.service.Interfaces.IArrangementService;
 import no.hvl.dat109.spring.service.Interfaces.IArrangementdeltagelseService;
 import no.hvl.dat109.spring.service.Interfaces.IProsjektService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -30,9 +32,13 @@ public class ArrangementdeltagelseController {
     private IProsjektService prosjektService;
 
     @GetMapping(UrlPaths.ARRANGEMENT_WITH_ID)
-    public String getArrangementDeltagelser(@PathVariable("id") int id, Model model) {
+    public String getArrangementDeltagelser(@PathVariable("id") int id, Model model, HttpSession session) {
         ArrangementBean arrangement = arrangementService.getArrangement(id);
         List<ProsjektBean> deltagelser = deltagelseService.getAllProsjektFromArrangement(arrangement);
+
+        UsersBean user = (UsersBean) session.getAttribute("user");
+
+        model.addAttribute("level", user == null ? 3 : user.getUsergroupLevel());
         model.addAttribute("deltagelser", deltagelser);
         return UrlPaths.ARRANGEMNT_DELTAGELSE_HTML;
     }
