@@ -9,7 +9,7 @@ import static no.hvl.dat109.prosjekt.utilities.PasswordHasher.getSaltedHash;
 
 public class Utilities {
 
-    private static final String letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    private static final String numbers = "1234567890";
     private static final Random random = new Random();
 
     /**
@@ -20,12 +20,12 @@ public class Utilities {
      */
     public static String generateShortPassword(int length) {
         //Create char array from letters and create a stringbuilder
-        char[] letterArray = letters.toCharArray();
+        char[] numberArray = numbers.toCharArray();
         StringBuilder pass = new StringBuilder();
 
         //Loop through and add a random letter from the char array
         for (int i = 0; i < length; i++) {
-            pass.append(letterArray[random.nextInt(letters.length())]);
+            pass.append(numberArray[random.nextInt(numbers.length())]);
         }
 
         return pass.toString();

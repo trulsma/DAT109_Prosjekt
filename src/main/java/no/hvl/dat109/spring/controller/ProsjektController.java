@@ -158,7 +158,7 @@ public class ProsjektController {
         StudieBean studie = studieService.getStudieById(institutt);
 
         //Lag en user med emailen vi fikk
-        String password = Utilities.generateShortPassword(5);
+        String password = Utilities.generateShortPassword(4);
         UsersBean user = userService.createNewUser(email, password);
 
         //Lag prosjektet med alt vi har fått så langt
