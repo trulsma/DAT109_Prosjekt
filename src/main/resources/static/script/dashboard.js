@@ -5,7 +5,7 @@ let antall_visning = document.getElementById('antall_visning');
 
 function visData(prosjektid, arrangementid) {
         $.ajax({
-        url: "/api/prosjekt/{0}/arrangement/{1}?stepSize=10".replace("{0}", prosjektid).replace("{1}", arrangementid),
+        url: "/api/prosjekt/{0}/arrangement/{1}?stepSize=30".replace("{0}", prosjektid).replace("{1}", arrangementid),
         data: {},
         success: visGrafer
     })

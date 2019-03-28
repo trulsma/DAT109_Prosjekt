@@ -70,8 +70,6 @@ public class StatistikkController {
             return "redirect:" + UrlPaths.INDEX;
         }
 
-        System.out.println("test");
-
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
         if (prosjekt == null) {
             return UrlPaths.ERRORPAGE;
