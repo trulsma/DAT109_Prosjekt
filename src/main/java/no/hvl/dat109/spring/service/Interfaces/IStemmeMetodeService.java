@@ -2,7 +2,7 @@ package no.hvl.dat109.spring.service.Interfaces;
 
 import no.hvl.dat109.spring.beans.StemmeMetodeBean;
 
-public interface IStemmeMetode {
+public interface IStemmeMetodeService {
 
     //Todo create service methods for stemmemetoder
 

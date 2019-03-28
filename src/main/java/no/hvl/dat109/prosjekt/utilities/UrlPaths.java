@@ -19,6 +19,7 @@ public class UrlPaths {
     //Arrangement
     public final static String ARRANGEMENT_BASE = "/arrangement",
             ARRANGEMENT_DELTA = ARRANGEMENT_BASE + "/delta",
+            ADD_ARRANGEMENT = ARRANGEMENT_BASE + "/add",
             ARRANGEMENT_WITH_ID = ARRANGEMENT_BASE + "/{id}",
             ARRANGEMNT_DELTAGELSE_HTML = "deltagelser";
 

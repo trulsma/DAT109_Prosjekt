@@ -33,6 +33,13 @@ public class ArrangementBean {
         this.arragementetutgaar = arragementetutgaar;
     }
 
+    public ArrangementBean(String arrangementnavn, String arrangementbeskrivelse, StemmeMetodeBean metode, Date arrangementutgaar) {
+        this.arrangementnavn = arrangementnavn;
+        this.arrangementbeskrivelse = arrangementbeskrivelse;
+        this.stemmemetode = metode;
+        this.arragementetutgaar = arrangementutgaar;
+    }
+
     public List<ArrangementdeltagelseBean> getDeltagelser() {
         return deltagelser;
     }

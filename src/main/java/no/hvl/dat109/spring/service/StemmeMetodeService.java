@@ -2,12 +2,12 @@ package no.hvl.dat109.spring.service;
 
 import no.hvl.dat109.spring.beans.StemmeMetodeBean;
 import no.hvl.dat109.spring.repository.StemmeMetodeRepository;
-import no.hvl.dat109.spring.service.Interfaces.IStemmeMetode;
+import no.hvl.dat109.spring.service.Interfaces.IStemmeMetodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StemmeMetodeService implements IStemmeMetode {
+public class StemmeMetodeService implements IStemmeMetodeService {
 
     //Todo implement methods
 

@@ -4,7 +4,6 @@ import no.hvl.dat109.prosjekt.utilities.UrlPaths;
 import no.hvl.dat109.spring.beans.ProsjektBean;
 import no.hvl.dat109.spring.beans.UsersBean;
 import no.hvl.dat109.spring.service.Interfaces.*;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +27,9 @@ public class DiverseController {
 
     @Autowired
     private IProsjektService prosjektService;
+
+    @Autowired
+    private IStemmeMetodeService stemmeMetode;
 
 
     @PostMapping(UrlPaths.REGISTRER_DEG)
@@ -80,9 +82,9 @@ public class DiverseController {
         if (user == null || user.getUsergroupLevel() > 1)
             return "redirect:" + UrlPaths.INDEX;
 
-
         model.addAttribute("kategorier", kategoriService.getAllKategorier());
         model.addAttribute("bedrifter", bedriftService.getAlleBedrifter());
+        model.addAttribute("stemmemetoder", stemmeMetode.getAllStemmemetoder());
         return UrlPaths.DASHBOARD_ADMIN_HTML;
     }
 

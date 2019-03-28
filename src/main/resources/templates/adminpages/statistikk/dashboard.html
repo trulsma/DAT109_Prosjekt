@@ -99,7 +99,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#addArrangement">
                             <i class="fas fa-plus"></i>
                             Legg til Arrangement
                         </a>
@@ -442,40 +442,54 @@
         </div>
     </div>
 
+    <div class="modal fade" id="addArrangement" role="dialog">
+        <div class="modal-dialog">
 
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <form class="form-signin" method="post" action="/prosjekt/add" id="deltaarrangement">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Delta på arrangement</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <p class="underTitle">Velg arrangement:
-                            <select class="selectpicker" data-live-search="true" form="deltaarrangement"
-                                    name="samarbeidspartner">
-                                <option th:each="bedrift: ${bedrifter}"
-                                        th:value="${bedrift.bedriftid}"
-                                        th:name="${bedrift.bedriftnavn}"
-                                        th:text="${bedrift.bedriftnavn}">
-                                </option>
-                            </select>
-                        </p>
+            <!-- Modal content-->
+            <form class="form-signin" method="post" action="/arrangement/add" id="addArrangementForm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Legg til nytt arrangement</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="arrangementnavn" class="col-form-label"></label>
+                            <input type="text" class="form-control" id="arrangementnavn" name="arrangementnavn"
+                                   placeholder="Arrangement Navn">
+                        </div>
+                        <div class="form-group">
+                            <label for="arrangementbeskrivelse" class="col-form-label"></label>
+                            <input type="text" class="form-control" id="arrangementbeskrivelse"
+                                   name="arrangementbeskrivelse" placeholder="Arrangement Beskrivelse">
+                        </div>
+                        <div class="form-group">
+                            <label for="arrangementdate" class="col-form-label"></label>
+                            <input type="datetime-local" class="form-control" id="arrangementdate" name="arrangementdate" placeholder="Utgår">
+                        </div>
+                        <div class="form-group">
+                            <p class="underTitle">Velg stemmemetode:<br>
+                                <select class="selectpicker" data-live-search="true" form="addArrangementForm"
+                                        id="stemmemetode" name="stemmemetode">
+                                    <option th:each="metode: ${stemmemetoder}"
+                                            th:value="${metode.metodeid}"
+                                            th:name="${metode.metodenavn}"
+                                            th:text="${metode.metodenavn}">
+                                    </option>
+                                </select>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-lg btn-outline-success btn-block" type="submit">Registrer prosjekt
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-lg btn-outline-success btn-block" type="submit">Registrer prosjekt
-                    </button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
 
-        </form>
+            </form>
+        </div>
     </div>
-
 </div>
 
 <!-- Bootstrap core JavaScript

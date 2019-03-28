@@ -1,6 +1,7 @@
 package no.hvl.dat109.spring.service.Interfaces;
 
 import no.hvl.dat109.spring.beans.ArrangementBean;
+import no.hvl.dat109.spring.beans.StemmeMetodeBean;
 
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,8 @@ public interface IArrangementService {
     List<ArrangementBean> getAllArrangementerNotAttending(int prosjektid);
 
     void addArrangement(String arrangementnavn, String arrangementbeskrivelse, Date arrangementutgaar);
+
+    void addArrangement(String arrangementnavn, String arrangementbeskrivelse, StemmeMetodeBean metode, Date arrangementutgaar);
 
     void removeArrangement(ArrangementBean arrangement);
 

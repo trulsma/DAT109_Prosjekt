@@ -2,6 +2,10 @@ package no.hvl.dat109.prosjekt.utilities;
 
 import no.hvl.dat109.spring.beans.UsersBean;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 import static no.hvl.dat109.prosjekt.utilities.PasswordHasher.check;
@@ -29,6 +33,17 @@ public class Utilities {
         }
 
         return pass.toString();
+    }
+
+    public static Date formatDate(String datestring) {
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+        try {
+            return (Date) formatter.parse(datestring);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return new Date();
     }
 
     /**
