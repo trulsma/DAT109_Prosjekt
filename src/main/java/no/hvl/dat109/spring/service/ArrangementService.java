@@ -1,12 +1,18 @@
 package no.hvl.dat109.spring.service;
 
 import no.hvl.dat109.spring.beans.ArrangementBean;
+import no.hvl.dat109.spring.beans.ArrangementdeltagelseBean;
 import no.hvl.dat109.spring.repository.ArrangementRepository;
+import no.hvl.dat109.spring.repository.ArrangementdeltagelseRepository;
 import no.hvl.dat109.spring.service.Interfaces.IArrangementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -15,6 +21,9 @@ public class ArrangementService implements IArrangementService {
     @Autowired
     private ArrangementRepository arrangementRepository;
 
+    @Autowired
+    private ArrangementdeltagelseService deltagelseService;
+
     @Override
     public String getAllArrangementAsString() {
 
@@ -22,6 +31,22 @@ public class ArrangementService implements IArrangementService {
 
         if (bean == null) return "Ingen data";
         return bean.toString();
+    }
+
+    @Override
+    public List<ArrangementBean> getAllArrangementerNotAttending(int prosjektid) {
+        List<ArrangementBean> arrangementer = new ArrayList<>();
+        Iterator<ArrangementdeltagelseBean> arrangementdeltagelseIterator = deltagelseService.getAllArrangementdeltagelser().iterator();
+
+        ArrangementdeltagelseBean deltagelse;
+        while (arrangementdeltagelseIterator.hasNext()) {
+            deltagelse = arrangementdeltagelseIterator.next();
+
+            if (deltagelse.getProsjekt().getProsjektid() != prosjektid)
+                arrangementer.add(deltagelse.getArrangement());
+        }
+
+        return arrangementer.stream().distinct().collect(Collectors.toList());
     }
 
     @Override

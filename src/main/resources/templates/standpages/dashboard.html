@@ -102,10 +102,14 @@
 
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                     <span>Arrangement</span>
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#deltaarrangement">
+                        <i class="fas fa-plus-circle"></i>
+                    </a>
                 </h6>
                 <ul class="nav flex-column mb-2" th:each="deltagelse: ${prosjekt.arragementdeltagelser}">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="${prosjekt.prosjektid} + '/arrangement/' + ${deltagelse.arrangement.arrangementid}">
+                        <a class="nav-link"
+                           th:href="${prosjekt.prosjektid} + '/arrangement/' + ${deltagelse.arrangement.arrangementid}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                  stroke-linejoin="round" class="feather feather-file-text">
@@ -124,7 +128,8 @@
 
         <main role="main" class="col-md-9">
             <p class="display-5">
-                Velg et arrangement fra listen til venstre for å få opp statistikk. <br>(hvis listen er tom er du ikke meldt på noen arrangementer)
+                Velg et arrangement fra listen til venstre for å få opp statistikk. <br>(hvis listen er tom er du ikke
+                meldt på noen arrangementer)
             </p>
         </main>
     </div>
@@ -203,8 +208,7 @@
                 </div>
                 <form th:action="@{'/prosjekt/' + ${prosjekt.prosjektid} + '/remove'}" method="post">
                     <div class="modal-body">
-
-                       <p>Er du sikker på du vil slette prosjektet?</p>
+                        <p>Er du sikker på du vil slette prosjektet?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn-danger">Ja</button>
@@ -217,6 +221,42 @@
     </div>
 </div>
 
+
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="deltaarrangement" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="display-10">Delta på arrangement</h1>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form action="/arrangement/delta" method="post">
+                    <div class="form-group">
+                        <p class="underTitle">Velg arrangement:
+                            <select class="selectpicker" data-live-search="true" id="arrangementid"
+                                    name="arrangementid">
+                                <option th:each="arrangement: ${arrangementer}"
+                                        th:value="${arrangement.arrangementid}"
+                                        th:name="${arrangement.arrangementnavn}"
+                                        th:text="${arrangement.arrangementnavn}">
+                                </option>
+                            </select>
+                        </p>
+                    </div>
+                    <input type="hidden" name="prosjektid" id="prosjektid" th:value="${prosjekt.prosjektid}">
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Delta</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Avbryt</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>

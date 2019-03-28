@@ -258,7 +258,7 @@
 
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                     <span>Saved reports</span>
-                    <a class="d-flex align-items-center text-muted" href="#">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#deltaarrangement">
                         <i class="fas fa-plus-circle"></i>
                     </a>
                 </h6>
@@ -441,6 +441,41 @@
             </form>
         </div>
     </div>
+
+
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <form class="form-signin" method="post" action="/prosjekt/add" id="deltaarrangement">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delta på arrangement</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <p class="underTitle">Velg arrangement:
+                            <select class="selectpicker" data-live-search="true" form="deltaarrangement"
+                                    name="samarbeidspartner">
+                                <option th:each="bedrift: ${bedrifter}"
+                                        th:value="${bedrift.bedriftid}"
+                                        th:name="${bedrift.bedriftnavn}"
+                                        th:text="${bedrift.bedriftnavn}">
+                                </option>
+                            </select>
+                        </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-lg btn-outline-success btn-block" type="submit">Registrer prosjekt
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
 </div>
 
 <!-- Bootstrap core JavaScript
