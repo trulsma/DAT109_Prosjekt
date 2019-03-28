@@ -61,12 +61,4 @@ public class Utilities {
         }
         return false;
     }
-
-    public static void main(String[] args) {
-        try {
-            System.out.println(check("1986", "C5+7QMAjiVQyNegrkDPqBi0cqc/HSzU4HNY5K1dmUOc=$Sqhzt8+2HMZEVjqfdXFBCbXyi8OgGZYXKLGJZHdxcyo="));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

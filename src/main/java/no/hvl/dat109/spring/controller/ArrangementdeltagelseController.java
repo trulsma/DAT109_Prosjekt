@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -26,9 +27,13 @@ public class ArrangementdeltagelseController {
     @GetMapping(UrlPaths.ARRANGEMENT_WITH_ID)
     public String getArrangementDeltagelser(@PathVariable("id") int id, Model model) {
         ArrangementBean arrangement = arrangementService.getArrangement(id);
-        System.out.println("Arrangement: " + arrangement);
         List<ProsjektBean> deltagelser = deltagelseService.getAllProsjektFromArrangement(arrangement);
         model.addAttribute("deltagelser", deltagelser);
         return UrlPaths.ARRANGEMNT_DELTAGELSE_HTML;
+    }
+
+    @PostMapping(UrlPaths.ARRANGEMENT_DELTA)
+    String deltaArrangement() {
+        return "index";
     }
 }

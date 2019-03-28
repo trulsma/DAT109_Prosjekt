@@ -18,6 +18,7 @@ public class UrlPaths {
 
     //Arrangement
     public final static String ARRANGEMENT_BASE = "/arrangement",
+            ARRANGEMENT_DELTA = ARRANGEMENT_BASE + "/delta",
             ARRANGEMENT_WITH_ID = ARRANGEMENT_BASE + "/{id}",
             ARRANGEMNT_DELTAGELSE_HTML = "deltagelser";
 
@@ -79,7 +80,6 @@ public class UrlPaths {
             LOGIN_HTML = "login",
             USER_LOGIN = "/user/login",
             USER_LOGIN_HTML = "userLogin",
-            LOGGED_IN_HTML = "loggedinIndex",
             INDEX = "/",
             STEM = "/stem",
             MINE_STEMMER = "/mine_stemmer",
