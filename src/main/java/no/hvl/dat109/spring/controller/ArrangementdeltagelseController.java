@@ -41,10 +41,11 @@ public class ArrangementdeltagelseController {
     String deltaArrangement(@RequestParam("arrangementid") int arrangementid,
                             @RequestParam("prosjektid") int prosjektid) {
 
+        //Finn prosjekt og arrangement
         ProsjektBean prosjekt = prosjektService.getProsjektById(prosjektid);
         ArrangementBean arrangement = arrangementService.getArrangement(arrangementid);
 
-
+        //Legg deltagelsen til databasen
         deltagelseService.addArrangementDeltagelse(arrangement, prosjekt);
 
         return "redirect:" + UrlPaths.DASHBOARD + "/" + prosjektid;

@@ -43,6 +43,7 @@ public class ProsjektBean implements Serializable {
         this.prosjektnavn = prosjektnavn;
         this.prosjektbeskrivelse = prosjektbeskrivelse;
         this.sammarbeidsbedrift = sammarbeidsbedrift;
+        this.pictureurl = "images/default-icon.png";
     }
 
     public ProsjektBean(String prosjektnavn, String prosjektbeskrivelse, BedriftBean sammarbeidsbedrift, StudieBean studieKategori, UsersBean prosjektEiger) {
@@ -51,6 +52,7 @@ public class ProsjektBean implements Serializable {
         this.sammarbeidsbedrift = sammarbeidsbedrift;
         this.studieKategori = studieKategori;
         this.prosjektEiger = prosjektEiger;
+        this.pictureurl = "images/default-icon.png";
     }
 
     public int getProsjektid() {
