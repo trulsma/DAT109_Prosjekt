@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+import static no.hvl.dat109.prosjekt.handlers.Processing.*;
+
 @Controller
 public class ArrangementdeltagelseController {
 
@@ -51,9 +53,27 @@ public class ArrangementdeltagelseController {
         ProsjektBean prosjekt = prosjektService.getProsjektById(prosjektid);
         ArrangementBean arrangement = arrangementService.getArrangement(arrangementid);
 
+        setQrLink(prosjekt, arrangement);
+
         //Legg deltagelsen til databasen
         deltagelseService.addArrangementDeltagelse(arrangement, prosjekt);
 
+
         return "redirect:" + UrlPaths.DASHBOARD + "/" + prosjektid;
+    }
+
+    /**
+     * Sets the QR link to the database
+     *
+     * @param prosjekt prosjekt to set the qr link to
+     */
+    private void setQrLink(ProsjektBean prosjekt, ArrangementBean arrangement) {
+        if (arrangement.getStemmemetode().getMetodeparameter() > 1)
+            prosjekt.setShortenedurl(generateShortlink(prosjekt, arrangement));
+        else
+            prosjekt.setShortenedurl(generateStemmeLink(prosjekt, arrangement));
+
+        prosjekt.setQrimagepath(getRelativeProjectQRCode(prosjekt, arrangement));
+        prosjektService.updateProsjekt(prosjekt);
     }
 }

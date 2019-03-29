@@ -5,6 +5,8 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.rosaloves.bitlyj.Url;
+import no.hvl.dat109.prosjekt.utilities.UrlPaths;
+import no.hvl.dat109.spring.beans.ArrangementBean;
 import no.hvl.dat109.spring.beans.ProsjektBean;
 
 import javax.imageio.ImageIO;
@@ -25,10 +27,16 @@ public class Processing {
      * @param prosjekt prosjektet du vil lage link til
      * @return bit.ly link
      */
-    public static String generateShortlink(ProsjektBean prosjekt) {
-        String shortenedLink = generateShortBitlyLinkForQR(prosjekt.getProsjektid());
-        createQRImage(prosjekt, shortenedLink);
+    public static String generateShortlink(ProsjektBean prosjekt, ArrangementBean arrangement) {
+        String shortenedLink = generateShortBitlyLinkForQR(prosjekt.getProsjektid(), arrangement.getArrangementid());
+        createQRImage(prosjekt, arrangement, shortenedLink);
         return shortenedLink;
+    }
+
+    public static String generateStemmeLink(ProsjektBean prosjekt, ArrangementBean arrangement) {
+        String shortenedUrl = generateShortBitlyStemmeLink(prosjekt.getProsjektid(), arrangement.getArrangementid());
+        createQRImage(prosjekt, arrangement, shortenedUrl);
+        return shortenedUrl;
     }
 
     /**
@@ -50,9 +58,9 @@ public class Processing {
      * @param prosjekt      prosjekt
      * @param shortenedLink bit.ly linken
      */
-    private static void createQRImage(ProsjektBean prosjekt, String shortenedLink) {
+    private static void createQRImage(ProsjektBean prosjekt, ArrangementBean arrangementBean, String shortenedLink) {
         //Pathen til resource mappen
-        String dir = PROJECT_PATH + prosjekt.getProsjektnavn() + "/images/";
+        String dir = PROJECT_PATH + prosjekt.getProsjektnavn() + "/arrangementer/" + arrangementBean.getArrangementid() + "/images/";
         File directory = new File(dir);
 
         //If directory exists then we can create, or try to make directory
@@ -83,9 +91,21 @@ public class Processing {
      * @param prosjektid prosjektid for linken
      * @return bit.ly link
      */
-    public static String generateShortBitlyLinkForQR(int prosjektid) {
+    public static String generateShortBitlyLinkForQR(int prosjektid, int arrangementid) {
         Url url = as("elprosjekto", "R_eea8a14a9ffe422e8ca79f8b26aabe8a")
-                .call(shorten(HOST + "prosjekt/" + prosjektid));
+                .call(shorten(HOST + "prosjekt/" + prosjektid + "/arrangement/" + arrangementid));
+        return url.getShortUrl();
+    }
+
+    /**
+     * Generer en bit.ly link
+     *
+     * @param prosjektid prosjektid for linken
+     * @return bit.ly link
+     */
+    public static String generateShortBitlyStemmeLink(int prosjektid, int arrangementid) {
+        Url url = as("elprosjekto", "R_eea8a14a9ffe422e8ca79f8b26aabe8a")
+                .call(shorten(HOST + UrlPaths.STEM + "/" + prosjektid + "/" + arrangementid));
         return url.getShortUrl();
     }
 
@@ -108,8 +128,8 @@ public class Processing {
      * @param prosjektBean prosjekt å finne qr bilde til
      * @return path til QR image
      */
-    public static String getFullQRImagePath(ProsjektBean prosjektBean) {
-        return PROJECT_PATH + prosjektBean.getProsjektnavn() + "/images/" + qrImageFileName(prosjektBean);
+    public static String getFullQRImagePath(ProsjektBean prosjektBean, ArrangementBean arrangement) {
+        return PROJECT_PATH + prosjektBean.getProsjektnavn() + "/arrangementer/" + arrangement.getArrangementid() + "/images/" + qrImageFileName(prosjektBean);
     }
 
     /**
@@ -119,8 +139,8 @@ public class Processing {
      * @param prosjekt prosjekt you want the qr code for
      * @return qrimage path relative to project
      */
-    public static String getRelativeProjectQRCode(ProsjektBean prosjekt) {
-        return RELATIVE_PROJECT_PATH + prosjekt.getProsjektnavn() + "/images/" + qrImageFileName(prosjekt);
+    public static String getRelativeProjectQRCode(ProsjektBean prosjekt, ArrangementBean arrangement) {
+        return RELATIVE_PROJECT_PATH + prosjekt.getProsjektnavn() + "/arrangementer/" + arrangement.getArrangementid() + "/images/" + qrImageFileName(prosjekt);
     }
 
     /**
@@ -130,7 +150,7 @@ public class Processing {
      * @param prosjektBean project to get imagepath to
      * @return relative imagepath often used in database
      */
-    public static String getRelativeProjectImagePath(ProsjektBean prosjektBean) {
-        return RELATIVE_PROJECT_PATH + prosjektBean.getProsjektnavn() + "/images/";
+    public static String getRelativeProjectImagePath(ProsjektBean prosjektBean, ArrangementBean arrangement) {
+        return RELATIVE_PROJECT_PATH + prosjektBean.getProsjektnavn() + "/arrangementer/" + arrangement.getArrangementid() + "/images/";
     }
 }
