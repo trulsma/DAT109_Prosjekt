@@ -23,8 +23,8 @@
     <div class="col-md-4 p-lg-5 mx-auto my-5 padding-md bg-light shadow-sm rounded">
         <div th:switch="${arrangement.stemmemetode.metodeparameter}">
             <div th:case="1">
-                <p><img th:src="@{~/{fil}(fil=${prosjekt.qrimagepath})}" alt=""></p>
-                <p class="smallText" th:text="${prosjekt.shortenedurl}"></p>
+                <p><img th:src="@{~/{fil}(fil=${qrpath})}" alt=""></p>
+                <p class="smallText" th:text="${shorturl}"></p>
             </div>
             <div th:case="*">
                 <form action="/stem" method="post">

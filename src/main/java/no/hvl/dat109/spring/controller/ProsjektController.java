@@ -1,7 +1,9 @@
 package no.hvl.dat109.spring.controller;
 
+import no.hvl.dat109.prosjekt.handlers.Processing;
 import no.hvl.dat109.prosjekt.utilities.EmailUtil;
 import no.hvl.dat109.prosjekt.handlers.FileHandler;
+import no.hvl.dat109.prosjekt.utilities.ProsjektPaths;
 import no.hvl.dat109.prosjekt.utilities.UrlPaths;
 import no.hvl.dat109.prosjekt.utilities.Utilities;
 import no.hvl.dat109.spring.beans.*;
@@ -110,6 +112,7 @@ public class ProsjektController {
         }
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
+        ArrangementBean arrangement = arrangementService.getArrangement(arrangementid);
         UsersBean user = (UsersBean) session.getAttribute("user");
 
         if (prosjekt == null) {
@@ -127,7 +130,11 @@ public class ProsjektController {
             return UrlPaths.ERRORPAGE;
         }
 
+        String relativeProjectQR = Processing.getRelativeProjectQRCode(prosjekt, arrangement);
+
         model.addAttribute("samarbeidspartner", prosjekt.getSammarbeidsbedrift());
+        model.addAttribute("qrpath", relativeProjectQR);
+        model.addAttribute("shorturl", Processing.decodeQRCode(relativeProjectQR));
         model.addAttribute("prosjekt", prosjekt);
         model.addAttribute("arrangement", deltagelse.getArrangement());
 

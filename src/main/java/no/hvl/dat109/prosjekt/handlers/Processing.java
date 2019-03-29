@@ -1,8 +1,10 @@
 package no.hvl.dat109.prosjekt.handlers;
 
 import com.google.zxing.*;
+import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.rosaloves.bitlyj.Url;
 import no.hvl.dat109.prosjekt.utilities.UrlPaths;
@@ -50,6 +52,23 @@ public class Processing {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         BitMatrix bitMatrix = qrCodeWriter.encode(projectlink, BarcodeFormat.QR_CODE, QRCODE_SIZE, QRCODE_SIZE);
         return MatrixToImageWriter.toBufferedImage(bitMatrix);
+    }
+
+
+    public static String decodeQRCode(String qrCodeString) {
+        File qrCodeImage = new File(qrCodeString);
+        BufferedImage bufferedImage = null;
+        try {
+            bufferedImage = ImageIO.read(qrCodeImage);
+            LuminanceSource source = new BufferedImageLuminanceSource(bufferedImage);
+            BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+
+            Result result = new MultiFormatReader().decode(bitmap);
+            return result.getText();
+        } catch (IOException | NotFoundException e) {
+            System.out.println("There is no QR code in the image");
+            return "";
+        }
     }
 
     /**
