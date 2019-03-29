@@ -33,6 +33,11 @@ public class ArrangementdeltagelseService implements IArrangementdeltagelseServi
     }
 
     @Override
+    public Iterable<ArrangementdeltagelseBean> getAllArrangementdeltagelser() {
+        return arrangementdeltagelseRepository.findAll();
+    }
+
+    @Override
     public void addArrangementDeltagelse(ArrangementBean arrangement, ProsjektBean prosjek) {
         ArrangementdeltagelseBean bean = new ArrangementdeltagelseBean(arrangement, prosjek);
         arrangementdeltagelseRepository.save(bean);

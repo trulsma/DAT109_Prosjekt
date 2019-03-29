@@ -14,6 +14,8 @@ public interface IArrangementdeltagelseService {
 
     ArrangementdeltagelseBean getArrangementDeltagelse(int prosjektid, int arrangementid);
 
+    Iterable<ArrangementdeltagelseBean> getAllArrangementdeltagelser();
+
     void addArrangementDeltagelse(ArrangementBean arrangement, ProsjektBean prosjek);
 
     void removeArrangementDeltagelse(ArrangementdeltagelseBean deltagelse);

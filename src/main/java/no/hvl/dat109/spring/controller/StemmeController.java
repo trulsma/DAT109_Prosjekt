@@ -2,6 +2,7 @@ package no.hvl.dat109.spring.controller;
 
 import no.hvl.dat109.prosjekt.utilities.UrlPaths;
 import no.hvl.dat109.spring.beans.*;
+import no.hvl.dat109.spring.service.Interfaces.IArrangementService;
 import no.hvl.dat109.spring.service.Interfaces.IProsjektService;
 import no.hvl.dat109.spring.service.Interfaces.IStemmeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class StemmeController {
 
     @Autowired
     private IProsjektService prosjektService;
+
+    @Autowired
+    private IArrangementService arrangementService;
 
     @GetMapping(UrlPaths.MINE_STEMMER)
     public String visMineStemmer(HttpSession session, Model model) {
@@ -84,20 +88,51 @@ public class StemmeController {
         }
 
         // TODO: bruke arragemetntdeltagelse
-        stemmeService.addStemme(new StemmeBean(deltagelse, epost, validateVerdi(verdi)));
+        stemmeService.addStemme(new StemmeBean(deltagelse, epost, validateVerdi(verdi, deltagelse.getArrangement())));
 
-        return "redirect:" + UrlPaths.STEM +"?navn=" + prosjekt.getProsjektnavn();
+        return "redirect:" + UrlPaths.STEM + "?navn=" + prosjekt.getProsjektnavn();
+    }
+
+    @GetMapping(UrlPaths.STEM_FROM_LINK)
+    String stemFromUrl(@PathVariable("pid") int pid, @PathVariable("aid") int aid, HttpSession session, Model model) {
+
+        UsersBean user = (UsersBean) session.getAttribute("user");
+
+        //TODO FIKS REDIRECT RETT
+        if (user == null) return "redirect:" + UrlPaths.REGISTRER_DEG;
+        ProsjektBean prosjekt = prosjektService.getProsjektById(pid);
+        ArrangementBean arrangement = arrangementService.getArrangement(aid);
+
+        if (prosjekt == null || arrangement == null) return "redirect:" + UrlPaths.INDEX;
+
+        // Sjekke om prosjektet deltar i arragementet
+        ArrangementdeltagelseBean deltagelse = prosjekt.getArragementdeltagelser()
+                .stream()
+                .filter(a -> a.getArrangement().getArrangementid() == aid)
+                .findAny()
+                .orElse(null);
+
+        // PRosjektet deltar ikke i arrengementet
+        if (deltagelse == null) {
+            return UrlPaths.ERRORPAGE;
+        }
+
+        stemmeService.addStemme(new StemmeBean(deltagelse, user.getUsername(), 1));
+        model.addAttribute("navn", prosjekt.getProsjektnavn());
+        return "redirect:" + UrlPaths.STEM;
     }
 
     /**
-     * Validerer at verdien ikke er større enn 5 eller mindre enn 0
+     * Validere at verdien ikke kan overstige arrangementet sin stemmeverdi og at det kan ikke bli mindre enn 1
      *
-     * @param verdi verdi fra post
-     * @return verdi mellom 0 og 5
+     * @param verdi       verdien av stemmen
+     * @param arrangement arrangementet for å finne rangeringen
+     * @return stemmeverdien
      */
-    private int validateVerdi(int verdi) {
-        if (verdi < 0) verdi = 0;
-        else if (verdi > 5) verdi = 5;
+    private int validateVerdi(int verdi, ArrangementBean arrangement) {
+        int metodeparameter = arrangement.getStemmemetode().getMetodeparameter();
+        if (verdi <= 0) verdi = 1;
+        else if (verdi > metodeparameter) verdi = metodeparameter;
         return verdi;
     }
 

@@ -28,6 +28,9 @@ public class DiverseController {
     @Autowired
     private IProsjektService prosjektService;
 
+    @Autowired
+    private IStemmeMetodeService stemmeMetode;
+
 
     @PostMapping(UrlPaths.REGISTRER_DEG)
     String registerBruker(@RequestParam String redirect_url, @RequestParam String epost, HttpSession session, HttpServletRequest request) {
@@ -43,26 +46,20 @@ public class DiverseController {
         //Get user from session
         UsersBean user = (UsersBean) session.getAttribute("user");
         model.addAttribute("user", user);
-
         model.addAttribute("prosjekter", prosjektService.getAlleProsjekter());
 
         //If you are a voter or dont have a user
         if (user == null || user.getUsergroupLevel() == 3) {
             model.addAttribute("prosjektid", 0);
-            return UrlPaths.INDEX_HTML; //If user is not logged in og just a voter
+            model.addAttribute("level", 3);
         } else {
             //If you are admin or
             ProsjektBean prosjekt = prosjektService.getProsjektFromOwner(user);
+            model.addAttribute("level", user.getUsergroupLevel());
             model.addAttribute("prosjektid", prosjekt == null ? 0 : prosjekt.getProsjektid());
-            return UrlPaths.LOGGED_IN_HTML;
         }
+        return UrlPaths.INDEX_HTML;
     }
-
-    @GetMapping(UrlPaths.BASE_KONTAKT)
-    String getKontakt() {
-        return UrlPaths.KONTAKT_HTML;
-    }
-
 
     @GetMapping(UrlPaths.REGISTRER_DEG)
     String getRegistrerBruker(@RequestParam(required = false) String redirect_url, Model model) {
@@ -79,9 +76,15 @@ public class DiverseController {
     }
 
     @GetMapping(UrlPaths.DASHBOARD)
-    String getDashboard(Model model) {
+    String getDashboard(HttpSession session, Model model) {
+
+        UsersBean user = (UsersBean) session.getAttribute("user");
+        if (user == null || user.getUsergroupLevel() > 1)
+            return "redirect:" + UrlPaths.INDEX;
+
         model.addAttribute("kategorier", kategoriService.getAllKategorier());
         model.addAttribute("bedrifter", bedriftService.getAlleBedrifter());
+        model.addAttribute("stemmemetoder", stemmeMetode.getAllStemmemetoder());
         return UrlPaths.DASHBOARD_ADMIN_HTML;
     }
 

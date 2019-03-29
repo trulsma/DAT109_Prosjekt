@@ -12,6 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
+@SuppressWarnings("ALL")
 @Controller
 public class StatistikkController {
 
@@ -58,6 +61,7 @@ public class StatistikkController {
         }
 
         model.addAttribute("prosjekt", prosjekt);
+        model.addAttribute("arrangementer", arrangementService.getAllArrangementerNotAttending(id));
 
         return UrlPaths.STAND_DASHBOARD_HTML;
     }

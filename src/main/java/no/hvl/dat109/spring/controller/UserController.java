@@ -28,7 +28,7 @@ public class UserController {
             return "redirect:" + UrlPaths.INDEX;
 
         session.setAttribute("user", user);
-        return "redirect:" + UrlPaths.BASE_PROSJEKT + "/" + id;
+        return "redirect:" + UrlPaths.DASHBOARD;
     }
 
     @GetMapping(UrlPaths.LOGOUT)

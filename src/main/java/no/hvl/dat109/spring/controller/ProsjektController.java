@@ -63,20 +63,21 @@ public class ProsjektController {
     }
 
     @GetMapping(UrlPaths.CREATE_QR_IMAGE)
-    String createProsjektQR(@PathVariable("id") int id) {
+    String createProsjektQR(@PathVariable("id") int id, @PathVariable("arrangementid") int arrangementid) {
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
+        ArrangementBean arrangement = arrangementService.getArrangement(arrangementid);
 
         if (prosjekt == null) {
             return UrlPaths.ERRORPAGE;
         }
 
         //Denne koden kjører av en eller annen merkelig grunn når jeg faktisk bare skriver linken inn i nettleser #spooky
-        removeProjectQrCode(prosjekt);
-        setQrLink(prosjekt);
+        removeProjectQrCode(prosjekt, arrangement);
+        setQrLink(prosjekt, arrangement);
 
         // OBS! serveren kan redirecte før qrkoden bildet er lagret og vil ikke være oppdattert uten er refresh
-        return "redirect:" + UrlPaths.BASE_PROSJEKT + id + "/qr";
+        return "redirect:" + UrlPaths.BASE_PROSJEKT + "/" + id + "/arrangement/" + arrangementid + "/qr";
     }
 
     @GetMapping(UrlPaths.PROSJEKT_WITH_ID)
@@ -90,8 +91,7 @@ public class ProsjektController {
         model.addAttribute("prosjekt", prosjekt);
         if (prosjekt.getArragementdeltagelser() != null) {
             model.addAttribute("deltagelser", prosjekt.getArragementdeltagelser());
-        }
-        else {
+        } else {
             model.addAttribute("deltagelser", new ArrayList<ArrangementdeltagelseBean>());
         }
 
@@ -169,7 +169,6 @@ public class ProsjektController {
         sendEmail(email, user, password);
 
         //Etter prosjektet er laget kan kan vi danne qr bilde link
-        setQrLink(prosjekt);
 
         session.setAttribute("epost", email);
         session.setAttribute("user", user);
@@ -235,9 +234,13 @@ public class ProsjektController {
      *
      * @param prosjekt prosjekt to set the qr link to
      */
-    private void setQrLink(ProsjektBean prosjekt) {
-        prosjekt.setShortenedurl(generateShortlink(prosjekt));
-        prosjekt.setQrimagepath(getRelativeProjectQRCode(prosjekt));
+    private void setQrLink(ProsjektBean prosjekt, ArrangementBean arrangement) {
+        if (arrangement.getStemmemetode().getMetodeparameter() > 1)
+            prosjekt.setShortenedurl(generateShortlink(prosjekt, arrangement));
+        else
+            prosjekt.setShortenedurl(generateStemmeLink(prosjekt, arrangement));
+
+        prosjekt.setQrimagepath(getRelativeProjectQRCode(prosjekt, arrangement));
         prosjektService.updateProsjekt(prosjekt);
     }
 }

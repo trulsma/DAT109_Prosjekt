@@ -1,6 +1,7 @@
 package no.hvl.dat109.prosjekt.handlers;
 
 import no.hvl.dat109.prosjekt.utilities.ProsjektPaths;
+import no.hvl.dat109.spring.beans.ArrangementBean;
 import no.hvl.dat109.spring.beans.ProsjektBean;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -59,8 +60,8 @@ public class FileHandler {
         }
     }
 
-    public static void removeProjectQrCode(ProsjektBean prosjektBean) {
-        File file = new File(ProsjektPaths.PROJECT_PATH + qrImageFileName(prosjektBean));
+    public static void removeProjectQrCode(ProsjektBean prosjektBean, ArrangementBean arrangement) {
+        File file = new File(ProsjektPaths.PROJECT_PATH + "arrangement/" + arrangement.getArrangementid() + "/" + qrImageFileName(prosjektBean));
         if (file.delete()) System.out.println("Managed to delete QR code");
         else System.out.println("Qr code does not exist!");
     }

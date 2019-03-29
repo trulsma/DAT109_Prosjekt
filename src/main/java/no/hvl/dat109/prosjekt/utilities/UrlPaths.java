@@ -18,6 +18,8 @@ public class UrlPaths {
 
     //Arrangement
     public final static String ARRANGEMENT_BASE = "/arrangement",
+            ARRANGEMENT_DELTA = ARRANGEMENT_BASE + "/delta",
+            ADD_ARRANGEMENT = ARRANGEMENT_BASE + "/add",
             ARRANGEMENT_WITH_ID = ARRANGEMENT_BASE + "/{id}",
             ARRANGEMNT_DELTAGELSE_HTML = "deltagelser";
 
@@ -30,7 +32,7 @@ public class UrlPaths {
             PROSJEKT_ENDRE_BESKRIVELSE = PROSJEKT_WITH_ID + "/endrebeskrivelse",
             ADD_PROSJEKT = BASE_PROSJEKT + "/add",
             PROSJEKT_STATISTIKK = PROSJEKT_WITH_ID + "/statistikk",
-            SHOW_QR = PROSJEKT_WITH_ID + "/qr",
+            SHOW_QR = PROSJEKT_WITH_ID_AND_ARRANGEMENT + "/qr",
             CREATE_QR_IMAGE = SHOW_QR + "/create",
             REMOVE_PROSJEKT = PROSJEKT_WITH_ID + "/remove",
             UPLOAD_PROSJEKT_IMAGES = PROSJEKT_WITH_ID + "/upload",
@@ -79,9 +81,9 @@ public class UrlPaths {
             LOGIN_HTML = "login",
             USER_LOGIN = "/user/login",
             USER_LOGIN_HTML = "userLogin",
-            LOGGED_IN_HTML = "loggedinIndex",
             INDEX = "/",
             STEM = "/stem",
+            STEM_FROM_LINK = STEM+"/{pid}/{aid}",
             MINE_STEMMER = "/mine_stemmer",
             ADMIN_INDEX = "/adminindex",
             INDEX_HTML = "index",
