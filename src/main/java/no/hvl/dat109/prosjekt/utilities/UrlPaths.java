@@ -35,7 +35,7 @@ public class UrlPaths {
             SHOW_QR = PROSJEKT_WITH_ID_AND_ARRANGEMENT + "/qr",
             CREATE_QR_IMAGE = SHOW_QR + "/create",
             REMOVE_PROSJEKT = PROSJEKT_WITH_ID + "/remove",
-            UPLOAD_PROSJEKT_IMAGES = PROSJEKT_WITH_ID + "/upload",
+            UPLOAD_PROSJEKT_IMAGES = PROSJEKT_WITH_ID + "/arrangement/{aid}/upload",
             UPLOAD_HTML = "upload.html",
             ALLE_PROSJEKTER = "/prosjekter",
 

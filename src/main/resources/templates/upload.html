@@ -2,9 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<h1>Spring Boot file upload example</h1>
+<h1>Filopplasting</h1>
 
-<form method="POST" th:action="@{'/prosjekt/' + ${id} +'/upload'}" enctype="multipart/form-data">
+<form method="POST" th:action="@{'/prosjekt/' + ${id} +'/arrangement/' + ${aid} + '/upload'}"
+      enctype="multipart/form-data">
     <label>Bakgrunn</label>
     <input type="file" name="background" accept="image/png, image/jpeg, image/png, image/gif, image/svg"/><br/><br/>
     <label>Logo</label>

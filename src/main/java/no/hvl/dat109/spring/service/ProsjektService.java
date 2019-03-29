@@ -1,6 +1,7 @@
 package no.hvl.dat109.spring.service;
 
 import no.hvl.dat109.prosjekt.handlers.FileHandler;
+import no.hvl.dat109.spring.beans.ArrangementBean;
 import no.hvl.dat109.spring.beans.ProsjektBean;
 import no.hvl.dat109.spring.beans.UsersBean;
 import no.hvl.dat109.spring.repository.ProsjektRepository;
@@ -87,7 +88,7 @@ public class ProsjektService implements IProsjektService {
     }
 
     @Override
-    public void updatePicturePath(ProsjektBean prosjekt, String path) {
+    public void updatePicturePath(ProsjektBean prosjekt, String path, ArrangementBean arrangement) {
         ProsjektBean prosjektBean = prosjektRepository.findById(prosjekt.getProsjektid()).orElse(null);
         if (prosjektBean == null) return;
         prosjektBean.setPictureurl(path);
@@ -95,7 +96,7 @@ public class ProsjektService implements IProsjektService {
     }
 
     @Override
-    public void updateBackgroundPath(ProsjektBean prosjekt, String path) {
+    public void updateBackgroundPath(ProsjektBean prosjekt, String path, ArrangementBean arrangement) {
         ProsjektBean bean = prosjektRepository.findById(prosjekt.getProsjektid()).orElse(null);
         if (bean == null) return;
         bean.setBackgroundurl(path);
@@ -103,13 +104,13 @@ public class ProsjektService implements IProsjektService {
     }
 
     @Override
-    public String createLogo(MultipartFile logo, ProsjektBean prosjekt) {
-        return FileHandler.createLogoImage(logo, prosjekt).replace("src/main/resources/static/", "");
+    public String createLogo(MultipartFile logo, ProsjektBean prosjekt, ArrangementBean arrangement) {
+        return FileHandler.createLogoImage(logo, prosjekt, arrangement).replace("src/main/resources/static/", "");
     }
 
     @Override
-    public String createBackground(MultipartFile background, ProsjektBean prosjekt) {
-        return FileHandler.createBackgroundImage(background, prosjekt).replace("src/main/resources/static/", "");
+    public String createBackground(MultipartFile background, ProsjektBean prosjekt, ArrangementBean arrangment) {
+        return FileHandler.createBackgroundImage(background, prosjekt, arrangment).replace("src/main/resources/static/", "");
     }
 
     @Override

@@ -1,5 +1,6 @@
 package no.hvl.dat109.spring.service.Interfaces;
 
+import no.hvl.dat109.spring.beans.ArrangementBean;
 import no.hvl.dat109.spring.beans.ProsjektBean;
 import no.hvl.dat109.spring.beans.UsersBean;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,11 +29,11 @@ public interface IProsjektService {
 
     void changeBeskrivelse(ProsjektBean prosjekt, String beskrivelse);
 
-    void updatePicturePath(ProsjektBean prosjekt, String path);
+    void updatePicturePath(ProsjektBean prosjekt, String path, ArrangementBean arrangment);
 
-    void updateBackgroundPath(ProsjektBean prosjekt, String path);
+    void updateBackgroundPath(ProsjektBean prosjekt, String path, ArrangementBean arrangement);
 
-    String createLogo(MultipartFile logo, ProsjektBean prosjekt);
+    String createLogo(MultipartFile logo, ProsjektBean prosjekt, ArrangementBean arrangement);
 
-    String createBackground(MultipartFile background, ProsjektBean prosjekt);
+    String createBackground(MultipartFile background, ProsjektBean prosjekt, ArrangementBean arrangement);
 }

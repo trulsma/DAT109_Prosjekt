@@ -75,15 +75,15 @@ public class FileHandler {
             purgeFolder(projectFolder);
     }
 
-    public static String createLogoImage(MultipartFile logo, ProsjektBean prosjekt) {
-        String output = ProsjektPaths.PROJECT_PATH + prosjekt.getProsjektnavn() + "/images/logo_" +
+    public static String createLogoImage(MultipartFile logo, ProsjektBean prosjekt, ArrangementBean arrangement) {
+        String output = ProsjektPaths.PROJECT_PATH + prosjekt.getProsjektnavn() + "/arrangementer/" + arrangement.getArrangementid() + "/images/logo_" +
                 logo.getOriginalFilename().replaceAll(" ", "_");
         createPicture(logo, output);
         return output;
     }
 
-    public static String createBackgroundImage(MultipartFile logo, ProsjektBean prosjekt) {
-        String output = ProsjektPaths.PROJECT_PATH + prosjekt.getProsjektnavn() + "/images/background_" +
+    public static String createBackgroundImage(MultipartFile logo, ProsjektBean prosjekt, ArrangementBean arrangement) {
+        String output = ProsjektPaths.PROJECT_PATH + prosjekt.getProsjektnavn() + "/arrangementer/" + arrangement.getArrangementid() + "/images/background_" +
                 logo.getOriginalFilename().replaceAll(" ", "_");
         createPicture(logo, output);
         return output;
