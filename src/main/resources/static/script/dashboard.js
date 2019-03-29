@@ -53,8 +53,7 @@ function visGrafStemmeverdi(data) {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true,
-                        max: 5
+                        beginAtZero: true
                     }
                 }]
             }

@@ -68,7 +68,9 @@ public class StemmeAPIController {
         }
 
         if (stemmer.size() < 1) {
-            return ResponseEntity.ok().body(new ResultatStemmeBean(0.0, 0, prosjektid, new Date()));
+            List<ResultatStemmeBean> resultat = new ArrayList<>();
+            resultat.add(new ResultatStemmeBean(0.0, 0, prosjektid, new Date()));
+            return ResponseEntity.ok().body(resultat);
         }
 
         // Finne første tid og runde av til.

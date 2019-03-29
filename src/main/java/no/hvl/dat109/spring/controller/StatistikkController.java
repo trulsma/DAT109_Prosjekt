@@ -84,8 +84,10 @@ public class StatistikkController {
             return UrlPaths.ERRORPAGE;
         }
 
+
         model.addAttribute("prosjekt", prosjekt);
         model.addAttribute("arrangement", arrangement);
+        model.addAttribute("arrangementer", arrangementService.getAllArrangementerNotAttending(id));
 
         return UrlPaths.STAND_ARRANGEMENT_DASHBOARD_HTML;
     }
