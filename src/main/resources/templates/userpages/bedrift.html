@@ -19,7 +19,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md bg-hvl ">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="https://www.hvl.no/">
         <img src="/images/hvl.svg" alt="logo" width="200" height="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -27,10 +27,10 @@
             <i class="fg-hvl">Meny</i>
         </span>
     </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav">
+    <div th:switch="${level}" class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul th:case="1" class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link fg-hvl" href="/">Startsiden</a>
+                <a class="nav-link fg-hvl" href="/dashboard">Dashboard</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link fg-hvl" href="/prosjekter">Prosjekter</a>
@@ -44,8 +44,37 @@
             <li class="nav-item">
                 <a class="nav-link fg-hvl" href="/prosjekt/add">Registrer prosjekt</a>
             </li>
+
             <li class="nav-item">
-                <a class="nav-link fg-hvl" href="/statistikk">Sjekk statistikk</a>
+                <a class="nav-link fg-hvl" href="/logout">Logg ut</a>
+            </li>
+        </ul>
+        <ul th:case="2" class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link fg-hvl" th:href="@{'/dashboard/' + ${prosjektid}}">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link fg-hvl" href="/prosjekter">Prosjekter</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link fg-hvl" href="/bedrifter">Bedrifter</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link fg-hvl" href="/prosjekt/add">Registrer prosjekt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link fg-hvl" href="/logout">Logg ut</a>
+            </li>
+        </ul>
+        <ul th:case="*" class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link fg-hvl" href="/prosjekter">Prosjekter</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link fg-hvl" href="/bedrifter">Bedrifter</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link fg-hvl" href="/user/login">Logg inn</a>
             </li>
         </ul>
     </div>
