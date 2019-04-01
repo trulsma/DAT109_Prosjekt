@@ -62,9 +62,6 @@
                 <a class="nav-link fg-hvl" href="/bedrifter">Bedrifter</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link fg-hvl" href="/prosjekt/add">Registrer prosjekt</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link fg-hvl" href="/logout">Logg ut</a>
             </li>
         </ul>
@@ -74,6 +71,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link fg-hvl" href="/bedrifter">Bedrifter</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link fg-hvl" href="/prosjekt/add">Registrer prosjekt</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link fg-hvl" href="/user/login">Logg inn</a>
@@ -88,7 +88,7 @@
             <div class="table-responsive" data-pattern="priority-columns">
                 <table summary=" "
                        class="table table-bordered table-hover">
-                    <caption class="text-center"> </caption>
+                    <caption class="text-center"></caption>
                     <thead class="thead-light">
 
                     <tr>
@@ -102,7 +102,9 @@
                         <th th:text="${deltagelse.arrangement.arrangementnavn}"></th>
                         <th th:text="${deltagelse.arrangement.arrangementbeskrivelse}"></th>
                         <th th:text="${deltagelse.arrangement.arragementetutgaar}"></th>
-                        <td><a th:href="@{${prosjekt.prosjektid}} + '/arrangement/' + ${deltagelse.arrangement.arrangementid}">>></a></td>
+                        <td>
+                            <a th:href="@{${prosjekt.prosjektid}} + '/arrangement/' + ${deltagelse.arrangement.arrangementid}">>></a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

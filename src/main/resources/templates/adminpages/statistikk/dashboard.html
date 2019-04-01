@@ -62,10 +62,9 @@
 
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Administratoroversikt</a>
-    <input class="form-control form-control-dark w-80" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Sign out</a>
+            <a class="nav-link" href="/logout">Sign out</a>
         </li>
     </ul>
 </nav>
@@ -257,34 +256,24 @@
                 </ul>
 
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                    <span>Saved reports</span>
+                    <span>Arrangementer</span>
                     <a class="nav-link" href="#" data-toggle="modal" data-target="#deltaarrangement">
                         <i class="fas fa-plus-circle"></i>
                     </a>
                 </h6>
-                <ul class="nav flex-column mb-2">
+                <ul class="nav flex-column mb-2" th:each="arrangement: ${arrangementer}">
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                            <i class="far fa-file-alt"></i>
-                            Arrangement
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="far fa-file-alt"></i>
-                            Arrangement_1
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="far fa-file-alt"></i>
-                            Arrangement_2
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="far fa-file-alt"></i>
-                            Arrangement_3
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-file-text">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            <span th:text="${arrangement.arrangementnavn}"></span>
                         </a>
                     </li>
                 </ul>
@@ -323,29 +312,6 @@
 
         </main>
     </div>
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Some text in the modal.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
     <!-- addBedriftModal -->
     <!-- Modal -->
     <div class="modal fade" id="addBedriftModal" role="dialog">
@@ -465,7 +431,8 @@
                         </div>
                         <div class="form-group">
                             <label for="arrangementdate" class="col-form-label"></label>
-                            <input type="datetime-local" class="form-control" id="arrangementdate" name="arrangementdate" placeholder="Utgår">
+                            <input type="datetime-local" class="form-control" id="arrangementdate"
+                                   name="arrangementdate" placeholder="Utgår">
                         </div>
                         <div class="form-group">
                             <p class="underTitle">Velg stemmemetode:<br>
@@ -481,7 +448,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-lg btn-outline-success btn-block" type="submit">Registrer prosjekt
+                        <button class="btn btn-lg btn-outline-success btn-block" type="submit">Legg til Arrangement
                         </button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>

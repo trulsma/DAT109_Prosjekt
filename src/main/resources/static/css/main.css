@@ -10,7 +10,9 @@ ul.topnav {
     background-color: #333;
 }
 
-ul.topnav li {float: left;}
+ul.topnav li {
+    float: left;
+}
 
 ul.topnav li a {
     display: block;
@@ -25,13 +27,18 @@ ul.topnav li a:hover:not(.active) {
 }
 
 ul.topnav li a.active {
-    background-color: black;}
+    background-color: black;
+}
 
-ul.topnav li.right {float: right;}
+ul.topnav li.right {
+    float: right;
+}
 
 @media screen and (max-width: 600px) {
     ul.topnav li.right,
-    ul.topnav li {float: none;}
+    ul.topnav li {
+        float: none;
+    }
 }
 
 h1 {
@@ -55,7 +62,6 @@ body {
 */
 
 
-
 .space {
     padding-left: 10px;
     padding-right: 10px;
@@ -72,20 +78,24 @@ div.gallery {
     float: left;
     width: 250px;
 }
+
 div.gallery:hover {
     border: 1px solid #777;
     opacity: 0.2;
 }
+
 div.gallery img {
     width: 100%;
     height: auto;
     opacity: 1;
 }
+
 div.desc {
     padding: 15px;
     text-align: center;
     font-style: italic;
 }
+
 * {
     box-sizing: border-box;
 }
@@ -95,6 +105,7 @@ div.desc {
     float: left;
     width: 24.99999%;
 }
+
 @media only screen and (max-width: 700px) {
     .responsive {
         width: 49.99999%;
@@ -107,6 +118,7 @@ div.desc {
         width: 100%;
     }
 }
+
 .clearfix:after {
     content: "";
     display: table;
@@ -128,16 +140,16 @@ div.desc {
     }
 }
 
-.bg-hvl{
+.bg-hvl {
     background-color: #004357;
 }
 
-.fg-hvl{
+.fg-hvl {
     color: #64d0df;
     border-bottom: 1px solid #004357;
 }
 
-.fg-hvl:hover{
+.fg-hvl:hover {
     color: white;
     border-bottom: 1px solid #f9de45;
 }
@@ -152,7 +164,7 @@ div.desc {
     background-repeat: no-repeat;
 }
 
-.wrapper{
+.wrapper {
     transform: rotate(90deg);
     transform-origin: bottom left;
 

@@ -56,7 +56,7 @@ public class Processing {
 
 
     public static String decodeQRCode(String qrCodeString) {
-        File qrCodeImage = new File(qrCodeString);
+        File qrCodeImage = new File(System.getProperty("user.dir") + qrCodeString);
         BufferedImage bufferedImage = null;
         try {
             bufferedImage = ImageIO.read(qrCodeImage);
@@ -79,7 +79,7 @@ public class Processing {
      */
     private static void createQRImage(ProsjektBean prosjekt, ArrangementBean arrangementBean, String shortenedLink) {
         //Pathen til resource mappen
-        String dir = PROJECT_PATH + prosjekt.getProsjektnavn() + "/arrangementer/" + arrangementBean.getArrangementid() + "/images/";
+        String dir = FILE_UPLOAD_PATH + prosjekt.getProsjektnavn() + "/arrangementer/" + arrangementBean.getArrangementid() + "/images/";
         File directory = new File(dir);
 
         //If directory exists then we can create, or try to make directory
@@ -136,8 +136,8 @@ public class Processing {
      * @return en path til qr bildet
      */
     public static String qrImageFileName(ProsjektBean prosjekt) {
-        return prosjekt.getProsjektid()
-                + "_" + prosjekt.getProsjektnavn().replaceAll(" ", "_") + ".png";
+        return prosjekt.getProsjektnavn()
+                + "_qr.png";
     }
 
     /**
@@ -148,7 +148,7 @@ public class Processing {
      * @return path til QR image
      */
     public static String getFullQRImagePath(ProsjektBean prosjektBean, ArrangementBean arrangement) {
-        return PROJECT_PATH + prosjektBean.getProsjektnavn() + "/arrangementer/" + arrangement.getArrangementid() + "/images/" + qrImageFileName(prosjektBean);
+        return RELATIVE_UPLOAD_PATH + prosjektBean.getProsjektnavn() + "/arrangementer/" + arrangement.getArrangementid() + "/images/" + qrImageFileName(prosjektBean);
     }
 
     /**
@@ -159,7 +159,7 @@ public class Processing {
      * @return qrimage path relative to project
      */
     public static String getRelativeProjectQRCode(ProsjektBean prosjekt, ArrangementBean arrangement) {
-        return RELATIVE_PROJECT_PATH + prosjekt.getProsjektnavn() + "/arrangementer/" + arrangement.getArrangementid() + "/images/" + qrImageFileName(prosjekt);
+        return RELATIVE_UPLOAD_PATH + prosjekt.getProsjektnavn() + "/arrangementer/" + arrangement.getArrangementid() + "/images/" + qrImageFileName(prosjekt);
     }
 
     /**
@@ -170,6 +170,6 @@ public class Processing {
      * @return relative imagepath often used in database
      */
     public static String getRelativeProjectImagePath(ProsjektBean prosjektBean, ArrangementBean arrangement) {
-        return RELATIVE_PROJECT_PATH + prosjektBean.getProsjektnavn() + "/arrangementer/" + arrangement.getArrangementid() + "/images/";
+        return RELATIVE_UPLOAD_PATH + prosjektBean.getProsjektnavn() + "/arrangementer/" + arrangement.getArrangementid() + "/images/";
     }
 }

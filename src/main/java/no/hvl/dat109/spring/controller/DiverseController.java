@@ -31,6 +31,9 @@ public class DiverseController {
     @Autowired
     private IStemmeMetodeService stemmeMetode;
 
+    @Autowired
+    private IArrangementService arrangementService;
+
 
     @PostMapping(UrlPaths.REGISTRER_DEG)
     String registerBruker(@RequestParam String redirect_url, @RequestParam String epost, HttpSession session, HttpServletRequest request) {
@@ -85,6 +88,7 @@ public class DiverseController {
         model.addAttribute("kategorier", kategoriService.getAllKategorier());
         model.addAttribute("bedrifter", bedriftService.getAlleBedrifter());
         model.addAttribute("stemmemetoder", stemmeMetode.getAllStemmemetoder());
+        model.addAttribute("arrangementer", arrangementService.getAllArrangement());
         return UrlPaths.DASHBOARD_ADMIN_HTML;
     }
 

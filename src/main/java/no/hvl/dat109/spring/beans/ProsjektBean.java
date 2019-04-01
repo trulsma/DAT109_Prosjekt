@@ -147,19 +147,6 @@ public class ProsjektBean implements Serializable {
         if (user == null || this.prosjektEiger == null) return false;
         return this.prosjektEiger.getUserid() == user.getUserid();
     }
-    /*
-    public Integer getStemmerMedVerdi() {
-        Integer sum = 0;
-        for (StemmeBean stemme : stemmer) {
-            sum += stemme.getStemmeverdi();
-        }
-        return sum;
-    }
-
-    public Double getStemmeGjennomsnitt() {
-        return new Double(getStemmerMedVerdi()) / stemmer.size();
-    }
-    */
 
     @Override
     public String toString() {

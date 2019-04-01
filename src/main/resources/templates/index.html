@@ -66,9 +66,6 @@
                 <a class="nav-link fg-hvl" href="/bedrifter">Bedrifter</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link fg-hvl" href="/prosjekt/add">Registrer prosjekt</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link fg-hvl" href="/logout">Logg ut</a>
             </li>
         </ul>
@@ -78,6 +75,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link fg-hvl" href="/bedrifter">Bedrifter</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link fg-hvl" href="/prosjekt/add">Registrer prosjekt</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link fg-hvl" href="/user/login">Logg inn</a>
@@ -104,7 +104,7 @@
                 <title>..</title>
                 <rect width="100%" height="100%" fill="#777" fill-opacity="0.4"></rect>
                 <text x="50%" y="50%" fill="#777" dy=".3em"></text>
-                <image width="185" height="160" th:href="${prosjekt.pictureurl}"></image>
+                <image width="185" height="160" href="/images/default-icon.png"></image>
             </svg>
             <h2 th:text="${prosjekt.prosjektnavn}"></h2>
             <p th:text="${prosjekt.prosjektbeskrivelse}"></p>

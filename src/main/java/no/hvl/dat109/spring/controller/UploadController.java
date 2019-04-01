@@ -54,7 +54,7 @@ public class UploadController {
         if (!backgroundPath.equals(""))
             prosjektService.updateBackgroundPath(prosjekt, backgroundPath, arrangementBean);
 
-        return "redirect:" + UrlPaths.BASE_PROSJEKT + "/" + id + "/arrangement/" + aid;
+        return "redirect:" + UrlPaths.DASHBOARD + "/" + id + "/arrangement/" + aid;
     }
 
 

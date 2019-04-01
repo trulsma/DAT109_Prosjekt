@@ -10,7 +10,7 @@ public class Application {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = new SpringApplicationBuilder(Application.class).headless(false).run(args);
-
+        System.out.println("Running from: "+ System.getProperty("user.dir"));
         //SpringApplication.run(Application.class, args);
     }
 
