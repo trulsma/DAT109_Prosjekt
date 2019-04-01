@@ -71,7 +71,7 @@ public class ProsjektController {
         return UrlPaths.STAND_QR_HTML;
     }
 
-    @GetMapping(UrlPaths.CREATE_QR_IMAGE)
+    @PostMapping(UrlPaths.CREATE_QR_IMAGE)
     String createProsjektQR(@PathVariable("id") int id, @PathVariable("arrangementid") int arrangementid) {
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
@@ -86,7 +86,7 @@ public class ProsjektController {
         setQrLink(prosjekt, arrangement);
 
         // OBS! serveren kan redirecte før qrkoden bildet er lagret og vil ikke være oppdattert uten er refresh
-        return "redirect:" + UrlPaths.BASE_PROSJEKT + "/" + id + "/arrangement/" + arrangementid + "/qr";
+        return "redirect:" + UrlPaths.DASHBOARD + "/" + id + "/arrangement/" + arrangementid;
     }
 
     @GetMapping(UrlPaths.PROSJEKT_WITH_ID)
@@ -136,12 +136,19 @@ public class ProsjektController {
         if (deltagelse == null) {
             return UrlPaths.ERRORPAGE;
         }
-
+        //Ressurser for ulike strings vi trenger til modellen
         String imagespath = Processing.getRelativeProjectImagePath(prosjekt, arrangement);
+        String logo = imagespath + "logo.png";
+        String background = imagespath + "background.png";
+        String prosjektnavn = prosjekt.getProsjektnavn();
+        String qrbilde = imagespath + prosjektnavn + "_qr.png";
+
+        //Legg disse attributtene tilbake til modellen
         model.addAttribute("samarbeidspartner", prosjekt.getSammarbeidsbedrift());
-        model.addAttribute("logopath", imagespath + "logo.png");
-        model.addAttribute("backgroundpath", imagespath + "background.png");
-        model.addAttribute("qrpath", imagespath + prosjekt.getProsjektnavn() + "_qr.png");
+        model.addAttribute("logopath", logo);
+        model.addAttribute("backgroundpath", background);
+        model.addAttribute("qrpath", qrbilde);
+        model.addAttribute("shorturl", Processing.decodeQRCode(qrbilde));
         model.addAttribute("prosjekt", prosjekt);
         model.addAttribute("arrangement", deltagelse.getArrangement());
 
@@ -187,7 +194,7 @@ public class ProsjektController {
         session.setAttribute("epost", email);
         session.setAttribute("user", user);
 
-        return "redirect:" + UrlPaths.BASE_PROSJEKT + "/" + prosjekt.getProsjektid();
+        return "redirect:" + UrlPaths.DASHBOARD + "/" + prosjekt.getProsjektid();
     }
 
     @PostMapping(UrlPaths.PROSJEKT_ENDRE_NAVN)
@@ -249,6 +256,8 @@ public class ProsjektController {
      * @param prosjekt prosjekt to set the qr link to
      */
     private void setQrLink(ProsjektBean prosjekt, ArrangementBean arrangement) {
+
+        //TODO fjern alt som har med qr kode i database osv
         if (arrangement.getStemmemetode().getMetodeparameter() > 1)
             prosjekt.setShortenedurl(generateShortlink(prosjekt, arrangement));
         else

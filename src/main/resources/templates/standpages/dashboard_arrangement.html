@@ -55,7 +55,6 @@
 <body>
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#" th:text="${prosjekt.prosjektnavn}"></a>
-    <input class="form-control form-control-dark w-80" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <a class="nav-link" href="/logout">Sign out</a>
@@ -69,9 +68,31 @@
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="..">
+                        <a class="nav-link active" th:href="@{'/dashboard/'+ ${prosjekt.prosjektid}}">
                             <i class="fa fa-home"></i>
-                            Startsiden <span class="sr-only">(current)</span>
+                            Dashboard <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active"
+                           th:href="@{'/prosjekt/'+${prosjekt.prosjektid}+'/arrangement/'+${arrangement.arrangementid}}"
+                           target="_blank">
+                            <i class="fas fa-file-powerpoint"></i>
+                            Stand siden
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active"
+                           th:href="@{'/prosjekt/'+${prosjekt.prosjektid}+'/arrangement/'+${arrangement.arrangementid}+'/qr'}"
+                           target="_blank">
+                            <i class="fas fa-qrcode"></i>
+                            QR siden
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#lagQR">
+                            <i class="fas fa-qrcode"></i>
+                            Generer ny QR
                         </a>
                     </li>
                     <li class="nav-item">
@@ -87,7 +108,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#addPictures">
                             <i class="fa fa-camera"></i>
                             Endre bilde
                         </a>
@@ -110,7 +131,7 @@
                     <li class="nav-item">
                         <a class="nav-link"
                            th:href="'/dashboard/' + ${prosjekt.prosjektid} + '/arrangement/' + ${deltagelse.arrangement.arrangementid}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                  stroke-linejoin="round" class="feather feather-file-text">
                                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -134,7 +155,6 @@
             <p class="h6">Gjennomsnittlig stemmeverdi: <span id="stemmeverdi_visning"></span></p>
             <canvas id="stemmeverdi"></canvas>
             <canvas id="antall"></canvas>
-
 
 
         </main>
@@ -230,6 +250,70 @@
 
 <div class="container">
     <!-- Modal -->
+    <div class="modal fade" id="addPictures" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="display-10">Last opp bilder!</h1>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form method="POST"
+                      th:action="@{'/prosjekt/' + ${prosjekt.prosjektid} +'/arrangement/' + ${arrangement.arrangementid} + '/upload'}"
+                      enctype="multipart/form-data">
+                    <div class="p-5">
+                        <div>
+                            <p class="text-center">Plakat</p>
+                            <input type="file" name="background"
+                                   accept="image/png, image/jpeg, image/png, image/gif, image/svg"/><br/><br/>
+                        </div>
+                        <div>
+                            <p class="text-center">Logo</p>
+                            <input type="file" name="logo"
+                                   accept="image/png, image/jpeg, image/png, image/gif, image/svg"/><br/><br/>
+                        </div>
+                        <div>
+                            <input type="submit" class="form-control" value="Submit"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="lagQR" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="display-10">Last opp bilder!</h1>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form method="POST"
+                      th:action="@{'/prosjekt/' + ${prosjekt.prosjektid} +'/arrangement/' + ${arrangement.arrangementid} + '/qr/create'}"
+                      enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <p>Er du sikker på du vil generere ny qr?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn-danger">Ja</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Nei</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Modal -->
     <div class="modal fade" id="deltaarrangement" role="dialog">
         <div class="modal-dialog">
 
@@ -271,7 +355,7 @@
 <script type="text/javascript" th:src="@{/script/dashboard.js}"></script>
 <script th:inline="javascript">
     /*<![CDATA[*/
-        visData(/*[[${prosjekt.prosjektid}]]*/ 0, /*[[${arrangement.arrangementid}]]*/ 0);
+    visData(/*[[${prosjekt.prosjektid}]]*/ 0, /*[[${arrangement.arrangementid}]]*/ 0);
     /*]]>*/
 </script>
 

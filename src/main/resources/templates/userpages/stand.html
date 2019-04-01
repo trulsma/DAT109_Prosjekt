@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Stem</title>
-    <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../../../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../../../css/modalcss.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -19,15 +20,15 @@
 </head>
 <body>
 
-<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center stand_bg">
-    <div class="col-md-4 p-lg-5 mx-auto my-5 padding-md bg-light shadow-sm rounded">
-        <p><img th:src="@{${logopath}}" alt=""></p>
-        <div th:switch="${arrangement.stemmemetode.metodeparameter}">
-            <div th:case="1">
-                <p><img th:src="@{${qrpath}}" alt=""></p>
-                <p class="smallText" th:text="${shorturl}"></p>
-            </div>
-            <div th:case="*">
+<div class="position-relative p-3 p-md-5 m-md-3 text-center">
+    <img th:src="@{${logopath}}" alt="">
+    <div th:switch="${arrangement.stemmemetode.metodeparameter}">
+        <div th:case="1">
+            <img th:src="@{${qrpath}}" class="text-center" alt="">
+            <p class="smallText" th:text="${shorturl}"></p>
+        </div>
+        <div th:case="*">
+            <div class="col-md-4 p-lg-5 mx-auto my-5 padding-md bg-light shadow-sm rounded">
                 <form action="/stem" method="post">
                     <h1 class="display-5" th:inline="text">[[${prosjekt.prosjektnavn}]]</h1>
                     <h1 class="underTitle" th:inline="text">[[${prosjekt.prosjektbeskrivelse}]]</h1>
@@ -48,12 +49,28 @@
                 </form>
             </div>
         </div>
-        <img class="stemme-bakgrunn" th:src="@{${backgroundpath}}" alt="">
+            <img id="myImg" th:src="@{${backgroundpath}}" alt="" class="small-image">
     </div>
     <div class="product-device shadow-sm d-none d-md-block"></div>
     <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
 </div>
 
+
+<!-- Trigger the Modal -->
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- The Close Button -->
+    <span class="close">&times;</span>
+
+    <!-- Modal Content (The Image) -->
+    <img class="modal-content" id="img01">
+
+    <!-- Modal Caption (Image Text) -->
+    <div id="caption"></div>
+</div>
+<script src="/script/standscript.js"></script>
 
 </body>
 </html>
