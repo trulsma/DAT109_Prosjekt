@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static no.hvl.dat109.prosjekt.handlers.FileHandler.removeProjectQrCode;
@@ -51,14 +52,20 @@ public class ProsjektController {
     }
 
     @GetMapping(UrlPaths.SHOW_QR)
-    String getProsjektQR(@PathVariable("id") int id, Model model) {
+    String getProsjektQR(@PathVariable("id") int id, @PathVariable("arrangementid") int arrangementid, Model model) {
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
+        ArrangementBean arrangement = arrangementService.getArrangement(arrangementid);
 
         if (prosjekt == null) {
             return UrlPaths.ERRORPAGE;
         }
 
+        String relativeProjectQR = Processing.getRelativeProjectQRCode(prosjekt, arrangement);
+        System.out.println(relativeProjectQR);
+
+        model.addAttribute("qrpath", relativeProjectQR);
+        model.addAttribute("shorturl", Processing.decodeQRCode(relativeProjectQR));
         model.addAttribute("prosjekt", prosjekt);
 
         return UrlPaths.STAND_QR_HTML;
@@ -130,11 +137,11 @@ public class ProsjektController {
             return UrlPaths.ERRORPAGE;
         }
 
-        String relativeProjectQR = Processing.getRelativeProjectQRCode(prosjekt, arrangement);
-
+        String imagespath = Processing.getRelativeProjectImagePath(prosjekt, arrangement);
         model.addAttribute("samarbeidspartner", prosjekt.getSammarbeidsbedrift());
-        model.addAttribute("qrpath", relativeProjectQR);
-        model.addAttribute("shorturl", Processing.decodeQRCode(relativeProjectQR));
+        model.addAttribute("logopath", imagespath + "logo.png");
+        model.addAttribute("backgroundpath", imagespath + "background.png");
+        model.addAttribute("qrpath", imagespath + prosjekt.getProsjektnavn() + "_qr.png");
         model.addAttribute("prosjekt", prosjekt);
         model.addAttribute("arrangement", deltagelse.getArrangement());
 

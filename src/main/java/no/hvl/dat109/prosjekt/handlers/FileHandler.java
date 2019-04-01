@@ -22,7 +22,7 @@ public class FileHandler {
      */
     public static void removeProject(ProsjektBean prosjekt) {
         //Find path to project folder
-        File projectFolder = new File(ProsjektPaths.PROJECT_PATH + prosjekt.getProsjektnavn());
+        File projectFolder = new File(ProsjektPaths.FILE_UPLOAD_PATH + prosjekt.getProsjektnavn());
 
         //If it is a directory then purge it
         if (projectFolder.isDirectory()) {
@@ -61,7 +61,7 @@ public class FileHandler {
     }
 
     public static void removeProjectQrCode(ProsjektBean prosjektBean, ArrangementBean arrangement) {
-        File file = new File(ProsjektPaths.PROJECT_PATH + "arrangement/" + arrangement.getArrangementid() + "/" + qrImageFileName(prosjektBean));
+        File file = new File(ProsjektPaths.RELATIVE_UPLOAD_PATH + "arrangement/" + arrangement.getArrangementid() + "/" + qrImageFileName(prosjektBean));
         if (file.delete()) System.out.println("Managed to delete QR code");
         else System.out.println("Qr code does not exist!");
     }
@@ -70,30 +70,31 @@ public class FileHandler {
      * Delete all project folders from disk
      */
     public static void removeAllProjects() {
-        File projectFolder = new File(ProsjektPaths.PROJECT_PATH);
+        File projectFolder = new File(ProsjektPaths.FILE_UPLOAD_PATH);
         if (projectFolder.isDirectory())
             purgeFolder(projectFolder);
     }
 
     public static String createLogoImage(MultipartFile logo, ProsjektBean prosjekt, ArrangementBean arrangement) {
-        String output = ProsjektPaths.PROJECT_PATH + prosjekt.getProsjektnavn() + "/arrangementer/" + arrangement.getArrangementid() + "/images/logo_" +
-                logo.getOriginalFilename().replaceAll(" ", "_");
-        createPicture(logo, output);
+        String output = ProsjektPaths.FILE_UPLOAD_PATH + prosjekt.getProsjektnavn() + "/arrangementer/" + arrangement.getArrangementid() + "/images/";
+        createPicture(logo, output, "logo.png");
         return output;
     }
 
     public static String createBackgroundImage(MultipartFile logo, ProsjektBean prosjekt, ArrangementBean arrangement) {
-        String output = ProsjektPaths.PROJECT_PATH + prosjekt.getProsjektnavn() + "/arrangementer/" + arrangement.getArrangementid() + "/images/background_" +
-                logo.getOriginalFilename().replaceAll(" ", "_");
-        createPicture(logo, output);
+        String output = ProsjektPaths.FILE_UPLOAD_PATH + prosjekt.getProsjektnavn() + "/arrangementer/" + arrangement.getArrangementid() + "/images/";
+        createPicture(logo, output, "background.png");
         return output;
     }
 
-    private static void createPicture(MultipartFile file, String outputPath) {
+    private static void createPicture(MultipartFile file, String outputPath, String filename) {
         try {
             // Get the file and save it somewhere
             byte[] bytes = file.getBytes();
-            Path path = Paths.get(outputPath);
+            File folder = new File(outputPath);
+            if (!folder.exists())
+                System.out.println(folder.mkdirs() ? "Created folder" : "Something went wrong when creating folder");
+            Path path = Paths.get(outputPath + filename);
             Files.write(path, bytes);
         } catch (IOException e) {
             e.printStackTrace();

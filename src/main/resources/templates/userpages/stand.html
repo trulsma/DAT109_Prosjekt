@@ -21,14 +21,14 @@
 
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center stand_bg">
     <div class="col-md-4 p-lg-5 mx-auto my-5 padding-md bg-light shadow-sm rounded">
+        <p><img th:src="@{${logopath}}" alt=""></p>
         <div th:switch="${arrangement.stemmemetode.metodeparameter}">
             <div th:case="1">
-                <p><img th:src="@{~/{fil}(fil=${qrpath})}" alt=""></p>
+                <p><img th:src="@{${qrpath}}" alt=""></p>
                 <p class="smallText" th:text="${shorturl}"></p>
             </div>
             <div th:case="*">
                 <form action="/stem" method="post">
-                    <p><img th:src="@{~/{fil}(fil=${prosjekt.pictureurl})}" alt=""></p>
                     <h1 class="display-5" th:inline="text">[[${prosjekt.prosjektnavn}]]</h1>
                     <h1 class="underTitle" th:inline="text">[[${prosjekt.prosjektbeskrivelse}]]</h1>
                     <h1 class="underTitle" th:inline="text">[[${samarbeidspartner.bedriftnavn}]]</h1>
@@ -48,14 +48,12 @@
                 </form>
             </div>
         </div>
-
+        <img class="stemme-bakgrunn" th:src="@{${backgroundpath}}" alt="">
     </div>
     <div class="product-device shadow-sm d-none d-md-block"></div>
     <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
 </div>
 
-
-<img class="stemme-bakgrunn" th:src="@{~/{fil}(fil=${prosjekt.backgroundurl})}" alt="">
 
 </body>
 </html>
