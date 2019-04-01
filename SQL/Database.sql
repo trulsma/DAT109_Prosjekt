@@ -113,11 +113,15 @@ VALUES ('Admin', 1),
        ('Stand', 2),
        ('User', 3);
 INSERT INTO Users (username, password, usergroup, expired)
-VALUES ('admin', 'admin', 1, false);
+VALUES ('admin@admin', '+zsGXifxectduALmskxRGIkXkauqLEHQ0/3pAiT4gUg=$6eibJx/ngJBVUOq0+gw4j/6WwbqSBU+ewmGyzvw4458=', 1, false);
 INSERT INTO Bedrift (bedriftnavn, bedriftbeskrivelse)
 VALUES ('HVL', 'Høgskolen på Vestlandet');
 INSERT INTO StemmeMetode (metodenavn, metodeparameter)
-VALUES ('Like', 1);
+VALUES ('Like', 1),
+       ('1-5 Rangering', 5),
+       ('1-10 Rangering', 10),
+       ('1-100 Rangering', 100),
+       ('1-1000 Rangering', 1000);
 
 
 INSERT INTO Kategori (kategorinavn)
@@ -135,7 +139,6 @@ VALUES ('Helse og funksjon'),
        ('Pedagogikk, Religion og samfunnsfag'),
        ('Maritime studium'),
        ('Samfunnsvitenskap');
-
 
 INSERT INTO Studie (studienavn, studiebeskrivelse, studiekategori)
 VALUES ('Ergoterapi', 'Ergoterapi', 1),
@@ -175,19 +178,3 @@ VALUES ('Ergoterapi', 'Ergoterapi', 1),
        ('Nautikk y-veg', 'nautikk', 13),
        ('Maritime operasjoner', 'nautikk', 13),
        ('Samfunnsvitenskap', 'samfunnsvitenskap', 14);
-
-
-INSERT INTO Arrangement (arrangementnavn, arrangementbeskrivelse, arragementetutgaar)
-VALUES ('Første Arrangement', 'Dette er en beskrivelse', '2019-03-17 12:07:21.827000');
-INSERT INTO Prosjekt (prosjektnavn,
-                      prosjektbeskrivelse,
-                      studie,
-                      sammarbeidsbedrift,
-                      shortenedurl,
-                      qrimagepath,
-                      pictureurl,
-                      backgroundurl,
-                      prosjektuser)
-VALUES ('Prosjekt navn', 'Beskrivelse', 1, 1, 'short url', 'qr path', 'images/expo-logo-transparent.png', 'images/background.png', 1);
-INSERT INTO ArrangementDeltagelse (arrangement, prosjekt)
-VALUES (1, 1);
