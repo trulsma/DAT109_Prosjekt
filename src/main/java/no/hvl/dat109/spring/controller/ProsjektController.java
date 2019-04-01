@@ -62,7 +62,6 @@ public class ProsjektController {
         }
 
         String relativeProjectQR = Processing.getRelativeProjectQRCode(prosjekt, arrangement);
-        System.out.println(relativeProjectQR);
 
         model.addAttribute("qrpath", relativeProjectQR);
         model.addAttribute("shorturl", Processing.decodeQRCode(relativeProjectQR));
@@ -120,7 +119,6 @@ public class ProsjektController {
 
         ProsjektBean prosjekt = prosjektService.getProsjektById(id);
         ArrangementBean arrangement = arrangementService.getArrangement(arrangementid);
-        UsersBean user = (UsersBean) session.getAttribute("user");
 
         if (prosjekt == null) {
             return UrlPaths.ERRORPAGE;

@@ -5,6 +5,7 @@ import no.hvl.dat109.spring.beans.*;
 import no.hvl.dat109.spring.service.Interfaces.IArrangementService;
 import no.hvl.dat109.spring.service.Interfaces.IProsjektService;
 import no.hvl.dat109.spring.service.Interfaces.IStemmeService;
+import no.hvl.dat109.spring.service.Interfaces.IUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,9 @@ public class StemmeController {
 
     @Autowired
     private IArrangementService arrangementService;
+
+    @Autowired
+    private IUsersService usersService;
 
     @GetMapping(UrlPaths.MINE_STEMMER)
     public String visMineStemmer(HttpSession session, Model model) {
@@ -96,10 +100,13 @@ public class StemmeController {
     @GetMapping(UrlPaths.STEM_FROM_LINK)
     String stemFromUrl(@PathVariable("pid") int pid, @PathVariable("aid") int aid, HttpSession session, Model model) {
 
-        UsersBean user = (UsersBean) session.getAttribute("user");
+        String epost = (String) session.getAttribute("epost");
 
         //TODO FIKS REDIRECT RETT
-        if (user == null) return "redirect:" + UrlPaths.REGISTRER_DEG;
+        if (epost == null)
+            return "redirect:" + UrlPaths.REGISTRER_DEG + "?redirect_url=stem/" + pid + "/" + aid;
+
+        UsersBean user = usersService.getVoterUserByName(epost);
         ProsjektBean prosjekt = prosjektService.getProsjektById(pid);
         ArrangementBean arrangement = arrangementService.getArrangement(aid);
 
@@ -118,8 +125,7 @@ public class StemmeController {
         }
 
         stemmeService.addStemme(new StemmeBean(deltagelse, user.getUsername(), 1));
-        model.addAttribute("navn", prosjekt.getProsjektnavn());
-        return "redirect:" + UrlPaths.STEM;
+        return "redirect:" + UrlPaths.STEM + "?navn=" + prosjekt.getProsjektnavn();
     }
 
     /**

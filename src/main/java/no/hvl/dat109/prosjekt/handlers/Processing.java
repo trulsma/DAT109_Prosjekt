@@ -37,7 +37,6 @@ public class Processing {
 
     public static String generateStemmeLink(ProsjektBean prosjekt, ArrangementBean arrangement) {
         String shortenedUrl = generateShortBitlyStemmeLink(prosjekt.getProsjektid(), arrangement.getArrangementid());
-        System.out.println(shortenedUrl + " short url");
         createQRImage(prosjekt, arrangement, shortenedUrl);
         return shortenedUrl;
     }
@@ -58,8 +57,6 @@ public class Processing {
 
     public static String decodeQRCode(String qrCodeString) {
         File qrCodeImage = new File(System.getProperty("user.dir") + qrCodeString);
-        System.out.println(qrCodeImage + " image");
-
         BufferedImage bufferedImage = null;
         try {
             bufferedImage = ImageIO.read(qrCodeImage);
@@ -69,7 +66,6 @@ public class Processing {
             Result result = new MultiFormatReader().decode(bitmap);
             return result.getText();
         } catch (IOException | NotFoundException e) {
-            System.out.println(e);
             System.out.println("There is no QR code in the image");
             return "";
         }

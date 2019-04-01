@@ -62,7 +62,7 @@ public class LoginController {
         UsersBean user = usersService.validUser(epost, passord);
         if (user == null) {
             model.addAttribute("loginerror", "Feil brukernavn eller passord!");
-            return UrlPaths.USER_LOGIN_HTML; //TODO CRETE ERROR WHEN NOT FOUND
+            return UrlPaths.USER_LOGIN_HTML;
         }
 
         //Find project with current user as owner, if any

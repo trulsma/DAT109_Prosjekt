@@ -50,4 +50,12 @@ public class PasswordHasher {
                 password.toCharArray(), salt, iterations, desiredKeyLen));
         return Base64.encodeBase64String(key.getEncoded());
     }
+
+    public static void main(String[] args) {
+        try {
+            System.out.println(getSaltedHash("Expo3"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
