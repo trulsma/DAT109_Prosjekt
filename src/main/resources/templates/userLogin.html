@@ -15,11 +15,16 @@
 <body class="text-center">
 <form class="form-signin" method="post" action="/user/login">
     <img class="mb-4" src="/images/hvl.svg" alt="" width="300" height="200">
+    <div th:if="${loginerror != null}">
+        <div class="alert alert-danger" role="alert" th:text="${loginerror}"></div>
+    </div>
     <h1 class="h3 mb-3 font-weight-normal text-white">Logg inn</h1>
     <label for="inputEmail" class="sr-only">epost</label>
     <input type="hidden" name="redirect_url" th:value="${redirect_url}">
-    <input type="email" id="inputEmail" class="form-control" name="epost" placeholder="Epost" required="" autofocus="">
-    <input type="password" id="inputPassword" class="form-control" name="passord" placeholder="Passord" required="" autofocus="">
+    <input type="email" id="inputEmail" class="form-control" name="epost" placeholder="Epost" required=""
+           autofocus="">
+    <input type="password" id="inputPassword" class="form-control" name="passord" placeholder="Passord" required=""
+           autofocus="">
     <br>
     <button class="btn btn-lg btn-outline-light btn-block" type="submit">Logg inn</button>
 </form>

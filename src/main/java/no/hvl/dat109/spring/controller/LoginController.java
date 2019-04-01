@@ -40,7 +40,9 @@ public class LoginController {
 
         //Create user from the posted epost
         UsersBean user = usersService.getUserByName(epost);
-        if (user == null) return "redirect:" + UrlPaths.LOGIN_HTML; //TODO CREATE ERROR WHEN USER NOT FOUND
+        if (user == null) {
+            return "redirect:" + UrlPaths.LOGIN_HTML; //TODO CREATE ERROR WHEN USER NOT FOUND
+        }
 
         //Add the user to session and go back to index page
         session.setAttribute("user", user);
@@ -58,7 +60,10 @@ public class LoginController {
 
         //Find user from post and return if not valid
         UsersBean user = usersService.validUser(epost, passord);
-        if (user == null) return "redirect:" + UrlPaths.USER_LOGIN; //TODO CRETE ERROR WHEN NOT FOUND
+        if (user == null) {
+            model.addAttribute("loginerror", "Feil brukernavn eller passord!");
+            return UrlPaths.USER_LOGIN_HTML; //TODO CRETE ERROR WHEN NOT FOUND
+        }
 
         //Find project with current user as owner, if any
         ProsjektBean prosjekt = prosjektService.getProsjektFromOwner(user);
@@ -66,6 +71,7 @@ public class LoginController {
 
         //Add user to session
         session.setAttribute("user", user);
+        session.setAttribute("epost", user.getUsername());
 
         return "redirect:" + UrlPaths.INDEX;
     }
