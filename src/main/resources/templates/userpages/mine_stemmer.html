@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-            xmlns:th="http://www.thymeleaf.org"
-            xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-            xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <title>Mine stemmer</title>
@@ -76,24 +76,29 @@
 
 
 <div class="container">
-<p class="display-5">Mine stemmer</p>
-<table summary=" "
-       class="table table-bordered table-hover">
-    <thead>
-    <tr>
-        <th>Prosjekt</th>
-        <th>Verdi</th>
-        <th>Tidspunkt</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="stemme: ${stemmer}">
-        <td th:text="${stemme.prosjekt.prosjekt.prosjektnavn}"></td>
-        <td th:text="${stemme.stemmeverdi}"></td>
-        <td th:text="${stemme.stemmetidspunkt}"></td>
-    </tr>
-    </tbody>
-</table>
+    <p class="display-5">Mine stemmer</p>
+    <table summary=" "
+           class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Prosjekt</th>
+            <th>Verdi</th>
+            <th>Tidspunkt</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="stemme: ${stemmer}">
+            <td th:text="${stemme.prosjekt.prosjekt.prosjektnavn}"></td>
+            <td th:text="${stemme.stemmeverdi}"></td>
+            <td th:text="${stemme.stemmetidspunkt}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="container">
+        <div class="col-md-12 text-center">
+            <a href="/" class="btn btn-outline-info btn-lg">Tilbake til startsiden</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>
