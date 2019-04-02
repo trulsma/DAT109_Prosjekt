@@ -38,7 +38,7 @@ public class StemmeController {
 
     @GetMapping(UrlPaths.MINE_STEMMER)
     public String visMineStemmer(HttpSession session, Model model) {
-        /*String epost = (String) session.getAttribute("epost");
+        String epost = (String) session.getAttribute("epost");
 
         if (epost == null) {
             return "redirect:" + UrlPaths.REGISTRER_DEG_HTML + "?redirect_url=mine_stemmer";
@@ -53,7 +53,6 @@ public class StemmeController {
         stemmerListe = stemmerListe.stream().filter(a -> a.getEpost().equals(epost)).collect(Collectors.toList());
 
         model.addAttribute("stemmer", stemmerListe);
-        */
 
         return UrlPaths.MINE_STEMMER_HTML;
     }
