@@ -1,4 +1,6 @@
+
 /*<![CDATA[*/
+/*
 var bar = document.getElementById('myBar');
 var ctx = document.getElementById('myLine')
 
@@ -8,13 +10,11 @@ function randomRGBA() {
     return 'rgba(' + o(r() * m) + ',' + o(r() * m) + ',' + o(r() * m) + ',';
 }
 
-/*
 $.ajax({
     url: "/api/prosjekter/stemmer",
     data: {},
     success: visGraf
 })
-*/
 let random1 = randomRGBA();
 let random2 = randomRGBA();
 let random3 = randomRGBA();
@@ -102,6 +102,7 @@ function visGraf(resultat) {
 
 //console.log(resultat[0])
 
+*/
 
 }
 
