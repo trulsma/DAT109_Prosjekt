@@ -4,27 +4,20 @@ class Arrangement {
 }
 
 class Utstilling {
-    Navn
-    Score
 }
 
 class Stemme {
-    Vekt
 }
 
-class Besøkende{
-    ID
+class Bedrift{
 }
 
-class Jury{
+class Studie{
 }
 
-Jury "1" -- "many" Utstilling : > vurderer
-
-Besøkende "many" -- "1" Stemme : > stemmer
-
-Arrangement "1" *-- "many" Utstilling : Består av >
-
-Stemme "many" -- "1" Utstilling : < Har
+Utstilling "many" -- "1" Studie : < Består av
+Utstilling "many" -- "1" Bedrift : < Består av
+Utstilling "many" --* "1" Arrangement : < Består av
+Stemme "many" -- "1" Utstilling : < Består av
 
 @enduml
