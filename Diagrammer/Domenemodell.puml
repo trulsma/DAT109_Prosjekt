@@ -15,9 +15,14 @@ class Bedrift{
 class Studie{
 }
 
+class Kategori{
+}
+
 Utstilling "many" -- "1" Studie : < Består av
 Utstilling "many" -- "1" Bedrift : < Består av
 Utstilling "many" --* "1" Arrangement : < Består av
-Stemme "many" -- "1" Utstilling : < Består av
+Utstilling "1" -- "many" Stemme : > Består av
+Kategori "1" -- "many" Studie
+Stemme "many" -- "1" Arrangement : > Lagret i
 
 @enduml
