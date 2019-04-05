@@ -1,6 +1,6 @@
 # Gruppe 3 DAT109 Prosjekt
 ###### Enah Lanto | Espen Mæland | Heine Fjeldberg | Herborg Irgens Sjo | Ingrid Klepsvik | Raida Talukdar | Sondre Lindaas Gjesdal | Truls Martinsen
-–––
+____
 ###
 1. Installer maven på ditt operativsystem [her](https://maven.apache.org/install.html)
 2. Clone prosjektet i en ønsket mappe
